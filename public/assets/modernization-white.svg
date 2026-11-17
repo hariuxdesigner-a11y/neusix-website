@@ -1,0 +1,13 @@
+<svg width="109" height="127" viewBox="0 0 109 127" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="3.26124" cy="3.26124" r="3.26124" transform="matrix(-1 0 0 1 57.5234 0)" fill="white"/>
+<circle cx="3.26124" cy="3.26124" r="3.26124" transform="matrix(-1 0 0 1 58.5234 119)" fill="white"/>
+<circle cx="3.26124" cy="3.26124" r="3.26124" transform="matrix(-1 0 0 1 108.523 29)" fill="white"/>
+<circle cx="3.26124" cy="3.26124" r="3.26124" transform="matrix(-1 0 0 1 6.52344 89)" fill="white"/>
+<circle cx="3.26124" cy="3.26124" r="3.26124" transform="matrix(-1 0 0 1 108.523 89)" fill="white"/>
+<line x1="3.30078" y1="32" x2="3.30078" y2="92" stroke="white"/>
+<line x1="54.5" y1="4" x2="54.5" y2="64" stroke="white"/>
+<line x1="105.301" y1="33" x2="105.301" y2="93" stroke="white"/>
+<line y1="-0.5" x2="60" y2="-0.5" transform="matrix(0.866025 0.5 0.5 -0.866025 3 92)" stroke="white"/>
+<line x1="54.25" y1="3.56699" x2="106.212" y2="33.567" stroke="white"/>
+<path d="M67 98.9489V117.449L82 126.109L97.5 117.16V98.9489L82 90L67 98.9489ZM67 98.9489L82 107.949" stroke="white"/>
+</svg>

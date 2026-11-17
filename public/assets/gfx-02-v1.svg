@@ -1,0 +1,13 @@
+<svg width="444" height="518" viewBox="0 0 444 518" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="13.3428" cy="13.3729" rx="13.3428" ry="13.3729" transform="matrix(-1 0 0 1 235.352 0)" fill="#6D6EB5"/>
+<ellipse cx="13.3428" cy="13.3729" rx="13.3428" ry="13.3729" transform="matrix(-1 0 0 1 239.445 487.965)" fill="#6D6EB5"/>
+<ellipse cx="13.3428" cy="13.3729" rx="13.3428" ry="13.3729" transform="matrix(-1 0 0 1 444.008 118.918)" fill="#6D6EB5"/>
+<ellipse cx="13.3428" cy="13.3729" rx="13.3428" ry="13.3729" transform="matrix(-1 0 0 1 26.6875 364.949)" fill="#6D6EB5"/>
+<ellipse cx="13.3428" cy="13.3729" rx="13.3428" ry="13.3729" transform="matrix(-1 0 0 1 444.008 364.949)" fill="#6D6EB5"/>
+<line x1="11.9598" y1="131.219" x2="11.9598" y2="377.252" stroke="#6D6EB5" stroke-width="0.997754"/>
+<line x1="221.436" y1="16.3984" x2="221.436" y2="262.432" stroke="#6D6EB5" stroke-width="0.997754"/>
+<line x1="429.272" y1="135.32" x2="429.272" y2="381.354" stroke="#6D6EB5" stroke-width="0.997754"/>
+<line y1="-0.498877" x2="245.618" y2="-0.498877" transform="matrix(0.865537 0.500845 0.499155 -0.866513 13.9766 378)" stroke="#6D6EB5" stroke-width="0.997754"/>
+<line y1="-0.498877" x2="245.618" y2="-0.498877" transform="matrix(0.865537 0.500845 -0.499155 0.866513 220.938 16.3984)" stroke="#6D6EB5" stroke-width="0.997754"/>
+<path d="M274.125 405.739V481.599L335.495 517.111L398.91 480.415V405.739L335.495 369.043L274.125 405.739ZM274.125 405.739L335.495 442.645" stroke="#6D6EB5" stroke-width="0.997754"/>
+</svg>

@@ -1,0 +1,41 @@
+# Content notes for the NeuSix team
+
+The rebuild copies the live site's content verbatim. The agreed fixes (typos and dead links) are applied.
+Everything else that looks wrong is **kept as published** and listed here, because changing it would mean
+inventing copy. Each item needs input from NeuSix.
+
+## Fixed in the rebuild (as agreed)
+
+| Live site | Rebuild |
+|---|---|
+| Footer link "AIl Services" | "All Services" |
+| "Tranforming" / "Addaptive AI" in hidden hero ticker | Ticker not rebuilt (it is hidden on the live site) |
+| "Start a Conversation" → `#` | Not shown (it is hidden on the live site); every consultation CTA → `/contact-us` |
+| Case study "Book a Free Consultation" → `#` | → `/contact-us` |
+| "Read Case Study" with no link (Typical outcomes) | Hidden on the live site; not rebuilt |
+| Case study filter chips "AITransformation", "Computer" | "AI Transformation", "Computer Vision", and the filters now work |
+| Logistics case: "Exceptions surfaced late Bottlenecks: were often…" | "Exceptions surfaced late: Bottlenecks were often…" |
+| Inconsistent "Book a free Consultation" | "Book a Free Consultation" |
+| Nav labels rendered in Arial | Brand font (Google Sans Flex) |
+| Page titles "NeuSix website", "Industries landing page", "About", missing meta descriptions | Titles/descriptions built from each page's own copy |
+
+**Not actually missing:** the "Reduce cycle time by ___" figures are animated Lottie dials (e.g. 20–35%, 10–25%), now self-hosted.
+
+## Needs NeuSix input (kept as published)
+
+1. **Blog articles:** all 10 blog cards link to the *same* Google Doc. Supply the right link per article (or the article text to publish on-site). See `src/content/resources.ts`.
+2. **Privacy Policy / Terms of Service / Cookie Policy:** shown as text in the footer; no pages exist. Supply the policy text to publish them.
+3. **Case study hero video:** every case study uses a generic stock clip (`file_example_MP4_640_3MG`). Replace with real footage or remove.
+4. **AI COE page:** "What we do" cards and "What we measure" line are identical to the ODC page.
+5. **Healthcare case study:** "Operational Outcomes" reads like manufacturing copy ("production flow").
+6. **Airlines case study:** "Experience Outcomes" repeats the retail case's personalization results.
+7. **Retail case study:** "Execution Outcomes" (terminal/yard/gate) and "Strategic Impact" (smart manufacturing) belong to other cases.
+8. **Legal case study:** "How It Works → Stage 2: Ground" has no description on the live site.
+9. **Leadership team (About):** present in the markup but hidden on the live site; the two hidden copies disagree on titles
+   (e.g. Harsh Patel "CTrO & CSO" vs "CTrO & CCO"). Confirm titles, then set `SHOW_TEAM = true` in `src/content/about.ts`.
+10. **Client names with stars (About):** "Suri & Co, Impacteers, Symnn, Vigilant Inc, Zolvit, Isaac Luxe" are hidden on the live site with no testimonial text; not rebuilt.
+
+## Content hidden on the live site (intentionally not rebuilt)
+
+Template nav ("Link 1/2/3"), the "Transforming enterprises with …" AI-terms ticker and topic orbs, the "Read Case Study" links, and
+the "Start a Conversation" buttons. All of these are `display:none` / zero-height on every screen size of the live site.

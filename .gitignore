@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# QA output
+/qa-shots/
+
+# allow the example env file
+!.env.example
