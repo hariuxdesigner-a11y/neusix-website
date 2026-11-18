@@ -47,11 +47,20 @@
 
   --animate-float: float 14s ease-in-out infinite;
   --animate-ticker: ticker 38s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
 
   @keyframes float {
     0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
     33% { transform: translate3d(3%, -4%, 0) scale(1.06); }
     66% { transform: translate3d(-3%, 3%, 0) scale(0.96); }
+  }
+  @keyframes megaIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   @keyframes ticker {
     from { transform: translateY(0); }
@@ -62,7 +71,7 @@
 :root {
   --gutter: clamp(20px, 5.6vw, 80px);
   --section-y: clamp(64px, 4rem + 4vw, 128px);
-  --header-h: 72px;
+  --header-h: 76px;
 }
 
 html {
@@ -107,7 +116,9 @@ img, svg, video { max-width: 100%; }
   .t-h2 { font-family: var(--font-serif); font-size: var(--text-h2); line-height: 1.15; font-weight: 400; }
   .t-h3 { font-family: var(--font-serif); font-size: var(--text-h3); line-height: 1.15; font-weight: 400; }
   .t-h4 { font-family: var(--font-serif); font-size: var(--text-h4); line-height: 1.2; font-weight: 400; }
-  .eyebrow { font-family: var(--font-sans); font-size: 14px; font-weight: 600; letter-spacing: 0.01em; }
+  .eyebrow { font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+  /* pages whose first section is light sit below the fixed header */
+  .below-header { padding-top: var(--header-h); }
 
   /* Scroll reveal: content is visible by default; only hidden once JS
      has booted (html.js) and only when motion is allowed. */

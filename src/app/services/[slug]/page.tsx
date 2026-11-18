@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SERVICES, getService } from "@/content/services";
-import { ACCENT_HEX, ServiceHero, ServiceIntro, StageFit, UseCaseThemes, WhatWeDo } from "@/components/services/ServiceSections";
+import type { MediaId } from "@/content/media";
+import { ACCENT_HEX, ServiceIntro, StageFit, UseCaseThemes, WhatWeDo } from "@/components/services/ServiceSections";
 import { WhatYouGet } from "@/components/services/WhatYouGet";
 import { TypicalOutcomes } from "@/components/sections/TypicalOutcomes";
-import { OurApproach } from "@/components/sections/OurApproach";
 import { CommercialModels } from "@/components/sections/CommercialModels";
-import { CtaBand } from "@/components/sections/CtaBand";
-import { TrustStrip } from "@/components/sections/TrustStrip";
+import { VideoHero } from "@/components/cinematic/VideoHero";
+import { VideoCtaCard } from "@/components/cinematic/Bands";
+import { ApproachBand } from "@/components/cinematic/HomeBlocks";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -17,12 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   const { slug } = await params;
   const s = getService(slug);
   if (!s) return {};
-  return {
-    title: s.seo.title,
-    description: s.seo.description,
-    alternates: { canonical: s.href },
-    openGraph: { title: s.seo.title, description: s.seo.description, url: s.href },
-  };
+  return { title: s.seo.title, description: s.seo.description, alternates: { canonical: s.href }, openGraph: { title: s.seo.title, description: s.seo.description, url: s.href } };
 }
 
 export default async function ServicePage({ params }: PageProps<"/services/[slug]">) {
@@ -32,23 +28,29 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const accent = ACCENT_HEX[s.accent];
   return (
     <div style={{ ["--accent" as string]: accent }}>
-      <ServiceHero s={s} />
+      <VideoHero
+        media={`svc-${s.slug}` as MediaId}
+        size="tall"
+        eyebrow="Shipping Impact"
+        accent={accent}
+        title={s.hero}
+        primary={{ label: "Book a Free Consultation", href: "/contact-us" }}
+        secondary={{ label: "All Services", href: "/services/services-neusix" }}
+      />
       <StageFit s={s} />
       <ServiceIntro s={s} />
       <WhatWeDo s={s} />
       <TypicalOutcomes items={s.outcomes} />
       <UseCaseThemes s={s} />
-      <OurApproach
+      <ApproachBand
         title="How We Ship Impact From Discovery to Scale"
-        subtitle="A consistent delivery rhythm across all services customized to your context, constraints, and measurable outcomes."
-        phases={s.phases}
-        icons={s.phaseIcons}
-        note={s.phaseNote}
+        sub="A consistent delivery rhythm across all services customized to your context, constraints, and measurable outcomes."
+        phases={s.phases.map((p, i) => ({ name: p.name, text: p.text, outputs: p.outputs, icon: s.phaseIcons[i] }))}
       />
+      {s.phaseNote && <p className="container-x reveal -mt-2 pb-4 pt-10 text-center text-sm text-slate">{s.phaseNote}</p>}
       <WhatYouGet items={s.whatYouGet} gfx={s.wygGfx} accent={accent} />
       <CommercialModels />
-      <CtaBand />
-      <TrustStrip />
+      <VideoCtaCard />
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { BLOG_TAGS, WHITE_PAPERS, postHref, postsForTag, tagLabel } from "@/content/resources";
 
-function ItemLink({ href, children }: { href: string; children: React.ReactNode }) {
+function ItemLink({ href, children, tone = "line" }: { href: string; children: React.ReactNode; tone?: "line" | "mist" }) {
   const external = /^https?:/.test(href);
-  const cls = "group block py-6 transition-colors hover:text-brand focus-visible:text-brand";
+  const cls = `group flex h-full flex-col rounded-[18px] p-6 transition-colors hover:text-brand ${tone === "mist" ? "bg-mist/70 hover:bg-mist" : "border border-ink/10 hover:border-navy"}`;
   return external ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
       {children}
@@ -21,10 +21,11 @@ export function ResourcesView({ tag }: { tag: string }) {
   const posts = postsForTag(tag);
   const current = tagLabel(tag);
   return (
-    <div className="container-x pb-[var(--section-y)] pt-[clamp(48px,7vw,104px)]">
+    <div className="below-header container-x pb-[var(--section-y)]">
+      <div className="pt-[clamp(48px,7vw,104px)]" />
       <h1 className="t-display">Resources &amp; Content</h1>
 
-      <section aria-labelledby="blogs-title" className="mt-[clamp(40px,5vw,72px)] max-w-[760px]">
+      <section aria-labelledby="blogs-title" className="mt-[clamp(40px,5vw,72px)]">
         <h2 id="blogs-title" className="t-h2">
           Blogs
         </h2>
@@ -59,32 +60,32 @@ export function ResourcesView({ tag }: { tag: string }) {
           </details>
         </div>
 
-        <ul className="mt-6 divide-y divide-mist-2 border-b border-mist-2">
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((p) => (
-            <li key={p.title}>
+            <li key={p.title} className="reveal">
               <ItemLink href={postHref(p)}>
-                <h3 className="text-base font-medium leading-snug">{p.title}</h3>
-                <p className="mt-1.5 flex items-center gap-2 text-xs text-slate">
-                  <span>{tagLabel(p.tag)}</span>
-                  <span aria-hidden className="h-3 w-px bg-slate/50" />
-                  <span>{p.readTime}</span>
-                </p>
+                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-lilac">
+                  <span aria-hidden className="size-1.5 rounded-full bg-orange" /> {tagLabel(p.tag)}
+                </span>
+                <h3 className="mt-5 text-lg font-medium leading-snug">{p.title}</h3>
+                <span className="mt-auto block pt-8 text-xs text-slate">{p.readTime}</span>
               </ItemLink>
             </li>
           ))}
         </ul>
       </section>
 
-      <section aria-labelledby="wp-title" className="mt-[clamp(56px,7vw,96px)] max-w-[760px]">
+      <section aria-labelledby="wp-title" className="mt-[clamp(56px,7vw,96px)]">
         <h2 id="wp-title" className="t-h2">
           White papers
         </h2>
-        <ul className="mt-6 divide-y divide-mist-2 border-b border-mist-2">
+        <ul className="mt-8 grid gap-4 lg:grid-cols-3">
           {WHITE_PAPERS.map((w) => (
-            <li key={w.title}>
-              <ItemLink href={w.href}>
-                <h3 className="text-base font-medium leading-snug">{w.title}</h3>
-                <p className="mt-1.5 text-sm text-slate">{w.text}</p>
+            <li key={w.title} className="reveal">
+              <ItemLink href={w.href} tone="mist">
+                <span className="text-xs uppercase tracking-[0.12em] text-slate">White paper</span>
+                <h3 className="t-h4 mt-4">{w.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate">{w.text}</p>
               </ItemLink>
             </li>
           ))}

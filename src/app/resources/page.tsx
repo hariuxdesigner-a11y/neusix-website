@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ResourcesView } from "@/components/resources/ResourcesView";
-import { CtaBand } from "@/components/sections/CtaBand";
+import { VideoCtaCard } from "@/components/cinematic/Bands";
 
 const title = "Resources | NeuSix";
 const description = "Blogs and white papers from NeuSix on AI transformation, modernization, AI COE, governance, and engagement models.";
@@ -16,7 +16,7 @@ export default function ResourcesPage() {
   return (
     <>
       <ResourcesView tag="resources" />
-      <CtaBand />
+      <VideoCtaCard />
     </>
   );
 }

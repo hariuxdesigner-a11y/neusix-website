@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ResourcesView } from "@/components/resources/ResourcesView";
-import { CtaBand } from "@/components/sections/CtaBand";
+import { VideoCtaCard } from "@/components/cinematic/Bands";
 import { BLOG_TAGS, tagLabel } from "@/content/resources";
 
 export function generateStaticParams() {
@@ -22,7 +22,7 @@ export default async function BlogTagPage({ params }: PageProps<"/blog-tags/[tag
   return (
     <>
       <ResourcesView tag={tag} />
-      <CtaBand />
+      <VideoCtaCard />
     </>
   );
 }

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
-import { CtaBand } from "@/components/sections/CtaBand";
-import { TrustStrip } from "@/components/sections/TrustStrip";
+import { SectionHead, StatementBand, VideoCtaCard } from "@/components/cinematic/Bands";
+import { VideoBackground } from "@/components/media/VideoBackground";
 import { ABOUT_INTRO, ABOUT_STATS, AWARDS, DNA, LEADERSHIP, MISSION, PRESENCE, SCOREBOARD, SHOW_TEAM, SPECIALISTS, VISION } from "@/content/about";
 
 // The live page has the title "About" and no description; this uses the page's own hero copy.
@@ -43,9 +42,9 @@ export default function AboutPage() {
           { }
           <img src="/assets/film-mobile.svg" alt="" className="size-full object-cover opacity-70" fetchPriority="high" />
         </picture>
-        <div className="container-x flex min-h-[clamp(460px,62svh,640px)] flex-col justify-center py-24">
-          <h1 className="eyebrow">About NeuSix</h1>
-          <p id="about-hero" className="t-h2 mt-4 max-w-[30ch] !text-[clamp(1.6rem,1.15rem+1.9vw,2.5rem)] !leading-[1.2]" style={{ ["--reveal-delay" as string]: "80ms" }}>
+        <div className="container-x flex min-h-[clamp(520px,72svh,720px)] flex-col justify-end pb-[clamp(48px,7vw,96px)] pt-[calc(var(--header-h)+64px)]">
+          <h1 className="eyebrow text-paper/85">About NeuSix</h1>
+          <p id="about-hero" className="t-display mt-4 max-w-[24ch] !text-[clamp(1.9rem,1.3rem+2.6vw,3.6rem)] !leading-[1.12]" style={{ ["--reveal-delay" as string]: "80ms" }}>
             We are a DeepTech AI transformation company helping enterprises discover, plan, build, and scale intelligent systems that deliver measurable business outcomes.
           </p>
         </div>
@@ -138,22 +137,16 @@ export default function AboutPage() {
         <img src="/assets/team-base-69d8e8.png" alt="" aria-hidden loading="lazy" className="h-auto w-full" />
       </picture>
 
-      <section aria-labelledby="join" className="container-x section-y">
-        <div className="reveal grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-          <h2 id="join" className="t-h2 text-navy">
-            Build What Matters. Join NeuSix.
-          </h2>
-          <div>
-            <p className="max-w-[56ch] leading-relaxed">
-              We’re a team of engineers, architects, data scientists, and strategists who believe AI should deliver real business outcomes. If you’re passionate about shipping impact and working
-              at the frontier of AI transformation, we’d love to hear from you.
-            </p>
-            <Button href="/contact-us" className="mt-6">
-              Get in touch
-            </Button>
-          </div>
-        </div>
-      </section>
+      <StatementBand
+        media="about-careers"
+        id="join"
+        align="split"
+        title="Build What Matters. Join NeuSix."
+        ctas={[{ label: "Get in touch", href: "/contact-us" }]}
+      >
+        We’re a team of engineers, architects, data scientists, and strategists who believe AI should deliver real business outcomes. If you’re passionate about shipping impact and working at the
+        frontier of AI transformation, we’d love to hear from you.
+      </StatementBand>
 
       <section aria-labelledby="awards" className="bg-mist/60">
         <div className="container-x section-y">
@@ -172,38 +165,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="presence" className="container-x section-y">
-        <h2 id="presence" className="t-h2 reveal text-center">
-          Global Presence &amp; Delivery Reach
-        </h2>
-        <ul className="reveal mx-auto mt-10 grid max-w-[1000px] gap-6 sm:grid-cols-3">
-          {PRESENCE.map((p) => (
-            <li key={p.title} className="flex gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.icon} alt="" width={20} height={20} className="mt-0.5 size-5 shrink-0" />
-              <div>
-                <h3 className="font-semibold">{p.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed">{p.text}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <section aria-labelledby="presence" className="relative isolate overflow-hidden text-paper">
+        <VideoBackground id="about-global" overlay="dark" />
+        <div className="container-x py-[clamp(88px,11vw,168px)]">
+          <SectionHead id="presence" dark title="Global Presence & Delivery Reach" />
+          <ul className="mt-10 grid gap-8 sm:grid-cols-3">
+            {PRESENCE.map((p) => (
+              <li key={p.title} className="reveal border-t border-white/20 pt-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.icon} alt="" width={20} height={20} className="size-5" />
+                <h3 className="t-h4 mt-4">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-paper/80">{p.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <div className="container-x py-[clamp(40px,5vw,80px)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/world-1.svg"
           alt="World map showing the delivery hub in India and client locations in the USA, UK, UAE and Australia/New Zealand"
           loading="lazy"
-          className="reveal mx-auto mt-10 h-auto w-full max-w-[1100px]"
+          className="reveal mx-auto h-auto w-full max-w-[1100px]"
         />
-      </section>
+      </div>
 
-      <CtaBand
+      <VideoCtaCard
         title="Ready to Transform Your Enterprise with AI?"
         body="Let’s start with a conversation about where AI can create the most impact for your business."
         primary={{ label: "Schedule a Discovery Call", href: "/contact-us" }}
         note=""
       />
-      <TrustStrip />
     </>
   );
 }

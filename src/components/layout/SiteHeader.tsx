@@ -3,163 +3,128 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { CONTACT_LINK, NAV, type NavItem } from "@/content/site";
+import { CONTACT_LINK, NAV, SERVICE_LINKS, type NavLink } from "@/content/site";
+import { SERVICES } from "@/content/services";
+import { getCaseStudy } from "@/content/case-studies";
 
-/** Pages whose hero is dark: the header switches to the dark style there (as on the live site). */
-const DARK_ROUTES = ["/our-work/industries"];
+/** Routes whose top section is light: the header starts solid there. Everything else opens on a dark/video hero. */
+const LIGHT_TOP = ["/resources", "/blog-tags"];
 
-function isActive(pathname: string, href: string) {
-  return pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
-}
+const isActive = (p: string, href: string) => p === href || (href !== "/" && p.startsWith(href + "/"));
 
-function Logo({ dark }: { dark: boolean }) {
+/* ── mega-menu content (all labels/descriptions are existing NeuSix copy) ───────────── */
+type Panel = { title: string; subtitle: string; items: { label: string; href: string; text: string; icon?: string }[]; footer: { label: string; href: string }; feature?: { eyebrow: string; title: string; text: string; href: string } };
+
+const serviceText = (href: string) => SERVICES.find((s) => s.href === href);
+const featured = getCaseStudy("logistics-ports")!;
+
+const PANELS: Record<string, Panel> = {
+  Services: {
+    title: "Our Services",
+    subtitle: "Services designed to ship measurable outcomes",
+    items: SERVICE_LINKS.filter((l) => l.href !== "/services/services-neusix").map((l) => {
+      const s = serviceText(l.href)!;
+      return { label: l.label, href: l.href, text: s.cardText, icon: s.cardGfx };
+    }),
+    footer: { label: "All Services", href: "/services/services-neusix" },
+  },
+  "Our Work": {
+    title: "Our Work",
+    subtitle: "AI transformation across industries built to survive the real world.",
+    items: [
+      { label: "Industries", href: "/our-work/industries", text: "Healthcare, Retail, BFSI, Manufacturing, Aviation, Real Estate, Professional Services, Energy, Public Sector" },
+      { label: "Case Studies", href: "/our-work/case-studies", text: "AI Transformation that moves from pilots to production" },
+    ],
+    footer: { label: "Book a Free Consultation", href: "/contact-us" },
+    feature: { eyebrow: `Case Study | ${featured.industry}`, title: featured.title, text: featured.impact, href: `/case-studies/${featured.slug}` },
+  },
+};
+
+function Logo({ light }: { light: boolean }) {
   return (
     <Link href="/" aria-label="NeuSix home" className="relative z-10 inline-flex shrink-0 items-center py-2">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={dark ? "/assets/neusix-logo-white.svg" : "/assets/group-1.svg"}
-        alt="NeuSix"
-        width={94}
-        height={16}
-        className="h-auto w-[94px]"
-      />
+      <img src={light ? "/assets/neusix-logo-white.svg" : "/assets/group-1.svg"} alt="NeuSix" width={94} height={16} className="h-auto w-[clamp(84px,7vw,104px)]" />
     </Link>
   );
 }
 
 function Chevron({ open }: { open: boolean }) {
   return (
-    <svg aria-hidden width="12" height="12" viewBox="0 0 12 12" className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}>
-      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg aria-hidden width="10" height="10" viewBox="0 0 12 12" className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}>
+      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function DesktopDropdown({ item, dark, pathname }: { item: Extract<NavItem, { children: unknown }>; dark: boolean; pathname: string }) {
-  const [open, setOpen] = useState(false);
-  const id = useId();
-  const ref = useRef<HTMLDivElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const active = item.children.some((c) => isActive(pathname, c.href));
-
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        ref.current?.querySelector("button")?.focus();
-      }
-    };
-    document.addEventListener("mousedown", onDoc);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDoc);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
-  // Close on route change (state reset during render instead of in an effect).
-  const [prevPath, setPrevPath] = useState(pathname);
-  if (prevPath !== pathname) {
-    setPrevPath(pathname);
-    setOpen(false);
-  }
-
+function MegaPanel({ panel, id, onNavigate }: { panel: Panel; id: string; onNavigate: () => void }) {
   return (
-    <div
-      ref={ref}
-      className="relative"
-      onMouseEnter={() => {
-        if (closeTimer.current) clearTimeout(closeTimer.current);
-        setOpen(true);
-      }}
-      onMouseLeave={() => {
-        closeTimer.current = setTimeout(() => setOpen(false), 120);
-      }}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
-      }}
-    >
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1.5 rounded-full px-4 py-5 text-sm transition-colors ${
-          dark ? "text-paper hover:text-lilac-soft" : "text-[#222] hover:text-brand"
-        } ${active ? (dark ? "text-lilac-soft" : "text-brand") : ""}`}
-      >
-        {item.label}
-        <Chevron open={open} />
-      </button>
-      <div
-        id={id}
-        hidden={!open}
-        className={`absolute left-0 top-full min-w-[220px] overflow-hidden rounded-xl py-2 shadow-[0_12px_32px_-12px_rgba(15,15,31,.25)] ring-1 ${
-          dark ? "bg-ink ring-white/10" : "bg-paper ring-mist-2"
-        }`}
-      >
-        <ul>
-          {item.children.map((c) => {
-            const cur = isActive(pathname, c.href);
-            return (
-              <li key={c.href}>
-                <Link
-                  href={c.href}
-                  aria-current={cur ? "page" : undefined}
-                  className={`block px-5 py-2.5 text-sm transition-colors ${
-                    dark
-                      ? "text-paper hover:bg-white/10"
-                      : `hover:bg-mist hover:text-brand ${cur ? "bg-mist text-brand" : "text-ink"}`
-                  }`}
-                >
-                  {c.label}
+    <div id={id} className="mx-auto w-full max-w-[1120px] overflow-hidden rounded-[22px] bg-paper text-ink shadow-[0_30px_80px_-30px_rgba(15,15,31,.55)] ring-1 ring-ink/5">
+      <div className="grid gap-8 p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:p-10">
+        <div>
+          <p className="t-h4">{panel.title}</p>
+          <p className="mt-2 max-w-[26ch] text-sm leading-relaxed text-slate">{panel.subtitle}</p>
+        </div>
+        <div className={`grid gap-x-6 gap-y-2 ${panel.feature ? "lg:grid-cols-[1fr_1fr]" : "sm:grid-cols-2"}`}>
+          <ul className={panel.feature ? "space-y-1" : "contents"}>
+            {panel.items.map((it) => (
+              <li key={it.href}>
+                <Link href={it.href} onClick={onNavigate} className="group flex gap-4 rounded-xl p-3 transition-colors hover:bg-mist focus-visible:bg-mist">
+                  {it.icon ? (
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-mist group-hover:bg-paper">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={it.icon} alt="" className="size-8 object-contain" />
+                    </span>
+                  ) : (
+                    <span aria-hidden className="mt-1.5 size-2 shrink-0 rounded-full bg-lilac" />
+                  )}
+                  <span>
+                    <span className="block text-[15px] font-medium">{it.label}</span>
+                    <span className="mt-0.5 block text-[13px] leading-snug text-slate">{it.text}</span>
+                  </span>
                 </Link>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+          {panel.feature && (
+            <Link href={panel.feature.href} onClick={onNavigate} className="group relative isolate flex min-h-[200px] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-6 text-paper">
+              <span aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(80%_80%_at_80%_10%,rgba(109,110,181,.55),transparent_60%)]" />
+              <span className="text-xs text-lilac-soft">{panel.feature.eyebrow}</span>
+              <span className="t-h4 mt-2">{panel.feature.title}</span>
+              <span className="mt-2 text-[13px] text-paper/75">{panel.feature.text}</span>
+            </Link>
+          )}
+        </div>
       </div>
+      <Link href={panel.footer.href} onClick={onNavigate} className="group flex items-center justify-between border-t border-ink/5 bg-mist/70 px-8 py-4 text-sm font-medium transition-colors hover:bg-mist lg:px-10">
+        {panel.footer.label}
+        <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+      </Link>
     </div>
   );
 }
 
-function MobileMenu({ open, dark, pathname, onClose }: { open: boolean; dark: boolean; pathname: string; onClose: () => void }) {
+function MobileMenu({ open, pathname, onClose }: { open: boolean; pathname: string; onClose: () => void }) {
   const [expanded, setExpanded] = useState<string | null>(null);
   return (
     <div
       id="mobile-menu"
       hidden={!open}
-      className={`absolute inset-x-0 top-full max-h-[calc(100dvh-var(--header-h))] overflow-y-auto border-t pb-8 shadow-lg nav:hidden ${
-        dark ? "border-white/10 bg-ink text-paper" : "border-mist-2 bg-paper text-ink"
-      }`}
+      className="fixed inset-x-0 bottom-0 top-[var(--header-h)] z-40 overflow-y-auto bg-ink text-paper nav:hidden"
     >
-      <nav aria-label="Mobile" className="container-x">
-        <ul className="divide-y divide-current/10">
+      <nav aria-label="Mobile" className="container-x flex min-h-full flex-col pb-10 pt-4">
+        <ul className="divide-y divide-white/10">
           {NAV.map((item) =>
             "children" in item ? (
               <li key={item.label}>
-                <button
-                  type="button"
-                  aria-expanded={expanded === item.label}
-                  onClick={() => setExpanded((v) => (v === item.label ? null : item.label))}
-                  className="flex w-full items-center justify-between py-4 text-base"
-                >
+                <button type="button" aria-expanded={expanded === item.label} onClick={() => setExpanded((v) => (v === item.label ? null : item.label))} className="flex w-full items-center justify-between py-5 font-serif text-2xl">
                   {item.label}
                   <Chevron open={expanded === item.label} />
                 </button>
-                <ul hidden={expanded !== item.label} className="pb-3">
-                  {item.children.map((c) => (
+                <ul hidden={expanded !== item.label} className="grid gap-1 pb-4">
+                  {item.children.map((c: NavLink) => (
                     <li key={c.href}>
-                      <Link
-                        href={c.href}
-                        onClick={onClose}
-                        aria-current={isActive(pathname, c.href) ? "page" : undefined}
-                        className={`block rounded-lg px-4 py-3 text-[15px] ${dark ? "hover:bg-white/10" : "hover:bg-mist"} aria-[current=page]:font-semibold`}
-                      >
+                      <Link href={c.href} onClick={onClose} aria-current={isActive(pathname, c.href) ? "page" : undefined} className="block rounded-lg px-3 py-3 text-[15px] text-paper/85 hover:bg-white/10 aria-[current=page]:text-lilac-soft">
                         {c.label}
                       </Link>
                     </li>
@@ -168,23 +133,14 @@ function MobileMenu({ open, dark, pathname, onClose }: { open: boolean; dark: bo
               </li>
             ) : (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  aria-current={isActive(pathname, item.href) ? "page" : undefined}
-                  className="block py-4 text-base aria-[current=page]:font-semibold"
-                >
+                <Link href={item.href} onClick={onClose} aria-current={isActive(pathname, item.href) ? "page" : undefined} className="block py-5 font-serif text-2xl aria-[current=page]:text-lilac-soft">
                   {item.label}
                 </Link>
               </li>
             ),
           )}
         </ul>
-        <Link
-          href={CONTACT_LINK.href}
-          onClick={onClose}
-          className={`mt-6 flex min-h-12 items-center justify-center rounded-full text-sm font-medium ${dark ? "bg-paper text-ink" : "bg-ink text-paper"}`}
-        >
+        <Link href={CONTACT_LINK.href} onClick={onClose} className="mt-auto flex min-h-13 items-center justify-center rounded-full bg-paper py-4 text-sm font-medium text-ink">
           {CONTACT_LINK.label}
         </Link>
       </nav>
@@ -194,74 +150,154 @@ function MobileMenu({ open, dark, pathname, onClose }: { open: boolean; dark: bo
 
 export function SiteHeader() {
   const pathname = usePathname() || "/";
-  const dark = DARK_ROUTES.includes(pathname);
-  const [open, setOpen] = useState(false);
+  const lightTop = LIGHT_TOP.some((p) => pathname.startsWith(p));
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [panel, setPanel] = useState<string | null>(null);
   const [prevPath, setPrevPath] = useState(pathname);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const uid = useId();
+
   if (prevPath !== pathname) {
     setPrevPath(pathname);
-    setOpen(false);
+    setMenu(false);
+    setPanel(null);
   }
+
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      setHidden(y > 480 && y > last + 4);
+      if (y < last - 4) setHidden(false);
+      last = y;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (panel) {
+          headerRef.current?.querySelector<HTMLButtonElement>(`[data-panel="${panel}"]`)?.focus();
+          setPanel(null);
+        }
+        setMenu(false);
+      }
+    };
+    const onDown = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setPanel(null);
+    };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
+    document.addEventListener("mousedown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onDown);
+    };
+  }, [panel]);
+
+  useEffect(() => {
+    document.documentElement.style.overflow = menu ? "hidden" : "";
+  }, [menu]);
+
+  const solid = lightTop || scrolled || menu || !!panel;
+  const onDark = !solid; // transparent over a dark/video hero → light text
+  const open = (k: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setPanel(k);
+  };
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setPanel(null), 160);
+  };
 
   return (
     <header
-      className={`sticky top-0 z-50 backdrop-blur-[11px] ${dark ? "bg-ink/90 text-paper" : "bg-paper/70 text-ink"}`}
+      ref={headerRef}
+      className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow,color] duration-300 ${hidden && !menu && !panel ? "-translate-y-full" : ""} ${
+        menu ? "bg-ink text-paper" : solid ? "bg-paper/85 text-ink shadow-[0_1px_0_rgba(15,15,31,.06)] backdrop-blur-xl" : "bg-transparent text-paper"
+      }`}
       style={{ height: "var(--header-h)" }}
+      onMouseLeave={scheduleClose}
     >
       <div className="container-x flex h-full items-center justify-between gap-6">
-        <Logo dark={dark} />
+        <Logo light={onDark || menu} />
 
-        <nav aria-label="Main" className="hidden items-center nav:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 nav:flex">
           {NAV.map((item) =>
             "children" in item ? (
-              <DesktopDropdown key={item.label} item={item} dark={dark} pathname={pathname} />
+              <button
+                key={item.label}
+                type="button"
+                data-panel={item.label}
+                aria-expanded={panel === item.label}
+                aria-controls={`${uid}-${item.label}`}
+                onMouseEnter={() => open(item.label)}
+                onClick={() => setPanel((p) => (p === item.label ? null : item.label))}
+                className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition-colors ${
+                  panel === item.label || item.children.some((c) => isActive(pathname, c.href)) ? (onDark ? "bg-white/15" : "bg-mist") : onDark ? "hover:bg-white/10" : "hover:bg-mist"
+                }`}
+              >
+                {item.label}
+                <Chevron open={panel === item.label} />
+              </button>
             ) : (
               <Link
                 key={item.href}
                 href={item.href}
+                onMouseEnter={scheduleClose}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
-                className={`px-5 py-5 text-sm transition-colors ${
-                  dark ? "text-paper hover:text-lilac-soft" : "text-[#222] hover:text-brand"
-                } aria-[current=page]:text-brand`}
+                className={`rounded-full px-4 py-2 text-sm transition-colors ${onDark ? "hover:bg-white/10 aria-[current=page]:bg-white/15" : "hover:bg-mist aria-[current=page]:bg-mist"}`}
               >
                 {item.label}
               </Link>
             ),
           )}
+        </nav>
+
+        <div className="hidden items-center gap-3 nav:flex">
           <Link
             href={CONTACT_LINK.href}
-            aria-current={isActive(pathname, CONTACT_LINK.href) ? "page" : undefined}
-            className={`ml-6 inline-flex h-9 min-w-[116px] items-center justify-center rounded-full px-6 text-sm transition-colors ${
-              dark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-white hover:bg-navy"
-            }`}
+            className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-colors ${onDark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-white hover:bg-navy"}`}
           >
             {CONTACT_LINK.label}
           </Link>
-        </nav>
+        </div>
 
         <button
           type="button"
           className="relative z-10 -mr-2 inline-flex size-11 items-center justify-center rounded-lg nav:hidden"
-          aria-expanded={open}
+          aria-expanded={menu}
           aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
+          aria-label={menu ? "Close menu" : "Open menu"}
+          onClick={() => setMenu((v) => !v)}
         >
-          <svg aria-hidden width="22" height="22" viewBox="0 0 24 24">
-            {open ? (
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            )}
+          <svg aria-hidden width="24" height="24" viewBox="0 0 24 24">
+            {menu ? <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
           </svg>
         </button>
       </div>
-      <MobileMenu open={open} dark={dark} pathname={pathname} onClose={() => setOpen(false)} />
+
+      {/* desktop mega panels */}
+      {Object.entries(PANELS).map(([k, p]) => (
+        <div
+          key={k}
+          hidden={panel !== k}
+          className="absolute inset-x-0 top-full hidden px-[var(--gutter)] pt-2 nav:block [&[hidden]]:hidden"
+          onMouseEnter={() => open(k)}
+          onMouseLeave={scheduleClose}
+        >
+          <div className="animate-[megaIn_.22s_ease-out]">
+            <MegaPanel panel={p} id={`${uid}-${k}`} onNavigate={() => setPanel(null)} />
+          </div>
+        </div>
+      ))}
+
+      <MobileMenu open={menu} pathname={pathname} onClose={() => setMenu(false)} />
     </header>
   );
 }

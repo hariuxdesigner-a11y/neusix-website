@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
-import { Orbs } from "@/components/ui/Orbs";
+import { VideoBackground } from "@/components/media/VideoBackground";
 
 export const metadata: Metadata = { title: "Page not found | NeuSix", robots: { index: false } };
 
 export default function NotFound() {
   return (
-    <section className="relative isolate overflow-hidden">
-      <Orbs preset="hero" dim />
-      <div className="container-x flex min-h-[70svh] flex-col items-center justify-center py-24 text-center">
-        <p className="eyebrow">404</p>
-        <h1 className="t-display mt-3 max-w-[16ch]">This page could not be found.</h1>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Button href="/">Back to home</Button>
-          <Button href="/contact-us" variant="light">
+    <section className="relative isolate overflow-hidden text-paper">
+      <VideoBackground id="contact" overlay="dark" />
+      <div className="container-x flex min-h-[100svh] flex-col items-start justify-end pb-[clamp(48px,8vw,120px)] pt-[calc(var(--header-h)+64px)]">
+        <p className="eyebrow text-paper/75">404</p>
+        <h1 className="t-display mt-4 max-w-[16ch]">This page could not be found.</h1>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Button href="/" className="!bg-paper !text-ink">Back to home</Button>
+          <Button href="/contact-us" variant="ghost-light">
             Contact
           </Button>
         </div>

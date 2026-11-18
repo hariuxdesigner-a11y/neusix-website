@@ -3,11 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { CASE_STUDIES, getCaseStudy } from "@/content/case-studies";
-import { HeroVideo, RelatedCarousel, StageTabs } from "@/components/case-studies/CaseInteractive";
+import { RelatedCarousel, StageTabs } from "@/components/case-studies/CaseInteractive";
+import { VideoHero } from "@/components/cinematic/VideoHero";
+import { VideoCtaCard } from "@/components/cinematic/Bands";
+import type { MediaId } from "@/content/media";
 import { Button } from "@/components/ui/Button";
 import { Orbs } from "@/components/ui/Orbs";
-import { CtaBand } from "@/components/sections/CtaBand";
-import { TrustStrip } from "@/components/sections/TrustStrip";
 
 export function generateStaticParams() {
   return CASE_STUDIES.map((c) => ({ slug: c.slug }));
@@ -87,36 +88,29 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
 
   return (
     <article>
-      {/* Hero */}
-      <section aria-labelledby="cs-title" className="relative isolate overflow-hidden">
-        <div className="container-x grid gap-10 py-[clamp(48px,6vw,96px)] lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <div>
-            <p className="text-sm">
-              <Link href="/our-work/case-studies" className="hover:text-brand">
-                Case Study |
-              </Link>{" "}
-              <span>{c.industry}</span>
-            </p>
-            <h1 id="cs-title" className="t-display mt-4 !text-[clamp(2rem,1.4rem+2.4vw,3.5rem)]">
-              {c.title}
-            </h1>
-            <p className="reveal mt-6 max-w-[52ch] leading-relaxed">
-              <strong className="font-semibold">Shipping Impact:</strong> {c.impact}
-            </p>
-            <ul className="reveal mt-6 flex flex-wrap gap-2.5" aria-label="Capabilities">
-              {c.tags.map((t) => (
-                <li key={t} className="rounded-full border border-lilac-soft px-4 py-2 text-sm text-navy">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="reveal">
-            {/* Original asset from the live site: a generic stock clip (see docs/CONTENT-NOTES.md). */}
-            <HeroVideo src="/assets/file-example-mp4-640-3mg-mp4.mp4" poster="/assets/file-example-mp4-640-3mg-poster-0000000.jpg" />
-          </div>
-        </div>
-      </section>
+      <VideoHero
+        media={`cs-${c.slug}` as MediaId}
+        size="tall"
+        compact
+        eyebrow={`Case Study | ${c.industry}`}
+        title={c.title}
+        text={
+          <>
+            <strong className="font-semibold">Shipping Impact:</strong> {c.impact}
+          </>
+        }
+      >
+        <ul className="mt-6 flex flex-wrap gap-2" aria-label="Capabilities">
+          {c.tags.map((t) => (
+            <li key={t} className="rounded-full bg-white/10 px-3.5 py-1.5 text-xs text-paper ring-1 ring-white/20 backdrop-blur">
+              {t}
+            </li>
+          ))}
+        </ul>
+        <Link href="/our-work/case-studies" className="mt-6 inline-block text-sm text-paper/75 hover:text-paper">
+          ← All case studies
+        </Link>
+      </VideoHero>
 
       <Block id="exec" title="Executive Summary">
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
@@ -253,8 +247,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
       </Block>
 
       <RelatedCarousel items={related} />
-      <CtaBand />
-      <TrustStrip />
+      <VideoCtaCard />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
     </article>
   );

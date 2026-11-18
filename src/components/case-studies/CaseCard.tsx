@@ -1,10 +1,14 @@
 import Link from "next/link";
 import type { CaseStudy } from "@/content/case-studies";
+import type { MediaId } from "@/content/media";
+import { MediaPoster } from "@/components/media/MediaPoster";
 
 export function CaseCard({ c, headingLevel = 2 }: { c: CaseStudy; headingLevel?: 2 | 3 }) {
   const H = headingLevel === 2 ? "h2" : "h3";
   return (
-    <article className="group relative flex h-full flex-col rounded-card border border-lilac-soft bg-paper p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.5)] sm:p-7">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-ink/10 bg-paper transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.5)]">
+      <MediaPoster id={`cs-${c.slug}` as MediaId} className="aspect-[16/9]" />
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
       <p className="text-xs font-semibold uppercase tracking-wide text-lilac">{c.industry}</p>
       <H className="t-h4 mt-3">
         <Link href={`/case-studies/${c.slug}`} className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none">
@@ -34,6 +38,7 @@ export function CaseCard({ c, headingLevel = 2 }: { c: CaseStudy; headingLevel?:
           <path d="M2.5 8h11m-4.5-4.5L13.5 8 9 12.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
+      </div>
     </article>
   );
 }

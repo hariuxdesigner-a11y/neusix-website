@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ONSITE_POSTS, tagLabel } from "@/content/resources";
 import { readPostHtml } from "@/lib/blog";
-import { CtaBand } from "@/components/sections/CtaBand";
+import { VideoCtaCard } from "@/components/cinematic/Bands";
 
 // Pre-renders every on-site article (posts in BLOG_POSTS that have a `slug`).
 // A placeholder param keeps the route valid while no on-site articles exist; it renders a 404.
@@ -25,7 +25,8 @@ export default async function BlogPostPage({ params }: PageProps<"/resources/[sl
   if (!post || !html) notFound();
   return (
     <>
-      <article className="container-x pb-[var(--section-y)] pt-[clamp(48px,7vw,104px)]">
+      <article className="below-header container-x pb-[var(--section-y)]">
+        <div className="pt-[clamp(48px,7vw,104px)]" />
         <p className="text-sm">
           <Link href="/resources" className="hover:text-brand">
             Resources
@@ -39,7 +40,7 @@ export default async function BlogPostPage({ params }: PageProps<"/resources/[sl
         </p>
         <div className="prose-neusix mt-10 max-w-[70ch]" dangerouslySetInnerHTML={{ __html: html }} />
       </article>
-      <CtaBand />
+      <VideoCtaCard />
     </>
   );
 }
