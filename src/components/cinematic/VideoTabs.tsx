@@ -43,7 +43,7 @@ export function VideoTabs({ tabs, autoAdvance = 0, dark = false }: { tabs: Video
               tabIndex={on ? 0 : -1}
               onClick={() => setI(k)}
               className={`flex shrink-0 snap-start items-center gap-4 rounded-full px-4 py-2.5 text-left text-sm transition-colors lg:rounded-xl lg:px-4 lg:py-4 lg:text-base ${
-                on ? (dark ? "bg-white/12 text-paper" : "bg-ink text-paper") : dark ? "text-paper/60 hover:text-paper" : "text-ink/55 hover:bg-mist hover:text-ink"
+                on ? (dark ? "bg-white/12 text-paper" : "bg-ink text-paper") : dark ? "text-paper/75 hover:text-paper" : "text-ink/70 hover:bg-mist hover:text-ink"
               }`}
             >
               {tab.icon && (

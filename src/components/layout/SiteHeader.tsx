@@ -238,6 +238,16 @@ export function SiteHeader() {
                 aria-controls={`${uid}-${item.label}`}
                 onMouseEnter={() => open(item.label)}
                 onClick={() => setPanel((p) => (p === item.label ? null : item.label))}
+                onKeyDown={(e) => {
+                  // Tab / ArrowDown from an open trigger moves into its panel
+                  if (panel === item.label && ((e.key === "Tab" && !e.shiftKey) || e.key === "ArrowDown")) {
+                    const first = document.getElementById(`${uid}-${item.label}`)?.querySelector<HTMLElement>("a,button");
+                    if (first) {
+                      e.preventDefault();
+                      first.focus();
+                    }
+                  }
+                }}
                 className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition-colors ${
                   panel === item.label || item.children.some((c) => isActive(pathname, c.href)) ? (onDark ? "bg-white/15" : "bg-mist") : onDark ? "hover:bg-white/10" : "hover:bg-mist"
                 }`}
@@ -262,6 +272,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 nav:flex">
           <Link
             href={CONTACT_LINK.href}
+            data-cta
             className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-colors ${onDark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-white hover:bg-navy"}`}
           >
             {CONTACT_LINK.label}
@@ -290,6 +301,24 @@ export function SiteHeader() {
           className="absolute inset-x-0 top-full hidden px-[var(--gutter)] pt-2 nav:block [&[hidden]]:hidden"
           onMouseEnter={() => open(k)}
           onMouseLeave={scheduleClose}
+          onKeyDown={(e) => {
+            if (e.key !== "Tab") return;
+            const items = [...e.currentTarget.querySelectorAll<HTMLElement>("a,button")];
+            const trigger = headerRef.current?.querySelector<HTMLElement>(`[data-panel="${k}"]`);
+            const navItems = [...(headerRef.current?.querySelectorAll<HTMLElement>("nav[aria-label=Main] > *, a[data-cta]") ?? [])];
+            if (!e.shiftKey && document.activeElement === items[items.length - 1]) {
+              // leaving the panel forwards: continue with the nav item after the trigger
+              const next = navItems[navItems.indexOf(trigger!) + 1];
+              if (next) {
+                e.preventDefault();
+                setPanel(null);
+                next.focus();
+              }
+            } else if (e.shiftKey && document.activeElement === items[0]) {
+              e.preventDefault();
+              trigger?.focus();
+            }
+          }}
         >
           <div className="animate-[megaIn_.22s_ease-out]">
             <MegaPanel panel={p} id={`${uid}-${k}`} onNavigate={() => setPanel(null)} />

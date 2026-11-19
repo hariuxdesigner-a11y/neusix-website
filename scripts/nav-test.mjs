@@ -12,7 +12,16 @@ console.log("3rd tab:", await p.evaluate(() => document.activeElement.textConten
 await p.keyboard.press("Enter");
 console.log("Services expanded:", await p.evaluate(() => document.activeElement.getAttribute("aria-expanded")));
 await p.keyboard.press("Tab");
-console.log("next focus:", await p.evaluate(() => document.activeElement.textContent.trim()));
+console.log("next focus (inside panel):", await p.evaluate(() => document.activeElement.closest("[id*=Services]") ? "yes: " + document.activeElement.textContent.trim().slice(0, 40) : "NO"));
+// tab through to the end of the panel → lands on "Our Work"
+for (let i = 0; i < 12; i++) {
+  const t = await p.evaluate(() => document.activeElement.textContent.trim());
+  if (t.startsWith("Our Work")) break;
+  await p.keyboard.press("Tab");
+}
+console.log("after panel focus:", await p.evaluate(() => document.activeElement.textContent.trim()), "services closed:", await p.evaluate(() => document.querySelector("[data-panel=Services]").getAttribute("aria-expanded")));
+await p.keyboard.press("Shift+Tab");
+await p.keyboard.press("Enter");
 await p.keyboard.press("Escape");
 console.log("after Esc expanded:", await p.evaluate(() => document.activeElement.getAttribute("aria-expanded")), "focus:", await p.evaluate(() => document.activeElement.textContent.trim()));
 // hover opens

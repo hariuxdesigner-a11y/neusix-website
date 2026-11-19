@@ -9,13 +9,15 @@ const [base, outDir, widthsArg, ...paths] = process.argv.slice(2);
 const widths = (widthsArg || "375,768,1440").split(",").map(Number);
 fs.mkdirSync(outDir, { recursive: true });
 
-const browser = await chromium.launch({
+let browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
   args: ["--no-sandbox"],
 });
 const report = [];
 for (const p of paths.length ? paths : ["/"]) {
   for (const w of widths) {
+    try {
+    if (!browser.isConnected()) browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined, args: ["--no-sandbox"] });
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, deviceScaleFactor: 1, reducedMotion: process.env.REDUCED ? "reduce" : "no-preference" });
     const page = await ctx.newPage();
     const errors = [];
@@ -52,13 +54,20 @@ for (const p of paths.length ? paths : ["/"]) {
     });
     const file = path.join(outDir, `${(p.replace(/\//g, "_") || "_home").replace(/^_$/, "_home")}-${w}.png`);
     if (!process.env.NOSHOT) await page.screenshot({ path: file, fullPage: true });
-    report.push({ path: p, width: w, status: res?.status(), hOverflow: overflow.scrollW > overflow.W, ...overflow, errors });
+    const r = { path: p, width: w, status: res?.status(), hOverflow: overflow.scrollW > overflow.W, ...overflow, errors };
+    report.push(r);
+    if (process.env.STREAM) console.log(fmt(r));
     await ctx.close();
+    } catch (e) {
+      console.log(`ERR ${p} @${w}: ${String(e).split("\n")[0]}`);
+      try { await browser.close(); } catch {}
+    }
   }
 }
 await browser.close();
-for (const r of report) {
-  console.log(
-    `${r.status} ${r.path} @${r.width}: ${r.hOverflow ? "OVERFLOW " + r.scrollW : "ok"}${r.offenders.length ? " offenders=" + r.offenders.join(" | ") : ""}${r.errors.length ? " ERRORS=" + r.errors.slice(0, 4).join(" || ") : ""}`,
+function fmt(r) {
+  return (
+    `${r.status} ${r.path} @${r.width}: ${r.hOverflow ? "OVERFLOW " + r.scrollW : "ok"}${r.offenders.length ? " offenders=" + r.offenders.join(" | ") : ""}${r.errors.length ? " ERRORS=" + r.errors.slice(0, 4).join(" || ") : ""}`
   );
 }
+if (!process.env.STREAM) for (const r of report) console.log(fmt(r));

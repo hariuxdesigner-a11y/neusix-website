@@ -72,8 +72,22 @@ export function VideoBackground({
     if (mobile && !priority && !playOnMobile) return;
     const choose = () => setSrc(mobile ? s.mobile : s.mp4);
     if (priority) {
-      choose();
-      return;
+      // let the poster (the LCP image) and page assets load first, then start the hero video
+      let idle = 0;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const start = () => {
+        const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+        if (ric) idle = ric(choose, { timeout: 1500 });
+        else timer = setTimeout(choose, 200);
+      };
+      if (document.readyState === "complete") start();
+      else window.addEventListener("load", start, { once: true });
+      return () => {
+        window.removeEventListener("load", start);
+        if (timer) clearTimeout(timer);
+        const cic = (window as Window & { cancelIdleCallback?: (h: number) => void }).cancelIdleCallback;
+        if (idle && cic) cic(idle);
+      };
     }
     const el = wrap.current;
     if (!el) return;
@@ -110,7 +124,10 @@ export function VideoBackground({
       {m.ready ? (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={s.poster} alt="" className="absolute inset-0 size-full object-cover" style={{ objectPosition: m.focal }} fetchPriority={priority ? "high" : "auto"} loading={priority ? "eager" : "lazy"} />
+          <picture>
+            <source media="(max-width: 767px)" srcSet={s.posterMobile} />
+            <img src={s.poster} alt="" className="absolute inset-0 size-full object-cover" style={{ objectPosition: m.focal }} fetchPriority={priority ? "high" : "auto"} loading={priority ? "eager" : "lazy"} />
+          </picture>
           {src && (
             <video
               ref={vid}

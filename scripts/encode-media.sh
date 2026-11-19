@@ -12,3 +12,5 @@ ffmpeg -y -loglevel error -ss "$SS" -t "$DUR" -i "$IN" -an -vf "$VF" -c:v libx26
 ffmpeg -y -loglevel error -ss "$SS" -t "$DUR" -i "$IN" -an -vf "$VFM" -c:v libx264 -preset veryfast -crf 28 -maxrate 1000k -bufsize 2000k -movflags +faststart "$OUT/$ID-m.mp4"
 ffmpeg -y -loglevel error -ss "$SS" -i "$IN" -frames:v 1 -vf "scale='min(1920,iw)':-2" -q:v 4 "$OUT/$ID.jpg"
 ls -la "$OUT/$ID".* "$OUT/$ID-m.mp4" | awk '{print $5, $9}'
+# phone poster: 3:4 centre crop (portrait sources are just scaled)
+ffmpeg -loglevel error -y -i "$OUT/$ID.jpg" -vf "crop='min(iw,ih*3/4)':ih,scale='min(540,iw)':-2" -q:v 5 "$OUT/$ID-m.jpg"

@@ -1,5 +1,36 @@
 # Testing & QA record
 
+## v2 cinematic experience (branch `experience-v2`), 19 Nov 2026
+
+Production build, placeholder footage in place (37 clips).
+
+* **Responsive / overflow: PASS.** 28 sitemap URLs + 404 page × 320, 375, 430, 768, 1024, 1280, 1440, 1920 px = 232 loads:
+  all 200 (404 page returns 404), **zero horizontal page scroll**, no console or network errors. Elements reported
+  past the edge are inside intentional sideways scrollers (logo marquee, competency/stage tabs, related-case carousel).
+* **Navigation: PASS.** Skip link → logo → Services; Enter opens the mega menu; **Tab moves into the open panel and
+  out to "Our Work"**, Shift+Tab returns to the trigger; Esc closes and restores focus; hover opens; mobile full-screen menu
+  accordions navigate and close; resources tag filter; case-study filters.
+* **Contact form: PASS.** Empty submit → field errors; no delivery configured → error message, never success;
+  webhook configured → success and the JSON arrives at the endpoint.
+* **Video behaviour: PASS.** Reduced motion → no video downloaded (posters only). Desktop → hero starts after page load,
+  other clips only when within ~600px of the viewport, and play only while visible. Phones (<768px) → only the hero
+  clip (mobile encode); other bands show a 3:4 phone poster.
+* **Lighthouse (mobile, simulated slow 4G):**
+
+| Page | Perf | A11y | Best pr. | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| Home | 99 | 100 | 100 | 100 | 0.9 s | 0 |
+| Modernization | 92 | 100 | 100 | 100 | 3.2 s | 0 |
+| About | 97 | 100 | 100 | 100 | 2.5 s | 0 |
+| Case study (Port Control Tower) | 86 | 100 | 100 | 100 | 4.0 s | 0 |
+| Case studies listing | 88 | 100 | 100 | 100 | 3.9 s | 0 |
+| Contact | 100 | 100 | 100 | 100 | 0.9 s | 0 |
+
+  On pages whose largest element is the hero poster image, Lighthouse's *simulated* LCP is 3–4 s; the measured
+  load-to-paint of that image was ~250 ms. Final footage/posters should keep posters under ~80 KB (desktop) and ~40 KB (phone).
+
+## v1 rebuild (branch `main`)
+
 All tests ran against the production build (`npm run build && npm start`) on 17 Nov 2026.
 
 ## How to run

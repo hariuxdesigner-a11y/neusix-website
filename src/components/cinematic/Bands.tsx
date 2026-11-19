@@ -118,10 +118,10 @@ export function SectionHead({
 }) {
   return (
     <div className={`reveal ${align === "center" ? "mx-auto max-w-[820px] text-center" : "max-w-[820px]"}`}>
-      {eyebrow && <p className={`eyebrow ${dark ? "text-lilac-soft" : "text-lilac"}`}>{eyebrow}</p>}
+      {eyebrow && <p className={`eyebrow ${dark ? "text-lilac-soft" : "text-brand"}`}>{eyebrow}</p>}
       <h2 id={id} className="t-h2 mt-3 text-balance !text-[clamp(1.9rem,1.3rem+2.4vw,3.25rem)] !leading-[1.08]">
         {title}
-        {sub && <span className={`block ${dark ? "text-paper/55" : "text-ink/45"}`}>{sub}</span>}
+        {sub && <span className={`block ${dark ? "text-paper/60" : "text-ink/55"}`}>{sub}</span>}
       </h2>
       {text && <div className={`mt-5 text-base leading-relaxed ${dark ? "text-paper/80" : "text-slate"}`}>{text}</div>}
     </div>

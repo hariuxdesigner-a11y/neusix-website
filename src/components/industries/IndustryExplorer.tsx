@@ -37,8 +37,8 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
             >
               <MediaPoster id={ind.media} className="mb-6 aspect-[16/9] rounded-2xl lg:hidden" />
               <p className="eyebrow text-lilac-soft">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className={`t-h3 mt-3 transition-colors duration-500 ${i === active ? "lg:text-paper" : "lg:text-paper/40"}`}>{ind.name}</h2>
-              <div className={`mt-5 max-w-[46ch] space-y-4 text-sm leading-relaxed transition-colors duration-500 sm:text-base ${i === active ? "text-paper/85" : "text-paper/85 lg:text-paper/40"}`}>
+              <h2 className={`t-h3 mt-3 transition-colors duration-500 ${i === active ? "lg:text-paper" : "lg:text-paper/50"}`}>{ind.name}</h2>
+              <div className={`mt-5 max-w-[46ch] space-y-4 text-sm leading-relaxed transition-colors duration-500 sm:text-base ${i === active ? "text-paper/85" : "text-paper/85 lg:text-paper/60"}`}>
                 <p>{ind.where}</p>
                 <p>{ind.wins}</p>
                 <p>{ind.themes}</p>

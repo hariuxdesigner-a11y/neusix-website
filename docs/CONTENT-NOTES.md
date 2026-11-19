@@ -25,7 +25,7 @@ inventing copy. Each item needs input from NeuSix.
 
 1. **Blog articles:** all 10 blog cards link to the *same* Google Doc. Supply the right link per article (or the article text to publish on-site). See `src/content/resources.ts`.
 2. **Privacy Policy / Terms of Service / Cookie Policy:** shown as text in the footer; no pages exist. Supply the policy text to publish them.
-3. **Case study hero video:** every case study uses a generic stock clip (`file_example_MP4_640_3MG`). Replace with real footage or remove.
+3. **Case study hero video:** the live site uses one generic sample clip (`file_example_MP4_640_3MG`) for every case study. In v2 each case study has its own placeholder clip matched to its industry; replace with real footage when available.
 4. **AI COE page:** "What we do" cards and "What we measure" line are identical to the ODC page.
 5. **Healthcare case study:** "Operational Outcomes" reads like manufacturing copy ("production flow").
 6. **Airlines case study:** "Experience Outcomes" repeats the retail case's personalization results.
@@ -39,3 +39,12 @@ inventing copy. Each item needs input from NeuSix.
 
 Template nav ("Link 1/2/3"), the "Transforming enterprises with …" AI-terms ticker and topic orbs, the "Read Case Study" links, and
 the "Start a Conversation" buttons. All of these are `display:none` / zero-height on every screen size of the live site.
+
+## v2 cinematic experience (branch `experience-v2`)
+
+* **No copy was rewritten.** Section labels shown as small eyebrows ("Shipping Impact", "Services", "Our Work", "Resources",
+  "Case Study | <industry>") are existing NeuSix labels reused; no new navigation items were added.
+* **Hero "news" pill** on Home links to the Port Control Tower case study as an agreed placeholder. Change it in `src/app/page.tsx`.
+* **All 37 videos are placeholders** (Mixkit free licence, credits in `docs/MEDIA-CREDITS.md`). `src/content/media.ts`
+  describes the shot each section should get, as a brief for the final footage.
+* `about-global` reuses the earth clip already on the live site.
