@@ -48,3 +48,20 @@ the "Start a Conversation" buttons. All of these are `display:none` / zero-heigh
 * **All 37 videos are placeholders** (Mixkit free licence, credits in `docs/MEDIA-CREDITS.md`). `src/content/media.ts`
   describes the shot each section should get, as a brief for the final footage.
 * `about-global` reuses the earth clip already on the live site.
+
+## Added content (19 Nov 2026, approved by NeuSix to improve the experience)
+
+All new copy is in `src/content/extras.ts` (plus small mappings in `industries.ts`) so it can be reviewed in one place.
+No statistics, client names or testimonials were invented; FAQ answers reuse existing NeuSix statements.
+
+| Where | What was added |
+|---|---|
+| Home | **Client logo carousel — placeholders** ("Our Clients / Trusted by enterprise teams"). Replace the 10 dummy logos in `extras.ts` → `CLIENTS` with real ones (files in `public/clients/`). |
+| Home | **Industries** tiles (9 industries → their section on the Industries page) |
+| Home | **Case studies** row (3 cases besides the featured Port Control Tower) |
+| Home, service pages, Contact | **FAQ** (6 questions; services show the first 5). Includes FAQ structured data for search engines. |
+| Service pages | **Related case studies** (matching the service first, then others) |
+| Industries | Anchor per industry (`/our-work/industries#healthcare` …) and **links to related case studies** |
+| Case study pages | **Previous / Next case study** navigation |
+| Contact | **What happens next** (3 steps, from the consultation copy) |
+| Header | Hover/active states unified; menu no longer changes colour when a dropdown opens; current page underlined |

@@ -77,6 +77,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
   const c = getCaseStudy(slug);
   if (!c) notFound();
   const related = CASE_STUDIES.filter((x) => x.slug !== c.slug);
+  const idx = CASE_STUDIES.findIndex((x) => x.slug === c.slug);
+  const prev = CASE_STUDIES[(idx - 1 + CASE_STUDIES.length) % CASE_STUDIES.length];
+  const next = CASE_STUDIES[(idx + 1) % CASE_STUDIES.length];
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -245,6 +248,25 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
           <Bullets items={c.governance.items} labelled={c.slug === "airlines-aviation"} />
         </div>
       </Block>
+
+      <nav aria-label="More case studies" className="border-y border-ink/5">
+        <div className="container-x grid divide-y divide-ink/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+          {[
+            { c: prev, dir: "Previous case study", align: "sm:pr-8" },
+            { c: next, dir: "Next case study", align: "sm:pl-8 sm:text-right" },
+          ].map(({ c: x, dir, align }) => (
+            <Link key={dir} href={`/case-studies/${x.slug}`} className={`group block py-8 ${align}`}>
+              <span className="text-xs font-semibold uppercase tracking-wide text-lilac">
+                {dir === "Previous case study" ? "← " : ""}
+                {dir}
+                {dir === "Next case study" ? " →" : ""}
+              </span>
+              <span className="t-h4 mt-2 block transition-colors group-hover:text-brand">{x.title}</span>
+              <span className="mt-1 block text-sm text-slate">{x.industry}</span>
+            </Link>
+          ))}
+        </div>
+      </nav>
 
       <RelatedCarousel items={related} />
       <VideoCtaCard />

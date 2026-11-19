@@ -4,16 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { CONTACT_LINK, NAV, SERVICE_LINKS, type NavLink } from "@/content/site";
-import { SERVICES } from "@/content/services";
+import { ACCENT_HEX, SERVICES } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
 
 /** Routes whose top section is light: the header starts solid there. Everything else opens on a dark/video hero. */
-const LIGHT_TOP = ["/resources", "/blog-tags"];
+const LIGHT_TOP = ["/resources", "/blog-tags", "/about"];
 
 const isActive = (p: string, href: string) => p === href || (href !== "/" && p.startsWith(href + "/"));
 
 /* ── mega-menu content (all labels/descriptions are existing NeuSix copy) ───────────── */
-type Panel = { title: string; subtitle: string; items: { label: string; href: string; text: string; icon?: string }[]; footer: { label: string; href: string }; feature?: { eyebrow: string; title: string; text: string; href: string } };
+type Panel = { title: string; subtitle: string; items: { label: string; href: string; text: string; accent?: string }[]; footer: { label: string; href: string }; feature?: { eyebrow: string; title: string; text: string; href: string } };
 
 const serviceText = (href: string) => SERVICES.find((s) => s.href === href);
 const featured = getCaseStudy("logistics-ports")!;
@@ -24,7 +24,7 @@ const PANELS: Record<string, Panel> = {
     subtitle: "Services designed to ship measurable outcomes",
     items: SERVICE_LINKS.filter((l) => l.href !== "/services/services-neusix").map((l) => {
       const s = serviceText(l.href)!;
-      return { label: l.label, href: l.href, text: s.cardText, icon: s.cardGfx };
+      return { label: l.label, href: l.href, text: s.cardText, accent: ACCENT_HEX[s.accent] };
     }),
     footer: { label: "All Services", href: "/services/services-neusix" },
   },
@@ -70,10 +70,9 @@ function MegaPanel({ panel, id, onNavigate }: { panel: Panel; id: string; onNavi
             {panel.items.map((it) => (
               <li key={it.href}>
                 <Link href={it.href} onClick={onNavigate} className="group flex gap-4 rounded-xl p-3 transition-colors hover:bg-mist focus-visible:bg-mist">
-                  {it.icon ? (
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-mist group-hover:bg-paper">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={it.icon} alt="" className="size-8 object-contain" />
+                  {it.accent ? (
+                    <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105" style={{ background: `${it.accent}1f` }}>
+                      <span className="size-2.5 rounded-full" style={{ background: it.accent }} />
                     </span>
                   ) : (
                     <span aria-hidden className="mt-1.5 size-2 shrink-0 rounded-full bg-lilac" />
@@ -205,8 +204,17 @@ export function SiteHeader() {
     document.documentElement.style.overflow = menu ? "hidden" : "";
   }, [menu]);
 
-  const solid = lightTop || scrolled || menu || !!panel;
-  const onDark = !solid; // transparent over a dark/video hero → light text
+  // Opening a mega panel no longer flips the header: it keeps the look of where you are on the page.
+  const solid = lightTop || scrolled;
+  const onDark = !solid || menu; // transparent over a dark/video hero (or mobile menu open) → light text
+  const itemCls = (on: boolean, current: boolean) =>
+    `relative flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition-colors duration-200 ${
+      onDark
+        ? `${on ? "bg-white/15" : "hover:bg-white/10"} ${current ? "text-paper" : "text-paper/85 hover:text-paper"}`
+        : `${on ? "bg-mist text-ink" : "hover:bg-mist hover:text-ink"} ${current ? "text-ink" : "text-ink/75"}`
+    }`;
+  const currentMark = (current: boolean) =>
+    current ? <span aria-hidden className={`absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full ${onDark ? "bg-lilac-soft" : "bg-brand"}`} /> : null;
   const open = (k: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setPanel(k);
@@ -219,7 +227,7 @@ export function SiteHeader() {
     <header
       ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow,color] duration-300 ${hidden && !menu && !panel ? "-translate-y-full" : ""} ${
-        menu ? "bg-ink text-paper" : solid ? "bg-paper/85 text-ink shadow-[0_1px_0_rgba(15,15,31,.06)] backdrop-blur-xl" : "bg-transparent text-paper"
+        menu ? "bg-ink text-paper" : solid ? "bg-paper text-ink shadow-[0_1px_0_rgba(15,15,31,.08)]" : "bg-gradient-to-b from-ink/45 to-transparent text-paper"
       }`}
       style={{ height: "var(--header-h)" }}
       onMouseLeave={scheduleClose}
@@ -248,12 +256,11 @@ export function SiteHeader() {
                     }
                   }
                 }}
-                className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition-colors ${
-                  panel === item.label || item.children.some((c) => isActive(pathname, c.href)) ? (onDark ? "bg-white/15" : "bg-mist") : onDark ? "hover:bg-white/10" : "hover:bg-mist"
-                }`}
+                className={itemCls(panel === item.label, item.children.some((c) => isActive(pathname, c.href)))}
               >
                 {item.label}
                 <Chevron open={panel === item.label} />
+                {currentMark(item.children.some((c) => isActive(pathname, c.href)))}
               </button>
             ) : (
               <Link
@@ -261,9 +268,10 @@ export function SiteHeader() {
                 href={item.href}
                 onMouseEnter={scheduleClose}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
-                className={`rounded-full px-4 py-2 text-sm transition-colors ${onDark ? "hover:bg-white/10 aria-[current=page]:bg-white/15" : "hover:bg-mist aria-[current=page]:bg-mist"}`}
+                className={itemCls(false, isActive(pathname, item.href))}
               >
                 {item.label}
+                {currentMark(isActive(pathname, item.href))}
               </Link>
             ),
           )}
@@ -273,7 +281,7 @@ export function SiteHeader() {
           <Link
             href={CONTACT_LINK.href}
             data-cta
-            className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-colors ${onDark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-white hover:bg-navy"}`}
+            className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-colors duration-200 ${onDark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-paper hover:bg-brand"}`}
           >
             {CONTACT_LINK.label}
           </Link>

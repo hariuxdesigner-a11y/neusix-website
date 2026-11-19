@@ -14,3 +14,5 @@ ffmpeg -y -loglevel error -ss "$SS" -i "$IN" -frames:v 1 -vf "scale='min(1920,iw
 ls -la "$OUT/$ID".* "$OUT/$ID-m.mp4" | awk '{print $5, $9}'
 # phone poster: 3:4 centre crop (portrait sources are just scaled)
 ffmpeg -loglevel error -y -i "$OUT/$ID.jpg" -vf "crop='min(iw,ih*3/4)':ih,scale='min(540,iw)':-2" -q:v 5 "$OUT/$ID-m.jpg"
+# card thumbnail
+ffmpeg -loglevel error -y -i "$OUT/$ID.jpg" -vf "scale='min(640,iw)':-2:flags=lanczos" -q:v 5 "$OUT/$ID-t.jpg"

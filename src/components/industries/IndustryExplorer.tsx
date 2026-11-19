@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import type { Industry } from "@/content/industries";
+import { getCaseStudy } from "@/content/case-studies";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { MediaPoster } from "@/components/media/MediaPoster";
 
@@ -29,11 +31,12 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
           {items.map((ind, i) => (
             <article
               key={ind.name}
+              id={ind.slug}
               data-i={i}
               ref={(el) => {
                 refs.current[i] = el;
               }}
-              className="reveal flex flex-col justify-center border-b border-white/10 py-10 last:border-0 lg:min-h-[78vh] lg:border-0 lg:py-16"
+              className="reveal flex scroll-mt-[calc(var(--header-h)+16px)] flex-col justify-center border-b border-white/10 py-10 last:border-0 lg:min-h-[78vh] lg:border-0 lg:py-16"
             >
               <MediaPoster id={ind.media} className="mb-6 aspect-[16/9] rounded-2xl lg:hidden" />
               <p className="eyebrow text-lilac-soft">{String(i + 1).padStart(2, "0")}</p>
@@ -43,6 +46,24 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
                 <p>{ind.wins}</p>
                 <p>{ind.themes}</p>
               </div>
+              {!!ind.caseStudies?.length && (
+                <ul className="mt-6 grid max-w-[46ch] gap-2">
+                  {ind.caseStudies.map((slug) => {
+                    const c = getCaseStudy(slug);
+                    return c ? (
+                      <li key={slug}>
+                        <Link href={`/case-studies/${slug}`} className="group flex items-center gap-4 rounded-2xl border border-white/15 px-4 py-3 text-sm text-paper transition-colors hover:border-paper hover:bg-paper hover:text-ink">
+                          <span>
+                            <span className="block text-[11px] font-semibold uppercase tracking-wide text-lilac-soft group-hover:text-brand">Case study</span>
+                            <span className="mt-0.5 block leading-snug">{c.title}</span>
+                          </span>
+                          <span aria-hidden className="ml-auto transition-transform group-hover:translate-x-0.5">→</span>
+                        </Link>
+                      </li>
+                    ) : null;
+                  })}
+                </ul>
+              )}
             </article>
           ))}
         </div>

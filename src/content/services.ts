@@ -343,3 +343,13 @@ export const COMMERCIAL_MODELS = [
 export const COMMERCIAL_NOTE = "The right model depends on your internal capability maturity, timeline urgency, and governance needs.";
 
 export const HOME_OUTCOMES = SERVICES[0].outcomes;
+
+/** Brand accent colours used per service (page theme, cards, menu). */
+export const ACCENT_HEX: Record<Accent, string> = {
+  purple: "#6d6eb5",
+  violet: "#995ba5",
+  orange: "#ef703d",
+  yellow: "#f6a042",
+  red: "#d43c3c",
+  green: "#649e4f",
+};

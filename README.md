@@ -75,6 +75,8 @@ docs/                          AUDIT.md, PLAN-V2-CINEMATIC.md, MEDIA-CREDITS.md,
 * **Copy changes:** edit the matching file in `src/content/`.
 * **New case study:** append an object to `CASE_STUDIES` in `src/content/case-studies.ts`. The listing, filters, detail page, related carousel and sitemap update automatically.
 * **New blog post:** add to `BLOG_POSTS` in `src/content/resources.ts`. Either link out (`href`) or publish on-site (`slug` + `src/content/blog/<slug>.md`).
+* **Client logos (home page):** put logo files in `public/clients/` and list them in `src/content/extras.ts` → `CLIENTS`
+  (the current 10 are placeholders). FAQ and contact-step copy live in the same file.
 * **Replacing a video:** run `scripts/encode-media.sh <source.mp4> <media-id> [start-sec] [duration]`
   (needs ffmpeg). It writes the three files into `public/media/`, overwriting the placeholder. For a new id, set `ready: true`
   in `src/content/media.ts`; when replacing a stock clip with NeuSix's own, delete its entry from `src/content/media-credits.ts`

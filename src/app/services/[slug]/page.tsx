@@ -8,6 +8,18 @@ import { TypicalOutcomes } from "@/components/sections/TypicalOutcomes";
 import { CommercialModels } from "@/components/sections/CommercialModels";
 import { VideoHero } from "@/components/cinematic/VideoHero";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
+import { CaseStudiesRow, FaqSection } from "@/components/cinematic/Extras";
+import { CASE_STUDIES } from "@/content/case-studies";
+import { FAQS } from "@/content/extras";
+
+const SERVICE_FILTER: Record<string, string> = {
+  "ai-transformation-page": "AI Transformation",
+  modernization: "Modernization",
+  "digital-transformation": "Digital Transformation",
+  "software-engineering-services": "Software Engineering",
+  "ai-center-of-excellence": "AI COE",
+  "offshore-development-center": "ODC",
+};
 import { ApproachBand } from "@/components/cinematic/HomeBlocks";
 
 export function generateStaticParams() {
@@ -50,6 +62,17 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       {s.phaseNote && <p className="container-x reveal -mt-2 pb-4 pt-10 text-center text-sm text-slate">{s.phaseNote}</p>}
       <WhatYouGet items={s.whatYouGet} gfx={s.wygGfx} accent={accent} />
       <CommercialModels />
+      <CaseStudiesRow
+        id="svc-cases-title"
+        eyebrow="Case Studies"
+        title="Shipping impact in the real world"
+        slugs={(() => {
+          const f = SERVICE_FILTER[s.slug];
+          const match = CASE_STUDIES.filter((c) => (c.filters.services as readonly string[]).includes(f)).map((c) => c.slug);
+          return [...match, ...CASE_STUDIES.map((c) => c.slug).filter((x) => !match.includes(x))];
+        })()}
+      />
+      <FaqSection items={FAQS.slice(0, 5)} id="svc-faq-title" className="section-y border-t border-ink/5" />
       <VideoCtaCard />
     </div>
   );

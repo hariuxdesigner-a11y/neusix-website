@@ -1,13 +1,6 @@
-import type { Accent, Service } from "@/content/services";
-
-export const ACCENT_HEX: Record<Accent, string> = {
-  purple: "#6d6eb5",
-  violet: "#995ba5",
-  orange: "#ef703d",
-  yellow: "#f6a042",
-  red: "#d43c3c",
-  green: "#649e4f",
-};
+import { ACCENT_HEX } from "@/content/services";
+import type { Service } from "@/content/services";
+export { ACCENT_HEX };
 
 function AccentOrb({ color, className = "" }: { color: string; className?: string }) {
   return (

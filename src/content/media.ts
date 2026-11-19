@@ -6,6 +6,7 @@
  *   <id>-m.mp4                mobile, 960×540
  *   <id>.jpg                  poster (first frame), shown before playback, for reduced motion and data saver
  *   <id>-m.jpg                3:4 centre-cropped poster for phones (scripts/encode-media.sh makes it)
+ *   <id>-t.jpg                640px-wide thumbnail for cards
  * Set `ready: true` once the files exist. Until then the section shows a brand-colour stand-in.
  */
 
@@ -93,4 +94,5 @@ export const mediaSrc = (id: MediaId) => ({
   mobile: `/media/${id}-m.mp4`,
   poster: `/media/${id}.jpg`,
   posterMobile: `/media/${id}-m.jpg`,
+  thumb: `/media/${id}-t.jpg`,
 });

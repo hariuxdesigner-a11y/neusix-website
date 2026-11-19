@@ -7,6 +7,8 @@ import { ApproachBand, OutcomeShowcase, ResourcesTeaser, ServiceShowcase, WhyBan
 import { HOME_OUTCOMES } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
 import { SITE } from "@/content/site";
+import { FAQS } from "@/content/extras";
+import { CaseStudiesRow, ClientMarquee, FaqSection, IndustriesStrip } from "@/components/cinematic/Extras";
 
 export const metadata: Metadata = {
   title: SITE.defaultTitle,
@@ -68,9 +70,13 @@ export default function HomePage() {
       </section>
 
       <ServiceShowcase />
+      <IndustriesStrip />
       <ApproachBand />
       <OutcomeShowcase items={HOME_OUTCOMES} />
+      <ClientMarquee />
+      <CaseStudiesRow exclude={featured.slug} />
       <WhyBand />
+      <FaqSection items={FAQS} />
       <VideoCtaCard />
       <ResourcesTeaser />
     </>

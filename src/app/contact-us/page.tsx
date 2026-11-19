@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { ContactForm } from "./ContactForm";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { SITE } from "@/content/site";
+import { CONTACT_STEPS, FAQS } from "@/content/extras";
+import { FaqSection } from "@/components/cinematic/Extras";
+import { SectionHead } from "@/components/cinematic/Bands";
 
 const title = "Contact NeuSix | Get in Touch for AI & Digital Solutions";
 const description =
@@ -16,6 +19,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
+    <>
     <section className="relative isolate overflow-hidden text-paper">
       <VideoBackground id="contact" overlay="dark" priority />
       <div className="container-x grid min-h-[100svh] gap-12 pb-[clamp(48px,7vw,112px)] pt-[calc(var(--header-h)+clamp(40px,6vw,96px))] md:grid-cols-[1fr_1.1fr] md:items-center md:gap-16 lg:gap-24">
@@ -35,5 +39,23 @@ export default function ContactPage() {
         </div>
       </div>
     </section>
+
+    <section aria-labelledby="next-title" className="section-y">
+      <div className="container-x">
+        <SectionHead id="next-title" eyebrow="What happens next" title="Book a Free Consultation" sub="Fast, practical, and tailored." />
+        <ol className="mt-[clamp(32px,4vw,56px)] grid gap-5 md:grid-cols-3">
+          {CONTACT_STEPS.map((st, i) => (
+            <li key={st.n} className="reveal rounded-[20px] border border-ink/10 bg-paper p-7" style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}>
+              <span className="font-serif text-3xl text-lilac">{st.n}</span>
+              <h3 className="t-h4 mt-4">{st.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate">{st.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <FaqSection items={FAQS} cta={false} className="section-y border-t border-ink/5 bg-mist/50" />
+    </>
   );
 }

@@ -1,7 +1,7 @@
 /* Copied verbatim from https://www.neusix.com/our-work/industries (17 Nov 2026). */
 import type { MediaId } from "./media";
 
-export type Industry = { name: string; where: string; wins: string; themes: string; media: MediaId };
+export type Industry = { name: string; where: string; wins: string; themes: string; media: MediaId; slug?: string; caseStudies?: string[] };
 
 export const INDUSTRIES: Industry[] = [
   {
@@ -76,3 +76,17 @@ export const PROBLEMS = [
   { title: "Governance that leaders trust", text: "security, auditability, monitoring, responsible use" },
   { title: "Adoption that sticks", text: "change enablement and operating rhythm" },
 ];
+
+/* v2: anchors (/our-work/industries#<slug>) and links to related case studies. */
+const INDUSTRY_LINKS: Record<string, { slug: string; caseStudies?: string[] }> = {
+  "ind-healthcare": { slug: "healthcare", caseStudies: ["healthcare-life-sciences"] },
+  "ind-retail": { slug: "retail", caseStudies: ["retail-consumer-travel-retail"] },
+  "ind-bfsi": { slug: "bfsi" },
+  "ind-manufacturing": { slug: "manufacturing", caseStudies: ["manufacturing-industrial"] },
+  "ind-aviation": { slug: "aviation-travel-logistics", caseStudies: ["airlines-aviation", "logistics-ports"] },
+  "ind-realestate": { slug: "real-estate" },
+  "ind-professional": { slug: "professional-services", caseStudies: ["legal"] },
+  "ind-energy": { slug: "energy" },
+  "ind-public": { slug: "public-sector" },
+};
+for (const ind of INDUSTRIES) Object.assign(ind, INDUSTRY_LINKS[ind.media] ?? {});
