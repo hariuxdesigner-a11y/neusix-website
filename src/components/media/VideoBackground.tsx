@@ -8,8 +8,8 @@ type Overlay = "hero" | "dark" | "soft" | "light" | "none";
 
 const OVERLAYS: Record<Overlay, string> = {
   // bottom-weighted for left/bottom-aligned hero copy
-  hero: "linear-gradient(180deg, rgba(15,15,31,.35) 0%, rgba(15,15,31,.15) 35%, rgba(15,15,31,.75) 78%, rgba(15,15,31,.92) 100%)",
-  dark: "linear-gradient(180deg, rgba(15,15,31,.72), rgba(15,15,31,.82))",
+  hero: "linear-gradient(90deg, rgba(15,15,31,.55) 0%, rgba(15,15,31,.2) 45%, rgba(15,15,31,0) 70%), linear-gradient(180deg, rgba(15,15,31,.4) 0%, rgba(15,15,31,.18) 32%, rgba(15,15,31,.8) 72%, rgba(15,15,31,.95) 100%)",
+  dark: "linear-gradient(180deg, rgba(15,15,31,.76), rgba(15,15,31,.86))",
   soft: "linear-gradient(180deg, rgba(252,252,253,.55), rgba(252,252,253,.92))",
   light: "linear-gradient(180deg, rgba(252,252,253,.2), rgba(252,252,253,.6))",
   none: "none",

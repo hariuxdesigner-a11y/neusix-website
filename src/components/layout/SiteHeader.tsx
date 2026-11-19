@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CONTACT_LINK, NAV, SERVICE_LINKS, type NavLink } from "@/content/site";
 import { ACCENT_HEX, SERVICES } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
+import { Icon, LinkArrow } from "@/components/ui/Icon";
 
 /** Routes whose top section is light: the header starts solid there. Everything else opens on a dark/video hero. */
-const LIGHT_TOP = ["/resources", "/blog-tags", "/about"];
+const LIGHT_TOP = ["/resources", "/blog-tags"];
 
 const isActive = (p: string, href: string) => p === href || (href !== "/" && p.startsWith(href + "/"));
 
@@ -44,20 +45,16 @@ function Logo({ light }: { light: boolean }) {
   return (
     <Link href="/" aria-label="NeuSix home" className="relative z-10 inline-flex shrink-0 items-center py-2">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={light ? "/assets/neusix-logo-white.svg" : "/assets/group-1.svg"} alt="NeuSix" width={94} height={16} className="h-auto w-[clamp(84px,7vw,104px)]" />
+      <img src={light ? "/assets/neusix-logo-white.svg" : "/assets/group-1.svg"} alt="NeuSix" width={94} height={16} className="h-auto w-[clamp(92px,7.4vw,112px)]" />
     </Link>
   );
 }
 
 function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg aria-hidden width="10" height="10" viewBox="0 0 12 12" className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}>
-      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <Icon name="chevron-down" size={14} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />;
 }
 
-function MegaPanel({ panel, id, onNavigate }: { panel: Panel; id: string; onNavigate: () => void }) {
+function MegaPanel({ panel, id, onNavigate, icons }: { panel: Panel; id: string; onNavigate: () => void; icons: Record<string, ReactNode> }) {
   return (
     <div id={id} className="mx-auto w-full max-w-[1120px] overflow-hidden rounded-[22px] bg-paper text-ink shadow-[0_30px_80px_-30px_rgba(15,15,31,.55)] ring-1 ring-ink/5">
       <div className="grid gap-8 p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:p-10">
@@ -70,9 +67,10 @@ function MegaPanel({ panel, id, onNavigate }: { panel: Panel; id: string; onNavi
             {panel.items.map((it) => (
               <li key={it.href}>
                 <Link href={it.href} onClick={onNavigate} className="group flex gap-4 rounded-xl p-3 transition-colors hover:bg-mist focus-visible:bg-mist">
-                  {it.accent ? (
-                    <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105" style={{ background: `${it.accent}1f` }}>
-                      <span className="size-2.5 rounded-full" style={{ background: it.accent }} />
+                  {icons[it.href] ? (
+                    <span aria-hidden className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-mist transition-colors duration-200 group-hover:bg-paper group-hover:ring-1 group-hover:ring-ink/10">
+                      <span className="size-9 text-brand">{icons[it.href]}</span>
+                      {it.accent && <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full ring-2 ring-paper" style={{ background: it.accent }} />}
                     </span>
                   ) : (
                     <span aria-hidden className="mt-1.5 size-2 shrink-0 rounded-full bg-lilac" />
@@ -90,14 +88,14 @@ function MegaPanel({ panel, id, onNavigate }: { panel: Panel; id: string; onNavi
               <span aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(80%_80%_at_80%_10%,rgba(109,110,181,.55),transparent_60%)]" />
               <span className="text-xs text-lilac-soft">{panel.feature.eyebrow}</span>
               <span className="t-h4 mt-2">{panel.feature.title}</span>
-              <span className="mt-2 text-[13px] text-paper/75">{panel.feature.text}</span>
+              <span className="mt-2 text-[13px] text-paper/85">{panel.feature.text}</span>
             </Link>
           )}
         </div>
       </div>
       <Link href={panel.footer.href} onClick={onNavigate} className="group flex items-center justify-between border-t border-ink/5 bg-mist/70 px-8 py-4 text-sm font-medium transition-colors hover:bg-mist lg:px-10">
         {panel.footer.label}
-        <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+        <LinkArrow />
       </Link>
     </div>
   );
@@ -147,7 +145,7 @@ function MobileMenu({ open, pathname, onClose }: { open: boolean; pathname: stri
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ icons = {} }: { icons?: Record<string, ReactNode> }) {
   const pathname = usePathname() || "/";
   const lightTop = LIGHT_TOP.some((p) => pathname.startsWith(p));
   const [scrolled, setScrolled] = useState(false);
@@ -210,10 +208,10 @@ export function SiteHeader() {
   const solid = lightTop || scrolled;
   const onDark = !solid || menu; // transparent over a dark/video hero (or mobile menu open) → light text
   const itemCls = (on: boolean, current: boolean) =>
-    `relative flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition-colors duration-200 ${
+    `relative flex h-10 items-center gap-1.5 rounded-full px-4 text-[15px] font-medium tracking-[-0.005em] transition-colors duration-200 focus-visible:outline-offset-2 ${
       onDark
-        ? `${on ? "bg-white/15" : "hover:bg-white/10"} ${current ? "text-paper" : "text-paper/85 hover:text-paper"}`
-        : `${on ? "bg-mist text-ink" : "hover:bg-mist hover:text-ink"} ${current ? "text-ink" : "text-ink/75"}`
+        ? `${on ? "bg-white/15" : "hover:bg-white/10"} ${current ? "text-paper" : "text-paper/90 hover:text-paper"}`
+        : `${on ? "bg-mist text-ink" : "hover:bg-mist hover:text-ink"} ${current ? "text-ink" : "text-ink/80"}`
     }`;
   const currentMark = (current: boolean) =>
     current ? <span aria-hidden className={`absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full ${onDark ? "bg-lilac-soft" : "bg-brand"}`} /> : null;
@@ -229,15 +227,15 @@ export function SiteHeader() {
     <header
       ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow,color] duration-300 ${hidden && !menu && !panel ? "-translate-y-full" : ""} ${
-        menu ? "bg-ink text-paper" : solid ? "bg-paper text-ink shadow-[0_1px_0_rgba(15,15,31,.08)]" : "bg-gradient-to-b from-ink/45 to-transparent text-paper"
+        menu ? "bg-ink text-paper" : solid ? "border-b border-ink/[.07] bg-paper/95 text-ink backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-gradient-to-b from-ink/55 to-transparent text-paper"
       }`}
       style={{ height: "var(--header-h)" }}
       onMouseLeave={scheduleClose}
     >
-      <div className="container-x flex h-full items-center justify-between gap-6">
+      <div className="container-x grid h-full grid-cols-[auto_1fr_auto] items-center gap-6 nav:grid-cols-[1fr_auto_1fr]">
         <Logo light={onDark || menu} />
 
-        <nav aria-label="Main" className="hidden items-center gap-1 nav:flex">
+        <nav aria-label="Main" className="hidden items-center gap-0.5 nav:flex">
           {NAV.map((item) =>
             "children" in item ? (
               <button
@@ -279,27 +277,26 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <div className="hidden items-center gap-3 nav:flex">
+        <div className="hidden items-center justify-self-end gap-3 nav:flex">
           <Link
             href={CONTACT_LINK.href}
             data-cta
-            className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-colors duration-200 ${onDark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-paper hover:bg-brand"}`}
+            className={`group inline-flex h-11 items-center justify-center gap-2 rounded-full pl-6 pr-5 text-[15px] font-medium transition-colors duration-200 ${onDark ? "bg-paper text-ink hover:bg-lilac-soft" : "bg-ink text-paper hover:bg-brand"}`}
           >
             {CONTACT_LINK.label}
+            <LinkArrow />
           </Link>
         </div>
 
         <button
           type="button"
-          className="relative z-10 -mr-2 inline-flex size-11 items-center justify-center rounded-lg nav:hidden"
+          className="relative z-10 -mr-2 inline-flex size-11 items-center justify-center justify-self-end rounded-full col-start-3 nav:hidden"
           aria-expanded={menu}
           aria-controls="mobile-menu"
           aria-label={menu ? "Close menu" : "Open menu"}
           onClick={() => setMenu((v) => !v)}
         >
-          <svg aria-hidden width="24" height="24" viewBox="0 0 24 24">
-            {menu ? <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
-          </svg>
+          <Icon name={menu ? "x" : "menu"} size={24} />
         </button>
       </div>
 
@@ -331,7 +328,7 @@ export function SiteHeader() {
           }}
         >
           <div className="animate-[megaIn_.22s_ease-out]">
-            <MegaPanel panel={p} id={`${uid}-${k}`} onNavigate={() => setPanel(null)} />
+            <MegaPanel panel={p} id={`${uid}-${k}`} onNavigate={() => setPanel(null)} icons={icons} />
           </div>
         </div>
       ))}

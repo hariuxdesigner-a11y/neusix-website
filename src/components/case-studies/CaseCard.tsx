@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CaseStudy } from "@/content/case-studies";
 import type { MediaId } from "@/content/media";
 import { MediaPoster } from "@/components/media/MediaPoster";
+import { Icon } from "@/components/ui/Icon";
 
 export function CaseCard({ c, headingLevel = 2 }: { c: CaseStudy; headingLevel?: 2 | 3 }) {
   const H = headingLevel === 2 ? "h2" : "h3";
@@ -9,7 +10,7 @@ export function CaseCard({ c, headingLevel = 2 }: { c: CaseStudy; headingLevel?:
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-ink/10 bg-paper transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.5)]">
       <MediaPoster id={`cs-${c.slug}` as MediaId} className="aspect-[16/9]" />
       <div className="flex flex-1 flex-col p-6 sm:p-7">
-      <p className="text-xs font-semibold uppercase tracking-wide text-lilac">{c.industry}</p>
+      <p className="text-xs font-semibold uppercase tracking-wide text-brand">{c.industry}</p>
       <H className="t-h4 mt-3">
         <Link href={`/case-studies/${c.slug}`} className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none">
           {c.title}
@@ -20,8 +21,7 @@ export function CaseCard({ c, headingLevel = 2 }: { c: CaseStudy; headingLevel?:
         {c.card.map((h) => (
           <li key={h.label} className="flex items-start gap-2.5 text-sm leading-snug">
             {h.trend ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={h.trend === "up" ? "/assets/caretup-1.png" : "/assets/caretup-2.png"} alt="" width={20} height={20} className="mt-0.5 size-5 shrink-0" />
+              <Icon name={h.trend === "up" ? "trend-up" : "trend-down"} size={18} className="mt-0.5 text-brand" />
             ) : (
               <span aria-hidden className="mt-1.5 size-2 shrink-0 rounded-full bg-lilac" />
             )}

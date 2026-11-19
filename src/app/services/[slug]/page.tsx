@@ -4,6 +4,7 @@ import { SERVICES, getService } from "@/content/services";
 import type { MediaId } from "@/content/media";
 import { ACCENT_HEX, ServiceIntro, StageFit, UseCaseThemes, WhatWeDo } from "@/components/services/ServiceSections";
 import { WhatYouGet } from "@/components/services/WhatYouGet";
+import { LineIcon } from "@/components/motion/LineIcon";
 import { CommercialModels } from "@/components/sections/CommercialModels";
 import { VideoHero } from "@/components/cinematic/VideoHero";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
@@ -59,7 +60,12 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         phases={s.phases.map((p, i) => ({ name: p.name, text: p.text, outputs: p.outputs, icon: s.phaseIcons[i] }))}
       />
       {s.phaseNote && <p className="container-x reveal -mt-2 pb-4 pt-10 text-center text-sm text-slate">{s.phaseNote}</p>}
-      <WhatYouGet items={s.whatYouGet} gfx={s.wygGfx} accent={accent} />
+      <WhatYouGet
+        items={s.whatYouGet}
+        accent={accent}
+        icons={s.wygGfx.map((g) => <LineIcon key={g} src={g} trigger="parent" className="size-full" />)}
+        panelIcons={s.whatYouGet.map((_, i) => <LineIcon key={i} src={s.wygGfx[i % s.wygGfx.length]} trigger="parent" stroke={1.2} className="size-full" />)}
+      />
       <CommercialModels />
       <CaseStudiesRow
         id="svc-cases-title"

@@ -5,6 +5,7 @@ import { useRef, useState, type ReactNode } from "react";
 import type { Outcome } from "@/content/services";
 import { LottieOnView } from "@/components/ui/LottieOnView";
 import { ProgressRing, useAutoAdvance } from "@/components/motion/AutoAdvance";
+import { ArrowChip } from "@/components/ui/Icon";
 
 /**
  * "Typical outcomes" as an Abridge card carousel: heading + outcome list with progress rings on
@@ -42,7 +43,7 @@ export function OutcomeCarousel({
                 aria-selected={on}
                 aria-controls="outcome-panel"
                 onClick={() => setI(k)}
-                className={`flex items-center gap-4 rounded-lg py-2.5 text-left text-[15px] transition-colors ${on ? "text-ink" : "text-ink/50 hover:text-ink"}`}
+                className={`flex items-center gap-4 rounded-lg py-2.5 text-left text-[15px] transition-colors ${on ? "text-ink" : "text-ink/70 hover:text-ink"}`}
               >
                 <ProgressRing run={on} paused={auto.paused} duration={interval} onDone={() => setI((v) => (v + 1) % items.length)} className={on ? "" : "opacity-50"} />
                 <span>
@@ -79,8 +80,8 @@ export function OutcomeCarousel({
             <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink/70">
               <span aria-hidden className="size-2 rounded-full bg-orange" /> {source.label}
             </span>
-            <Link href={source.href} aria-label={`${source.label}: learn more`} className="flex size-10 items-center justify-center rounded-xl bg-paper text-ink ring-1 ring-ink/10 transition-colors hover:bg-ink hover:text-paper">
-              →
+            <Link href={source.href} aria-label={`${source.label}: learn more`} className="group rounded-full">
+              <ArrowChip className="bg-paper" />
             </Link>
           </div>
         </div>

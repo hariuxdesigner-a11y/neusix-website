@@ -8,38 +8,33 @@ import { SectionHead } from "./Bands";
 import { Marquee } from "@/components/motion/Marquee";
 import { StaggerParallax } from "@/components/motion/StaggerParallax";
 import { Counter } from "@/components/motion/Counter";
+import { ArrowChip, LinkArrow } from "@/components/ui/Icon";
 
-export const Arrow = () => (
-  <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
-    <path d="M2.5 8h11m-4.5-4.5L13.5 8 9 12.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+export const Arrow = LinkArrow;
 
 /** Client logo marquee. Logos are greyscale until hovered; motion pauses on hover and stops for reduced motion. */
 export function ClientMarquee() {
   if (!CLIENTS.length) return null;
   return (
-    <section aria-labelledby="clients-title" className="border-y border-ink/5 bg-paper py-[clamp(48px,6vw,88px)]">
-      <div className="container-x">
-        <div className="stagger text-center">
-          <p className="eyebrow text-brand">{CLIENTS_SECTION.eyebrow}</p>
-          <h2 id="clients-title" className="t-h3 mt-3">
-            {CLIENTS_SECTION.title}
-          </h2>
-        </div>
+    <section aria-labelledby="clients-title" className="border-b border-ink/[.07] bg-paper">
+      <div className="container-x grid items-center gap-5 py-[clamp(24px,3vw,40px)] lg:grid-cols-[minmax(0,240px)_1fr] lg:gap-12">
+        <h2 id="clients-title" className="reveal text-sm leading-snug text-slate">
+          <span className="eyebrow block text-brand">{CLIENTS_SECTION.eyebrow}</span>
+          <span className="mt-1.5 block font-serif text-lg text-ink">{CLIENTS_SECTION.title}</span>
+        </h2>
+        <Marquee speed={42}>
+          {CLIENTS.map((c) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={c.name}
+              src={c.logo}
+              alt={c.name}
+              loading="lazy"
+              className="h-[clamp(26px,2.4vw,36px)] w-auto max-w-[170px] shrink-0 object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+            />
+          ))}
+        </Marquee>
       </div>
-      <Marquee className="mt-[clamp(28px,3.5vw,48px)]" speed={42}>
-        {CLIENTS.map((c) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            key={c.name}
-            src={c.logo}
-            alt={c.name}
-            loading="lazy"
-            className="h-[clamp(28px,2.6vw,40px)] w-auto max-w-[180px] shrink-0 object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-          />
-        ))}
-      </Marquee>
     </section>
   );
 }
@@ -63,9 +58,7 @@ export function IndustriesStrip() {
                 <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
                 <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 text-paper">
                   <span className="text-[17px] font-medium leading-snug">{ind.name}</span>
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-paper/15 backdrop-blur transition-colors group-hover:bg-paper group-hover:text-ink">
-                    <Arrow />
-                  </span>
+                  <ArrowChip tone="image" />
                 </span>
               </Link>
             </li>
@@ -170,7 +163,7 @@ export function ImpactCases({ exclude }: { exclude?: string }) {
             <p className="eyebrow text-brand">Our Impact</p>
             <h2 id="impact-title" className="t-h2 mt-3 !text-[clamp(1.9rem,1.3rem+2.4vw,3.25rem)] !leading-[1.08]">
               Shipped across <Counter value={String(new Set(CASE_STUDIES.map((c) => c.filters.industry)).size)} /> industries
-              <span className="block text-ink/55">from pilots to production</span>
+              <span className="block text-ink/60">from pilots to production</span>
             </h2>
           </div>
           <Link href="/our-work/case-studies" className="group reveal inline-flex items-center gap-2 text-sm font-medium text-navy">
@@ -199,11 +192,9 @@ export function ImpactCases({ exclude }: { exclude?: string }) {
                   )}
                   <span className="mt-auto flex items-center justify-between pt-8">
                     <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink/70">
-                      <span aria-hidden className="size-2 rounded-sm bg-orange" /> Case Study
+                      <span aria-hidden className="size-2 rounded-full bg-orange" /> Case Study
                     </span>
-                    <span aria-hidden className="flex size-9 items-center justify-center rounded-lg bg-mist transition-colors group-hover:bg-ink group-hover:text-paper">
-                      <Arrow />
-                    </span>
+                    <ArrowChip />
                   </span>
                 </Link>
               </li>

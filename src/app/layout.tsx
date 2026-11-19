@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Lora, Google_Sans_Flex } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { LineIcon } from "@/components/motion/LineIcon";
+import { SERVICES } from "@/content/services";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { RevealObserver } from "@/components/ui/RevealObserver";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -80,7 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader />
+        <SiteHeader icons={Object.fromEntries([...SERVICES.map((s) => [s.href, <LineIcon key={s.slug} src={s.cardGfx} stroke={1.5} mono className="size-full" />]), ["/our-work/industries", <LineIcon key="ind" src="/assets/cs-i3.svg" stroke={1.4} mono className="size-full" />], ["/our-work/case-studies", <LineIcon key="cs" src="/assets/outcome-banner.svg" stroke={1.4} mono className="size-full" />]])} />
         <main id="main" className="flex-1">
           {children}
         </main>

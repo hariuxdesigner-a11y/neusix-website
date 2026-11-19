@@ -67,7 +67,7 @@ export function ResourcesView({ tag }: { tag: string }) {
           {posts.map((p) => (
             <li key={p.title}>
               <ItemLink href={postHref(p)}>
-                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-lilac">
+                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-brand">
                   <span aria-hidden className="size-1.5 rounded-full bg-orange" /> {tagLabel(p.tag)}
                 </span>
                 <h3 className="mt-5 text-lg font-medium leading-snug">{p.title}</h3>

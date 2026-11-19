@@ -6,6 +6,7 @@ import type { Industry } from "@/content/industries";
 import { getCaseStudy } from "@/content/case-studies";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { MediaPoster } from "@/components/media/MediaPoster";
+import { LinkArrow } from "@/components/ui/Icon";
 
 /** Nine industries. Desktop: copy scrolls on the left while a sticky video panel cross-fades to the
  *  clip for the industry in view. Phones/tablets: each industry stacks with its own still. */
@@ -40,8 +41,8 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
             >
               <MediaPoster id={ind.media} className="mb-6 aspect-[16/9] rounded-2xl lg:hidden" />
               <p className="eyebrow text-lilac-soft">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className={`t-h3 mt-3 transition-colors duration-500 ${i === active ? "lg:text-paper" : "lg:text-paper/50"}`}>{ind.name}</h2>
-              <div className={`mt-5 max-w-[46ch] space-y-4 text-sm leading-relaxed transition-colors duration-500 sm:text-base ${i === active ? "text-paper/85" : "text-paper/85 lg:text-paper/60"}`}>
+              <h2 className={`t-h3 mt-3 transition-colors duration-500 ${i === active ? "lg:text-paper" : "lg:text-paper/60"}`}>{ind.name}</h2>
+              <div className={`mt-5 max-w-[46ch] space-y-4 text-sm leading-relaxed transition-colors duration-500 sm:text-base ${i === active ? "text-paper/85" : "text-paper/85 lg:text-paper/70"}`}>
                 <p>{ind.where}</p>
                 <p>{ind.wins}</p>
                 <p>{ind.themes}</p>
@@ -57,7 +58,7 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
                             <span className="block text-[11px] font-semibold uppercase tracking-wide text-lilac-soft group-hover:text-brand">Case study</span>
                             <span className="mt-0.5 block leading-snug">{c.title}</span>
                           </span>
-                          <span aria-hidden className="ml-auto transition-transform group-hover:translate-x-0.5">→</span>
+                          <LinkArrow className="ml-auto" />
                         </Link>
                       </li>
                     ) : null;
@@ -75,7 +76,7 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
               </div>
             ))}
             <div className="absolute inset-x-0 bottom-0 z-10 p-8">
-              <p className="eyebrow text-paper/70">
+              <p className="eyebrow text-paper/85">
                 {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </p>
               <p className="t-h3 mt-2 text-paper">{items[active].name}</p>

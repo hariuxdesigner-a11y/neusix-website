@@ -26,7 +26,7 @@ export default function ContactPage() {
       <div className="container-x grid min-h-[100svh] gap-12 pb-[clamp(48px,7vw,112px)] pt-[calc(var(--header-h)+clamp(40px,6vw,96px))] md:grid-cols-[1fr_1.1fr] md:items-center md:gap-16 lg:gap-24">
         <div className="flex flex-col gap-12">
           <div>
-            <p className="eyebrow text-paper/75">Contact</p>
+            <p className="eyebrow text-paper/85">Contact</p>
             <h1 className="t-display mt-4">
               <WordRise>Get in Touch</WordRise>
             </h1>
@@ -49,7 +49,7 @@ export default function ContactPage() {
         <ol className="mt-[clamp(32px,4vw,56px)] grid gap-5 md:grid-cols-3">
           {CONTACT_STEPS.map((st, i) => (
             <li key={st.n} className="reveal rounded-[20px] border border-ink/10 bg-paper p-7" style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}>
-              <span className="font-serif text-3xl text-lilac">{st.n}</span>
+              <span className="font-serif text-3xl text-brand">{st.n}</span>
               <h3 className="t-h4 mt-4">{st.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate">{st.text}</p>
             </li>

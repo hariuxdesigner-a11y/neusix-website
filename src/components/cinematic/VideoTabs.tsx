@@ -69,7 +69,7 @@ export function VideoTabs({ tabs, autoAdvance = 7000, dark = false }: { tabs: Vi
             <VideoBackground id={tab.media} overlay="hero" active={k === i} playOnMobile={k === i} />
           </div>
         ))}
-        <p className="eyebrow text-paper/75">{String(i + 1).padStart(2, "0")} / {String(tabs.length).padStart(2, "0")}</p>
+        <p className="eyebrow text-paper/85">{String(i + 1).padStart(2, "0")} / {String(tabs.length).padStart(2, "0")}</p>
         <h3 className="t-h3 mt-2">{t.title ?? t.label}</h3>
         {t.body && <div className="mt-3 max-w-[52ch] text-sm leading-relaxed text-paper/85 sm:text-base">{t.body}</div>}
       </div>

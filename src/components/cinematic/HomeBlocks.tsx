@@ -12,12 +12,9 @@ import { LineIcon } from "@/components/motion/LineIcon";
 import { BlurStage } from "@/components/motion/BlurStage";
 import { OutcomeCarousel } from "./OutcomeCarousel";
 import { Button } from "@/components/ui/Button";
+import { LinkArrow } from "@/components/ui/Icon";
 
-const Arrow = () => (
-  <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
-    <path d="M2.5 8h11m-4.5-4.5L13.5 8 9 12.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+const Arrow = LinkArrow;
 
 /** "Our Services": image-led cards (Abridge workflow cards), still frame from each service's own hero clip. */
 export function ServiceShowcase({ title = "Our Services", eyebrow = "Services" }: { title?: string; eyebrow?: string }) {
@@ -75,7 +72,7 @@ export function ApproachBand({
           {items.map((p, i) => (
             <li key={p.name} className="flex flex-col rounded-[20px] bg-paper/95 p-6 shadow-[0_24px_60px_-34px_rgba(15,15,31,.4)] ring-1 ring-ink/5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold tracking-[0.14em] text-lilac">0{i + 1}</span>
+                <span className="text-xs font-semibold tracking-[0.14em] text-brand">0{i + 1}</span>
                 <LineIcon src={p.icon} delay={200 + i * 150} className="h-16 w-[72px]" />
               </div>
               <h3 className="t-h4 mt-4">{p.name}</h3>
@@ -133,7 +130,7 @@ export function WhyBand() {
       <div className="container-x section-y">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)]">
           <div className="reveal">
-            <h2 id="why-title" className="t-display text-lilac">
+            <h2 id="why-title" className="t-display text-lilac-bright">
               Why NeuSix
             </h2>
             <p className="mt-6 max-w-[22ch] font-serif text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-snug text-paper/85">
@@ -143,9 +140,9 @@ export function WhyBand() {
           <ol className="stagger grid gap-px overflow-hidden rounded-[20px] bg-white/10 sm:grid-cols-3">
             {WHY_NEUSIX.map((w) => (
               <li key={w.n} className="flex flex-col bg-ink p-7">
-                <span className="text-sm text-lilac">{w.n}</span>
+                <span className="text-sm text-lilac-bright">{w.n}</span>
                 <h3 className="t-h4 mt-10">{w.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-paper/75">{w.text}</p>
+                <p className="mt-3 text-sm leading-relaxed text-paper/85">{w.text}</p>
               </li>
             ))}
           </ol>
@@ -171,7 +168,7 @@ export function ResourcesTeaser() {
           {posts.map((p) => (
             <li key={p.title}>
               <a href={postHref(p)} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col rounded-[18px] border border-ink/10 p-6 transition-colors hover:border-navy">
-                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-lilac">
+                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-brand">
                   <span aria-hidden className="size-1.5 rounded-full bg-orange" /> {tagLabel(p.tag)}
                 </span>
                 <h3 className="mt-5 text-lg font-medium leading-snug group-hover:text-brand">{p.title}</h3>

@@ -10,6 +10,7 @@ import { VideoCtaCard } from "@/components/cinematic/Bands";
 import type { MediaId } from "@/content/media";
 import { Button } from "@/components/ui/Button";
 import { Orbs } from "@/components/ui/Orbs";
+import { Icon } from "@/components/ui/Icon";
 
 export function generateStaticParams() {
   return CASE_STUDIES.map((c) => ({ slug: c.slug }));
@@ -111,8 +112,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
             </li>
           ))}
         </ul>
-        <Link href="/our-work/case-studies" className="mt-6 inline-block text-sm text-paper/75 hover:text-paper">
-          ← All case studies
+        <Link href="/our-work/case-studies" className="mt-6 inline-block text-sm text-paper/85 hover:text-paper">
+          <span className="inline-flex items-center gap-2"><Icon name="arrow-left" size={16} /> All case studies</span>
         </Link>
       </VideoHero>
 
@@ -254,10 +255,11 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
             { c: next, dir: "Next case study", align: "sm:pl-8 sm:text-right" },
           ].map(({ c: x, dir, align }) => (
             <Link key={dir} href={`/case-studies/${x.slug}`} className={`group block py-8 ${align}`}>
-              <span className="text-xs font-semibold uppercase tracking-wide text-lilac">
-                {dir === "Previous case study" ? "← " : ""}
-                {dir}
-                {dir === "Next case study" ? " →" : ""}
+              <span className="text-xs font-semibold uppercase tracking-wide text-brand">
+                <span className={`inline-flex items-center gap-2 ${dir === "Next case study" ? "sm:flex-row-reverse" : ""}`}>
+                  <Icon name={dir === "Previous case study" ? "arrow-left" : "arrow-right"} size={14} />
+                  {dir}
+                </span>
               </span>
               <span className="t-h4 mt-2 block transition-colors group-hover:text-brand">{x.title}</span>
               <span className="mt-1 block text-sm text-slate">{x.industry}</span>

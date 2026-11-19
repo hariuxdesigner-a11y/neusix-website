@@ -4,6 +4,7 @@ import type { MediaId } from "@/content/media";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { Button } from "@/components/ui/Button";
 import { WordRise } from "@/components/motion/WordRise";
+import { LinkArrow } from "@/components/ui/Icon";
 
 type Cta = { label: string; href: string };
 
@@ -48,7 +49,7 @@ export function VideoHero({
       <div className="container-x relative grid gap-10 pb-[clamp(40px,7vw,96px)] pt-[calc(var(--header-h)+48px)] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="max-w-[880px]">
           {eyebrow && (
-            <p className="eyebrow rise flex items-center gap-3 text-paper/80">
+            <p className="eyebrow rise flex items-center gap-3 text-paper/90">
               {accent && <span aria-hidden className="h-px w-8" style={{ background: accent }} />}
               {eyebrow}
             </p>
@@ -85,9 +86,11 @@ export function VideoHero({
           >
             <span className="mt-1 size-2.5 shrink-0 rounded-full bg-orange" aria-hidden />
             <span>
-              <span className="block text-xs uppercase tracking-[0.12em] text-paper/70">{pill.label}</span>
+              <span className="block text-xs uppercase tracking-[0.12em] text-paper/85">{pill.label}</span>
               <span className="mt-1.5 block text-[15px] leading-snug">{pill.title}</span>
-              <span className="mt-3 inline-block text-sm text-lilac-soft transition-transform group-hover:translate-x-1">Explore →</span>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-sm text-lilac-soft">
+                Explore <LinkArrow />
+              </span>
             </span>
           </Link>
         )}

@@ -12,6 +12,7 @@
   --color-brand: #403e8e;          /* --neusix-blue-700 */
   --color-lilac: #6d6eb5;          /* --neusix-light-purple */
   --color-lilac-soft: #d9daf2;
+  --color-lilac-bright: #a9aae6;   /* lilac for text on dark backgrounds (AA on ink) */
   --color-mist: #f1f1f9;           /* --neusix-blue-white */
   --color-mist-2: #e7e8f3;
   --color-paper: #fcfcfd;          /* --neusix-white-text */
@@ -72,7 +73,7 @@
   --ease-out-expo: cubic-bezier(.16,1,.3,1);
   --gutter: clamp(20px, 5.6vw, 80px);
   --section-y: clamp(64px, 4rem + 4vw, 128px);
-  --header-h: 76px;
+  --header-h: 80px;
 }
 
 html {
@@ -150,7 +151,10 @@ img, svg, video { max-width: 100%; }
   .ring-paused .ring-fg { animation-play-state: paused; }
   @keyframes ringFill { to { stroke-dashoffset: 0; } }
 
-  /* NeuSix line icons draw themselves on */
+  /* NeuSix line icons: one stroke weight at every size, then they draw themselves on */
+  .draw-icon [data-d="s"] { vector-effect: non-scaling-stroke; stroke-width: var(--icon-stroke, 1.4px); }
+  .icon-mono [data-d="s"] { stroke: currentColor; }
+  .icon-mono [data-d="f"]:not([data-k]) { fill: currentColor; }
   .js .draw-icon [data-d="s"] { stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.65,0,.35,1); transition-delay: calc(var(--draw-delay, 0ms) + min(var(--k), 24) * 45ms); }
   .js .draw-icon [data-d="f"] { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; transition: opacity .5s ease, transform .8s cubic-bezier(.34,1.56,.64,1); transition-delay: calc(var(--draw-delay, 0ms) + 450ms + min(var(--k), 24) * 35ms); }
   .js .draw-soft [data-d="f"] { opacity: 1; transform: none; transition: none; }

@@ -1,5 +1,11 @@
 # Testing & QA record
 
+## Header / About / contrast / icon pass, 19 Nov 2026
+
+* Contrast: `node scripts/contrast.mjs http://localhost:3000 1440,390 <paths>` (axe-core) on every page → **0 issues** (was 16).
+* 232 loads at 8 widths: no horizontal scroll, no errors. Nav + form tests pass.
+* Lighthouse mobile: Home 98/100/100/100, About 91/100/100/100, Contact 100/100/100/100, Modernization 84, ODC 91.
+
 ## Motion pass (Abridge-style animation), 19 Nov 2026
 
 * 28 URLs + 404 × 8 widths = 232 loads: no horizontal scroll, no console/network errors.

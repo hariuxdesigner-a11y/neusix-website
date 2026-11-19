@@ -6,6 +6,9 @@ import { WordRise } from "@/components/motion/WordRise";
 import { StatementFill } from "@/components/motion/StatementFill";
 import { Counter } from "@/components/motion/Counter";
 import { LineIcon } from "@/components/motion/LineIcon";
+import { Button } from "@/components/ui/Button";
+import { ArrowChip } from "@/components/ui/Icon";
+import Link from "next/link";
 import { ABOUT_INTRO, ABOUT_STATS, AWARDS, DNA, LEADERSHIP, MISSION, PRESENCE, SCOREBOARD, SHOW_TEAM, SPECIALISTS, VISION } from "@/content/about";
 
 // The live page has the title "About" and no description; this uses the page's own hero copy.
@@ -35,107 +38,129 @@ function People({ people }: { people: typeof LEADERSHIP }) {
 }
 
 export default function AboutPage() {
+  const stats = [...ABOUT_STATS, ...SCOREBOARD.filter((s) => !ABOUT_STATS.some((a) => a.value === s.value)).map((s) => ({ value: s.value, label: s.label === "Squad size" ? "Squad Size" : s.label }))];
+  const dot = ["bg-orange", "bg-lilac-bright", "bg-green"];
   return (
     <>
-      {/* Hero: purple haze (original film.png on wide screens, film-mobile.svg on phones) */}
-      <section aria-labelledby="about-hero" className="relative isolate overflow-hidden text-paper">
-        {/* purple haze: #995BA5 panel blurred 80px (as on the live site) + the original film-strip overlay */}
-        <div aria-hidden className="absolute inset-x-0 top-0 -z-20 h-full rounded-[200px] bg-purple blur-[clamp(40px,6vw,80px)]" />
-        <picture className="absolute inset-0 -z-10">
+      {/* ── Hero: NeuSix purple haze on ink ─────────────────────────────── */}
+      <section aria-labelledby="about-hero" className="relative isolate overflow-hidden bg-ink text-paper">
+        <div aria-hidden className="absolute -left-[10%] top-[-30%] -z-10 aspect-square w-[70%] rounded-full bg-purple/70 blur-[clamp(60px,9vw,140px)]" />
+        <div aria-hidden className="absolute -right-[15%] bottom-[-40%] -z-10 aspect-square w-[60%] rounded-full bg-brand/80 blur-[clamp(60px,9vw,140px)]" />
+        <picture aria-hidden className="absolute inset-x-0 bottom-0 -z-10 opacity-25">
           <source media="(min-width: 768px)" srcSet="/assets/film.png" />
-          { }
-          <img src="/assets/film-mobile.svg" alt="" className="size-full object-cover opacity-70" fetchPriority="high" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/film-mobile.svg" alt="" className="h-auto w-full" fetchPriority="high" />
         </picture>
-        <div className="container-x flex min-h-[clamp(520px,72svh,720px)] flex-col justify-end pb-[clamp(48px,7vw,96px)] pt-[calc(var(--header-h)+64px)]">
-          <h1 className="eyebrow rise text-paper/85">About NeuSix</h1>
-          <p id="about-hero" className="t-display mt-4 max-w-[24ch] !text-[clamp(1.9rem,1.3rem+2.6vw,3.6rem)] !leading-[1.12]">
+        <div className="container-x flex min-h-[clamp(560px,86svh,860px)] flex-col justify-end pb-[clamp(48px,7vw,104px)] pt-[calc(var(--header-h)+64px)]">
+          <h1 className="eyebrow rise flex items-center gap-3 text-paper/90">
+            <span aria-hidden className="h-px w-8 bg-purple" /> About NeuSix
+          </h1>
+          <p id="about-hero" className="t-display mt-5 max-w-[22ch] text-balance !text-[clamp(2.1rem,1.4rem+3vw,4.25rem)] !leading-[1.08]">
             <WordRise delay={200}>We are a DeepTech AI transformation company helping enterprises discover, plan, build, and scale intelligent systems that deliver measurable business outcomes.</WordRise>
           </p>
+          <div className="rise mt-10 flex flex-wrap gap-3" style={{ ["--d" as string]: "900ms" }}>
+            <Button href="/contact-us" className="!bg-paper !text-ink hover:!bg-lilac-soft">
+              Book a Free Consultation
+            </Button>
+            <Button href="/our-work/case-studies" variant="ghost-light">
+              Case Studies
+            </Button>
+          </div>
         </div>
       </section>
 
+      {/* ── Conviction ─────────────────────────────────────────────────── */}
+      <section aria-labelledby="conviction" className="container-x pt-[var(--section-y)]">
+        <p id="conviction" className="eyebrow reveal text-brand">
+          Our Conviction
+        </p>
+        <StatementFill as="p" text={ABOUT_INTRO[0]} className="mt-6 max-w-[32ch] font-serif text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-[1.18] text-ink" />
+      </section>
+
+      {/* ── Stats highlight ─────────────────────────────────────────────── */}
       <section aria-labelledby="about-outcomes" className="container-x section-y">
-        <p className="eyebrow reveal text-brand">Our Conviction</p>
-        <StatementFill as="p" text={ABOUT_INTRO[0]} className="mt-5 max-w-[30ch] font-serif text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-[1.18]" />
-        <h2 id="about-outcomes" className="t-h2 reveal mt-[clamp(56px,8vw,120px)]">
-          Typical outcomes
-        </h2>
-        <div className="mt-[clamp(28px,4vw,56px)] grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
-          <div className="stagger max-w-[60ch] space-y-6 leading-relaxed">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-20">
+          <div className="stagger lg:sticky lg:top-[calc(var(--header-h)+40px)] lg:self-start">
+            <p className="eyebrow text-brand">NeuSix Scoreboard</p>
+            <h2 id="about-outcomes" className="t-h2 mt-3">
+              Typical outcomes
+            </h2>
             {ABOUT_INTRO.slice(1).map((p) => (
-              <p key={p}>{p}</p>
+              <p key={p} className="mt-5 max-w-[56ch] leading-relaxed text-body">
+                {p}
+              </p>
             ))}
+            <div className="mt-8">
+              <Button href="/our-work/case-studies" variant="dark">
+                Case Studies
+              </Button>
+            </div>
           </div>
-          <dl className="stagger relative isolate grid gap-8 overflow-hidden rounded-card bg-mist/60 p-8 sm:grid-cols-2 lg:grid-cols-1 lg:p-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/typical-outcomes.png" alt="" aria-hidden loading="lazy" className="absolute inset-0 -z-10 size-full object-cover opacity-60" />
-            {ABOUT_STATS.map((s) => (
-              <div key={s.label} className="flex flex-col-reverse">
-                <dt className="mt-2 max-w-[28ch] text-sm">{s.label}</dt>
-                <dd className="font-serif text-[clamp(2.5rem,2rem+2vw,3.5rem)] leading-none text-navy">
+          <div className="stagger grid grid-cols-2 gap-3">
+            {stats.map((s) => (
+              <dl key={s.label} className="flex min-h-[150px] flex-col-reverse justify-between rounded-[20px] bg-mist p-5 ring-1 ring-ink/[.04] sm:min-h-[170px] sm:p-7">
+                <dt className="mt-5 max-w-[26ch] text-[13px] leading-snug text-body sm:text-sm">{s.label}</dt>
+                <dd className="font-serif text-[clamp(2.2rem,1.6rem+2.4vw,4rem)] leading-none text-navy">
                   <Counter value={s.value} />
                 </dd>
-              </div>
+              </dl>
             ))}
-          </dl>
+            <Link href="/our-work/case-studies" className="group flex min-h-[150px] flex-col justify-between rounded-[20px] bg-ink p-5 text-paper sm:min-h-[170px] sm:p-7">
+              <span className="eyebrow text-lilac-bright">Shipping Impact</span>
+              <span className="flex items-end justify-between gap-4">
+                <span className="max-w-[14ch] font-serif text-[clamp(1rem,.9rem+.6vw,1.375rem)] leading-snug">See the outcomes in our case studies</span>
+                <ArrowChip tone="dark" />
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section aria-labelledby="dna" className="relative isolate overflow-hidden bg-mist/40">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/our-dna-bg.png" alt="" aria-hidden loading="lazy" className="pointer-events-none absolute inset-0 -z-10 size-full object-cover opacity-70" />
-        <div className="container-x section-y text-center">
-          <div className="stagger">
-            <p className="eyebrow text-brand">Our Values</p>
-            <h2 id="dna" className="t-h2 mt-3">
-              Our DNA
-            </h2>
-            <p className="mt-2">Everything we do is guided by four principles:</p>
+      {/* ── Our DNA (values) ────────────────────────────────────────────── */}
+      <section aria-labelledby="dna" className="relative isolate overflow-hidden bg-ink text-paper">
+        <div aria-hidden className="absolute right-[-10%] top-[-20%] -z-10 aspect-square w-[45%] rounded-full bg-purple/30 blur-[120px]" />
+        <div className="container-x section-y">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHead id="dna" dark eyebrow="Our Values" title="Our DNA" text="Everything we do is guided by four principles:" />
           </div>
-          <ul className="stagger mx-auto mt-[clamp(32px,5vw,72px)] grid max-w-[1200px] gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="stagger mt-[clamp(36px,5vw,72px)] grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {DNA.map((d, i) => (
-              <li key={d.title} className="group flex min-h-[280px] flex-col rounded-[20px] bg-paper/90 p-7 ring-1 ring-ink/5 transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.5)]">
-                <span className="font-serif text-2xl text-lilac">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="t-h3 mt-auto pt-10">{d.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate">{d.text}</p>
+              <li
+                key={d.title}
+                className="group flex min-h-[220px] flex-col rounded-[20px] bg-white/[.05] p-7 sm:min-h-[300px] ring-1 ring-white/10 transition-[background-color,transform] duration-500 hover:-translate-y-1 hover:bg-white/[.08]"
+              >
+                <span className="flex items-center gap-3 text-sm text-lilac-bright">
+                  <span aria-hidden className="h-px w-6 bg-lilac-bright" />
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="t-h3 mt-auto pt-12">{d.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-paper/85">{d.text}</p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
+      {/* ── Vision & mission ────────────────────────────────────────────── */}
       <section aria-label="Vision and mission" className="container-x section-y">
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
-          <LineIcon src="/assets/v-m-lines.svg" className="hidden aspect-[503/309] w-full max-w-[460px] lg:block" />
-          <div className="stagger grid gap-12">
-            <div>
-              <h2 className="t-h3">Vision</h2>
-              <p className="mt-3 max-w-[56ch] leading-relaxed">{VISION}</p>
-            </div>
-            <div>
-              <h2 className="t-h3">Mission</h2>
-              <p className="mt-3 max-w-[56ch] leading-relaxed">{MISSION}</p>
-            </div>
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.3fr)] lg:gap-16">
+          <div className="hidden lg:block">
+            <LineIcon src="/assets/v-m-lines.svg" stroke={1.6} mono className="mx-auto block aspect-[503/309] w-full max-w-[520px] text-brand" />
+          </div>
+          <div className="stagger grid gap-3 md:grid-cols-2 lg:grid-cols-1">
+            {[
+              { k: "Vision", t: VISION },
+              { k: "Mission", t: MISSION },
+            ].map((v) => (
+              <div key={v.k} className="rounded-[20px] bg-mist p-7 sm:p-9">
+                <h2 className="eyebrow text-brand">{v.k}</h2>
+                <p className="mt-4 font-serif text-[clamp(1.2rem,1rem+.8vw,1.6rem)] leading-snug text-ink">{v.t}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
-
-      <section aria-labelledby="score" className="container-x pb-[var(--section-y)] text-center">
-        <h2 id="score" className="t-h2 reveal">
-          NeuSix scoreboard
-        </h2>
-        <dl className="stagger mx-auto mt-8 grid max-w-[720px] grid-cols-2 gap-8 sm:grid-cols-4">
-          {SCOREBOARD.map((s) => (
-            <div key={s.label} className="flex flex-col-reverse">
-              <dt className="mt-1 text-sm">{s.label}</dt>
-              <dd className="font-serif text-[clamp(2rem,1.6rem+1.6vw,2.75rem)] leading-none">
-                <Counter value={s.value} />
-              </dd>
-            </div>
-          ))}
-        </dl>
         {SHOW_TEAM && (
-          <div className="mt-[var(--section-y)] text-left">
+          <div className="mt-[var(--section-y)]">
             <h2 className="t-h2">Our leadership team — positioned for impact</h2>
             <People people={LEADERSHIP} />
             <h2 className="t-h2 mt-16">Architects, Engineers &amp; Specialists</h2>
@@ -143,12 +168,6 @@ export default function AboutPage() {
           </div>
         )}
       </section>
-
-      <picture className="block">
-        <source media="(min-width: 640px)" srcSet="/assets/team-base.png" />
-        { }
-        <img src="/assets/team-base-69d8e8.png" alt="" aria-hidden loading="lazy" className="h-auto w-full" />
-      </picture>
 
       <StatementBand
         media="about-careers"
@@ -161,48 +180,68 @@ export default function AboutPage() {
         frontier of AI transformation, we’d love to hear from you.
       </StatementBand>
 
-      <section aria-labelledby="awards" className="bg-mist/60">
-        <div className="container-x section-y">
-          <h2 id="awards" className="t-h2 reveal text-center">
-            Awards &amp; Recognition
-          </h2>
-          <ul className="stagger mx-auto mt-[clamp(28px,4vw,56px)] grid max-w-[1000px] gap-6 md:grid-cols-2">
+      {/* ── Awards ──────────────────────────────────────────────────────── */}
+      <section aria-labelledby="awards" className="container-x section-y">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16">
+          <div className="stagger lg:sticky lg:top-[calc(var(--header-h)+40px)] lg:self-start">
+            <p className="eyebrow text-brand">Recognition</p>
+            <h2 id="awards" className="t-h2 mt-3">
+              Awards &amp; Recognition
+            </h2>
+          </div>
+          <ul className="stagger grid gap-4 sm:grid-cols-2">
             {AWARDS.map((a) => (
-              <li key={a.text} className="overflow-hidden rounded-card bg-paper transition-transform duration-500 hover:-translate-y-1">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={a.img} alt="" loading="lazy" width={283} height={251} className="aspect-[283/251] h-auto w-full object-cover" />
-                <p className="p-6 font-medium leading-snug">{a.text}</p>
+              <li key={a.text} className="group overflow-hidden rounded-[20px] bg-mist ring-1 ring-ink/[.04]">
+                <div className="overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={a.img.replace(/\.svg$/, ".webp")}
+                    alt=""
+                    loading="lazy"
+                    width={566}
+                    height={502}
+                    className="aspect-[283/251] h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="flex items-start gap-3 p-6">
+                  <span aria-hidden className="mt-2 size-2 shrink-0 rounded-full bg-orange" />
+                  <p className="font-medium leading-snug text-ink">{a.text}</p>
+                </div>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
+      {/* ── Global presence ─────────────────────────────────────────────── */}
       <section aria-labelledby="presence" className="relative isolate overflow-hidden text-paper">
         <VideoBackground id="about-global" overlay="dark" parallax={70} />
-        <div className="container-x py-[clamp(88px,11vw,168px)]">
-          <SectionHead id="presence" dark title="Global Presence & Delivery Reach" />
-          <ul className="stagger mt-10 grid gap-8 sm:grid-cols-3">
-            {PRESENCE.map((p) => (
-              <li key={p.title} className="border-t border-white/20 pt-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.icon} alt="" width={20} height={20} className="size-5" />
-                <h3 className="t-h4 mt-4">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-paper/80">{p.text}</p>
-              </li>
-            ))}
-          </ul>
+        <div className="container-x grid items-center gap-10 py-[clamp(88px,11vw,168px)] lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.3fr)] lg:gap-16">
+          <div>
+            <SectionHead id="presence" dark eyebrow="Where we work" title="Global Presence & Delivery Reach" />
+            <ul className="stagger mt-10 divide-y divide-white/15 border-y border-white/15">
+              {PRESENCE.map((p, i) => (
+                <li key={p.title} className="flex gap-4 py-5">
+                  <span aria-hidden className={`mt-2 size-2.5 shrink-0 rounded-full ${dot[i % dot.length]}`} />
+                  <span>
+                    <h3 className="text-lg font-medium">{p.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-paper/85">{p.text}</p>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="reveal rounded-[clamp(18px,2vw,28px)] bg-paper p-[clamp(16px,3vw,36px)] shadow-[0_40px_100px_-40px_rgba(0,0,0,.7)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/world-1.svg"
+              alt="World map showing the delivery hub in India and client locations in the USA, UK, UAE and Australia/New Zealand"
+              loading="lazy"
+              className="h-auto w-full"
+            />
+          </div>
         </div>
       </section>
-      <div className="container-x py-[clamp(40px,5vw,80px)]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/assets/world-1.svg"
-          alt="World map showing the delivery hub in India and client locations in the USA, UK, UAE and Australia/New Zealand"
-          loading="lazy"
-          className="reveal mx-auto h-auto w-full max-w-[1100px]"
-        />
-      </div>
 
       <VideoCtaCard
         title="Ready to Transform Your Enterprise with AI?"

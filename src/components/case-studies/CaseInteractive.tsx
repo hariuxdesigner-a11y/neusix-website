@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import type { CaseStudy, Stage } from "@/content/case-studies";
 import { ProgressRing, useAutoAdvance } from "@/components/motion/AutoAdvance";
 import { CaseCard } from "./CaseCard";
+import { Icon } from "@/components/ui/Icon";
 
 /** WAI-ARIA tabs for "How It Works" stages (arrow keys / Home / End supported). */
 export function StageTabs({ stages }: { stages: Stage[] }) {
@@ -54,7 +55,7 @@ export function StageTabs({ stages }: { stages: Stage[] }) {
         ))}
       </div>
       <div key={i} role="tabpanel" id={`${id}-p`} aria-labelledby={`${id}-t${i}`} tabIndex={0} className="animate-[megaIn_.45s_ease-out] rounded-card bg-mist/70 p-7 sm:p-10">
-        <p className="text-xs font-semibold uppercase tracking-wide text-lilac">{s.label.replace(/:$/, "")}</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand">{s.label.replace(/:$/, "")}</p>
         <h3 className="t-h3 mt-2">{s.title}</h3>
         {s.body.length === 0 ? null : listy ? (
           <>
@@ -113,9 +114,7 @@ export function HeroVideo({ src, poster }: { src: string; poster: string }) {
         aria-label={playing ? "Pause background video" : "Play background video"}
         className="absolute bottom-3 right-3 inline-flex size-11 items-center justify-center rounded-full bg-paper/90 text-ink shadow"
       >
-        <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          {playing ? <path d="M7 5h4v14H7zM13 5h4v14h-4z" /> : <path d="M8 5v14l11-7z" />}
-        </svg>
+        <Icon name={playing ? "pause" : "play"} size={18} />
       </button>
     </div>
   );
@@ -138,12 +137,11 @@ export function RelatedCarousel({ items }: { items: CaseStudy[] }) {
           </h2>
           <div className="flex gap-2">
             {[
-              { d: -1, label: "Previous case studies", icon: "/assets/left-svgrepo-com.svg" },
-              { d: 1, label: "Next case studies", icon: "/assets/next-svgrepo-com.svg" },
+              { d: -1, label: "Previous case studies", icon: "arrow-left" as const },
+              { d: 1, label: "Next case studies", icon: "arrow-right" as const },
             ].map((b) => (
-              <button key={b.d} type="button" onClick={() => scroll(b.d)} aria-label={b.label} className="inline-flex size-11 items-center justify-center rounded-full border border-lilac-soft hover:border-navy">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={b.icon} alt="" width={20} height={20} className="size-5" />
+              <button key={b.d} type="button" onClick={() => scroll(b.d)} aria-label={b.label} className="inline-flex size-11 items-center justify-center rounded-full bg-mist text-ink transition-colors hover:bg-ink hover:text-paper">
+                <Icon name={b.icon} size={18} />
               </button>
             ))}
           </div>

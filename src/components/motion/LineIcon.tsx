@@ -22,9 +22,10 @@ function load(src: string) {
   return raw;
 }
 
-export function LineIcon({ src, className = "", delay = 0, trigger = "self" }: { src: string; className?: string; delay?: number; trigger?: "self" | "parent" }) {
+export function LineIcon({ src, className = "", delay = 0, trigger = "self", stroke, mono = false }: { src: string; className?: string; delay?: number; trigger?: "self" | "parent"; stroke?: number; /** recolour to currentColor */ mono?: boolean }) {
   let svg = /\.svg$/i.test(src) ? load(src) : "";
-  if (!svg || !svg.includes("<svg")) {
+  // bitmap-based or very large files are not line art: load them as normal images instead
+  if (!svg || !svg.includes("<svg") || svg.includes("<image") || svg.length > 40_000) {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt="" aria-hidden className={`object-contain ${className}`} />;
   }
@@ -34,7 +35,9 @@ export function LineIcon({ src, className = "", delay = 0, trigger = "self" }: {
     chunk.replace(/<(path|circle|ellipse|rect|line|polyline|polygon)\b([^>]*?)(\/?)>/g, (_m, t: string, attrs: string, close: string) => {
       const i = k++;
       const stroked = /stroke="(?!none)[^"]+"/.test(attrs) && !/stroke-dasharray/.test(attrs); // dashed lines fade in instead
-      const extra = stroked ? ` pathLength="1" data-d="s"` : ` data-d="f"`;
+      // light/dark "knock-out" fills keep their colour in mono mode
+      const knock = !stroked && /fill="(#f{3,6}|#fcfcfd|#f1f1f9|white|#0f0f1f|#1e1f41|#222344)"/i.test(attrs);
+      const extra = stroked ? ` pathLength="1" data-d="s"` : knock ? ` data-d="f" data-k=""` : ` data-d="f"`;
       return `<${t}${attrs}${extra} style="--k:${i}"${close}>`;
     });
   svg = svg
@@ -52,8 +55,8 @@ export function LineIcon({ src, className = "", delay = 0, trigger = "self" }: {
   return (
     <span
       aria-hidden
-      className={`draw-icon ${/<filter\b/.test(svg) ? "draw-soft" : ""} ${trigger === "parent" ? "draw-parent" : ""} inline-block [&>svg]:size-full ${className}`}
-      style={{ ["--draw-delay" as string]: `${delay}ms` }}
+      className={`draw-icon ${mono ? "icon-mono" : ""} ${/<filter\b/.test(svg) ? "draw-soft" : ""} ${trigger === "parent" ? "draw-parent" : ""} inline-block [&>svg]:size-full ${className}`}
+      style={{ ["--draw-delay" as string]: `${delay}ms`, ...(stroke ? { ["--icon-stroke" as string]: `${stroke}px` } : {}) }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

@@ -71,3 +71,11 @@ No statistics, client names or testimonials were invented; FAQ answers reuse exi
 * Home outcomes: "Measured in cycle time, cost, and reliability—not in slides."
 * Home impact headline: "Shipped across 6 industries / from pilots to production" (6 = industries covered by the case studies; updates automatically).
 * About: "Our Conviction" label over the first intro paragraph; "Our Values" label above Our DNA.
+
+## Header, About, contrast & icon pass (19 Nov 2026)
+
+* About: hero buttons "Book a Free Consultation" and "Case Studies"; small labels "NeuSix Scoreboard", "Recognition", "Where we work";
+  a link tile "See the outcomes in our case studies". The separate scoreboard row was merged into the stats grid (all values kept,
+  incl. Squad Size 17). The decorative "team base" strip was removed.
+* Award images are now lightweight WebP copies of the original artwork (`a-r-1.webp`, `a-r-2.webp`).
+* Home: client logo strip (placeholders) moved directly under the hero.

@@ -39,6 +39,8 @@ export default function HomePage() {
         pill={{ label: `Case Study | ${featured.industry}`, title: featured.title, href: `/case-studies/${featured.slug}` }}
       />
 
+      <ClientMarquee />
+
       <ProofStrip
         stats={[
           { value: "10+", label: "engagements delivered" },
@@ -74,7 +76,6 @@ export default function HomePage() {
       <IndustriesStrip />
       <ApproachBand />
       <OutcomeShowcase items={HOME_OUTCOMES} />
-      <ClientMarquee />
       <ImpactCases exclude={featured.slug} />
       <WhyBand />
       <FaqSection items={FAQS} />

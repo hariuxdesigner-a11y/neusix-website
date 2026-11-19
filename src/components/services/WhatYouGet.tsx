@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /** "What you get": dark panel. On large screens the active deliverable is highlighted
  *  and its line-art shows on the right (auto-advances; hover/focus to choose).
  *  On smaller screens every deliverable shows with its graphic, in a fluid grid. */
-export function WhatYouGet({ items, gfx, accent }: { items: string[]; gfx: string[]; accent: string }) {
+export function WhatYouGet({ items, icons, panelIcons, accent }: { items: string[]; icons: ReactNode[]; panelIcons: ReactNode[]; accent: string }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -58,11 +58,10 @@ export function WhatYouGet({ items, gfx, accent }: { items: string[]; gfx: strin
                   onBlur={() => setPaused(false)}
                   aria-pressed={on}
                   className={`flex h-full w-full flex-col items-start gap-4 rounded-card border border-white/10 p-5 text-left transition-colors lg:flex-row lg:items-center lg:gap-0 lg:border-0 lg:p-0 ${
-                    on ? "lg:text-paper" : "lg:text-paper/35 lg:hover:text-paper/70"
+                    on ? "lg:text-paper" : "lg:text-paper/55 lg:hover:text-paper/80"
                   }`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={gfx[i % gfx.length]} alt="" width={202} height={187} loading="lazy" className="h-20 w-auto lg:hidden" />
+                  <span className="is-active block h-20 w-[86px] lg:hidden">{icons[i % icons.length]}</span>
                   <span
                     aria-hidden
                     className="hidden h-px shrink-0 transition-[width] duration-500 lg:block"
@@ -75,15 +74,10 @@ export function WhatYouGet({ items, gfx, accent }: { items: string[]; gfx: strin
           })}
         </ul>
         <div aria-hidden className="pointer-events-none absolute right-[max(var(--gutter),8%)] top-1/2 hidden aspect-[202/187] w-[clamp(220px,22vw,320px)] -translate-y-1/2 lg:block">
-          {gfx.slice(0, items.length).map((g, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={g}
-              src={g}
-              alt=""
-              loading="lazy"
-              className={`absolute inset-0 size-full object-contain transition-all duration-500 ${i === active ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
-            />
+          {panelIcons.slice(0, items.length).map((g, i) => (
+            <div key={i} className={`absolute inset-0 transition-all duration-500 ${i === active ? "is-active scale-100 opacity-100" : "scale-95 opacity-0"}`}>
+              {g}
+            </div>
           ))}
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function NotFound() {
     <section className="relative isolate overflow-hidden text-paper">
       <VideoBackground id="contact" overlay="dark" />
       <div className="container-x flex min-h-[100svh] flex-col items-start justify-end pb-[clamp(48px,8vw,120px)] pt-[calc(var(--header-h)+64px)]">
-        <p className="eyebrow text-paper/75">404</p>
+        <p className="eyebrow text-paper/85">404</p>
         <h1 className="t-display mt-4 max-w-[16ch]">
           <WordRise>This page could not be found.</WordRise>
         </h1>
