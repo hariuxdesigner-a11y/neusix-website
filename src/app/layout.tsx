@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { RevealObserver } from "@/components/ui/RevealObserver";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SITE, SITE_URL, SOCIAL } from "@/content/site";
 
 const lora = Lora({
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <RevealObserver />
+        <SmoothScroll />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </body>
     </html>

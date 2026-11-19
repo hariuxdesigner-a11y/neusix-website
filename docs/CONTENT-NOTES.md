@@ -65,3 +65,9 @@ No statistics, client names or testimonials were invented; FAQ answers reuse exi
 | Case study pages | **Previous / Next case study** navigation |
 | Contact | **What happens next** (3 steps, from the consultation copy) |
 | Header | Hover/active states unified; menu no longer changes colour when a dropdown opens; current page underlined |
+
+## Motion pass (19 Nov 2026) — new short copy
+
+* Home outcomes: "Measured in cycle time, cost, and reliability—not in slides."
+* Home impact headline: "Shipped across 6 industries / from pilots to production" (6 = industries covered by the case studies; updates automatically).
+* About: "Our Conviction" label over the first intro paragraph; "Our Values" label above Our DNA.

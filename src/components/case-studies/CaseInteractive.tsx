@@ -2,11 +2,14 @@
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import type { CaseStudy, Stage } from "@/content/case-studies";
+import { ProgressRing, useAutoAdvance } from "@/components/motion/AutoAdvance";
 import { CaseCard } from "./CaseCard";
 
 /** WAI-ARIA tabs for "How It Works" stages (arrow keys / Home / End supported). */
 export function StageTabs({ stages }: { stages: Stage[] }) {
   const [i, setI] = useState(0);
+  const root = useRef<HTMLDivElement>(null);
+  const auto = useAutoAdvance(root);
   const id = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const onKey = (e: KeyboardEvent) => {
@@ -24,7 +27,7 @@ export function StageTabs({ stages }: { stages: Stage[] }) {
   const [lead, ...rest] = s.body;
   const listy = s.body.length > 1 && lead.endsWith(":");
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-12">
+    <div ref={root} {...auto.handlers} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-12">
       <div role="tablist" aria-orientation="vertical" className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0" onKeyDown={onKey}>
         {stages.map((st, k) => (
           <button
@@ -42,12 +45,15 @@ export function StageTabs({ stages }: { stages: Stage[] }) {
               k === i ? "border-navy bg-navy text-white" : "border-lilac-soft bg-paper hover:border-lilac"
             }`}
           >
-            <span className={`block text-xs font-semibold uppercase tracking-wide ${k === i ? "text-lilac-soft" : "text-lilac"}`}>{st.label.replace(/:$/, "")}</span>
+            <span className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-wide ${k === i ? "text-lilac-soft" : "text-lilac"}`}>
+              <ProgressRing run={k === i} paused={auto.paused} duration={6500} onDone={() => setI((v) => (v + 1) % stages.length)} dark={k === i} className={k === i ? "" : "opacity-40"} />
+              {st.label.replace(/:$/, "")}
+            </span>
             <span className="t-h4 mt-1 block !text-lg">{st.title}</span>
           </button>
         ))}
       </div>
-      <div role="tabpanel" id={`${id}-p`} aria-labelledby={`${id}-t${i}`} tabIndex={0} className="rounded-card bg-mist/70 p-7 sm:p-10">
+      <div key={i} role="tabpanel" id={`${id}-p`} aria-labelledby={`${id}-t${i}`} tabIndex={0} className="animate-[megaIn_.45s_ease-out] rounded-card bg-mist/70 p-7 sm:p-10">
         <p className="text-xs font-semibold uppercase tracking-wide text-lilac">{s.label.replace(/:$/, "")}</p>
         <h3 className="t-h3 mt-2">{s.title}</h3>
         {s.body.length === 0 ? null : listy ? (

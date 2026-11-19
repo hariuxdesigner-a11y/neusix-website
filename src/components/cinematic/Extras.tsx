@@ -5,6 +5,9 @@ import { CASE_STUDIES } from "@/content/case-studies";
 import { MediaPoster } from "@/components/media/MediaPoster";
 import { CaseCard } from "@/components/case-studies/CaseCard";
 import { SectionHead } from "./Bands";
+import { Marquee } from "@/components/motion/Marquee";
+import { StaggerParallax } from "@/components/motion/StaggerParallax";
+import { Counter } from "@/components/motion/Counter";
 
 export const Arrow = () => (
   <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
@@ -15,37 +18,28 @@ export const Arrow = () => (
 /** Client logo marquee. Logos are greyscale until hovered; motion pauses on hover and stops for reduced motion. */
 export function ClientMarquee() {
   if (!CLIENTS.length) return null;
-  const row = (hidden: boolean) => (
-    <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-[clamp(40px,5vw,80px)] pr-[clamp(40px,5vw,80px)]">
-      {CLIENTS.map((c) => (
-        <li key={c.name} className="shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={c.logo}
-            alt={hidden ? "" : c.name}
-            loading="lazy"
-            className="h-[clamp(28px,2.6vw,40px)] w-auto max-w-[180px] object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-          />
-        </li>
-      ))}
-    </ul>
-  );
   return (
     <section aria-labelledby="clients-title" className="border-y border-ink/5 bg-paper py-[clamp(48px,6vw,88px)]">
       <div className="container-x">
-        <div className="reveal text-center">
+        <div className="stagger text-center">
           <p className="eyebrow text-brand">{CLIENTS_SECTION.eyebrow}</p>
           <h2 id="clients-title" className="t-h3 mt-3">
             {CLIENTS_SECTION.title}
           </h2>
         </div>
       </div>
-      <div className="group/marquee relative mt-[clamp(28px,3.5vw,48px)] overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-        <div className="flex w-max motion-safe:animate-marquee group-hover/marquee:[animation-play-state:paused] motion-reduce:w-full motion-reduce:flex-wrap motion-reduce:justify-center">
-          {row(false)}
-          <div className="contents motion-reduce:hidden">{row(true)}</div>
-        </div>
-      </div>
+      <Marquee className="mt-[clamp(28px,3.5vw,48px)]" speed={42}>
+        {CLIENTS.map((c) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={c.name}
+            src={c.logo}
+            alt={c.name}
+            loading="lazy"
+            className="h-[clamp(28px,2.6vw,40px)] w-auto max-w-[180px] shrink-0 object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+          />
+        ))}
+      </Marquee>
     </section>
   );
 }
@@ -61,9 +55,9 @@ export function IndustriesStrip() {
             All Industries <Arrow />
           </Link>
         </div>
-        <ul className="-mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
-          {INDUSTRIES.map((ind, i) => (
-            <li key={ind.media} className="reveal w-[78vw] max-w-[340px] shrink-0 snap-start sm:w-auto sm:max-w-none" style={{ ["--reveal-delay" as string]: `${(i % 3) * 80}ms` }}>
+        <ul className="stagger -mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+          {INDUSTRIES.map((ind) => (
+            <li key={ind.media} className="w-[78vw] max-w-[340px] shrink-0 snap-start sm:w-auto sm:max-w-none">
               <Link href={`/our-work/industries#${ind.slug}`} className="group relative isolate block overflow-hidden rounded-[clamp(14px,1.6vw,20px)]">
                 <MediaPoster id={ind.media} className="aspect-[4/3]" />
                 <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
@@ -111,9 +105,9 @@ export function CaseStudiesRow({
             All Case Studies <Arrow />
           </Link>
         </div>
-        <ul className="-mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
-          {list.map((c, i) => (
-            <li key={c.slug} className="reveal w-[82vw] max-w-[360px] shrink-0 snap-start sm:w-auto sm:max-w-none" style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}>
+        <ul className="stagger -mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+          {list.map((c) => (
+            <li key={c.slug} className="w-[82vw] max-w-[360px] shrink-0 snap-start sm:w-auto sm:max-w-none">
               <CaseCard c={c} headingLevel={3} />
             </li>
           ))}
@@ -161,3 +155,62 @@ export function FaqSection({ items, id = "faq-title", title = "Frequently asked 
   );
 }
 
+
+/**
+ * Home "Our impact" (Abridge staggered cards): a big rolling number headline and the case studies
+ * as a staircase of cards that deepens as you scroll.
+ */
+export function ImpactCases({ exclude }: { exclude?: string }) {
+  const list = CASE_STUDIES.filter((c) => c.slug !== exclude).slice(0, 4);
+  return (
+    <section aria-labelledby="impact-title" className="section-y overflow-hidden">
+      <div className="container-x">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="stagger max-w-[820px]">
+            <p className="eyebrow text-brand">Our Impact</p>
+            <h2 id="impact-title" className="t-h2 mt-3 !text-[clamp(1.9rem,1.3rem+2.4vw,3.25rem)] !leading-[1.08]">
+              Shipped across <Counter value={String(new Set(CASE_STUDIES.map((c) => c.filters.industry)).size)} /> industries
+              <span className="block text-ink/55">from pilots to production</span>
+            </h2>
+          </div>
+          <Link href="/our-work/case-studies" className="group reveal inline-flex items-center gap-2 text-sm font-medium text-navy">
+            All Case Studies <Arrow />
+          </Link>
+        </div>
+        <StaggerParallax
+          step={56}
+          className="-mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-[200px]"
+        >
+          {list.map((c) => {
+            const hl = c.card.find((h) => h.value) ?? c.card[0];
+            return (
+              <li key={c.slug} className="w-[78vw] max-w-[320px] shrink-0 snap-start will-change-transform lg:w-auto lg:max-w-none">
+                <Link
+                  href={`/case-studies/${c.slug}`}
+                  className="group flex h-full min-h-[300px] flex-col rounded-[18px] border border-ink/10 bg-paper p-6 transition-[border-color,box-shadow] duration-300 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.45)]"
+                >
+                  <span className="text-[17px] font-medium leading-snug">{c.industry}</span>
+                  <span className="mt-3 text-sm leading-relaxed text-slate">{c.title}</span>
+                  {hl?.value && (
+                    <span className="mt-6 font-serif text-[clamp(2rem,1.6rem+1.4vw,2.75rem)] leading-none text-navy">
+                      <Counter value={hl.value} />
+                      <span className="mt-2 block font-sans text-xs leading-snug text-slate">{hl.label}</span>
+                    </span>
+                  )}
+                  <span className="mt-auto flex items-center justify-between pt-8">
+                    <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink/70">
+                      <span aria-hidden className="size-2 rounded-sm bg-orange" /> Case Study
+                    </span>
+                    <span aria-hidden className="flex size-9 items-center justify-center rounded-lg bg-mist transition-colors group-hover:bg-ink group-hover:text-paper">
+                      <Arrow />
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </StaggerParallax>
+      </div>
+    </section>
+  );
+}

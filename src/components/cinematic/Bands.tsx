@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { MediaId } from "@/content/media";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { Button } from "@/components/ui/Button";
+import { StatementFill } from "@/components/motion/StatementFill";
 
 type Cta = { label: string; href: string };
 
@@ -25,7 +26,7 @@ export function StatementBand({
 }) {
   return (
     <section aria-labelledby={id} className="relative isolate overflow-hidden text-paper">
-      <VideoBackground id={media} overlay="dark" />
+      <VideoBackground id={media} overlay="dark" parallax={70} />
       <div className={`container-x py-[clamp(96px,14vw,200px)] ${align === "center" ? "text-center" : "grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end"}`}>
         <div>
           {eyebrow && <p className="eyebrow reveal text-lilac-soft">{eyebrow}</p>}
@@ -35,7 +36,12 @@ export function StatementBand({
         </div>
         {(children || ctas) && (
           <div className={`reveal ${align === "center" ? "mx-auto mt-8 max-w-[60ch]" : ""}`}>
-            {children && <div className="text-base leading-relaxed text-paper/85 sm:text-lg">{children}</div>}
+            {children &&
+              (typeof children === "string" ? (
+                <StatementFill text={children} className="text-[clamp(1.05rem,.95rem+.5vw,1.375rem)] leading-relaxed text-paper" />
+              ) : (
+                <div className="text-base leading-relaxed text-paper/85 sm:text-lg">{children}</div>
+              ))}
             {ctas && (
               <div className={`mt-8 flex flex-wrap gap-3 ${align === "center" ? "justify-center" : ""}`}>
                 {ctas.map((c, i) =>
@@ -77,7 +83,7 @@ export function VideoCtaCard({
   return (
     <section aria-labelledby="cta-title" className="container-x py-[clamp(48px,6vw,96px)]">
       <div className="reveal relative isolate flex min-h-[clamp(440px,60vw,640px)] flex-col justify-end overflow-hidden rounded-[clamp(18px,2.4vw,32px)] p-[clamp(24px,5vw,72px)] text-paper">
-        <VideoBackground id={media} overlay="hero" />
+        <VideoBackground id={media} overlay="hero" parallax={70} />
         <h2 id="cta-title" className="t-display max-w-[16ch]">
           {title}
         </h2>
@@ -117,7 +123,7 @@ export function SectionHead({
   dark?: boolean;
 }) {
   return (
-    <div className={`reveal ${align === "center" ? "mx-auto max-w-[820px] text-center" : "max-w-[820px]"}`}>
+    <div className={`stagger ${align === "center" ? "mx-auto max-w-[820px] text-center" : "max-w-[820px]"}`}>
       {eyebrow && <p className={`eyebrow ${dark ? "text-lilac-soft" : "text-brand"}`}>{eyebrow}</p>}
       <h2 id={id} className="t-h2 mt-3 text-balance !text-[clamp(1.9rem,1.3rem+2.4vw,3.25rem)] !leading-[1.08]">
         {title}

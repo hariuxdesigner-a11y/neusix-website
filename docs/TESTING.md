@@ -1,5 +1,12 @@
 # Testing & QA record
 
+## Motion pass (Abridge-style animation), 19 Nov 2026
+
+* 28 URLs + 404 × 8 widths = 232 loads: no horizontal scroll, no console/network errors.
+* Reduced motion: no smooth scroll, no parallax, no auto-advancing tabs; all text, counters and icons shown complete.
+* Keyboard/mobile navigation and contact form tests pass (form never shows a fake success).
+* Lighthouse mobile: Home 99/100/100/100, About 90/100/100/100, Modernization 89, Port case study 86, Contact 100 (performance/accessibility/best practices/SEO); CLS 0 on every page tested.
+
 ## v2 cinematic experience (branch `experience-v2`), 19 Nov 2026
 
 Production build, placeholder footage in place (37 clips).

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useScrollProgress } from "@/components/motion/scroll";
 import { MEDIA, mediaSrc, type MediaId } from "@/content/media";
 
 type Overlay = "hero" | "dark" | "soft" | "light" | "none";
@@ -45,6 +46,7 @@ export function VideoBackground({
   playOnMobile = false,
   active = true,
   className = "",
+  parallax = 0,
 }: {
   id: MediaId;
   overlay?: Overlay;
@@ -53,6 +55,8 @@ export function VideoBackground({
   /** for tabbed/stacked usage: only the active clip plays */
   active?: boolean;
   className?: string;
+  /** px the media drifts inside its frame while the section scrolls by (0 = off) */
+  parallax?: number;
 }) {
   const m = MEDIA[id];
   const s = mediaSrc(id);
@@ -119,8 +123,18 @@ export function VideoBackground({
     else v.pause();
   }, [visible, active, src]);
 
+  const layer = useRef<HTMLDivElement>(null);
+  useScrollProgress(
+    wrap,
+    (p) => {
+      if (layer.current) layer.current.style.transform = `translate3d(0,${((p - 0.5) * 2 * parallax).toFixed(1)}px,0)`;
+    },
+    [parallax],
+  );
+
   return (
     <div ref={wrap} aria-hidden className={`pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-ink ${className}`}>
+      <div ref={layer} className="absolute inset-x-0 will-change-transform" style={parallax ? { top: -parallax, bottom: -parallax } : { top: 0, bottom: 0 }}>
       {m.ready ? (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -147,6 +161,7 @@ export function VideoBackground({
       ) : (
         <StandIn tint={m.tint} />
       )}
+      </div>
       {overlay !== "none" && <div className="absolute inset-0" style={{ background: OVERLAYS[overlay] }} />}
     </div>
   );

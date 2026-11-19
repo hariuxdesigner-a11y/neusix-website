@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BLOG_TAGS, WHITE_PAPERS, postHref, postsForTag, tagLabel } from "@/content/resources";
+import { WordRise } from "@/components/motion/WordRise";
 
 function ItemLink({ href, children, tone = "line" }: { href: string; children: React.ReactNode; tone?: "line" | "mist" }) {
   const external = /^https?:/.test(href);
@@ -23,7 +24,9 @@ export function ResourcesView({ tag }: { tag: string }) {
   return (
     <div className="below-header container-x pb-[var(--section-y)]">
       <div className="pt-[clamp(48px,7vw,104px)]" />
-      <h1 className="t-display">Resources &amp; Content</h1>
+      <h1 className="t-display">
+        <WordRise>Resources & Content</WordRise>
+      </h1>
 
       <section aria-labelledby="blogs-title" className="mt-[clamp(40px,5vw,72px)]">
         <h2 id="blogs-title" className="t-h2">
@@ -60,9 +63,9 @@ export function ResourcesView({ tag }: { tag: string }) {
           </details>
         </div>
 
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="stagger mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((p) => (
-            <li key={p.title} className="reveal">
+            <li key={p.title}>
               <ItemLink href={postHref(p)}>
                 <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-lilac">
                   <span aria-hidden className="size-1.5 rounded-full bg-orange" /> {tagLabel(p.tag)}
@@ -79,9 +82,9 @@ export function ResourcesView({ tag }: { tag: string }) {
         <h2 id="wp-title" className="t-h2">
           White papers
         </h2>
-        <ul className="mt-8 grid gap-4 lg:grid-cols-3">
+        <ul className="stagger mt-8 grid gap-4 lg:grid-cols-3">
           {WHITE_PAPERS.map((w) => (
-            <li key={w.title} className="reveal">
+            <li key={w.title}>
               <ItemLink href={w.href} tone="mist">
                 <span className="text-xs uppercase tracking-[0.12em] text-slate">White paper</span>
                 <h3 className="t-h4 mt-4">{w.title}</h3>

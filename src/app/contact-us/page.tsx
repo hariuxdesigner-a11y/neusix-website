@@ -5,6 +5,7 @@ import { SITE } from "@/content/site";
 import { CONTACT_STEPS, FAQS } from "@/content/extras";
 import { FaqSection } from "@/components/cinematic/Extras";
 import { SectionHead } from "@/components/cinematic/Bands";
+import { WordRise } from "@/components/motion/WordRise";
 
 const title = "Contact NeuSix | Get in Touch for AI & Digital Solutions";
 const description =
@@ -26,7 +27,9 @@ export default function ContactPage() {
         <div className="flex flex-col gap-12">
           <div>
             <p className="eyebrow text-paper/75">Contact</p>
-            <h1 className="t-display mt-4">Get in Touch</h1>
+            <h1 className="t-display mt-4">
+              <WordRise>Get in Touch</WordRise>
+            </h1>
             <p className="mt-5 max-w-[32ch] text-base leading-relaxed text-paper/85 sm:text-lg">Reach out to us for inquiries, partnerships, or schedule a meeting with our team.</p>
           </div>
           <address className="not-italic">

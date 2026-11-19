@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { CASE_STUDIES, getCaseStudy } from "@/content/case-studies";
+import { LineIcon } from "@/components/motion/LineIcon";
 import { RelatedCarousel, StageTabs } from "@/components/case-studies/CaseInteractive";
 import { VideoHero } from "@/components/cinematic/VideoHero";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
@@ -36,7 +37,7 @@ function Rich({ text }: { text: string }) {
 
 function Bullets({ items, dark = false, labelled = false }: { items: string[]; dark?: boolean; labelled?: boolean }) {
   return (
-    <ul className="space-y-3">
+    <ul className="stagger space-y-3">
       {items.map((t) => {
         const idx = labelled ? t.indexOf(": ") : -1;
         return (
@@ -149,8 +150,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
               <Bullets items={c.outcomeHighlights} dark />
             </div>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/outcome-banner.svg" alt="" loading="lazy" className="reveal mx-auto h-auto w-full max-w-[520px]" />
+          <LineIcon src="/assets/outcome-banner.svg" className="mx-auto aspect-[445/446] w-full max-w-[520px]" />
         </div>
       </section>
 
@@ -176,14 +176,13 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
               <Bullets items={c.challenge.bottlenecks} labelled />
             </div>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/cs-i2-3.svg" alt="" loading="lazy" className="reveal mx-auto h-auto w-full max-w-[420px]" />
+          <LineIcon src="/assets/cs-i2-3.svg" className="mx-auto aspect-square w-full max-w-[420px]" />
         </div>
       </section>
 
       <Block id="shipped" title="What NeuSix Shipped">
         <p className="max-w-[68ch] leading-relaxed">{c.shipped.intro}</p>
-        <ul className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <ul className="stagger mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {c.shipped.groups.map((g) => (
             <li key={g.title} className="rounded-card border border-lilac-soft p-6 sm:p-7">
               <h3 className="t-h4 !text-xl">{g.title}</h3>
@@ -229,7 +228,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
           <h2 id="measured" className="t-h2 reveal">
             What We Measured
           </h2>
-          <dl className="reveal mt-8 grid gap-6 sm:grid-cols-2">
+          <dl className="stagger mt-8 grid gap-6 sm:grid-cols-2">
             {c.measured.map((m) => (
               <div key={m.title} className="border-l-2 border-lilac pl-4">
                 <dt className="font-semibold">{m.title}</dt>
@@ -238,8 +237,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
             ))}
           </dl>
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/cs-i3.svg" alt="" loading="lazy" className="reveal mx-auto h-auto w-full max-w-[420px]" />
+        <LineIcon src="/assets/cs-i3.svg" className="mx-auto aspect-[445/300] w-full max-w-[420px]" />
       </section>
 
       <Block id="gov" title="Governance, Trust & Reliability" className="bg-mist/60">

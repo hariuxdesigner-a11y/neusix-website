@@ -8,7 +8,8 @@ import { HOME_OUTCOMES } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
 import { SITE } from "@/content/site";
 import { FAQS } from "@/content/extras";
-import { CaseStudiesRow, ClientMarquee, FaqSection, IndustriesStrip } from "@/components/cinematic/Extras";
+import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
+import { LineIcon } from "@/components/motion/LineIcon";
 
 export const metadata: Metadata = {
   title: SITE.defaultTitle,
@@ -64,7 +65,7 @@ export default function HomePage() {
         <div className="container-x">
           <SectionHead id="competencies-title" title="Our competencies" />
           <div className="mt-[clamp(32px,4vw,56px)]">
-            <VideoTabs tabs={COMPETENCIES.map((c) => ({ ...c, media: c.media }))} />
+            <VideoTabs tabs={COMPETENCIES.map((c) => ({ ...c, icon: <LineIcon src={c.icon} className="size-full" /> }))} />
           </div>
         </div>
       </section>
@@ -74,7 +75,7 @@ export default function HomePage() {
       <ApproachBand />
       <OutcomeShowcase items={HOME_OUTCOMES} />
       <ClientMarquee />
-      <CaseStudiesRow exclude={featured.slug} />
+      <ImpactCases exclude={featured.slug} />
       <WhyBand />
       <FaqSection items={FAQS} />
       <VideoCtaCard />

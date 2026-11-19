@@ -202,6 +202,8 @@ export function SiteHeader() {
 
   useEffect(() => {
     document.documentElement.style.overflow = menu ? "hidden" : "";
+    if (menu) window.__lenis?.stop();
+    else window.__lenis?.start();
   }, [menu]);
 
   // Opening a mega panel no longer flips the header: it keeps the look of where you are on the page.

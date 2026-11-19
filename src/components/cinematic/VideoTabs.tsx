@@ -1,18 +1,21 @@
 "use client";
 
-import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { ProgressRing, useAutoAdvance } from "@/components/motion/AutoAdvance";
 import type { MediaId } from "@/content/media";
 import { VideoBackground } from "@/components/media/VideoBackground";
 
-export type VideoTab = { label: string; media: MediaId; icon?: string; title?: string; body?: ReactNode };
+export type VideoTab = { label: string; media: MediaId; icon?: ReactNode; title?: string; body?: ReactNode };
 
 /**
  * Abridge "how it works" split: tab list on the left, a large video panel on the right
  * whose clip matches the selected tab. Only the active clip plays; others stay as posters.
  * Phones: the panel sits on top and the tabs become a horizontal chip row.
  */
-export function VideoTabs({ tabs, autoAdvance = 0, dark = false }: { tabs: VideoTab[]; autoAdvance?: number; dark?: boolean }) {
+export function VideoTabs({ tabs, autoAdvance = 7000, dark = false }: { tabs: VideoTab[]; autoAdvance?: number; dark?: boolean }) {
   const [i, setI] = useState(0);
+  const root = useRef<HTMLDivElement>(null);
+  const auto = useAutoAdvance(root, autoAdvance > 0);
   const id = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const onKey = (e: KeyboardEvent) => {
@@ -23,10 +26,10 @@ export function VideoTabs({ tabs, autoAdvance = 0, dark = false }: { tabs: Video
     setI(n);
     refs.current[n]?.focus();
   };
-  void autoAdvance;
+  const next = () => setI((v) => (v + 1) % tabs.length);
   const t = tabs[i];
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] lg:gap-12">
+    <div ref={root} {...auto.handlers} className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] lg:gap-12">
       <div role="tablist" aria-orientation="vertical" onKeyDown={onKey} className="order-2 -mx-[var(--gutter)] flex snap-x gap-2 overflow-x-auto px-[var(--gutter)] pb-1 lg:order-1 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
         {tabs.map((tab, k) => {
           const on = k === i;
@@ -46,10 +49,10 @@ export function VideoTabs({ tabs, autoAdvance = 0, dark = false }: { tabs: Video
                 on ? (dark ? "bg-white/12 text-paper" : "bg-ink text-paper") : dark ? "text-paper/75 hover:text-paper" : "text-ink/70 hover:bg-mist hover:text-ink"
               }`}
             >
-              {tab.icon && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={tab.icon} alt="" width={40} height={40} className={`hidden size-10 shrink-0 rounded-lg bg-paper p-1 lg:block ${on ? "" : "opacity-70"}`} />
+              {autoAdvance > 0 && (
+                <ProgressRing run={on} paused={auto.paused} duration={autoAdvance} onDone={next} className={on ? "" : "opacity-40"} dark={dark || on} />
               )}
+              {tab.icon && <span className={`hidden size-10 shrink-0 rounded-lg bg-paper p-1 text-ink lg:block ${on ? "is-active" : "opacity-70"}`}>{tab.icon}</span>}
               <span className="whitespace-nowrap lg:whitespace-normal">{tab.label}</span>
             </button>
           );

@@ -74,7 +74,7 @@ export function CaseStudiesBrowser() {
           </p>
         </div>
         {list.length ? (
-          <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          <ul className="stagger mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
             {list.map((c) => (
               <li key={c.slug}>
                 <CaseCard c={c} headingLevel={3} />

@@ -60,9 +60,9 @@ export default function ServicesHubPage() {
             title="Stages of AI Workflow Transformation"
             text="Enterprises typically scale AI through three stages Advisory, Development & Integration, and Managed Services. NeuSix supports all three stages while keeping our service offerings consistent."
           />
-          <ol className="mt-[clamp(32px,4vw,56px)] grid gap-px overflow-hidden rounded-[22px] bg-ink/10 md:grid-cols-3">
+          <ol className="stagger mt-[clamp(32px,4vw,56px)] grid gap-px overflow-hidden rounded-[22px] bg-ink/10 md:grid-cols-3">
             {STAGES.map((st, i) => (
-              <li key={st.name} className="reveal flex flex-col bg-paper p-7 sm:p-8" style={{ ["--reveal-delay" as string]: `${i * 120}ms` }}>
+              <li key={st.name} className="flex flex-col bg-paper p-7 transition-colors duration-300 hover:bg-mist/60 sm:p-8">
                 <span className="text-sm text-lilac">0{i + 1}</span>
                 <h3 className="t-h3 mt-8">{st.name}</h3>
                 <ul className="mt-5 space-y-3">

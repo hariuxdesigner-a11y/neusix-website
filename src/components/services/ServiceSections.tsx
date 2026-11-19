@@ -1,5 +1,7 @@
 import { ACCENT_HEX } from "@/content/services";
 import type { Service } from "@/content/services";
+import { LineIcon } from "@/components/motion/LineIcon";
+import { StatementFill } from "@/components/motion/StatementFill";
 export { ACCENT_HEX };
 
 function AccentOrb({ color, className = "" }: { color: string; className?: string }) {
@@ -40,15 +42,14 @@ export function StageFit({ s }: { s: Service }) {
         <h2 id="stage-title" className="t-h2 reveal">
           Stage Fit : Where this service plays
         </h2>
-        <ol className="mt-[clamp(32px,4vw,64px)] grid gap-10 md:grid-cols-3 md:gap-0">
+        <ol className="stagger mt-[clamp(32px,4vw,64px)] grid gap-10 md:grid-cols-3 md:gap-0">
           {cols.map((col, i) => (
             <li
               key={col.title}
-              className="reveal border-dotted md:px-[clamp(16px,2.4vw,40px)] md:first:pl-0 md:[&:not(:first-child)]:border-l-2"
-              style={{ borderColor: c, ["--reveal-delay" as string]: `${i * 140}ms` }}
+              className="border-dotted md:px-[clamp(16px,2.4vw,40px)] md:first:pl-0 md:[&:not(:first-child)]:border-l-2"
+              style={{ borderColor: c }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={col.gfx} alt="" width={159} height={136} loading="lazy" className="h-[clamp(80px,7vw,104px)] w-auto" />
+              <LineIcon src={col.gfx} delay={250 + i * 180} className="h-[clamp(80px,7vw,104px)] w-[clamp(94px,8.2vw,122px)]" />
               <h3 className="t-h4 mt-5">{col.title}</h3>
               <ul className="mt-4 space-y-4">
                 {col.items.map((t) => (
@@ -76,7 +77,7 @@ export function ServiceIntro({ s }: { s: Service }) {
           {s.intro.title}
         </h2>
         {parts ? (
-          <ul className="reveal mx-auto mt-6 flex max-w-[1000px] flex-wrap justify-center gap-x-3 gap-y-2 font-serif text-[clamp(1.25rem,0.9rem+1.5vw,2.25rem)] leading-snug">
+          <ul className="stagger mx-auto mt-6 flex max-w-[1000px] flex-wrap justify-center gap-x-3 gap-y-2 font-serif text-[clamp(1.25rem,0.9rem+1.5vw,2.25rem)] leading-snug">
             {parts.map((p, i) => (
               <li key={p} className="flex items-center gap-3">
                 {p}
@@ -85,7 +86,7 @@ export function ServiceIntro({ s }: { s: Service }) {
             ))}
           </ul>
         ) : (
-          <p className="reveal mx-auto mt-6 max-w-[56ch] text-base leading-relaxed sm:text-lg">{s.intro.text}</p>
+          <StatementFill text={s.intro.text} className="mx-auto mt-6 max-w-[40ch] font-serif text-[clamp(1.25rem,0.9rem+1.5vw,2.25rem)] leading-snug" />
         )}
         <AccentOrb color={c} className="right-[18%] top-[55%] w-[clamp(140px,14vw,220px)] opacity-70" />
       </div>
@@ -102,12 +103,11 @@ export function WhatWeDo({ s }: { s: Service }) {
         <h2 id="wwd-title" className="t-h2 reveal text-center">
           What we do
         </h2>
-        <ul className="mx-auto mt-[clamp(32px,4vw,64px)] grid max-w-[1100px] gap-4 md:grid-cols-3 md:gap-6">
-          {s.whatWeDo.map((w, i) => (
+        <ul className="stagger mx-auto mt-[clamp(32px,4vw,64px)] grid max-w-[1100px] gap-4 md:grid-cols-3 md:gap-6">
+          {s.whatWeDo.map((w) => (
             <li
               key={w.title}
-              className="reveal rounded-card border border-white/60 bg-paper/75 p-7 shadow-[0_20px_50px_-30px_rgba(15,15,31,.35)] backdrop-blur-md"
-              style={{ ["--reveal-delay" as string]: `${i * 120}ms` }}
+              className="rounded-card border border-white/60 bg-paper/75 p-7 shadow-[0_20px_50px_-30px_rgba(15,15,31,.35)] backdrop-blur-md transition-transform duration-500 hover:-translate-y-1"
             >
               <span aria-hidden className="block h-1 w-10 rounded-full" style={{ background: c }} />
               <h3 className="t-h4 mt-5">{w.title}</h3>
@@ -128,7 +128,7 @@ export function UseCaseThemes({ s }: { s: Service }) {
         <h2 id="ucs-title" className="t-h2 reveal text-center">
           Use-case themes
         </h2>
-        <ul className="reveal mx-auto mt-10 flex max-w-[1000px] flex-wrap justify-center gap-3">
+        <ul className="stagger mx-auto mt-10 flex max-w-[1000px] flex-wrap justify-center gap-3">
           {s.useCaseThemes.map((t) => (
             <li key={t} className="flex items-center gap-2.5 rounded-full border border-lilac-soft bg-paper px-5 py-3 text-sm sm:text-base">
               {/* eslint-disable-next-line @next/next/no-img-element */}

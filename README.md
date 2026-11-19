@@ -35,7 +35,7 @@ Requires **Node.js 20.9+** (Node 22 LTS recommended).
 | Styling | Tailwind CSS v4 with NeuSix brand tokens in `src/app/globals.css`; fluid type/spacing with `clamp()` |
 | Fonts | Lora (headings) + Google Sans Flex (UI/body), self-hosted via `next/font` |
 | Video | `VideoBackground`: lazy-loaded muted loops with posters, smaller mobile encodes, poster-only for reduced motion / Save-Data, brand-colour stand-in if a clip is missing |
-| Motion | CSS scroll reveals, Lottie dials via `@lottiefiles/dotlottie-react` (self-hosted WASM). All respect `prefers-reduced-motion`; content is visible without JavaScript |
+| Motion (Abridge-style) | `src/components/motion/`: Lenis smooth scrolling, headline words rising in, staggered fade-ups, statements that fill in as you scroll, rolling-digit counters (NumberFlow), scroll-reactive logo marquees, video parallax, a sticky blur-backdrop stage, staggered parallax cards, auto-advancing tabs with progress rings, and NeuSix's own line icons drawing themselves on. One shared scroll loop; everything is off for reduced motion. Also CSS scroll reveals, Lottie dials via `@lottiefiles/dotlottie-react` (self-hosted WASM). All respect `prefers-reduced-motion`; content is visible without JavaScript |
 | Forms | Server Action + `zod` validation + honeypot + rate limit → SMTP (`nodemailer`) and/or webhook |
 | QA | Playwright scripts in `scripts/` (screenshots, overflow, console, form, keyboard nav) |
 

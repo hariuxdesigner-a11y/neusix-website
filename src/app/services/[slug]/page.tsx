@@ -4,7 +4,6 @@ import { SERVICES, getService } from "@/content/services";
 import type { MediaId } from "@/content/media";
 import { ACCENT_HEX, ServiceIntro, StageFit, UseCaseThemes, WhatWeDo } from "@/components/services/ServiceSections";
 import { WhatYouGet } from "@/components/services/WhatYouGet";
-import { TypicalOutcomes } from "@/components/sections/TypicalOutcomes";
 import { CommercialModels } from "@/components/sections/CommercialModels";
 import { VideoHero } from "@/components/cinematic/VideoHero";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
@@ -20,7 +19,7 @@ const SERVICE_FILTER: Record<string, string> = {
   "ai-center-of-excellence": "AI COE",
   "offshore-development-center": "ODC",
 };
-import { ApproachBand } from "@/components/cinematic/HomeBlocks";
+import { OutcomeShowcase, ApproachBand } from "@/components/cinematic/HomeBlocks";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -52,7 +51,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       <StageFit s={s} />
       <ServiceIntro s={s} />
       <WhatWeDo s={s} />
-      <TypicalOutcomes items={s.outcomes} />
+      <OutcomeShowcase items={s.outcomes} source={{ label: "Case Studies", href: "/our-work/case-studies" }} cta={{ label: "Book a Free Consultation", href: "/contact-us" }} />
       <UseCaseThemes s={s} />
       <ApproachBand
         title="How We Ship Impact From Discovery to Scale"

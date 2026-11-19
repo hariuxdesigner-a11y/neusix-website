@@ -31,9 +31,9 @@ export default function IndustriesPage() {
         <section aria-labelledby="problems-title" className="section-y border-t border-white/10">
           <div className="container-x">
             <SectionHead id="problems-title" dark title="The Problems We Solve" sub="What most industries actually need from AI" />
-            <ul className="mt-[clamp(32px,4vw,56px)] grid gap-px overflow-hidden rounded-[22px] bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
+            <ul className="stagger mt-[clamp(32px,4vw,56px)] grid gap-px overflow-hidden rounded-[22px] bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
               {PROBLEMS.map((p, i) => (
-                <li key={p.title} className="reveal flex flex-col bg-ink p-6 sm:min-h-[220px]" style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}>
+                <li key={p.title} className="flex flex-col bg-ink p-6 transition-colors duration-300 hover:bg-navy/40 sm:min-h-[220px]">
                   <span className="text-sm text-lilac">0{i + 1}</span>
                   <h3 className="t-h4 mt-4 sm:mt-auto sm:pt-10">{p.title}</h3>
                   <p className="mt-2 text-sm text-paper/70">{p.text}</p>
