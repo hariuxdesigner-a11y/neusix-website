@@ -156,7 +156,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             </details>
 
             {post.takeaways.length > 0 && (
-              <aside aria-labelledby="takeaways" className="relative isolate mb-12 overflow-hidden rounded-[20px] bg-mist p-[clamp(22px,3vw,36px)]">
+              <aside aria-labelledby="takeaways" className="relative isolate mb-12 overflow-hidden rounded-card bg-mist p-[clamp(22px,3vw,36px)]">
                 <NArch strokeWidth={36} draw={false} className="absolute -right-6 -top-4 -z-10 h-[150%] text-brand/[.08]" />
                 <h2 id="takeaways" className="eyebrow text-brand">
                   Key takeaways
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               <ShareLinks url={url} title={post.title} />
             </footer>
 
-            <div className="mt-10 flex gap-5 rounded-[20px] border border-ink/10 p-6">
+            <div className="mt-10 flex gap-5 rounded-card border border-ink/10 p-6">
               <span aria-hidden className="flex size-14 shrink-0 items-center justify-center rounded-full bg-ink">
                 <NArch strokeWidth={70} draw={false} className="h-[24px] text-paper" />
               </span>
@@ -227,7 +227,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             <div className="sticky top-[calc(var(--header-h)+24px)] space-y-8">
               <TocNav items={post.toc} />
               {service ? (
-                <Link href={service.href} className="group relative isolate block overflow-hidden rounded-[20px] bg-ink p-6 text-paper">
+                <Link href={service.href} className="group relative isolate block overflow-hidden rounded-card bg-ink p-6 text-paper">
                   <NArch strokeWidth={34} draw={false} className="absolute -bottom-10 -right-8 -z-10 h-[150%] text-lilac-soft/20" />
                   <span className="eyebrow text-lilac-soft">Related service</span>
                   <span className="t-h4 mt-3 block">{service.name}</span>
@@ -237,7 +237,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
                   </span>
                 </Link>
               ) : (
-                <Link href="/contact-us" className="group relative isolate block overflow-hidden rounded-[20px] bg-ink p-6 text-paper">
+                <Link href="/contact-us" className="group relative isolate block overflow-hidden rounded-card bg-ink p-6 text-paper">
                   <NArch strokeWidth={34} draw={false} className="absolute -bottom-10 -right-8 -z-10 h-[150%] text-lilac-soft/20" />
                   <span className="eyebrow text-lilac-soft">Talk to NeuSix</span>
                   <span className="t-h4 mt-3 block">Book a Free Consultation</span>

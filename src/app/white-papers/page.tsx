@@ -55,7 +55,7 @@ export default function WhitePapersPage() {
             </p>
           </div>
         </div>
-        <div className="reveal mt-[clamp(40px,5vw,72px)] flex flex-wrap items-center justify-between gap-6 rounded-[20px] bg-mist p-[clamp(22px,3vw,36px)]">
+        <div className="reveal mt-[clamp(40px,5vw,72px)] flex flex-wrap items-center justify-between gap-6 rounded-card bg-mist p-[clamp(22px,3vw,36px)]">
           <div>
             <p className="t-h4">Prefer shorter reads?</p>
             <p className="mt-2 text-[15px] text-body">Our blog covers the same topics in focused, practical articles.</p>

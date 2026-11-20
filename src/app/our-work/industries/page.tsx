@@ -27,7 +27,7 @@ export default function IndustriesPage() {
             <SectionHead id="problems-title" eyebrow="Challenges" title="The Problems We Solve" sub="What most industries actually need from AI" />
             <ul className="stagger mt-[clamp(32px,4vw,56px)] grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {PROBLEMS.map((p, i) => (
-                <li key={p.title} className="flex flex-col rounded-[20px] bg-paper p-6 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)] sm:min-h-[240px]">
+                <li key={p.title} className="flex flex-col rounded-card bg-paper p-6 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)] sm:min-h-[240px]">
                   <span className="flex items-center gap-3 text-sm text-brand">
                     <span aria-hidden className="h-px w-6 bg-brand" />0{i + 1}
                   </span>

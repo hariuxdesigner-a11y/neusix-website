@@ -63,7 +63,7 @@ export function LegalPage({
                 <div className="mt-4 space-y-4 leading-relaxed text-body">{s.body}</div>
               </section>
             ))}
-            <p className="mt-10 rounded-[20px] bg-mist p-6 text-sm leading-relaxed text-body">
+            <p className="mt-10 rounded-card bg-mist p-6 text-sm leading-relaxed text-body">
               Related: <Link href="/privacy-policy">Privacy Policy</Link> · <Link href="/terms-of-service">Terms of Service</Link> · <Link href="/cookie-policy">Cookie Policy</Link> ·{" "}
               <Link href="/contact-us">Contact us</Link>
             </p>

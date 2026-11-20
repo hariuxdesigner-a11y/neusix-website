@@ -182,7 +182,7 @@ export function ImpactCases({ exclude }: { exclude?: string }) {
               <li key={c.slug} className="w-[78vw] max-w-[320px] shrink-0 snap-start will-change-transform lg:w-auto lg:max-w-none">
                 <Link
                   href={`/case-studies/${c.slug}`}
-                  className="group flex h-full min-h-[300px] flex-col rounded-[18px] border border-ink/10 bg-paper p-6 transition-[border-color,box-shadow] duration-300 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.45)]"
+                  className="group flex h-full min-h-[300px] flex-col rounded-card border border-ink/10 bg-paper p-6 transition-[border-color,box-shadow] duration-300 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.45)]"
                 >
                   <span className="text-[17px] font-medium leading-snug">{c.industry}</span>
                   <span className="mt-3 text-sm leading-relaxed text-slate">{c.title}</span>

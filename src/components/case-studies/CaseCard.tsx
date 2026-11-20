@@ -7,7 +7,7 @@ import { Icon } from "@/components/ui/Icon";
 export function CaseCard({ c, headingLevel = 2 }: { c: CaseStudy; headingLevel?: 2 | 3 }) {
   const H = headingLevel === 2 ? "h2" : "h3";
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-ink/10 bg-paper transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.5)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-card border border-ink/10 bg-paper transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_18px_40px_-24px_rgba(49,49,104,.5)]">
       <MediaPoster id={`cs-${c.slug}` as MediaId} className="aspect-[16/9]" />
       <div className="flex flex-1 flex-col p-6 sm:p-7">
       <p className="text-xs font-semibold uppercase tracking-wide text-brand">{c.industry}</p>

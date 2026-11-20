@@ -28,7 +28,7 @@ export default function NotFound() {
       <ul className="stagger mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {LINKS.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="group flex h-full min-h-[180px] flex-col justify-between rounded-[20px] bg-mist p-6 transition-colors hover:bg-lilac-soft/60">
+            <Link href={l.href} className="group flex h-full min-h-[180px] flex-col justify-between rounded-card bg-mist p-6 transition-colors hover:bg-lilac-soft/60">
               <span>
                 <span className="t-h4 block">{l.label}</span>
                 <span className="mt-2 block text-sm leading-relaxed text-body">{l.text}</span>

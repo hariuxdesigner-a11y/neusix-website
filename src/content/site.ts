@@ -25,7 +25,7 @@ export const SOCIAL = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/neusix/", icon: "/assets/linkedin-01.svg" },
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61589978183199", icon: "/assets/div-1.svg" },
   { label: "Instagram", href: "https://www.instagram.com/neusix.24/", icon: "/assets/insta-01.svg" },
-  { label: "YouTube", href: "https://youtube.com/@neusix-h8g?si=dpvjGbsvsZTvJzEV", icon: "/assets/div-3.svg" },
+  { label: "YouTube", href: "https://www.youtube.com/@neusix-h8g", icon: "/assets/div-3.svg" },
 ] as const;
 
 export type NavLink = { label: string; href: string };

@@ -3,7 +3,9 @@ import { CommercialModels } from "@/components/sections/CommercialModels";
 import { VideoHero } from "@/components/cinematic/VideoHero";
 import { SectionHead, StatementBand, VideoCtaCard } from "@/components/cinematic/Bands";
 import { ApproachBand, ServiceShowcase, WhyBand } from "@/components/cinematic/HomeBlocks";
-import { Breadcrumbs, pageMetadata } from "@/lib/seo";
+import { Breadcrumbs, JsonLd, pageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/content/site";
+import { SERVICES as SERVICE_LIST } from "@/content/services";
 
 export const metadata: Metadata = pageMetadata("/services/services-neusix");
 
@@ -29,6 +31,7 @@ export default function ServicesHubPage() {
   return (
     <>
       <Breadcrumbs items={[{ name: "Services", path: "/services/services-neusix" }]} />
+      <JsonLd data={{ "@type": "ItemList", name: "NeuSix services", itemListElement: SERVICE_LIST.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: `${SITE_URL}${s.href}` })) }} />
       <VideoHero
         media="services-hero"
         size="tall"

@@ -7,7 +7,8 @@ import { VideoCtaCard } from "@/components/cinematic/Bands";
 import { ArrowChip, LinkArrow } from "@/components/ui/Icon";
 import { FeaturedPostCard, PostCard } from "@/components/blog/PostCard";
 import { WhitePapersBand } from "@/components/blog/WhitePapers";
-import { Breadcrumbs, pageMetadata } from "@/lib/seo";
+import { Breadcrumbs, JsonLd, pageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/resources");
 
@@ -21,6 +22,7 @@ export default function ResourcesPage() {
   return (
     <>
       <Breadcrumbs items={[{ name: "Resources", path: "/resources" }]} />
+      <JsonLd data={{ "@type": "CollectionPage", name: "NeuSix Resources", url: `${SITE_URL}/resources`, hasPart: [{ "@type": "Blog", "@id": `${SITE_URL}/blog#blog`, url: `${SITE_URL}/blog` }, { "@type": "CollectionPage", url: `${SITE_URL}/white-papers` }] }} />
       <header className="below-header relative isolate overflow-hidden">
         <NArch strokeWidth={26} className="pointer-events-none absolute right-[-4%] top-[18%] -z-10 hidden h-[115%] text-brand/[.07] lg:block" />
         <div className="container-x pb-[clamp(32px,4vw,56px)] pt-[clamp(48px,7vw,104px)]">
@@ -33,7 +35,7 @@ export default function ResourcesPage() {
           <ul className="stagger mt-[clamp(32px,4vw,56px)] grid gap-4 md:grid-cols-2">
             {HUB.map((h) => (
               <li key={h.href}>
-                <Link href={h.href} className="group flex h-full items-start justify-between gap-6 rounded-[20px] border border-ink/10 p-[clamp(22px,3vw,36px)] transition-colors hover:border-navy/40">
+                <Link href={h.href} className="group flex h-full items-start justify-between gap-6 rounded-card border border-ink/10 p-[clamp(22px,3vw,36px)] transition-colors hover:border-navy/40">
                   <span>
                     <span className="t-h3 block">{h.label}</span>
                     <span className="mt-3 block max-w-[48ch] text-[15px] leading-relaxed text-body">{h.text}</span>

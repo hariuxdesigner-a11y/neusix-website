@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/Button";
 import { ArrowChip } from "@/components/ui/Icon";
 import Link from "next/link";
 import { ABOUT_INTRO, ABOUT_STATS, AWARDS, DNA, LEADERSHIP, MISSION, PRESENCE, SCOREBOARD, SHOW_TEAM, SPECIALISTS, VISION } from "@/content/about";
-import { Breadcrumbs, pageMetadata } from "@/lib/seo";
+import { Breadcrumbs, JsonLd, pageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/content/site";
 import { NArch } from "@/components/brand/NArch";
 
 // The live page has the title "About" and no description; this uses the page's own hero copy.
@@ -37,6 +38,7 @@ export default function AboutPage() {
   return (
     <>
       <Breadcrumbs items={[{ name: "About", path: "/about" }]} />
+      <JsonLd data={{ "@type": "AboutPage", name: "About NeuSix", url: `${SITE_URL}/about`, isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` } }} />
       <VideoHero
         media="about-global"
         size="tall"
@@ -77,14 +79,14 @@ export default function AboutPage() {
           </div>
           <div className="stagger grid grid-cols-2 gap-3">
             {stats.map((s) => (
-              <dl key={s.label} className="flex min-h-[150px] flex-col-reverse justify-between rounded-[20px] bg-mist p-5 ring-1 ring-ink/[.04] sm:min-h-[170px] sm:p-7">
+              <dl key={s.label} className="flex min-h-[150px] flex-col-reverse justify-between rounded-card bg-mist p-5 ring-1 ring-ink/[.04] sm:min-h-[170px] sm:p-7">
                 <dt className="mt-5 max-w-[26ch] text-[13px] leading-snug text-body sm:text-sm">{s.label}</dt>
                 <dd className="font-serif text-[clamp(2.2rem,1.6rem+2.4vw,4rem)] leading-none text-navy">
                   <Counter value={s.value} />
                 </dd>
               </dl>
             ))}
-            <Link href="/our-work/case-studies" className="group flex min-h-[150px] flex-col justify-between rounded-[20px] bg-ink p-5 text-paper sm:min-h-[170px] sm:p-7">
+            <Link href="/our-work/case-studies" className="group flex min-h-[150px] flex-col justify-between rounded-card bg-ink p-5 text-paper sm:min-h-[170px] sm:p-7">
               <span className="eyebrow text-lilac-bright">Shipping Impact</span>
               <span className="flex items-end justify-between gap-4">
                 <span className="max-w-[14ch] font-serif text-[clamp(1rem,.9rem+.6vw,1.375rem)] leading-snug">See the outcomes in our case studies</span>
@@ -105,7 +107,7 @@ export default function AboutPage() {
             {DNA.map((d, i) => (
               <li
                 key={d.title}
-                className="group flex min-h-[220px] flex-col rounded-[20px] bg-paper p-7 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)] sm:min-h-[300px]"
+                className="group flex min-h-[220px] flex-col rounded-card bg-paper p-7 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)] sm:min-h-[300px]"
               >
                 <span className="flex items-center gap-3 text-sm text-brand">
                   <span aria-hidden className="h-px w-6 bg-brand" />
@@ -130,7 +132,7 @@ export default function AboutPage() {
               { k: "Vision", t: VISION },
               { k: "Mission", t: MISSION },
             ].map((v) => (
-              <div key={v.k} className="rounded-[20px] bg-mist p-7 sm:p-9">
+              <div key={v.k} className="rounded-card bg-mist p-7 sm:p-9">
                 <h2 className="eyebrow text-brand">{v.k}</h2>
                 <p className="mt-4 font-serif text-[clamp(1.2rem,1rem+.8vw,1.6rem)] leading-snug text-ink">{v.t}</p>
               </div>
@@ -169,7 +171,7 @@ export default function AboutPage() {
           </div>
           <ul className="stagger grid gap-4 sm:grid-cols-2">
             {AWARDS.map((a) => (
-              <li key={a.text} className="group overflow-hidden rounded-[20px] bg-mist ring-1 ring-ink/[.04]">
+              <li key={a.text} className="group overflow-hidden rounded-card bg-mist ring-1 ring-ink/[.04]">
                 <div className="overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

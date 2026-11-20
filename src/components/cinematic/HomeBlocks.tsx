@@ -72,7 +72,7 @@ export function ApproachBand({
         <SectionHead id="approach-title" eyebrow={title} title={sub} align="center" />
         <ol className="stagger mt-[clamp(48px,8vw,120px)] grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p, i) => (
-            <li key={p.name} className="flex flex-col rounded-[20px] bg-paper/95 p-6 shadow-[0_24px_60px_-34px_rgba(15,15,31,.4)] ring-1 ring-ink/5">
+            <li key={p.name} className="flex flex-col rounded-card bg-paper/95 p-6 shadow-[0_24px_60px_-34px_rgba(15,15,31,.4)] ring-1 ring-ink/5">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold tracking-[0.14em] text-brand">0{i + 1}</span>
                 <LineIcon src={p.icon} delay={200 + i * 150} className="h-16 w-[72px]" />
@@ -143,7 +143,7 @@ export function WhyBand() {
           </div>
           <ol className="stagger grid gap-3 sm:grid-cols-3">
             {WHY_NEUSIX.map((w) => (
-              <li key={w.n} className="flex flex-col rounded-[20px] bg-paper p-7 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)]">
+              <li key={w.n} className="flex flex-col rounded-card bg-paper p-7 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)]">
                 <span className="flex items-center gap-3 text-sm text-brand">
                   <span aria-hidden className="h-px w-6 bg-brand" />
                   {w.n}
@@ -181,7 +181,7 @@ export function ResourcesTeaser() {
         <ul className="stagger mt-4 grid gap-4 md:grid-cols-3">
           {WHITE_PAPERS.map((w) => (
             <li key={w.title}>
-              <a href={w.href} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col gap-3 rounded-[18px] bg-mist/70 p-6 transition-colors hover:bg-mist">
+              <a href={w.href} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col gap-3 rounded-card bg-mist/70 p-6 transition-colors hover:bg-mist">
                 <span className="text-xs uppercase tracking-[0.12em] text-slate">White paper</span>
                 <span className="text-sm font-medium leading-snug group-hover:text-brand">{w.title}</span>
                 <span className="sr-only"> (opens in a new tab)</span>

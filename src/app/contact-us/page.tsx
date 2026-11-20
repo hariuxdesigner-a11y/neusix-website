@@ -6,7 +6,8 @@ import { CONTACT_STEPS, FAQS } from "@/content/extras";
 import { FaqSection } from "@/components/cinematic/Extras";
 import { SectionHead } from "@/components/cinematic/Bands";
 import { WordRise } from "@/components/motion/WordRise";
-import { Breadcrumbs, pageMetadata } from "@/lib/seo";
+import { Breadcrumbs, JsonLd, pageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/contact-us");
 
@@ -14,6 +15,7 @@ export default function ContactPage() {
   return (
     <>
       <Breadcrumbs items={[{ name: "Contact", path: "/contact-us" }]} />
+      <JsonLd data={{ "@type": "ContactPage", name: "Contact NeuSix", url: `${SITE_URL}/contact-us`, isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` } }} />
     <section className="relative isolate overflow-hidden text-paper">
       <VideoBackground id="contact" overlay="dark" priority />
       <div className="container-x grid min-h-[100svh] gap-12 pb-[clamp(48px,7vw,112px)] pt-[calc(var(--header-h)+clamp(40px,6vw,96px))] md:grid-cols-[1fr_1.1fr] md:items-center md:gap-16 lg:gap-24">
@@ -41,7 +43,7 @@ export default function ContactPage() {
         <SectionHead id="next-title" eyebrow="What happens next" title="Book a Free Consultation" sub="Fast, practical, and tailored." />
         <ol className="mt-[clamp(32px,4vw,56px)] grid gap-5 md:grid-cols-3">
           {CONTACT_STEPS.map((st, i) => (
-            <li key={st.n} className="reveal rounded-[20px] border border-ink/10 bg-paper p-7" style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}>
+            <li key={st.n} className="reveal rounded-card border border-ink/10 bg-paper p-7" style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}>
               <span className="font-serif text-3xl text-brand">{st.n}</span>
               <h3 className="t-h4 mt-4">{st.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate">{st.text}</p>

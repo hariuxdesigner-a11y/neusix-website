@@ -6,7 +6,7 @@ import { ArrowChip, LinkArrow } from "@/components/ui/Icon";
 export function WhitePaperCard({ paper, index, headingLevel = 3 }: { paper: (typeof WHITE_PAPERS)[number]; index: number; headingLevel?: 2 | 3 }) {
   const H = `h${headingLevel}` as const;
   return (
-    <a href={paper.href} target="_blank" rel="noopener noreferrer" className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-ink/10 bg-paper p-[clamp(22px,2.4vw,32px)] transition-[border-color,box-shadow] duration-300 hover:border-navy/40 hover:shadow-[0_18px_40px_-24px_rgba(15,15,31,.35)]">
+    <a href={paper.href} target="_blank" rel="noopener noreferrer" className="group relative flex h-full flex-col overflow-hidden rounded-card border border-ink/10 bg-paper p-[clamp(22px,2.4vw,32px)] transition-[border-color,box-shadow] duration-300 hover:border-navy/40 hover:shadow-[0_18px_40px_-24px_rgba(15,15,31,.35)]">
       {/* document motif: a page with the N arch */}
       <span aria-hidden className="relative mb-8 flex h-28 w-[88px] items-end justify-center overflow-hidden rounded-[10px] bg-mist ring-1 ring-ink/5 transition-transform duration-500 group-hover:-translate-y-1">
         <svg viewBox="0 0 495 529" className="absolute -right-3 top-3 h-24 text-brand/30" fill="none">

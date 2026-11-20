@@ -41,7 +41,7 @@
   --text-lead--line-height: 1.55;
 
   --radius-pill: 24px;
-  --radius-card: 16px;
+  --radius-card: 20px;
 
   --breakpoint-xs: 30rem;   /* 480 */
   --breakpoint-nav: 64rem;  /* 1024: desktop nav from here */

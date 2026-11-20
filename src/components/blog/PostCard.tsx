@@ -26,7 +26,7 @@ export function TagPill({ tag, light = false }: { tag: string; light?: boolean }
 export function PostCard({ post, headingLevel = 3, excerpt = true }: { post: BlogPost; headingLevel?: 2 | 3; excerpt?: boolean }) {
   const H = `h${headingLevel}` as const;
   return (
-    <Link href={postHref(post)} className="group flex h-full flex-col overflow-hidden rounded-[20px] border border-ink/10 bg-paper transition-[border-color,box-shadow] duration-300 hover:border-navy/40 hover:shadow-[0_18px_40px_-24px_rgba(15,15,31,.35)]">
+    <Link href={postHref(post)} className="group flex h-full flex-col overflow-hidden rounded-card border border-ink/10 bg-paper transition-[border-color,box-shadow] duration-300 hover:border-navy/40 hover:shadow-[0_18px_40px_-24px_rgba(15,15,31,.35)]">
       <MediaPoster id={post.image} className="aspect-[16/10]" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw" />
       <div className="flex flex-1 flex-col p-6">
         <TagPill tag={post.tag} />
@@ -56,8 +56,8 @@ export function FeaturedPostCard({ post, headingLevel = 2 }: { post: BlogPost; h
         <p className="mt-4 text-[17px] leading-relaxed text-body">{post.excerpt}</p>
         <div className="mt-8 flex items-center justify-between gap-4">
           <Meta post={post} />
-          <span className="inline-flex items-center gap-3 text-sm font-medium text-navy">
-            Read article <ArrowChip />
+          <span className="inline-flex shrink-0 items-center gap-3 whitespace-nowrap text-sm font-medium text-navy">
+            <span className="hidden sm:inline">Read article</span> <ArrowChip />
           </span>
         </div>
       </div>
