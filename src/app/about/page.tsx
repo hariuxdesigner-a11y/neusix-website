@@ -12,6 +12,7 @@ import { ArrowChip } from "@/components/ui/Icon";
 import Link from "next/link";
 import { ABOUT_INTRO, ABOUT_STATS, AWARDS, DNA, LEADERSHIP, MISSION, PRESENCE, SCOREBOARD, SHOW_TEAM, SPECIALISTS, VISION } from "@/content/about";
 import { Breadcrumbs, pageMetadata } from "@/lib/seo";
+import { NArch } from "@/components/brand/NArch";
 
 // The live page has the title "About" and no description; this uses the page's own hero copy.
 export const metadata: Metadata = pageMetadata("/about");
@@ -47,7 +48,8 @@ export default function AboutPage() {
       />
 
       {/* ── Conviction ─────────────────────────────────────────────────── */}
-      <section aria-labelledby="conviction" className="container-x pt-[var(--section-y)]">
+      <section aria-labelledby="conviction" className="container-x relative isolate pt-[var(--section-y)]">
+        <NArch strokeWidth={20} delay={200} className="absolute right-[var(--gutter)] top-[calc(var(--section-y)-8px)] -z-10 hidden h-[clamp(240px,24vw,360px)] text-brand/[.14] lg:block" />
         <p id="conviction" className="eyebrow reveal text-brand">
           Our Conviction
         </p>

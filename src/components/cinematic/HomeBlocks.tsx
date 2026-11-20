@@ -13,6 +13,7 @@ import { BlurStage } from "@/components/motion/BlurStage";
 import { OutcomeCarousel } from "./OutcomeCarousel";
 import { Button } from "@/components/ui/Button";
 import { LinkArrow } from "@/components/ui/Icon";
+import { NArch } from "@/components/brand/NArch";
 
 const Arrow = LinkArrow;
 
@@ -126,7 +127,8 @@ export function OutcomeShowcase({
 /** "Why NeuSix": calm dark band with the three principles. */
 export function WhyBand() {
   return (
-    <section aria-labelledby="why-title" className="bg-mist/70">
+    <section aria-labelledby="why-title" className="relative isolate overflow-hidden bg-mist/70">
+      <NArch strokeWidth={22} delay={200} className="absolute right-[-3%] top-[8%] -z-10 hidden h-[135%] text-brand/[.10] lg:block" />
       <div className="container-x section-y">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)]">
           <div className="reveal">

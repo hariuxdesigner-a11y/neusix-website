@@ -163,7 +163,12 @@ img, svg, video { max-width: 100%; }
   .js .draw-soft [data-d="f"] { opacity: 1; transform: none; transition: none; }
   .js .draw-icon.is-in [data-d], .js .is-active .draw-parent [data-d] { stroke-dashoffset: 0; opacity: 1; transform: none; }
 
+  /* NeuSix "N" arch motif draws itself in */
+  .js .n-arch path { stroke-dasharray: 1 1.05; stroke-dashoffset: 1; transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1) var(--arch-delay, 0ms); }
+  .js .n-arch.is-in path { stroke-dashoffset: 0; }
+
   @media (prefers-reduced-motion: reduce) {
+    .js .n-arch path { stroke-dashoffset: 0; transition: none; }
     .js .reveal, .js .stagger > *, .js .rise { opacity: 1; transform: none; transition: none; animation: none; }
     .js .wr > span { transform: none; animation: none; }
     .js .draw-icon [data-d] { stroke-dashoffset: 0; opacity: 1; transform: none; transition: none; }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/lib/seo";
 import { WordRise } from "@/components/motion/WordRise";
+import { NArch } from "@/components/brand/NArch";
 
 export type LegalSection = { id: string; title: string; body: ReactNode };
 
@@ -79,7 +80,7 @@ export function L({ items }: { items: ReactNode[] }) {
     <ul className="space-y-2">
       {items.map((t, i) => (
         <li key={i} className="flex gap-3">
-          <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand" />
+          <NArch draw={false} strokeWidth={80} className="mt-[7px] h-[11px] w-[10px] shrink-0 text-brand" />
           <span>{t}</span>
         </li>
       ))}

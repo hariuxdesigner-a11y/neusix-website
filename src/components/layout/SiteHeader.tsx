@@ -7,6 +7,7 @@ import { CONTACT_LINK, NAV, SERVICE_LINKS, type NavLink } from "@/content/site";
 import { ACCENT_HEX, SERVICES } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
 import { Icon, LinkArrow } from "@/components/ui/Icon";
+import { NArch } from "@/components/brand/NArch";
 
 /** Routes whose top section is light: the header starts solid there. Everything else opens on a dark/video hero. */
 /** Pages without a dark video hero start with a solid header. Pages can also opt in with a `data-light-top` element (e.g. the 404 page). */
@@ -108,8 +109,9 @@ function MobileMenu({ open, pathname, onClose }: { open: boolean; pathname: stri
     <div
       id="mobile-menu"
       hidden={!open}
-      className="fixed inset-x-0 bottom-0 top-[var(--header-h)] z-40 overflow-y-auto bg-ink text-paper nav:hidden"
+      className="fixed inset-x-0 bottom-0 top-[var(--header-h)] z-40 isolate overflow-y-auto bg-ink text-paper nav:hidden"
     >
+      <NArch strokeWidth={26} draw={false} className="pointer-events-none fixed bottom-[-6%] right-[-14%] -z-10 h-[62%] text-paper/[.06]" />
       <nav aria-label="Mobile" className="container-x flex min-h-full flex-col pb-10 pt-4">
         <ul className="divide-y divide-white/10">
           {NAV.map((item) =>

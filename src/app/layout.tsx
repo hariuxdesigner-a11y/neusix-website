@@ -30,10 +30,6 @@ export const metadata: Metadata = {
   title: { default: SITE.defaultTitle, template: "%s" },
   description: SITE.defaultDescription,
   applicationName: SITE.name,
-  icons: {
-    icon: "/assets/fevi-light.png",
-    apple: "/assets/ssi.png",
-  },
   openGraph: {
     type: "website",
     siteName: SITE.name,

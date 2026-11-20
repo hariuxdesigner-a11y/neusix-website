@@ -3,6 +3,7 @@ import type { MediaId } from "@/content/media";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { Button } from "@/components/ui/Button";
 import { StatementFill } from "@/components/motion/StatementFill";
+import { NArch } from "@/components/brand/NArch";
 
 type Cta = { label: string; href: string };
 
@@ -65,7 +66,7 @@ export function StatementBand({
 export function VideoCtaCard({
   media = "consult",
   title = "Book a Free Consultation",
-  body = "In a 30-minute call, we’ll understand your goals and constraints, share a practical path to measurable impact, and outline next steps no obligations.",
+  body = "In a 30-minute call, we’ll understand your goals and constraints, share a practical path to measurable impact, and outline next steps, with no obligations.",
   primary = { label: "Book a Free Consultation", href: "/contact-us" },
   secondary,
   note = "Fast, practical, and tailored. We'll keep it grounded in your reality.",
@@ -81,6 +82,7 @@ export function VideoCtaCard({
     <section aria-labelledby="cta-title" className="container-x py-[clamp(48px,6vw,96px)]">
       <div className="reveal relative isolate flex min-h-[clamp(440px,60vw,640px)] flex-col justify-end overflow-hidden rounded-[clamp(18px,2.4vw,32px)] p-[clamp(24px,5vw,72px)] text-paper">
         <VideoBackground id={media} overlay="hero" parallax={70} />
+        <NArch strokeWidth={34} delay={300} className="absolute -bottom-[14%] right-[5%] -z-[1] h-[62%] text-lilac-soft/40 sm:h-[88%]" />
         <h2 id="cta-title" className="t-display max-w-[16ch]">
           {title}
         </h2>

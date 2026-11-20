@@ -17,7 +17,7 @@ export function RevealObserver() {
       },
       { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
     );
-    const scan = () => document.querySelectorAll(".reveal:not(.is-in), .stagger:not(.is-in), .draw-icon:not(.is-in):not(.draw-parent)").forEach((el) => io.observe(el));
+    const scan = () => document.querySelectorAll(".reveal:not(.is-in), .stagger:not(.is-in), .draw-icon:not(.is-in):not(.draw-parent), .n-arch:not(.is-in)").forEach((el) => io.observe(el));
     scan();
     const mo = new MutationObserver(scan);
     mo.observe(document.body, { childList: true, subtree: true });

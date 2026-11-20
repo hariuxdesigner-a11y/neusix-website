@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FOOTER_COMPANY, LEGAL_LINKS, SERVICE_LINKS, SITE, SOCIAL } from "@/content/site";
+import { NArch } from "@/components/brand/NArch";
 
 const COLUMNS = [
   { title: "Services", links: SERVICE_LINKS },
@@ -16,7 +17,8 @@ const COLUMNS = [
 /** Abridge-style footer: brand block left, link columns mirroring the navigation, slim legal bar. */
 export function SiteFooter() {
   return (
-    <footer className="border-t border-ink/5 bg-paper text-ink">
+    <footer className="relative isolate overflow-hidden border-t border-ink/5 bg-paper text-ink">
+      <NArch strokeWidth={30} className="absolute -bottom-[38%] right-[-6%] -z-10 hidden h-[125%] text-navy/[.06] lg:block" />
       <div className="container-x pb-8 pt-[clamp(56px,7vw,112px)]">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_2fr]">
           <div>

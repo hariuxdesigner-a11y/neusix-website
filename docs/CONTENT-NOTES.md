@@ -94,3 +94,13 @@ No statistics, client names or testimonials were invented; FAQ answers reuse exi
   only, no cookies, no analytics. **Have them reviewed by your legal adviser**, and update them if you add analytics, a CRM, chat,
   or a dedicated privacy contact email. Terms name the courts at Hyderabad, Telangana (registered office) — confirm this choice.
 * Footer: designer credit removed; legal links are live; copyright shows the legal entity name.
+
+## NeuSix "N" mark (20 Nov 2026)
+
+* Supplied favicon artwork traced to a vector (98.8% match): `public/brand/neusix-n.svg` (navy #2D2D5F).
+* Site icons: `src/app/icon.svg` (browser tab, switches to light lilac in dark mode), `src/app/favicon.ico` (16/32/48),
+  `src/app/apple-icon.png` (180, white N on brand navy), `public/brand/icon-192/512.png` + maskable icon, `src/app/manifest.ts`.
+  Regenerate with `node scripts/make-icons.mjs`.
+* Brand motif `src/components/brand/NArch.tsx` (draws itself in): closing CTA card on every page, footer watermark, behind
+  "Why NeuSix", About "Our Conviction", 404 page, mobile menu, list bullets on the legal pages, and all share images.
+* Fixed the CTA card text: "…outline next steps, with no obligations."

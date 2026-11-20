@@ -38,6 +38,7 @@ img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 h1{font-family:Lora,serif;font-weight:500;font-size:${c.title.length > 60 ? 54 : 64}px;line-height:1.1;max-width:880px;margin-top:20px}
 .u{font-size:18px;color:#d9daf2}</style></head><body>
 <img class="bg" src="${base}/media/${c.media}.jpg"><div class="ov"></div>
+<svg viewBox="0 0 495 529" style="position:absolute;right:70px;bottom:-90px;height:560px;overflow:visible" fill="none"><path d="M33.75 227C33.75 124 115 33.75 243 33.75C375 33.75 460.75 109 460.75 239V495.25" stroke="rgba(217,218,242,.22)" stroke-width="30" stroke-linecap="round"/></svg>
 <div class="c"><img class="logo" src="${base}/assets/neusix-logo-white.svg"><div><p class="e">${c.eyebrow}</p><h1>${c.title}</h1></div><p class="u">neusix.com</p></div></body></html>`, { waitUntil: "networkidle" });
   await p.evaluate(() => document.fonts.ready);
   await p.screenshot({ path: `public/og/${c.key}.jpg`, type: "jpeg", quality: 82 });
