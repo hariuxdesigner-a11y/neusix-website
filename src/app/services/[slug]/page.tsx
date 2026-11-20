@@ -23,6 +23,7 @@ const SERVICE_FILTER: Record<string, string> = {
 import { OutcomeShowcase, ApproachBand } from "@/components/cinematic/HomeBlocks";
 import { Breadcrumbs, JsonLd, pageMetadata } from "@/lib/seo";
 import { SEO } from "@/content/seo";
+import { ACCENT_INK } from "@/content/services";
 import { SITE, SITE_URL } from "@/content/site";
 
 export function generateStaticParams() {
@@ -78,8 +79,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       <WhatYouGet
         items={s.whatYouGet}
         accent={accent}
-        icons={s.wygGfx.map((g) => <LineIcon key={g} src={g} trigger="parent" knock="#fcfcfd" className="size-full" />)}
-        panelIcons={s.whatYouGet.map((_, i) => <LineIcon key={i} src={s.wygGfx[i % s.wygGfx.length]} trigger="parent" stroke={1.2} knock="#f1f1f9" className="size-full" />)}
+        icons={s.wygGfx.map((g) => <LineIcon key={g} src={g} trigger="parent" knock="#fcfcfd" mono stroke={1.5} color={ACCENT_INK[s.accent]} className="size-full" />)}
+        panelIcons={s.whatYouGet.map((_, i) => <LineIcon key={i} src={s.wygGfx[i % s.wygGfx.length]} trigger="parent" stroke={1.4} knock="#f1f1f9" mono color={ACCENT_INK[s.accent]} className="size-full" />)}
       />
       <CommercialModels />
       <CaseStudiesRow

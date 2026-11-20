@@ -154,7 +154,9 @@ img, svg, video { max-width: 100%; }
   /* NeuSix line icons: one stroke weight at every size, then they draw themselves on */
   .draw-icon [data-d="s"] { vector-effect: non-scaling-stroke; stroke-width: var(--icon-stroke, 1.4px); }
   .icon-mono [data-d="s"] { stroke: currentColor; }
-  .icon-mono [data-d="f"]:not([data-k]) { fill: currentColor; }
+  .icon-mono [data-d="f"]:not([data-k]):not([data-dash]):not([fill="none"]) { fill: currentColor; }
+  .icon-mono [data-dash] { stroke: currentColor; }
+  .draw-icon [data-dash] { vector-effect: non-scaling-stroke; stroke-width: calc(var(--icon-stroke, 1.4px) * .9); }
   .icon-knock [data-k="dark"] { fill: var(--knock); }
   .js .draw-icon [data-d="s"] { stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.65,0,.35,1); transition-delay: calc(var(--draw-delay, 0ms) + min(var(--k), 24) * 45ms); }
   .js .draw-icon [data-d="f"] { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; transition: opacity .5s ease, transform .8s cubic-bezier(.34,1.56,.64,1); transition-delay: calc(var(--draw-delay, 0ms) + 450ms + min(var(--k), 24) * 35ms); }

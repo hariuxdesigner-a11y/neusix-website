@@ -30,6 +30,7 @@ export function LineIcon({
   stroke,
   mono = false,
   knock,
+  color,
 }: {
   src: string;
   className?: string;
@@ -40,6 +41,8 @@ export function LineIcon({
   mono?: boolean;
   /** surface colour behind the icon: dark "knock-out" shapes are repainted with it (icons drawn for dark backgrounds) */
   knock?: string;
+  /** colour for mono icons */
+  color?: string;
 }) {
   let svg = /\.svg$/i.test(src) ? load(src) : "";
   // bitmap-based or very large files are not line art: load them as normal images instead
@@ -54,9 +57,10 @@ export function LineIcon({
       const i = k++;
       const stroked = /stroke="(?!none)[^"]+"/.test(attrs) && !/stroke-dasharray/.test(attrs); // dashed lines fade in instead
       // light/dark "knock-out" fills keep their colour in mono mode
-      const darkKnock = !stroked && /fill="(#0f0f1f|#1e1f41|#222344|#000|#000000|black)"/i.test(attrs);
+      const darkKnock = /fill="(#0f0f1f|#1e1f41|#222344|#000|#000000|black)"/i.test(attrs);
       const lightKnock = !stroked && /fill="(#f{3,6}|#fcfcfd|#f1f1f9|white)"/i.test(attrs);
-      const extra = stroked ? ` pathLength="1" data-d="s"` : darkKnock ? ` data-d="f" data-k="dark"` : lightKnock ? ` data-d="f" data-k="light"` : ` data-d="f"`;
+      const dashed = /stroke="(?!none)[^"]+"/.test(attrs) && /stroke-dasharray/.test(attrs);
+      const extra = stroked ? ` pathLength="1" data-d="s"${darkKnock ? ` data-k="dark"` : ""}` : dashed ? ` data-d="f" data-dash=""` : darkKnock ? ` data-d="f" data-k="dark"` : lightKnock ? ` data-d="f" data-k="light"` : ` data-d="f"`;
       return `<${t}${attrs}${extra} style="--k:${i}"${close}>`;
     });
   svg = svg
@@ -75,7 +79,7 @@ export function LineIcon({
     <span
       aria-hidden
       className={`draw-icon ${mono ? "icon-mono" : ""} ${knock ? "icon-knock" : ""} ${/<filter\b/.test(svg) ? "draw-soft" : ""} ${trigger === "parent" ? "draw-parent" : ""} inline-block [&>svg]:size-full ${className}`}
-      style={{ ["--draw-delay" as string]: `${delay}ms`, ...(stroke ? { ["--icon-stroke" as string]: `${stroke}px` } : {}), ...(knock ? { ["--knock" as string]: knock } : {}) }}
+      style={{ ["--draw-delay" as string]: `${delay}ms`, ...(stroke ? { ["--icon-stroke" as string]: `${stroke}px` } : {}), ...(knock ? { ["--knock" as string]: knock } : {}), ...(color ? { color } : {}) }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

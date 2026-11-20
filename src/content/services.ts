@@ -344,6 +344,16 @@ export const COMMERCIAL_NOTE = "The right model depends on your internal capabil
 
 export const HOME_OUTCOMES = SERVICES[0].outcomes;
 
+/** Darker versions of the accents for icons and small graphics on white (≥ 3:1 contrast). */
+export const ACCENT_INK: Record<Accent, string> = {
+  purple: "#5a5ba6",
+  violet: "#8a4e96",
+  orange: "#c8541f",
+  yellow: "#b56a0e",
+  red: "#c23434",
+  green: "#4a7f38",
+};
+
 /** Brand accent colours used per service (page theme, cards, menu). */
 export const ACCENT_HEX: Record<Accent, string> = {
   purple: "#6d6eb5",

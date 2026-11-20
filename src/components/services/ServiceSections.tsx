@@ -1,33 +1,10 @@
-import { ACCENT_HEX } from "@/content/services";
+import { ACCENT_HEX, ACCENT_INK } from "@/content/services";
 import type { Service } from "@/content/services";
 import { LineIcon } from "@/components/motion/LineIcon";
 import { StatementFill } from "@/components/motion/StatementFill";
 export { ACCENT_HEX };
 
-function AccentOrb({ color, className = "" }: { color: string; className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={`pointer-events-none absolute -z-10 aspect-square rounded-full blur-[clamp(24px,3vw,48px)] motion-safe:animate-float ${className}`}
-      style={{ background: `radial-gradient(circle, ${color} 0%, ${color}cc 25%, transparent 70%)` }}
-    />
-  );
-}
 
-export function ServiceHero({ s }: { s: Service }) {
-  const c = ACCENT_HEX[s.accent];
-  return (
-    <section aria-labelledby="svc-hero" className="relative isolate overflow-hidden">
-      <div className="container-x relative py-[clamp(72px,10vw,150px)]">
-        <AccentOrb color={c} className="left-[calc(var(--gutter)-60px)] top-[clamp(10px,3vw,40px)] w-[clamp(160px,18vw,260px)] opacity-80" />
-        <p className="eyebrow">Shipping Impact</p>
-        <h1 id="svc-hero" className="t-display mt-3 max-w-[15ch]" style={{ ["--reveal-delay" as string]: "80ms" }}>
-          {s.hero}
-        </h1>
-      </div>
-    </section>
-  );
-}
 
 export function StageFit({ s }: { s: Service }) {
   const c = ACCENT_HEX[s.accent];
@@ -52,7 +29,7 @@ export function StageFit({ s }: { s: Service }) {
               className="border-dotted md:px-[clamp(16px,2.4vw,40px)] md:first:pl-0 md:[&:not(:first-child)]:border-l-2"
               style={{ borderColor: c }}
             >
-              <LineIcon src={col.gfx} delay={250 + i * 180} knock="#fcfcfd" className="h-[clamp(80px,7vw,104px)] w-[clamp(94px,8.2vw,122px)]" />
+              <LineIcon src={col.gfx} delay={250 + i * 180} knock="#fcfcfd" mono stroke={1.6} color={ACCENT_INK[s.accent]} className="h-[clamp(80px,7vw,104px)] w-[clamp(94px,8.2vw,122px)]" />
               <h3 className="t-h4 mt-5">{col.title}</h3>
               <ul className="mt-4 space-y-4">
                 {col.items.map((t) => (
@@ -91,7 +68,6 @@ export function ServiceIntro({ s }: { s: Service }) {
         ) : (
           <StatementFill text={s.intro.text} className="mx-auto mt-6 max-w-[40ch] font-serif text-[clamp(1.25rem,0.9rem+1.5vw,2.25rem)] leading-snug" />
         )}
-        <AccentOrb color={c} className="right-[18%] top-[55%] w-[clamp(140px,14vw,220px)] opacity-70" />
       </div>
     </section>
   );
@@ -100,8 +76,10 @@ export function ServiceIntro({ s }: { s: Service }) {
 export function WhatWeDo({ s }: { s: Service }) {
   const c = ACCENT_HEX[s.accent];
   return (
-    <section aria-labelledby="wwd-title" className="relative isolate overflow-hidden">
-      <AccentOrb color={c} className="left-1/2 top-1/2 w-[clamp(280px,40vw,560px)] -translate-x-1/2 -translate-y-1/2 opacity-45" />
+    <section
+      aria-labelledby="wwd-title"
+      style={{ background: `radial-gradient(60% 70% at 50% 62%, ${c}1f 0%, ${c}0d 45%, transparent 75%)` }}
+    >
       <div className="container-x section-y">
         <h2 id="wwd-title" className="t-h2 reveal text-center">
           What we do
