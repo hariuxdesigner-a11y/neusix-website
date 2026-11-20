@@ -22,15 +22,19 @@ export function Marquee({ children, speed = 40, className = "", gap = "clamp(40p
     let visible = true;
     const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
     io.observe(el);
+    let v = speed; // current velocity (px/s), eased towards the target
     const tick = (t: number) => {
       const dt = Math.min(64, t - last) / 1000;
       last = t;
       const y = window.scrollY;
-      boost = boost * 0.92 + Math.abs(y - lastY) * 0.6;
+      // scroll adds a gentle, capped boost that eases in and out (no jumps)
+      boost = Math.min(Math.abs(y - lastY) / Math.max(dt, 0.001), 2400) * 0.06;
       lastY = y;
+      const target = hover.current ? 0 : speed + boost;
+      v += (target - v) * Math.min(1, dt * 4);
       if (visible) {
         const w = first.current?.offsetWidth ?? 0;
-        x -= (hover.current ? 0 : speed + boost * 4) * dt;
+        x -= v * dt;
         if (w && -x >= w) x += w;
         el.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
       }
