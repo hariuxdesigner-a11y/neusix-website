@@ -42,7 +42,7 @@ export const SERVICES: Service[] = [
     seo: {
       title: "AI Transformation Services | Strategy to Deployment | NeuSix",
       description:
-        "Accelerate your AI journey with NeuSix's end-to-end AI transformation services — from strategy and model development to deployment, automation, and continuous optimisation.",
+        "Accelerate your AI journey with NeuSix's end-to-end AI transformation services, from strategy and model development to deployment, automation, and continuous optimisation.",
     },
     hero: "AI Transformation that moves from pilots to production",
     stage: {
@@ -80,14 +80,14 @@ export const SERVICES: Service[] = [
     slug: "modernization",
     href: "/services/modernization",
     name: "Modernization",
-    cardText: "Make legacy systems cloud-native and AI-ready—without disrupting critical operations.",
+    cardText: "Make legacy systems cloud-native and AI-ready, without disrupting critical operations.",
     cardGfx: A("gfx-02-v1.svg"),
     cardGfxWhite: A("modernization-white.svg"),
     accent: "orange",
     seo: {
       title: "Application & Infrastructure Modernization | NeuSix",
       description:
-        "Migrate from legacy to modern with NeuSix's modernisation services — cloud migration, microservices adoption, API-first architecture, and platform re-engineering for enterprise agility.",
+        "Migrate from legacy to modern with NeuSix's modernisation services: cloud migration, microservices adoption, API-first architecture, and platform re-engineering for enterprise agility.",
     },
     hero: "Modernize without breaking the business",
     stage: {
@@ -194,7 +194,7 @@ export const SERVICES: Service[] = [
       bullets: true,
     },
     whatWeDo: [
-      { title: "Dedicated Pods (Accountable Teams)", text: "Engineering, AI/ML, data, QA, DevOps—configured to your outcomes." },
+      { title: "Dedicated Pods (Accountable Teams)", text: "Engineering, AI/ML, data, QA and DevOps, configured to your outcomes." },
       { title: "Operating Rhythm + Governance", text: "Cadences, KPIs, reporting, quality gates, and escalation paths." },
       { title: "Continuity + Security by Design", text: "Talent continuity plan, access controls, and compliance alignment to your policies." },
     ],
@@ -242,7 +242,7 @@ export const SERVICES: Service[] = [
     // NOTE: the live AI COE page repeats the ODC "What we do" cards and "What we measure" line verbatim.
     // Kept as published; flagged in docs/CONTENT-NOTES.md for the client to supply COE-specific copy.
     whatWeDo: [
-      { title: "Dedicated Pods (Accountable Teams)", text: "Engineering, AI/ML, data, QA, DevOps—configured to your outcomes." },
+      { title: "Dedicated Pods (Accountable Teams)", text: "Engineering, AI/ML, data, QA and DevOps, configured to your outcomes." },
       { title: "Operating Rhythm + Governance", text: "Cadences, KPIs, reporting, quality gates, and escalation paths." },
       { title: "Continuity + Security by Design", text: "Talent continuity plan, access controls, and compliance alignment to your policies." },
     ],
@@ -330,15 +330,15 @@ export const APPROACH_DEFAULT: { name: Phase["name"]; text: string; icon: string
 ];
 
 export const WHY_NEUSIX = [
-  { n: "01", title: "We co-create. We embed. We enable.", text: "We work inside real constraints—people, processes, systems—so transformation sticks." },
+  { n: "01", title: "We co-create. We embed. We enable.", text: "We work inside real constraints (people, processes, systems), so transformation sticks." },
   { n: "02", title: "Built for leaders who want transformation, not tools.", text: "Enterprise-grade engineering with governance, reliability, and adoption designed in." },
-  { n: "03", title: "Decisions, not just dashboards.", text: "We build intelligence that improves action, cycle time, cost, and quality—not just reporting." },
+  { n: "03", title: "Decisions, not just dashboards.", text: "We build intelligence that improves action, cycle time, cost, and quality, not just reporting." },
 ];
 
 export const COMMERCIAL_MODELS = [
   { gfx: A("model-gfx-01.svg"), title: "Build & Transfer (B&T)", text: "NeuSix builds the solution and hands it over to your team with documentation, enablement, and transition support." },
-  { gfx: A("model-gfx-02.svg"), title: "Build—Operate—Transfer (BOT)", text: "NeuSix builds and operates the solution for an agreed period, then transfers to your team once stable and adoption is proven." },
-  { gfx: A("model-gfx-03.svg"), title: "Build—Operate—Maintain (BOM)", text: "NeuSix builds and continues to operate and maintain the solution long-term with clear SLAs, governance, and continuous improvement." },
+  { gfx: A("model-gfx-02.svg"), title: "Build-Operate-Transfer (BOT)", text: "NeuSix builds and operates the solution for an agreed period, then transfers to your team once stable and adoption is proven." },
+  { gfx: A("model-gfx-03.svg"), title: "Build-Operate-Maintain (BOM)", text: "NeuSix builds and continues to operate and maintain the solution long-term with clear SLAs, governance, and continuous improvement." },
 ];
 export const COMMERCIAL_NOTE = "The right model depends on your internal capability maturity, timeline urgency, and governance needs.";
 

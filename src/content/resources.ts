@@ -46,7 +46,7 @@ export const BLOG_POSTS: BlogPost[] = [
   { title: "Modernization Without Disruption: A Practical Guide for CTOs", tag: "modernization", readTime: "8 min read", href: DOC },
   { title: "Discover-Plan-Build-Scale: Why Execution Systems Beat Frameworks", tag: "methodology", readTime: "9 min read", href: DOC },
   { title: "The Difference Between AI Competence and AI Relevance", tag: "leadership-pov", readTime: "8 min read", href: DOC },
-  { title: "Why Most Enterprise AI Pilots Fail — And What to do Instead", tag: "ai-transformation", readTime: "7 min read", href: DOC },
+  { title: "Why Most Enterprise AI Pilots Fail (And What to do Instead)", tag: "ai-transformation", readTime: "7 min read", href: DOC },
 ];
 
 export const WHITE_PAPERS = [

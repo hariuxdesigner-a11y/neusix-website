@@ -57,7 +57,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   if (limited(ip)) return { status: "error", message: "Too many submissions. Please try again in a few minutes.", values };
 
   const d = parsed.data;
-  const subject = `New enquiry: ${d.industry}${d.name ? ` — ${d.name}` : ""}`;
+  const subject = `New enquiry: ${d.industry}${d.name ? ` from ${d.name}` : ""}`;
   const text = `Area of interest: ${d.industry}\nName: ${d.name || "-"}\nPhone: ${d.phone}\nEmail: ${d.email}\n\nMessage:\n${d.message || "-"}\n`;
   const html = `<table cellpadding="6" style="font-family:Arial,sans-serif;font-size:14px">
 <tr><td><b>Area of interest</b></td><td>${esc(d.industry)}</td></tr>

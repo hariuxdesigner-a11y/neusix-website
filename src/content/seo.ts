@@ -9,13 +9,13 @@ export const SEO: Record<string, Seo> = {
   "/": {
     title: "NeuSix | AI-Powered Enterprise Automation & Digital Innovation",
     description:
-      "NeuSix is a DeepTech AI transformation company delivering enterprise AI, automation, modernization and software engineering—from pilots to production.",
+      "NeuSix is a DeepTech AI transformation company delivering enterprise AI, automation, modernization and software engineering, from pilots to production.",
     og: "home",
   },
   "/services/services-neusix": {
     title: "AI Transformation & Engineering Services | NeuSix",
     description:
-      "NeuSix helps organizations modernize foundations, redesign workflows, and deploy production-grade AI—services designed to ship measurable outcomes.",
+      "NeuSix helps organizations modernize foundations, redesign workflows, and deploy production-grade AI, with services designed to ship measurable outcomes.",
     og: "services",
   },
   "/services/ai-transformation-page": {
@@ -57,7 +57,7 @@ export const SEO: Record<string, Seo> = {
   "/our-work/industries": {
     title: "Industries | AI Transformation Across Industries | NeuSix",
     description:
-      "AI transformation for healthcare, BFSI, retail, manufacturing, aviation, logistics, energy, real estate and the public sector—built for the real world.",
+      "AI transformation for healthcare, BFSI, retail, manufacturing, aviation, logistics, energy, real estate and the public sector, built for the real world.",
     og: "industries",
   },
   "/our-work/case-studies": {
@@ -99,7 +99,7 @@ export const SEO: Record<string, Seo> = {
   "/case-studies/manufacturing-industrial": {
     title: "FMCG Food Manufacturing Automation | NeuSix",
     description:
-      "Manufacturing case study: robotics, machine vision and a digital twin for FMCG food production—higher throughput, lower downtime, consistent quality.",
+      "Manufacturing case study: robotics, machine vision and a digital twin for FMCG food production, with higher throughput and lower downtime.",
     og: "cs-manufacturing-industrial",
   },
   "/resources": {
@@ -143,7 +143,7 @@ export const SEO: Record<string, Seo> = {
 /* Topic (blog tag) pages: unique heading copy so each page stands on its own in search. */
 export const TAG_SEO: Record<string, { intro: string; description: string }> = {
   "engagement-models": {
-    intro: "How to choose between build & transfer, build-operate-transfer and build-operate-manage—and what each model means for speed, control and cost.",
+    intro: "How to choose between build & transfer, build-operate-transfer and build-operate-manage, and what each model means for speed, control and cost.",
     description: "NeuSix articles on engagement models: build & transfer, build-operate-transfer and build-operate-manage, and how to choose the right one for your team.",
   },
   modernization: {
@@ -159,7 +159,7 @@ export const TAG_SEO: Record<string, { intro: string; description: string }> = {
     description: "NeuSix articles on building an AI Center of Excellence: operating model, governance, platforms, talent and a use-case pipeline that scales.",
   },
   methodology: {
-    intro: "The NeuSix Execution System—Discover, Plan, Build, Scale—and the methods behind shipping measurable impact.",
+    intro: "The NeuSix Execution System (Discover, Plan, Build, Scale) and the methods behind shipping measurable impact.",
     description: "NeuSix articles on methodology: the Discover, Plan, Build, Scale execution system and the practices behind shipping measurable AI impact.",
   },
   "market-pov": {

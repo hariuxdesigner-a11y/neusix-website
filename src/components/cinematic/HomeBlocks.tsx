@@ -111,7 +111,7 @@ export function OutcomeShowcase({
         <OutcomeCarousel
           items={items}
           source={source}
-          head={<SectionHead id="outcomes-title" eyebrow={eyebrow} title={title} text="Measured in cycle time, cost, and reliability—not in slides." />}
+          head={<SectionHead id="outcomes-title" eyebrow={eyebrow} title={title} text="Measured in cycle time, cost, and reliability, not in slides." />}
           cta={
             <Button href={cta.href} variant="dark">
               {cta.label}

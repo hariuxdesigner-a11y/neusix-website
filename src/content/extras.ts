@@ -28,7 +28,7 @@ const industryList = INDUSTRIES.map((i) => i.name.replace(/\s*\(.*\)$/, "")).joi
 export const FAQS: Faq[] = [
   {
     q: "How does an engagement with NeuSix start?",
-    a: "With a free 30-minute consultation. We’ll understand your goals and constraints, share a practical path to measurable impact, and outline next steps—no obligations. From there, work follows the NeuSix Execution System: Discover, Plan, Build and Scale.",
+    a: "With a free 30-minute consultation. We’ll understand your goals and constraints, share a practical path to measurable impact, and outline next steps, with no obligations. From there, work follows the NeuSix Execution System: Discover, Plan, Build and Scale.",
   },
   {
     q: "Which engagement models do you offer?",
@@ -40,7 +40,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "How do you make sure AI reaches production, not just a pilot?",
-    a: "We work inside real constraints—people, processes, systems—so transformation sticks. Enterprise-grade engineering with governance, reliability, and adoption designed in, and co-creation sprints integrated into workflows, not isolated demos.",
+    a: "We work inside real constraints (people, processes, systems), so transformation sticks. Enterprise-grade engineering with governance, reliability, and adoption designed in, and co-creation sprints integrated into workflows, not isolated demos.",
   },
   {
     q: "How do you measure success?",
@@ -55,6 +55,6 @@ export const FAQS: Faq[] = [
 /* ── Contact page: what happens after you submit ─────────────────────────── */
 export const CONTACT_STEPS = [
   { n: "01", title: "Tell us about your goals", text: "Share your area of interest and what you’d like to achieve using the form on this page." },
-  { n: "02", title: "A 30-minute call", text: "We’ll understand your goals and constraints—fast, practical, and tailored." },
+  { n: "02", title: "A 30-minute call", text: "We’ll understand your goals and constraints. Fast, practical, and tailored." },
   { n: "03", title: "A practical path to impact", text: "We share a practical path to measurable impact and outline next steps, with no obligations." },
 ];

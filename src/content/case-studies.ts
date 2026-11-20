@@ -50,7 +50,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "healthcare-life-sciences",
     industry: "Healthcare & Life Sciences",
     title: "AI-Powered Patient Growth & Lifetime Intelligence",
-    impact: "Lower CAC, stronger bookings, higher repeat visits — with transparency at every step",
+    impact: "Lower CAC, stronger bookings, higher repeat visits, with transparency at every step",
     tags: ["AI Transformation", "Decision Intelligence", "Workflow Automation", "CRM Enablement", "Growth & Retention"],
     filters: { industry: "Healthcare", services: ["AI Transformation", "Decision Intelligence", "Automation"], themes: ["Personalization"] },
     card: [
@@ -60,7 +60,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     executive: {
       paragraphs: [
-        "NeuSix partnered with a multi-location healthcare network (hospitals and specialty/aesthetic clinics) to build an end-to-end Patient Growth & Lifetime Intelligence system—a governed AI layer that improves performance across the full patient lifecycle:",
+        "NeuSix partnered with a multi-location healthcare network (hospitals and specialty/aesthetic clinics) to build an end-to-end Patient Growth & Lifetime Intelligence system: a governed AI layer that improves performance across the full patient lifecycle:",
       ],
       flow: "Acquire → Convert → Retain → Grow",
       bulletsIntro: "Instead of optimizing campaigns in isolation, the organization moved to a measurable operating system connecting:",
@@ -90,10 +90,10 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
     },
     shipped: {
-      intro: "NeuSix shipped a modular system spanning acquisition, conversion, and lifetime value—designed for multi-location healthcare operations.",
+      intro: "NeuSix shipped a modular system spanning acquisition, conversion, and lifetime value, designed for multi-location healthcare operations.",
       groups: [
         {
-          title: "Pillar A — Lead & Campaign Intelligence (Acquire)",
+          title: "Pillar A: Lead & Campaign Intelligence (Acquire)",
           items: [
             "Lead ingestion + validation + enrichment",
             "De-duplication and unified lead schema",
@@ -104,25 +104,25 @@ export const CASE_STUDIES: CaseStudy[] = [
           ],
         },
         {
-          title: "Pillar B — Sales Enablement & Script Intelligence (Convert)",
+          title: "Pillar B: Sales Enablement & Script Intelligence (Convert)",
           items: [
-            "AI Script Generator — contextual call script based on lead score, persona, interest, and budget sensitivity",
-            "Persona-Based Script Customization — adjust tone (luxury / price-sensitive / urgency-driven)",
-            "Objection Handling AI — real-time rebuttals (price, time constraints, trust, alternatives)",
-            "Call Summary Generator — structured notes auto-created for CRM logging",
-            "Conversion Recommendation Engine — next best action (discount / follow-up timing / alternate service)",
-            "Script Performance Analytics — track which scripts drive higher booking rates",
+            "AI Script Generator: contextual call script based on lead score, persona, interest, and budget sensitivity",
+            "Persona-Based Script Customization: adjust tone (luxury / price-sensitive / urgency-driven)",
+            "Objection Handling AI: real-time rebuttals (price, time constraints, trust, alternatives)",
+            "Call Summary Generator: structured notes auto-created for CRM logging",
+            "Conversion Recommendation Engine: next best action (discount / follow-up timing / alternate service)",
+            "Script Performance Analytics: track which scripts drive higher booking rates",
           ],
         },
         {
-          title: "Pillar C — Customer Lifetime Intelligence (Retain & Grow)",
+          title: "Pillar C: Customer Lifetime Intelligence (Retain & Grow)",
           items: [
-            "Repeat Purchase Prediction — repurchase probability based on history and service type",
-            "Dormant User Detection — identify customers inactive after X days post-service",
-            "Cross-Sell Recommendation — suggest next best treatment/service",
-            "Reactivation Trigger Automation — WhatsApp/Email/SMS based on probability drop or dormancy",
-            "Churn Risk Alerts — flag reduced engagement or negative sentiment signals",
-            "Retargeting Audience Sync — push dormant/high-LTV segments to Meta/Google Ads",
+            "Repeat Purchase Prediction: repurchase probability based on history and service type",
+            "Dormant User Detection: identify customers inactive after X days post-service",
+            "Cross-Sell Recommendation: suggest next best treatment/service",
+            "Reactivation Trigger Automation: WhatsApp/Email/SMS based on probability drop or dormancy",
+            "Churn Risk Alerts: flag reduced engagement or negative sentiment signals",
+            "Retargeting Audience Sync: push dormant/high-LTV segments to Meta/Google Ads",
           ],
         },
       ],
@@ -201,7 +201,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     executive: {
       paragraphs: [
         "NeuSix partnered with a legal organization handling complex, document-heavy matters to deliver an Enterprise LLM Layer that transforms legal research and discovery from keyword-only workflows into governed, evidence-linked intelligence.",
-        "The solution enables teams to ask questions in natural language, retrieve relevant evidence across massive corpuses, and generate structured outputs—while maintaining strong governance, traceability, and access control.",
+        "The solution enables teams to ask questions in natural language, retrieve relevant evidence across massive corpuses, and generate structured outputs, while maintaining strong governance, traceability, and access control.",
       ],
       highlightsTitle: "Outcome Highlights (representative)",
       highlights: [
@@ -223,7 +223,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     context: {
       intro: "The client’s teams routinely work with large collections of legal documents and case materials. Their outcomes depend on:",
       points: ["Speed of finding relevant evidence", "Consistency of summaries and reasoning", "Confidentiality and access control", "Auditability and defensibility of outputs", "Repeatability across matters and teams"],
-      outro: "They needed an AI solution that was **practical, explainable, and safe**—not a generic chatbot.",
+      outro: "They needed an AI solution that was **practical, explainable, and safe**, not a generic chatbot.",
     },
     challenge: {
       intro: "Traditional workflows were slowing down research and increasing effort.",
@@ -236,7 +236,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
     },
     shipped: {
-      intro: "NeuSix shipped an Enterprise LLM Layer designed for legal research and discovery—built to be evidence-first, governed, and scalable.",
+      intro: "NeuSix shipped an Enterprise LLM Layer designed for legal research and discovery, built to be evidence-first, governed, and scalable.",
       groups: [
         {
           title: "Retrieval Foundation (RAG Core)",
@@ -300,7 +300,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "airlines-aviation",
     industry: "Airlines / Aviation",
     title: "Digital Passenger Experience Transformation (Biometrics + Digital Twin + Predictive AI)",
-    impact: "Faster processing, smoother journeys, stronger operational control — at scale",
+    impact: "Faster processing, smoother journeys, stronger operational control, at scale",
     tags: ["Experience Transformation", "Biometrics", "Digital Twin", "Predictive AI", "Operations Intelligence"],
     filters: { industry: "Airlines", services: ["Digital Transformation", "Digital Twin", "Computer Vision"], themes: ["Predictive Ops", "Vision"] },
     card: [{ value: "35–40%", label: "reduction in processing time (biometric flow)", trend: "down" }, { label: "Passenger authenticated in less than 3 seconds" }],
@@ -369,7 +369,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         {
           label: "Stage 3:",
           title: "Predict and Act (AI Decision Support)",
-          body: ["Predictive intelligence highlights upcoming congestion and suggests actions—staffing adjustments, lane changes, or flow interventions."],
+          body: ["Predictive intelligence highlights upcoming congestion and suggests actions: staffing adjustments, lane changes, or flow interventions."],
         },
         { label: "Stage 4:", title: "Measure and Improve", body: ["Operational telemetry provided transparency into drivers of downtime and quality loss, enabling continuous improvement."] },
       ],
@@ -412,14 +412,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "retail-consumer-travel-retail",
     industry: "Retail & Consumer (Travel Retail)",
     title: "AI‑Powered Travel Retail Transformation (Personalization + CV + Inventory Intelligence)",
-    impact: "More relevant shopping, better execution, stronger conversion readiness — with measurable transparency",
+    impact: "More relevant shopping, better execution, stronger conversion readiness, with measurable transparency",
     tags: ["AI Transformation", "Personalization", "Computer Vision", "Retail Intelligence", "Omnichannel"],
     filters: { industry: "Retail", services: ["AI Transformation", "Computer Vision"], themes: ["Personalization", "Vision"] },
     card: [{ label: "Real‑time analytics for campaign and store execution" }, { label: "Personalized recommendations with 85–96% match (model scoring)" }],
     executive: {
       paragraphs: [
         "NeuSix partnered with a travel retail organization operating at large scale to modernize retail execution using an AI layer combining **personalization**, **computer vision**, and **inventory intelligence**.",
-        "The goal was to move from generic campaigns and limited shopper insights to real-time, store-aware retail intelligence—making recommendations more relevant, execution more consistent, and decision-making more measurable.",
+        "The goal was to move from generic campaigns and limited shopper insights to real-time, store-aware retail intelligence, making recommendations more relevant, execution more consistent, and decision-making more measurable.",
       ],
     },
     outcomeHighlights: [
@@ -437,7 +437,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         "Multi-category product mix with inventory and merchandising complexity",
         "Campaigns need to be localized while maintaining brand consistency",
       ],
-      outro: "The client wanted a system that improves relevance at the shopper level and execution at the store level—without creating operational chaos.",
+      outro: "The client wanted a system that improves relevance at the shopper level and execution at the store level, without creating operational chaos.",
     },
     challenge: {
       intro: "Performance was constrained by limited real-time visibility and generic engagement.",
@@ -490,7 +490,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         {
           label: "Stage 4:",
           title: "Optimize in Real Time",
-          body: ["The analytics cockpit highlights what’s performing, what’s stuck, and what needs action—enabling consistent execution at scale."],
+          body: ["The analytics cockpit highlights what’s performing, what’s stuck, and what needs action, enabling consistent execution at scale."],
         },
       ],
     },
@@ -526,7 +526,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "logistics-ports",
     industry: "Logistics & Ports",
     title: "AI‑Driven Port Control Tower",
-    impact: "Higher throughput, fewer delays, faster decisions — with operational transparency",
+    impact: "Higher throughput, fewer delays, faster decisions, with operational transparency",
     tags: ["AI Transformation", "Control Tower", "Predictive Ops", "Workflow Orchestration", "Observability"],
     filters: { industry: "Logistics", services: ["AI Transformation", "Control Tower"], themes: ["Predictive Ops"] },
     card: [
@@ -536,8 +536,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     executive: {
       paragraphs: [
-        "NeuSix partnered with a port/terminal operator to build an AI-Driven Port Control Tower—a real-time operational intelligence layer that unified terminal, yard, and gate views into one decision-making cockpit.",
-        "The control tower enabled leaders and ops teams to see what’s happening now, what will break next, and what actions will reduce delays—moving from reactive firefighting to proactive operations.",
+        "NeuSix partnered with a port/terminal operator to build an AI-Driven Port Control Tower: a real-time operational intelligence layer that unified terminal, yard, and gate views into one decision-making cockpit.",
+        "The control tower enabled leaders and ops teams to see what’s happening now, what will break next, and what actions will reduce delays, moving from reactive firefighting to proactive operations.",
       ],
     },
     outcomeHighlights: [
@@ -599,7 +599,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         {
           label: "Stage 2",
           title: "Detect (Exceptions + Risks)",
-          body: ["Exceptions are flagged and prioritized with context—what’s blocked, where congestion is building, what’s deviating from normal."],
+          body: ["Exceptions are flagged and prioritized with context: what’s blocked, where congestion is building, what’s deviating from normal."],
         },
         {
           label: "Stage 3",
@@ -609,7 +609,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         {
           label: "Stage 4",
           title: "Act (Workflow + Accountability)",
-          body: ["Exceptions move through owned workflows with timers, escalation, and measurement—so resolution is accountable, not ad-hoc."],
+          body: ["Exceptions move through owned workflows with timers, escalation, and measurement, so resolution is accountable, not ad-hoc."],
         },
       ],
     },
@@ -643,7 +643,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     slug: "manufacturing-industrial",
     industry: "Manufacturing & Industrial",
     title: "FMCG Food Manufacturing Automation (Robotics + Vision + Digital Twin)",
-    impact: "Higher throughput, lower downtime, consistent quality — with a scalable automation blueprint",
+    impact: "Higher throughput, lower downtime, consistent quality, with a scalable automation blueprint",
     tags: ["Industrial AI", "Automation", "Robotics", "Computer Vision", "Digital Twin", "Modernization"],
     filters: { industry: "Manufacturing", services: ["Automation", "Computer Vision", "Digital Twin", "Modernization"], themes: ["Vision"] },
     card: [
@@ -655,7 +655,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     executive: {
       paragraphs: [
         "NeuSix partnered with an FMCG food manufacturing operation to modernize and automate critical production workflows using robotics, computer vision inspection, and digital twin simulation.",
-        "The program reduced manual handling bottlenecks, minimized downtime drivers, and improved quality consistency—while creating a scalable blueprint for expansion across lines and plants.",
+        "The program reduced manual handling bottlenecks, minimized downtime drivers, and improved quality consistency, while creating a scalable blueprint for expansion across lines and plants.",
       ],
     },
     outcomeHighlights: [

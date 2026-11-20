@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/blog-tags/[tag]">
   if (!BLOG_TAGS.some((t) => t.slug === tag)) return {};
   // "All Blogs" duplicates /resources, so it points search engines there.
   if (tag === "resources") return pageMetadata("/resources");
-  // Topic pages list only a few posts: kept for visitors, but not indexed (thin content) — links are still followed.
+  // Topic pages list only a few posts: kept for visitors, but not indexed (thin content); links are still followed.
   return pageMetadata(`/blog-tags/${tag}`, { title: `${tagLabel(tag)} Articles & Insights | NeuSix`, description: TAG_SEO[tag]?.description, og: "resources", noindex: true });
 }
 

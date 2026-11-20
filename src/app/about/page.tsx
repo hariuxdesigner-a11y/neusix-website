@@ -137,7 +137,7 @@ export default function AboutPage() {
         </div>
         {SHOW_TEAM && (
           <div className="mt-[var(--section-y)]">
-            <h2 className="t-h2">Our leadership team — positioned for impact</h2>
+            <h2 className="t-h2">Our leadership team: positioned for impact</h2>
             <People people={LEADERSHIP} />
             <h2 className="t-h2 mt-16">Architects, Engineers &amp; Specialists</h2>
             <People people={SPECIALISTS} />

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/resources/[slug]"
   const { slug } = await params;
   const post = ONSITE_POSTS.find((p) => p.slug === slug);
   if (!post) return {};
-  return pageMetadata(`/resources/${slug}`, { title: `${post.title} | NeuSix`, description: `${post.title} — ${tagLabel(post.tag)} insights from NeuSix (${post.readTime}).`, type: "article", og: "resources" });
+  return pageMetadata(`/resources/${slug}`, { title: `${post.title} | NeuSix`, description: `${post.title}: ${tagLabel(post.tag)} insights from NeuSix (${post.readTime}).`, type: "article", og: "resources" });
 }
 
 export default async function BlogPostPage({ params }: PageProps<"/resources/[slug]">) {
