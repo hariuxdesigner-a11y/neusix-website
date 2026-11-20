@@ -41,12 +41,17 @@ await p.click("#mobile-menu >> text=Services");
 await p.click("#mobile-menu >> text=Modernization");
 await p.waitForURL("**/services/modernization");
 console.log("mobile navigated:", p.url(), "menu closed:", !(await p.isVisible("#mobile-menu")));
-// tag filter dropdown on resources (no JS needed)
-await p.goto(base + "/resources");
-await p.click("summary");
-await p.click("text=Methodology");
+// blog category chips (plain links, no JS needed) and Resources menu
+await p.goto(base + "/blog");
+await p.click("nav[aria-label='Blog categories'] >> text=Methodology");
 await p.waitForURL("**/blog-tags/methodology");
-console.log("tag page items:", await p.$$eval("#blogs-title ~ ul li", (l) => l.length));
+await p.waitForLoadState("networkidle"); await p.waitForTimeout(500);
+console.log("tag page cards:", await p.$$eval("main ul li a[href^='/blog/']", (l) => l.filter((a) => a.offsetParent).length));
+await p.click("nav[aria-label='Blog categories'] >> text=All Blogs");
+await p.waitForURL("**/blog");
+await p.click("main a[href='/blog/why-enterprise-ai-pilots-fail'] >> nth=0");
+await p.waitForURL("**/blog/why-enterprise-ai-pilots-fail");
+console.log("post toc links:", await p.$$eval("nav[aria-label='On this page'] a", (l) => l.length));
 // case study filter
 await p.goto(base + "/our-work/case-studies", { waitUntil: "networkidle" });
 await p.click("button:has-text('Legal')");

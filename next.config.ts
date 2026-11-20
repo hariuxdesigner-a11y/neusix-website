@@ -25,8 +25,9 @@ const nextConfig: NextConfig = {
       { source: "/case-studies", destination: "/our-work/case-studies", permanent: true },
       { source: "/industries", destination: "/our-work/industries", permanent: true },
       { source: "/contact", destination: "/contact-us", permanent: true },
-      { source: "/blog-tags", destination: "/resources", permanent: true },
-      { source: "/blog", destination: "/resources", permanent: true },
+      { source: "/blog-tags", destination: "/blog", permanent: true },
+      { source: "/blogs", destination: "/blog", permanent: true },
+      { source: "/white-paper", destination: "/white-papers", permanent: true },
     ];
   },
   async headers() {

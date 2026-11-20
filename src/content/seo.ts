@@ -103,10 +103,22 @@ export const SEO: Record<string, Seo> = {
     og: "cs-manufacturing-industrial",
   },
   "/resources": {
-    title: "AI Transformation Blogs & White Papers | NeuSix",
+    title: "Resources: AI Transformation Blogs & White Papers | NeuSix",
     description:
-      "Blogs and white papers from NeuSix on AI transformation, modernization, AI COE, governance, engagement models and ODC engineering.",
+      "Blogs and white papers from NeuSix on AI transformation, modernization, AI COE, AI governance, engagement models and ODC engineering.",
     og: "resources",
+  },
+  "/blog": {
+    title: "NeuSix Blog: Enterprise AI Transformation Insights",
+    description:
+      "Practical articles on enterprise AI transformation, AI governance, AI Centers of Excellence, modernization, engagement models and ODC delivery.",
+    og: "blog",
+  },
+  "/white-papers": {
+    title: "AI Transformation White Papers & Guides | NeuSix",
+    description:
+      "In-depth NeuSix white papers: the enterprise AI transformation playbook, building an AI Center of Excellence, and modernization without disruption.",
+    og: "white-papers",
   },
   "/about": {
     title: "About NeuSix | DeepTech AI Transformation Company",
@@ -143,8 +155,8 @@ export const SEO: Record<string, Seo> = {
 /* Topic (blog tag) pages: unique heading copy so each page stands on its own in search. */
 export const TAG_SEO: Record<string, { intro: string; description: string }> = {
   "engagement-models": {
-    intro: "How to choose between build & transfer, build-operate-transfer and build-operate-manage, and what each model means for speed, control and cost.",
-    description: "NeuSix articles on engagement models: build & transfer, build-operate-transfer and build-operate-manage, and how to choose the right one for your team.",
+    intro: "How to choose between build & transfer, build-operate-transfer and build-operate-maintain, and what each model means for speed, control and cost.",
+    description: "NeuSix articles on engagement models: build & transfer, build-operate-transfer and build-operate-maintain, and how to choose the right one for your team.",
   },
   modernization: {
     intro: "Practical guidance on modernizing applications, data and infrastructure without breaking the business.",

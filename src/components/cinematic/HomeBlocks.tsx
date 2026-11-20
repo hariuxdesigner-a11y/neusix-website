@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { MediaId } from "@/content/media";
 import { SERVICES, SERVICE_CARD_ORDER, APPROACH_DEFAULT, WHY_NEUSIX, type Outcome } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
-import { BLOG_POSTS, WHITE_PAPERS, postHref, tagLabel } from "@/content/resources";
+import { SORTED_POSTS, WHITE_PAPERS } from "@/content/resources";
+import { PostCard } from "@/components/blog/PostCard";
 import { MediaPoster } from "@/components/media/MediaPoster";
 import { ACCENT_HEX } from "@/components/services/ServiceSections";
 import { VideoBackground } from "@/components/media/VideoBackground";
@@ -158,29 +159,22 @@ export function WhyBand() {
   );
 }
 
-/** Latest resources (Abridge "news" grid). */
+/** Latest articles and white papers (Abridge "news" grid). */
 export function ResourcesTeaser() {
-  const posts = BLOG_POSTS.slice(0, 3);
+  const posts = SORTED_POSTS.slice(0, 3);
   return (
     <section aria-labelledby="res-title" className="section-y border-t border-ink/5">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead id="res-title" eyebrow="Resources" title="Resources & Content" />
-          <Link href="/resources" className="group reveal inline-flex items-center gap-2 text-sm font-medium text-navy">
+          <Link href="/blog" className="group reveal inline-flex items-center gap-2 text-sm font-medium text-navy">
             All Blogs <Arrow />
           </Link>
         </div>
         <ul className="stagger mt-[clamp(28px,3.5vw,48px)] grid gap-4 md:grid-cols-3">
           {posts.map((p) => (
-            <li key={p.title}>
-              <a href={postHref(p)} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col rounded-[18px] border border-ink/10 p-6 transition-colors hover:border-navy">
-                <span className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-brand">
-                  <span aria-hidden className="size-1.5 rounded-full bg-orange" /> {tagLabel(p.tag)}
-                </span>
-                <h3 className="mt-5 text-lg font-medium leading-snug group-hover:text-brand">{p.title}</h3>
-                <span className="mt-auto pt-8 text-xs text-slate">{p.readTime}</span>
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
+            <li key={p.slug}>
+              <PostCard post={p} excerpt={false} />
             </li>
           ))}
         </ul>

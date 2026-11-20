@@ -104,3 +104,10 @@ No statistics, client names or testimonials were invented; FAQ answers reuse exi
 * Brand motif `src/components/brand/NArch.tsx` (draws itself in): closing CTA card on every page, footer watermark, behind
   "Why NeuSix", About "Our Conviction", 404 page, mobile menu, list bullets on the legal pages, and all share images.
 * Fixed the CTA card text: "…outline next steps, with no obligations."
+
+## Blog and white papers (v2.9, 20 Nov 2026)
+* Menu: Resources now opens a panel with **Blogs** (/blog) and **White Papers** (/white-papers); "All Resources" goes to /resources (hub). Footer Company column lists Blogs and White Papers.
+* The 10 blog headlines are the live site's. On the live site every card pointed to the same Google Doc, so **the article bodies are new, written for this site** (about 1,300 to 1,800 words each, NeuSix terminology: Discover-Plan-Build-Scale, Advisory / Development & Integration / Managed Services, B&T / BOT / BOM, delivery pods). No statistics, client names or results are claimed. Byline: "NeuSix Editorial Team". All dated 20 November 2026. **Please review before going live.**
+* SEO per article: meta description, keywords, key takeaways, table of contents, FAQ (FAQPage data), BlogPosting data, share image (public/og/blog-<slug>.jpg), internal links to services, case studies and related articles. Four long headlines have a shorter search title (`seoTitle`).
+* Category pages (/blog-tags/<topic>, live URLs) are now blog category views; they stay noindex,follow because each lists only 1 or 2 articles. /blog-tags/resources and /blog-tags redirect to /blog.
+* White papers still link to the published Google Docs (opens in a new tab).

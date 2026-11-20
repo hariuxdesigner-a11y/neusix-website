@@ -6,12 +6,13 @@ import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CONTACT_LINK, NAV, SERVICE_LINKS, type NavLink } from "@/content/site";
 import { ACCENT_HEX, SERVICES } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
+import { FEATURED_POST, tagLabel } from "@/content/resources";
 import { Icon, LinkArrow } from "@/components/ui/Icon";
 import { NArch } from "@/components/brand/NArch";
 
 /** Routes whose top section is light: the header starts solid there. Everything else opens on a dark/video hero. */
 /** Pages without a dark video hero start with a solid header. Pages can also opt in with a `data-light-top` element (e.g. the 404 page). */
-const LIGHT_TOP = ["/resources", "/blog-tags", "/privacy-policy", "/terms-of-service", "/cookie-policy"];
+const LIGHT_TOP = ["/resources", "/blog", "/white-papers", "/privacy-policy", "/terms-of-service", "/cookie-policy"];
 
 const isActive = (p: string, href: string) => p === href || (href !== "/" && p.startsWith(href + "/"));
 
@@ -40,6 +41,16 @@ const PANELS: Record<string, Panel> = {
     ],
     footer: { label: "Book a Free Consultation", href: "/contact-us" },
     feature: { eyebrow: `Case Study | ${featured.industry}`, title: featured.title, text: featured.impact, href: `/case-studies/${featured.slug}` },
+  },
+  Resources: {
+    title: "Resources",
+    subtitle: "Insights and guides on AI transformation, modernization and delivery.",
+    items: [
+      { label: "Blogs", href: "/blog", text: "Practical articles on AI transformation, governance, AI COE, modernization and engagement models" },
+      { label: "White Papers", href: "/white-papers", text: "In-depth guides for enterprise leaders, from AI strategy to modernization" },
+    ],
+    footer: { label: "All Resources", href: "/resources" },
+    feature: { eyebrow: `Latest article | ${tagLabel(FEATURED_POST.tag)}`, title: FEATURED_POST.title, text: FEATURED_POST.readTime, href: `/blog/${FEATURED_POST.slug}` },
   },
 };
 
@@ -264,11 +275,11 @@ export function SiteHeader({ icons = {} }: { icons?: Record<string, ReactNode> }
                     }
                   }
                 }}
-                className={itemCls(panel === item.label, item.children.some((c) => isActive(pathname, c.href)))}
+                className={itemCls(panel === item.label, (item.children.some((c) => isActive(pathname, c.href)) || (item.label === "Resources" && /^\/(resources|blog-tags)(\/|$)/.test(pathname))))}
               >
                 {item.label}
                 <Chevron open={panel === item.label} />
-                {currentMark(item.children.some((c) => isActive(pathname, c.href)))}
+                {currentMark((item.children.some((c) => isActive(pathname, c.href)) || (item.label === "Resources" && /^\/(resources|blog-tags)(\/|$)/.test(pathname))))}
               </button>
             ) : (
               <Link

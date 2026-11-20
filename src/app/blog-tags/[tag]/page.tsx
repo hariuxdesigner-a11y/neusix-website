@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { ResourcesView } from "@/components/resources/ResourcesView";
+import { notFound, permanentRedirect } from "next/navigation";
+import { BlogIndex } from "@/components/blog/BlogIndex";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
 import { BLOG_TAGS, tagLabel } from "@/content/resources";
 import { Breadcrumbs, pageMetadata } from "@/lib/seo";
@@ -12,20 +12,20 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/blog-tags/[tag]">): Promise<Metadata> {
   const { tag } = await params;
-  if (!BLOG_TAGS.some((t) => t.slug === tag)) return {};
-  // "All Blogs" duplicates /resources, so it points search engines there.
-  if (tag === "resources") return pageMetadata("/resources");
-  // Topic pages list only a few posts: kept for visitors, but not indexed (thin content); links are still followed.
-  return pageMetadata(`/blog-tags/${tag}`, { title: `${tagLabel(tag)} Articles & Insights | NeuSix`, description: TAG_SEO[tag]?.description, og: "resources", noindex: true });
+  if (!BLOG_TAGS.some((t) => t.slug === tag) || tag === "resources") return {};
+  // Category pages list only one or two articles: kept for visitors, not indexed (thin); links are followed.
+  return pageMetadata(`/blog-tags/${tag}`, { title: `${tagLabel(tag)} Articles & Insights | NeuSix Blog`, description: TAG_SEO[tag]?.description, og: "blog", noindex: true });
 }
 
 export default async function BlogTagPage({ params }: PageProps<"/blog-tags/[tag]">) {
   const { tag } = await params;
   if (!BLOG_TAGS.some((t) => t.slug === tag)) notFound();
+  // "All Blogs" (/blog-tags/resources on the live site) is the blog index itself.
+  if (tag === "resources") permanentRedirect("/blog");
   return (
     <>
-      <Breadcrumbs items={[{ name: "Resources", path: "/resources" }, { name: tagLabel(tag), path: `/blog-tags/${tag}` }]} />
-      <ResourcesView tag={tag} />
+      <Breadcrumbs items={[{ name: "Blog", path: "/blog" }, { name: tagLabel(tag), path: `/blog-tags/${tag}` }]} />
+      <BlogIndex tag={tag} />
       <VideoCtaCard />
     </>
   );

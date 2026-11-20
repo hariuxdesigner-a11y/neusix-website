@@ -4,6 +4,8 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 const base = process.argv[2] || "http://localhost:3000";
 const seo = fs.readFileSync(new URL("../src/content/seo.ts", import.meta.url), "utf8");
+const res = fs.readFileSync(new URL("../src/content/resources.ts", import.meta.url), "utf8");
+const only = process.env.ONLY ? new RegExp(process.env.ONLY) : null;
 const titleOf = (path) => {
   const m = seo.match(new RegExp(`"${path.replace(/[/-]/g, (c) => "\\" + c)}": \\{\\s*title: "([^"]+)"`));
   return m ? m[1].replace(/\s*\|\s*NeuSix$/, "").replace(/^NeuSix \| /, "").split(" | ")[0] : "";
@@ -21,12 +23,17 @@ const cards = [
     key: `cs-${s}`, media: `cs-${s}`, eyebrow: "Case Study", title: titleOf(`/case-studies/${s}`),
   })),
   { key: "resources", media: "home-approach", eyebrow: "Resources & Content", title: "Blogs and white papers on AI transformation" },
+  { key: "blog", media: "home-approach", eyebrow: "NeuSix Blog", title: "Insights on AI transformation" },
+  { key: "white-papers", media: "services-stages", eyebrow: "White Papers", title: "In-depth guides for enterprise leaders" },
+  ...[...res.matchAll(/slug: "([^"]+)", title: "((?:[^"\\]|\\.)+)", tag: "[^"]+", image: "([^"]+)"/g)].map(([, slug, title, media]) => ({
+    key: `blog-${slug}`, media, eyebrow: "NeuSix Blog", title,
+  })),
   { key: "about", media: "about-global", eyebrow: "About NeuSix", title: "A DeepTech AI transformation company delivering measurable outcomes" },
   { key: "contact", media: "contact", eyebrow: "Contact", title: "Book a Free Consultation" },
 ];
 const b = await chromium.launch({ executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome", args: ["--no-sandbox"] });
 const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
-for (const c of cards) {
+for (const c of cards.filter((c) => !only || only.test(c.key))) {
   await p.setContent(`<!doctype html><html><head>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Google+Sans+Flex:wght@400;600&display=block" rel="stylesheet">
 <style>*{margin:0;box-sizing:border-box}body{width:1200px;height:630px;position:relative;overflow:hidden;background:#0f0f1f;font-family:'Google Sans Flex',sans-serif}

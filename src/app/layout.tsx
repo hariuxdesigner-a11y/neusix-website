@@ -83,7 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader icons={Object.fromEntries([...SERVICES.map((s) => [s.href, <LineIcon key={s.slug} src={s.cardGfx} stroke={1.5} mono className="size-full" />]), ["/our-work/industries", <LineIcon key="ind" src="/assets/cs-i3.svg" stroke={1.4} mono className="size-full" />], ["/our-work/case-studies", <LineIcon key="cs" src="/assets/outcome-banner.svg" stroke={1.4} mono className="size-full" />]])} />
+        <SiteHeader icons={Object.fromEntries([...SERVICES.map((s) => [s.href, <LineIcon key={s.slug} src={s.cardGfx} stroke={1.5} mono className="size-full" />]), ["/our-work/industries", <LineIcon key="ind" src="/assets/cs-i3.svg" stroke={1.4} mono className="size-full" />], ["/our-work/case-studies", <LineIcon key="cs" src="/assets/outcome-banner.svg" stroke={1.4} mono className="size-full" />], ["/blog", <LineIcon key="blog" src="/assets/discover-01.svg" stroke={1.4} mono className="size-full" />], ["/white-papers", <LineIcon key="wp" src="/assets/plan-01.svg" stroke={1.4} mono className="size-full" />]])} />
         <main id="main" className="flex-1">
           {children}
         </main>

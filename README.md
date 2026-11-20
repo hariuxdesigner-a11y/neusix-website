@@ -50,7 +50,10 @@ src/
     our-work/industries/       /our-work/industries
     our-work/case-studies/     /our-work/case-studies      (filterable listing)
     case-studies/[slug]/       /case-studies/<6 case studies>
-    resources/                 /resources   (+ /resources/[slug] for on-site articles)
+    resources/                 /resources   (hub: blogs + white papers)
+    blog/ blog/[slug]/         /blog, /blog/<slug>   (articles from src/content/blog/*.md)
+    blog-tags/[tag]/           /blog-tags/<topic>    (blog category views)
+    white-papers/              /white-papers
     blog-tags/[tag]/           /blog-tags/<10 category pages>
     about/  contact-us/        /about, /contact-us (form + server action)
     sitemap.ts robots.ts not-found.tsx
@@ -58,7 +61,7 @@ src/
     layout/                    SiteHeader (mega menus, transparent over video, mobile full-screen menu), SiteFooter
     cinematic/                 VideoHero, StatementBand, VideoCtaCard, SectionHead, VideoTabs, ProofStrip, HomeBlocks
     media/                     VideoBackground, MediaPoster
-    sections/ services/ industries/ case-studies/ resources/  Page-specific sections
+    sections/ services/ industries/ case-studies/ blog/  Page-specific sections
     ui/                        Button, Orbs, LottieOnView, RevealObserver
   content/                     ALL site copy lives here (typed data); edit text without touching layout
     site.ts services.ts industries.ts case-studies.ts resources.ts about.ts blog/*.md
@@ -74,7 +77,7 @@ docs/                          AUDIT.md, PLAN-V2-CINEMATIC.md, MEDIA-CREDITS.md,
 
 * **Copy changes:** edit the matching file in `src/content/`.
 * **New case study:** append an object to `CASE_STUDIES` in `src/content/case-studies.ts`. The listing, filters, detail page, related carousel and sitemap update automatically.
-* **New blog post:** add to `BLOG_POSTS` in `src/content/resources.ts`. Either link out (`href`) or publish on-site (`slug` + `src/content/blog/<slug>.md`).
+* **New blog post:** write `src/content/blog/<slug>.md` and add it to `BLOG_POSTS` in `src/content/resources.ts` (see `src/content/blog/README.md`).
 * **Client logos (home page):** put logo files in `public/clients/` and list them in `src/content/extras.ts` → `CLIENTS`
   (the current 10 are placeholders). FAQ and contact-step copy live in the same file.
 * **Replacing a video:** run `scripts/encode-media.sh <source.mp4> <media-id> [start-sec] [duration]`

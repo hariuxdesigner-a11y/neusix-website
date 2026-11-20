@@ -50,14 +50,21 @@ export const NAV: NavItem[] = [
       { label: "Case Studies", href: "/our-work/case-studies" },
     ],
   },
-  { label: "Resources", href: "/resources" },
+  {
+    label: "Resources",
+    children: [
+      { label: "Blogs", href: "/blog" },
+      { label: "White Papers", href: "/white-papers" },
+    ],
+  },
   { label: "About", href: "/about" },
 ];
 
 export const CONTACT_LINK: NavLink = { label: "Contact", href: "/contact-us" };
 
 export const FOOTER_COMPANY: NavLink[] = [
-  { label: "Resources", href: "/resources" },
+  { label: "Blogs", href: "/blog" },
+  { label: "White Papers", href: "/white-papers" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact-us" },
 ];
