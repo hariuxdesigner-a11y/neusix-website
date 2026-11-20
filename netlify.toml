@@ -1,0 +1,13 @@
+# Netlify config for the REVIEW PREVIEW (production hosting is planned on Hostinger).
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Keep the preview out of search engines; the real site is www.neusix.com.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

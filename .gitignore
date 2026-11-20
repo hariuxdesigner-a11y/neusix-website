@@ -45,3 +45,6 @@ next-env.d.ts
 
 # allow the example env file
 !.env.example
+
+# Netlify local state
+.netlify
