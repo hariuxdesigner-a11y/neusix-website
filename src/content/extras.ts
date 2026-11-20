@@ -5,15 +5,25 @@ import { COMMERCIAL_MODELS } from "./services";
 import { INDUSTRIES } from "./industries";
 
 /* ── Client logos ─────────────────────────────────────────────────────────────
-   PLACEHOLDERS. Replace each entry with a real client: put the logo file (SVG preferred,
-   single colour or full colour) in /public/clients/ and set `name` + `logo`.
-   Delete `placeholder: true` once real logos are in. The section hides itself if the list is empty. */
-export type Client = { name: string; logo: string; placeholder?: boolean };
+   Logos supplied by NeuSix (20 Nov 2026), prepared for a light background in /public/clients/
+   (backgrounds removed, white lettering recoloured to NeuSix ink, brand accents kept).
+   `ratio` = width / height of the file; the carousel uses it to size every logo to the same
+   visual weight. To add a client: drop the logo in /public/clients/ and add a line below. */
+export type Client = { name: string; logo: string; ratio: number; boost?: number /* optional size tweak for very light/thin logos */ };
 
-export const CLIENTS: Client[] = Array.from({ length: 10 }, (_, i) => {
-  const n = String(i + 1).padStart(2, "0");
-  return { name: `Client ${n}`, logo: `/clients/placeholder-${n}.svg`, placeholder: true };
-});
+export const CLIENTS: Client[] = [
+  { name: "Tiger Analytics", logo: "/clients/tiger-analytics.svg", ratio: 2.61 },
+  { name: "Onward Technologies", logo: "/clients/onward-technologies.svg", ratio: 4.05 },
+  { name: "Volanté Technologies", logo: "/clients/volante.png", ratio: 5.12 },
+  { name: "Suri & Co. Chartered Accountants", logo: "/clients/suri-co.png", ratio: 3.12 },
+  { name: "Vigilant360", logo: "/clients/vigilant360.png", ratio: 5.36 },
+  { name: "Lloyd Laboratories", logo: "/clients/lloyd-laboratories.png", ratio: 1.72 },
+  { name: "Geri Care", logo: "/clients/geri-care.png", ratio: 4.56 },
+  { name: "8bit.ai", logo: "/clients/8bit-ai.png", ratio: 3.26 },
+  { name: "Glosel", logo: "/clients/glosel.png", ratio: 1.21 },
+  { name: "Pathscript", logo: "/clients/path-script.png", ratio: 4.26 },
+  { name: "Isaac Luxe", logo: "/clients/isaac-luxe.png", ratio: 5.07, boost: 1.25 },
+];
 
 export const CLIENTS_SECTION = {
   eyebrow: "Our Clients",

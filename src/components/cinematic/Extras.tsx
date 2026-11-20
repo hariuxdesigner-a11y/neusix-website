@@ -12,7 +12,7 @@ import { ArrowChip, LinkArrow } from "@/components/ui/Icon";
 
 export const Arrow = LinkArrow;
 
-/** Client logo marquee. Logos are greyscale until hovered; motion pauses on hover and stops for reduced motion. */
+/** Client logo marquee. Logos show as one-colour silhouettes and turn to full colour on hover; motion pauses on hover and stops for reduced motion. */
 export function ClientMarquee() {
   if (!CLIENTS.length) return null;
   return (
@@ -30,7 +30,9 @@ export function ClientMarquee() {
               src={c.logo}
               alt={c.name}
               loading="lazy"
-              className="h-[clamp(26px,2.4vw,36px)] w-auto max-w-[170px] shrink-0 object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+              className="w-auto max-w-none shrink-0 select-none object-contain opacity-60 transition duration-300 [filter:grayscale(1)_brightness(0)] hover:opacity-100 hover:[filter:none]"
+              // optical sizing: wide wordmarks get shorter, square marks taller, so all read at the same weight
+              style={{ height: `calc(${Math.max(0.62, Math.min(1.45, Math.sqrt(3 / c.ratio)) * (c.boost ?? 1)).toFixed(3)} * clamp(24px, 2.2vw, 32px))` }}
             />
           ))}
         </Marquee>
