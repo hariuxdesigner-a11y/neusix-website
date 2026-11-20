@@ -1,5 +1,13 @@
 # Testing & QA record
 
+## Page style / SEO / legal pass, 20 Nov 2026
+
+* Darkness per page now 13–18% (hero + CTA card) on every page; light-top pages 0%. Industries was 83%, About 43%.
+* SEO audit `python3 scripts/seo-audit.py http://localhost:3000`: all indexable pages pass (title/description length, unique, canonical,
+  Open Graph + Twitter image, one H1, no heading skips, alt text, JSON-LD: Organization, WebSite, BreadcrumbList, Service, Article, FAQPage).
+* 24 pages × 8 widths = 192 loads clean; contrast audit 0 issues; nav + form tests pass.
+* Lighthouse mobile: Home 99/100/100/100, Industries 100/100/100/100, Privacy 99/100/100/100, About 92, Modernization 90.
+
 ## Header / About / contrast / icon pass, 19 Nov 2026
 
 * Contrast: `node scripts/contrast.mjs http://localhost:3000 1440,390 <paths>` (axe-core) on every page → **0 issues** (was 16).

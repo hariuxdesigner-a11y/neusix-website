@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
 import { ResourcesView } from "@/components/resources/ResourcesView";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
+import { Breadcrumbs, pageMetadata } from "@/lib/seo";
 
-const title = "Resources | NeuSix";
-const description = "Blogs and white papers from NeuSix on AI transformation, modernization, AI COE, governance, and engagement models.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/resources" },
-  openGraph: { title, description, url: "/resources" },
-};
+export const metadata: Metadata = pageMetadata("/resources");
 
 export default function ResourcesPage() {
   return (
     <>
+      <Breadcrumbs items={[{ name: "Resources", path: "/resources" }]} />
       <ResourcesView tag="resources" />
       <VideoCtaCard />
     </>

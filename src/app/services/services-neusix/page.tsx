@@ -3,17 +3,9 @@ import { CommercialModels } from "@/components/sections/CommercialModels";
 import { VideoHero } from "@/components/cinematic/VideoHero";
 import { SectionHead, StatementBand, VideoCtaCard } from "@/components/cinematic/Bands";
 import { ApproachBand, ServiceShowcase, WhyBand } from "@/components/cinematic/HomeBlocks";
+import { Breadcrumbs, pageMetadata } from "@/lib/seo";
 
-const title = "Our Services | AI Transformation, Modernization & Engineering | NeuSix";
-const description =
-  "NeuSix helps organizations modernize foundations, redesign workflows, and deploy production-grade AI built for reliability, governance, and ROI.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/services/services-neusix" },
-  openGraph: { title, description, url: "/services/services-neusix" },
-};
+export const metadata: Metadata = pageMetadata("/services/services-neusix");
 
 const STAGES = [
   {
@@ -36,6 +28,7 @@ const STAGES = [
 export default function ServicesHubPage() {
   return (
     <>
+      <Breadcrumbs items={[{ name: "Services", path: "/services/services-neusix" }]} />
       <VideoHero
         media="services-hero"
         size="tall"

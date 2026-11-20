@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BLOG_TAGS, WHITE_PAPERS, postHref, postsForTag, tagLabel } from "@/content/resources";
 import { WordRise } from "@/components/motion/WordRise";
+import { TAG_SEO } from "@/content/seo";
 
 function ItemLink({ href, children, tone = "line" }: { href: string; children: React.ReactNode; tone?: "line" | "mist" }) {
   const external = /^https?:/.test(href);
@@ -24,9 +25,23 @@ export function ResourcesView({ tag }: { tag: string }) {
   return (
     <div className="below-header container-x pb-[var(--section-y)]">
       <div className="pt-[clamp(48px,7vw,104px)]" />
-      <h1 className="t-display">
-        <WordRise>Resources & Content</WordRise>
-      </h1>
+      {tag === "resources" ? (
+        <h1 className="t-display">
+          <WordRise>Resources & Content</WordRise>
+        </h1>
+      ) : (
+        <>
+          <p className="eyebrow rise text-brand">Resources &amp; Content</p>
+          <h1 className="t-display mt-3">
+            <WordRise>{current}</WordRise>
+          </h1>
+          {TAG_SEO[tag] && (
+            <p className="rise mt-5 max-w-[60ch] text-lg leading-relaxed text-body" style={{ ["--d" as string]: "350ms" }}>
+              {TAG_SEO[tag].intro}
+            </p>
+          )}
+        </>
+      )}
 
       <section aria-labelledby="blogs-title" className="mt-[clamp(40px,5vw,72px)]">
         <h2 id="blogs-title" className="t-h2">

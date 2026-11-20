@@ -79,3 +79,18 @@ No statistics, client names or testimonials were invented; FAQ answers reuse exi
   incl. Squad Size 17). The decorative "team base" strip was removed.
 * Award images are now lightweight WebP copies of the original artwork (`a-r-1.webp`, `a-r-2.webp`).
 * Home: client logo strip (placeholders) moved directly under the hero.
+
+## Page style, SEO and legal pages (20 Nov 2026)
+
+* **One page style:** every page = video hero → light content → dark rounded CTA card. Statement bands, Why NeuSix, Stage Fit,
+  What you get, Outcome Highlights, Industries, About values/presence and the 404 page are now light. Small labels added for the
+  new light layouts: "Our Difference", "Deliverables", "Results", "Challenges", "Error 404".
+* **SEO copy** lives in `src/content/seo.ts` (title ≤ 60 chars and a unique 120–160 char description for every page, plus topic-page
+  intros). Built from existing page copy. Share images (1200×630) are in `public/og/`; regenerate with `node scripts/make-og.mjs`
+  while the site runs on localhost:3000.
+* Topic pages (`/blog-tags/*`) are `noindex, follow` and not in the sitemap: each lists only 1–2 posts that all link to the same
+  Google Doc. Remove `noindex` in `src/app/blog-tags/[tag]/page.tsx` once real articles exist.
+* **Legal pages** (`/privacy-policy`, `/terms-of-service`, `/cookie-policy`) describe what the site actually does today: contact form
+  only, no cookies, no analytics. **Have them reviewed by your legal adviser**, and update them if you add analytics, a CRM, chat,
+  or a dedicated privacy contact email. Terms name the courts at Hyderabad, Telangana (registered office) — confirm this choice.
+* Footer: designer credit removed; legal links are live; copyright shows the legal entity name.

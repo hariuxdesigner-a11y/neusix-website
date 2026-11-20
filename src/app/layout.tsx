@@ -37,11 +37,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE.name,
+    locale: "en_US",
     title: SITE.defaultTitle,
     description: SITE.defaultDescription,
     url: SITE_URL,
+    images: [{ url: "/og/default.jpg", width: 1200, height: 630, alt: SITE.name }],
   },
-  twitter: { card: "summary_large_image", title: SITE.defaultTitle, description: SITE.defaultDescription },
+  twitter: { card: "summary_large_image", title: SITE.defaultTitle, description: SITE.defaultDescription, images: ["/og/default.jpg"] },
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {
@@ -53,7 +56,9 @@ export const viewport: Viewport = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
   name: SITE.name,
+  description: SITE.defaultDescription,
   legalName: SITE.legalName,
   url: SITE_URL,
   logo: `${SITE_URL}/assets/ssi.png`,
@@ -90,6 +95,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <RevealObserver />
         <SmoothScroll />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: SITE_URL, name: SITE.name, publisher: { "@id": `${SITE_URL}/#organization` }, inLanguage: "en" }),
+          }}
+        />
       </body>
     </html>
   );

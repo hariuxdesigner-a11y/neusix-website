@@ -126,23 +126,27 @@ export function OutcomeShowcase({
 /** "Why NeuSix": calm dark band with the three principles. */
 export function WhyBand() {
   return (
-    <section aria-labelledby="why-title" className="bg-ink text-paper">
+    <section aria-labelledby="why-title" className="bg-mist/70">
       <div className="container-x section-y">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)]">
           <div className="reveal">
-            <h2 id="why-title" className="t-display text-lilac-bright">
+            <p className="eyebrow text-brand">Our Difference</p>
+            <h2 id="why-title" className="t-display mt-3 text-ink">
               Why NeuSix
             </h2>
-            <p className="mt-6 max-w-[22ch] font-serif text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-snug text-paper/85">
+            <p className="mt-6 max-w-[22ch] font-serif text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-snug text-body">
               <em>We optimize for:</em> Impact, Value, Transparency, and ROI.
             </p>
           </div>
-          <ol className="stagger grid gap-px overflow-hidden rounded-[20px] bg-white/10 sm:grid-cols-3">
+          <ol className="stagger grid gap-3 sm:grid-cols-3">
             {WHY_NEUSIX.map((w) => (
-              <li key={w.n} className="flex flex-col bg-ink p-7">
-                <span className="text-sm text-lilac-bright">{w.n}</span>
+              <li key={w.n} className="flex flex-col rounded-[20px] bg-paper p-7 ring-1 ring-ink/[.05] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(49,49,104,.45)]">
+                <span className="flex items-center gap-3 text-sm text-brand">
+                  <span aria-hidden className="h-px w-6 bg-brand" />
+                  {w.n}
+                </span>
                 <h3 className="t-h4 mt-10">{w.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-paper/85">{w.text}</p>
+                <p className="mt-3 text-sm leading-relaxed text-body">{w.text}</p>
               </li>
             ))}
           </ol>

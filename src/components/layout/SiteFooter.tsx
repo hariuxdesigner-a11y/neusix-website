@@ -51,14 +51,14 @@ export function SiteFooter() {
 
         <div className="mt-[clamp(48px,6vw,96px)] flex flex-col gap-5 border-t border-ink/10 pt-6 text-xs text-slate lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span>© 2026 NeuSix. All rights reserved.</span>
-            {/* Policy pages are not published on the live site yet; shown as text until the content is supplied. */}
-            {LEGAL_LINKS.map((l) => (
-              <span key={l.label}>{l.label}</span>
-            ))}
-            <a href={SITE.credit.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
-              {SITE.credit.label}
-            </a>
+            <span>© 2026 {SITE.legalName}. All rights reserved.</span>
+            <nav aria-label="Legal" className="contents">
+              {LEGAL_LINKS.map((l) => (
+                <Link key={l.href} href={l.href} className="underline-offset-4 transition-colors hover:text-brand hover:underline">
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
           </div>
           <ul className="flex gap-2" aria-label="Social media">
             {SOCIAL.map((s) => (

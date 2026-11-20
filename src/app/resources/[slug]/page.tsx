@@ -5,6 +5,7 @@ import { ONSITE_POSTS, tagLabel } from "@/content/resources";
 import { readPostHtml } from "@/lib/blog";
 import { VideoCtaCard } from "@/components/cinematic/Bands";
 import { WordRise } from "@/components/motion/WordRise";
+import { pageMetadata } from "@/lib/seo";
 
 // Pre-renders every on-site article (posts in BLOG_POSTS that have a `slug`).
 // A placeholder param keeps the route valid while no on-site articles exist; it renders a 404.
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/resources/[slug]"
   const { slug } = await params;
   const post = ONSITE_POSTS.find((p) => p.slug === slug);
   if (!post) return {};
-  return { title: `${post.title} | NeuSix`, alternates: { canonical: `/resources/${slug}` }, openGraph: { type: "article", title: post.title, url: `/resources/${slug}` } };
+  return pageMetadata(`/resources/${slug}`, { title: `${post.title} | NeuSix`, description: `${post.title} — ${tagLabel(post.tag)} insights from NeuSix (${post.readTime}).`, type: "article", og: "resources" });
 }
 
 export default async function BlogPostPage({ params }: PageProps<"/resources/[slug]">) {

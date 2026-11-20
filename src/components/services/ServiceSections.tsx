@@ -37,11 +37,14 @@ export function StageFit({ s }: { s: Service }) {
     { title: "Managed Services", items: s.stage.managed, gfx: s.stage.gfx[2] },
   ];
   return (
-    <section aria-labelledby="stage-title" className="bg-ink text-paper">
+    <section aria-labelledby="stage-title" className="border-b border-ink/[.07]">
       <div className="container-x py-[clamp(56px,7vw,112px)]">
-        <h2 id="stage-title" className="t-h2 reveal">
-          Stage Fit : Where this service plays
-        </h2>
+        <div className="stagger">
+          <p className="eyebrow text-brand">Stage Fit</p>
+          <h2 id="stage-title" className="t-h2 mt-3">
+            Stage Fit : Where this service plays
+          </h2>
+        </div>
         <ol className="stagger mt-[clamp(32px,4vw,64px)] grid gap-10 md:grid-cols-3 md:gap-0">
           {cols.map((col, i) => (
             <li
@@ -49,11 +52,11 @@ export function StageFit({ s }: { s: Service }) {
               className="border-dotted md:px-[clamp(16px,2.4vw,40px)] md:first:pl-0 md:[&:not(:first-child)]:border-l-2"
               style={{ borderColor: c }}
             >
-              <LineIcon src={col.gfx} delay={250 + i * 180} className="h-[clamp(80px,7vw,104px)] w-[clamp(94px,8.2vw,122px)]" />
+              <LineIcon src={col.gfx} delay={250 + i * 180} knock="#fcfcfd" className="h-[clamp(80px,7vw,104px)] w-[clamp(94px,8.2vw,122px)]" />
               <h3 className="t-h4 mt-5">{col.title}</h3>
               <ul className="mt-4 space-y-4">
                 {col.items.map((t) => (
-                  <li key={t} className="max-w-[32ch] text-sm leading-relaxed text-paper/90">
+                  <li key={t} className="max-w-[32ch] text-sm leading-relaxed text-body">
                     {t}
                   </li>
                 ))}

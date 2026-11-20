@@ -37,12 +37,12 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
               ref={(el) => {
                 refs.current[i] = el;
               }}
-              className="reveal flex scroll-mt-[calc(var(--header-h)+16px)] flex-col justify-center border-b border-white/10 py-10 last:border-0 lg:min-h-[78vh] lg:border-0 lg:py-16"
+              className="reveal flex scroll-mt-[calc(var(--header-h)+16px)] flex-col justify-center border-b border-ink/10 py-10 last:border-0 lg:min-h-[78vh] lg:border-0 lg:py-16"
             >
               <MediaPoster id={ind.media} className="mb-6 aspect-[16/9] rounded-2xl lg:hidden" />
-              <p className="eyebrow text-lilac-soft">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className={`t-h3 mt-3 transition-colors duration-500 ${i === active ? "lg:text-paper" : "lg:text-paper/60"}`}>{ind.name}</h2>
-              <div className={`mt-5 max-w-[46ch] space-y-4 text-sm leading-relaxed transition-colors duration-500 sm:text-base ${i === active ? "text-paper/85" : "text-paper/85 lg:text-paper/70"}`}>
+              <p className="eyebrow text-brand">{String(i + 1).padStart(2, "0")}</p>
+              <h2 className={`t-h3 mt-3 transition-colors duration-500 ${i === active ? "lg:text-ink" : "lg:text-ink/55"}`}>{ind.name}</h2>
+              <div className={`mt-5 max-w-[46ch] space-y-4 text-sm leading-relaxed transition-colors duration-500 sm:text-base ${i === active ? "text-body" : "text-body lg:text-ink/60"}`}>
                 <p>{ind.where}</p>
                 <p>{ind.wins}</p>
                 <p>{ind.themes}</p>
@@ -53,9 +53,9 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
                     const c = getCaseStudy(slug);
                     return c ? (
                       <li key={slug}>
-                        <Link href={`/case-studies/${slug}`} className="group flex items-center gap-4 rounded-2xl border border-white/15 px-4 py-3 text-sm text-paper transition-colors hover:border-paper hover:bg-paper hover:text-ink">
+                        <Link href={`/case-studies/${slug}`} className="group flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper px-4 py-3 text-sm text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper">
                           <span>
-                            <span className="block text-[11px] font-semibold uppercase tracking-wide text-lilac-soft group-hover:text-brand">Case study</span>
+                            <span className="block text-[11px] font-semibold uppercase tracking-wide text-brand group-hover:text-lilac-bright">Case study</span>
                             <span className="mt-0.5 block leading-snug">{c.title}</span>
                           </span>
                           <LinkArrow className="ml-auto" />

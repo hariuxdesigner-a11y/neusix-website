@@ -6,21 +6,14 @@ import { CONTACT_STEPS, FAQS } from "@/content/extras";
 import { FaqSection } from "@/components/cinematic/Extras";
 import { SectionHead } from "@/components/cinematic/Bands";
 import { WordRise } from "@/components/motion/WordRise";
+import { Breadcrumbs, pageMetadata } from "@/lib/seo";
 
-const title = "Contact NeuSix | Get in Touch for AI & Digital Solutions";
-const description =
-  "Reach out to NeuSix to discuss your AI transformation, digital modernisation, or software engineering needs. Our team is ready to help you unlock your next phase of growth.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/contact-us" },
-  openGraph: { title, description, url: "/contact-us" },
-};
+export const metadata: Metadata = pageMetadata("/contact-us");
 
 export default function ContactPage() {
   return (
     <>
+      <Breadcrumbs items={[{ name: "Contact", path: "/contact-us" }]} />
     <section className="relative isolate overflow-hidden text-paper">
       <VideoBackground id="contact" overlay="dark" priority />
       <div className="container-x grid min-h-[100svh] gap-12 pb-[clamp(48px,7vw,112px)] pt-[calc(var(--header-h)+clamp(40px,6vw,96px))] md:grid-cols-[1fr_1.1fr] md:items-center md:gap-16 lg:gap-24">

@@ -26,17 +26,14 @@ export function WhatYouGet({ items, icons, panelIcons, accent }: { items: string
   }, [inView, paused, items.length]);
 
   return (
-    <section ref={ref} aria-labelledby="wyg-title" className="relative isolate overflow-hidden bg-ink text-paper">
-      {/* eclipse glow */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -right-[18%] top-[6%] -z-10 hidden aspect-square w-[52%] rounded-full lg:block"
-        style={{ boxShadow: `inset -10px 0 24px -12px ${accent}, 18px 0 60px -30px ${accent}` }}
-      />
-      <div className="container-x py-[clamp(64px,8vw,128px)]">
-        <h2 id="wyg-title" className="t-h2 reveal">
-          What you get
-        </h2>
+    <section ref={ref} aria-labelledby="wyg-title" className="relative isolate overflow-hidden">
+      <div className="container-x relative py-[clamp(64px,8vw,128px)]">
+        <div className="stagger">
+          <p className="eyebrow text-brand">Deliverables</p>
+          <h2 id="wyg-title" className="t-h2 mt-3">
+            What you get
+          </h2>
+        </div>
         <ul
           className="relative mt-[clamp(32px,4vw,56px)] grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-3 lg:block lg:min-h-[420px] lg:w-1/2"
           onMouseLeave={() => setPaused(false)}
@@ -57,8 +54,8 @@ export function WhatYouGet({ items, icons, panelIcons, accent }: { items: string
                   }}
                   onBlur={() => setPaused(false)}
                   aria-pressed={on}
-                  className={`flex h-full w-full flex-col items-start gap-4 rounded-card border border-white/10 p-5 text-left transition-colors lg:flex-row lg:items-center lg:gap-0 lg:border-0 lg:p-0 ${
-                    on ? "lg:text-paper" : "lg:text-paper/55 lg:hover:text-paper/80"
+                  className={`flex h-full w-full flex-col items-start gap-4 rounded-card border border-ink/10 p-5 text-left transition-colors lg:flex-row lg:items-center lg:gap-0 lg:border-0 lg:p-0 ${
+                    on ? "lg:text-ink" : "lg:text-ink/55 lg:hover:text-ink/80"
                   }`}
                 >
                   <span className="is-active block h-20 w-[86px] lg:hidden">{icons[i % icons.length]}</span>
@@ -73,12 +70,18 @@ export function WhatYouGet({ items, icons, panelIcons, accent }: { items: string
             );
           })}
         </ul>
-        <div aria-hidden className="pointer-events-none absolute right-[max(var(--gutter),8%)] top-1/2 hidden aspect-[202/187] w-[clamp(220px,22vw,320px)] -translate-y-1/2 lg:block">
-          {panelIcons.slice(0, items.length).map((g, i) => (
-            <div key={i} className={`absolute inset-0 transition-all duration-500 ${i === active ? "is-active scale-100 opacity-100" : "scale-95 opacity-0"}`}>
-              {g}
-            </div>
-          ))}
+        <div aria-hidden className="pointer-events-none absolute bottom-[clamp(64px,8vw,128px)] right-[var(--gutter)] top-[clamp(150px,14vw,220px)] hidden w-[44%] items-center justify-center overflow-hidden rounded-[clamp(20px,2.4vw,32px)] bg-mist lg:flex">
+          <span
+            className="absolute -right-[20%] top-[10%] aspect-square w-[80%] rounded-full opacity-70"
+            style={{ boxShadow: `inset -10px 0 24px -12px ${accent}, 18px 0 60px -30px ${accent}` }}
+          />
+          <div className="relative aspect-[202/187] w-[clamp(220px,22vw,320px)]">
+            {panelIcons.slice(0, items.length).map((g, i) => (
+              <div key={i} className={`absolute inset-0 transition-all duration-500 ${i === active ? "is-active scale-100 opacity-100" : "scale-95 opacity-0"}`}>
+                {g}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

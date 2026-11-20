@@ -21,6 +21,9 @@ const SERVICE_FILTER: Record<string, string> = {
   "offshore-development-center": "ODC",
 };
 import { OutcomeShowcase, ApproachBand } from "@/components/cinematic/HomeBlocks";
+import { Breadcrumbs, JsonLd, pageMetadata } from "@/lib/seo";
+import { SEO } from "@/content/seo";
+import { SITE, SITE_URL } from "@/content/site";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -30,7 +33,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   const { slug } = await params;
   const s = getService(slug);
   if (!s) return {};
-  return { title: s.seo.title, description: s.seo.description, alternates: { canonical: s.href }, openGraph: { title: s.seo.title, description: s.seo.description, url: s.href } };
+  return pageMetadata(s.href);
 }
 
 export default async function ServicePage({ params }: PageProps<"/services/[slug]">) {
@@ -40,6 +43,18 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const accent = ACCENT_HEX[s.accent];
   return (
     <div style={{ ["--accent" as string]: accent }}>
+      <Breadcrumbs items={[{ name: "Services", path: "/services/services-neusix" }, { name: s.name, path: s.href }]} />
+      <JsonLd
+        data={{
+          "@type": "Service",
+          name: s.name,
+          serviceType: s.name,
+          description: SEO[s.href]?.description,
+          url: `${SITE_URL}${s.href}`,
+          provider: { "@type": "Organization", name: SITE.legalName, url: SITE_URL },
+          areaServed: ["IN", "US", "GB", "AE", "AU", "NZ"],
+        }}
+      />
       <VideoHero
         media={`svc-${s.slug}` as MediaId}
         size="tall"
@@ -63,8 +78,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       <WhatYouGet
         items={s.whatYouGet}
         accent={accent}
-        icons={s.wygGfx.map((g) => <LineIcon key={g} src={g} trigger="parent" className="size-full" />)}
-        panelIcons={s.whatYouGet.map((_, i) => <LineIcon key={i} src={s.wygGfx[i % s.wygGfx.length]} trigger="parent" stroke={1.2} className="size-full" />)}
+        icons={s.wygGfx.map((g) => <LineIcon key={g} src={g} trigger="parent" knock="#fcfcfd" className="size-full" />)}
+        panelIcons={s.whatYouGet.map((_, i) => <LineIcon key={i} src={s.wygGfx[i % s.wygGfx.length]} trigger="parent" stroke={1.2} knock="#f1f1f9" className="size-full" />)}
       />
       <CommercialModels />
       <CaseStudiesRow

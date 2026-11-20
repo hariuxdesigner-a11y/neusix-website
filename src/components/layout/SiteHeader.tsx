@@ -9,7 +9,8 @@ import { getCaseStudy } from "@/content/case-studies";
 import { Icon, LinkArrow } from "@/components/ui/Icon";
 
 /** Routes whose top section is light: the header starts solid there. Everything else opens on a dark/video hero. */
-const LIGHT_TOP = ["/resources", "/blog-tags"];
+/** Pages without a dark video hero start with a solid header. Pages can also opt in with a `data-light-top` element (e.g. the 404 page). */
+const LIGHT_TOP = ["/resources", "/blog-tags", "/privacy-policy", "/terms-of-service", "/cookie-policy"];
 
 const isActive = (p: string, href: string) => p === href || (href !== "/" && p.startsWith(href + "/"));
 
@@ -147,7 +148,12 @@ function MobileMenu({ open, pathname, onClose }: { open: boolean; pathname: stri
 
 export function SiteHeader({ icons = {} }: { icons?: Record<string, ReactNode> }) {
   const pathname = usePathname() || "/";
-  const lightTop = LIGHT_TOP.some((p) => pathname.startsWith(p));
+  const [markedLight, setMarkedLight] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- read the page marker after each navigation
+    setMarkedLight(!!document.querySelector("[data-light-top]"));
+  }, [pathname]);
+  const lightTop = markedLight || LIGHT_TOP.some((p) => pathname.startsWith(p));
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menu, setMenu] = useState(false);

@@ -11,6 +11,9 @@ import type { MediaId } from "@/content/media";
 import { Button } from "@/components/ui/Button";
 import { Orbs } from "@/components/ui/Orbs";
 import { Icon } from "@/components/ui/Icon";
+import { Breadcrumbs, pageMetadata } from "@/lib/seo";
+import { SEO } from "@/content/seo";
+import { SITE, SITE_URL } from "@/content/site";
 
 export function generateStaticParams() {
   return CASE_STUDIES.map((c) => ({ slug: c.slug }));
@@ -20,10 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/case-studies/[slu
   const { slug } = await params;
   const c = getCaseStudy(slug);
   if (!c) return {};
-  // Live pages use the generic title "NeuSix website" and no description; built from the case study's own copy.
-  const title = `${c.title} | Case Study | NeuSix`;
-  const description = `${c.industry}: ${c.impact}.`;
-  return { title, description, alternates: { canonical: `/case-studies/${c.slug}` }, openGraph: { type: "article", title, description, url: `/case-studies/${c.slug}` } };
+  return pageMetadata(`/case-studies/${c.slug}`, { type: "article" });
 }
 
 /** Renders **bold** segments from the content files. */
@@ -87,12 +87,17 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
     "@context": "https://schema.org",
     "@type": "Article",
     headline: c.title,
+    description: SEO[`/case-studies/${c.slug}`]?.description,
     about: c.industry,
-    publisher: { "@type": "Organization", name: "NeuSix" },
+    image: `${SITE_URL}/og/cs-${c.slug}.jpg`,
+    mainEntityOfPage: `${SITE_URL}/case-studies/${c.slug}`,
+    author: { "@type": "Organization", name: SITE.name, url: SITE_URL },
+    publisher: { "@type": "Organization", name: SITE.name, logo: { "@type": "ImageObject", url: `${SITE_URL}/assets/ssi.png` } },
   };
 
   return (
     <article>
+      <Breadcrumbs items={[{ name: "Case Studies", path: "/our-work/case-studies" }, { name: c.title, path: `/case-studies/${c.slug}` }]} />
       <VideoHero
         media={`cs-${c.slug}` as MediaId}
         size="tall"
@@ -140,18 +145,18 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </div>
       </Block>
 
-      <section aria-labelledby="oh" className="relative isolate overflow-hidden bg-ink text-paper">
-        <Orbs preset="dark" dim />
+      <section aria-labelledby="oh" className="bg-mist/70">
         <div className="container-x grid gap-10 py-[clamp(56px,7vw,112px)] lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
-            <h2 id="oh" className="t-h2 reveal">
+            <p className="eyebrow reveal text-brand">Results</p>
+            <h2 id="oh" className="t-h2 reveal mt-3">
               Outcome Highlights
             </h2>
             <div className="reveal mt-8">
-              <Bullets items={c.outcomeHighlights} dark />
+              <Bullets items={c.outcomeHighlights} />
             </div>
           </div>
-          <LineIcon src="/assets/outcome-banner.svg" className="mx-auto aspect-[445/446] w-full max-w-[520px]" />
+          <LineIcon src="/assets/outcome-banner.svg" mono stroke={1.4} className="mx-auto aspect-[445/446] w-full max-w-[460px] text-brand" />
         </div>
       </section>
 
@@ -195,13 +200,13 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </ul>
       </Block>
 
-      <section aria-labelledby="harness" className="relative isolate overflow-hidden bg-ink text-paper">
-        <Orbs preset="dark" dim />
-        <div className="container-x flex flex-col items-center gap-8 py-[clamp(56px,7vw,104px)] text-center">
-          <h2 id="harness" className="t-h2 reveal max-w-[22ch]">
+      <section aria-labelledby="harness" className="container-x py-[clamp(24px,3vw,40px)]">
+        <div className="reveal relative isolate flex flex-col items-center gap-8 overflow-hidden rounded-[clamp(20px,2.4vw,32px)] bg-ink px-6 py-[clamp(48px,6vw,88px)] text-center text-paper">
+          <Orbs preset="dark" dim />
+          <h2 id="harness" className="t-h2 max-w-[22ch]">
             Harnessing AI to create relevance, not just competence
           </h2>
-          <Button href="/contact-us" className="reveal bg-[#2b2b5a] hover:bg-lilac">
+          <Button href="/contact-us" className="!bg-paper !text-ink hover:!bg-lilac-soft">
             Book a Free Consultation
           </Button>
         </div>

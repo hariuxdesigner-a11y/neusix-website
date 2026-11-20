@@ -14,7 +14,7 @@ export function StatementBand({
   title,
   children,
   ctas,
-  align = "center",
+  flip = false,
 }: {
   media: MediaId;
   id: string;
@@ -22,43 +22,40 @@ export function StatementBand({
   title: ReactNode;
   children?: ReactNode;
   ctas?: Cta[];
+  /** kept for compatibility; the band is always a light split layout now */
   align?: "center" | "split";
+  /** video on the left instead of the right */
+  flip?: boolean;
 }) {
   return (
-    <section aria-labelledby={id} className="relative isolate overflow-hidden text-paper">
-      <VideoBackground id={media} overlay="dark" parallax={70} />
-      <div className={`container-x py-[clamp(96px,14vw,200px)] ${align === "center" ? "text-center" : "grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end"}`}>
-        <div>
-          {eyebrow && <p className="eyebrow reveal text-lilac-soft">{eyebrow}</p>}
-          <h2 id={id} className={`t-display reveal mt-4 text-balance ${align === "center" ? "mx-auto max-w-[20ch]" : "max-w-[16ch]"}`}>
-            {title}
-          </h2>
-        </div>
-        {(children || ctas) && (
-          <div className={`reveal ${align === "center" ? "mx-auto mt-8 max-w-[60ch]" : ""}`}>
-            {children &&
-              (typeof children === "string" ? (
-                <StatementFill text={children} className="text-[clamp(1.05rem,.95rem+.5vw,1.375rem)] leading-relaxed text-paper" />
-              ) : (
-                <div className="text-base leading-relaxed text-paper/85 sm:text-lg">{children}</div>
-              ))}
-            {ctas && (
-              <div className={`mt-8 flex flex-wrap gap-3 ${align === "center" ? "justify-center" : ""}`}>
-                {ctas.map((c, i) =>
-                  i === 0 ? (
-                    <Button key={c.href} href={c.href} className="!bg-paper !text-ink hover:!bg-lilac-soft">
-                      {c.label}
-                    </Button>
-                  ) : (
-                    <Button key={c.href} href={c.href} variant="ghost-light">
-                      {c.label}
-                    </Button>
-                  ),
-                )}
-              </div>
-            )}
+    <section aria-labelledby={id} className="section-y">
+      <div className="container-x grid items-center gap-[clamp(32px,5vw,80px)] lg:grid-cols-2">
+        <div className={flip ? "lg:order-2" : ""}>
+          <div className="stagger">
+            {eyebrow && <p className="eyebrow text-brand">{eyebrow}</p>}
+            <h2 id={id} className="t-h2 mt-3 max-w-[18ch] text-balance">
+              {title}
+            </h2>
           </div>
-        )}
+          {children &&
+            (typeof children === "string" ? (
+              <StatementFill text={children} className="mt-6 max-w-[52ch] text-[clamp(1.05rem,.95rem+.45vw,1.3rem)] leading-relaxed text-ink" />
+            ) : (
+              <div className="reveal mt-6 max-w-[56ch] text-base leading-relaxed text-body sm:text-lg">{children}</div>
+            ))}
+          {ctas && (
+            <div className="reveal mt-8 flex flex-wrap gap-3">
+              {ctas.map((c, i) => (
+                <Button key={c.href} href={c.href} variant={i === 0 ? "dark" : "light"}>
+                  {c.label}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className={`reveal relative isolate aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] lg:aspect-[5/4] ${flip ? "lg:order-1" : ""}`}>
+          <VideoBackground id={media} overlay="none" parallax={50} />
+        </div>
       </div>
     </section>
   );

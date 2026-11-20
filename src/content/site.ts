@@ -19,7 +19,6 @@ export const SITE = {
     postalCode: "500034",
     country: "IN",
   },
-  credit: { label: "Designed and developed by Twist Open UX", href: "https://www.twistopen.in/" },
 };
 
 export const SOCIAL = [

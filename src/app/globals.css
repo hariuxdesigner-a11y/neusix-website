@@ -155,6 +155,7 @@ img, svg, video { max-width: 100%; }
   .draw-icon [data-d="s"] { vector-effect: non-scaling-stroke; stroke-width: var(--icon-stroke, 1.4px); }
   .icon-mono [data-d="s"] { stroke: currentColor; }
   .icon-mono [data-d="f"]:not([data-k]) { fill: currentColor; }
+  .icon-knock [data-k="dark"] { fill: var(--knock); }
   .js .draw-icon [data-d="s"] { stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.65,0,.35,1); transition-delay: calc(var(--draw-delay, 0ms) + min(var(--k), 24) * 45ms); }
   .js .draw-icon [data-d="f"] { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; transition: opacity .5s ease, transform .8s cubic-bezier(.34,1.56,.64,1); transition-delay: calc(var(--draw-delay, 0ms) + 450ms + min(var(--k), 24) * 35ms); }
   .js .draw-soft [data-d="f"] { opacity: 1; transform: none; transition: none; }
@@ -187,3 +188,8 @@ img, svg, video { max-width: 100%; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* legal pages: readable links inside running text */
+.legal-prose a { color: var(--color-brand); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.legal-prose a:hover { color: var(--color-navy); }
+.legal-prose strong { color: var(--color-ink); font-weight: 600; }

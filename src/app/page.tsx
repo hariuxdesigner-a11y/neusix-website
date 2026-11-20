@@ -10,12 +10,9 @@ import { SITE } from "@/content/site";
 import { FAQS } from "@/content/extras";
 import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
 import { LineIcon } from "@/components/motion/LineIcon";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: SITE.defaultTitle,
-  description: SITE.defaultDescription,
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = pageMetadata("/");
 
 const COMPETENCIES = [
   { label: "Extended Reality", media: "comp-xr", icon: "/assets/comp-extended-reality.svg" },
