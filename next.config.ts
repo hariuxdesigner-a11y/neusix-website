@@ -39,6 +39,9 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          // Review preview on Netlify (NETLIFY=true at build): keep it out of search engines.
+          // Production (Hostinger) builds don't set NETLIFY, so the real site stays indexable.
+          ...(process.env.NETLIFY === "true" ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : []),
         ],
       },
       {
