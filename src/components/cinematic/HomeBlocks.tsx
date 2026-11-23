@@ -9,12 +9,12 @@ import { ACCENT_HEX } from "@/components/services/ServiceSections";
 import { VideoBackground } from "@/components/media/VideoBackground";
 import { LottieOnView } from "@/components/ui/LottieOnView";
 import { SectionHead } from "./Bands";
-import { LineIcon } from "@/components/motion/LineIcon";
 import { BlurStage } from "@/components/motion/BlurStage";
 import { OutcomeCarousel } from "./OutcomeCarousel";
 import { Button } from "@/components/ui/Button";
 import { LinkArrow } from "@/components/ui/Icon";
 import { NArch } from "@/components/brand/NArch";
+import { AnimIcon, SERVICE_ICON } from "@/components/icons/AnimIcon";
 
 const Arrow = LinkArrow;
 
@@ -37,7 +37,9 @@ export function ServiceShowcase({ title = "Our Services", eyebrow = "Services" }
                 <div className="relative">
                   <MediaPoster id={`svc-${s.slug}` as MediaId} className="aspect-[4/3] rounded-[clamp(14px,1.6vw,22px)]" />
                   <span aria-hidden className="absolute left-4 top-4 h-1 w-10 rounded-full" style={{ background: ACCENT_HEX[s.accent] }} />
-                  <LineIcon src={s.cardGfxWhite} delay={300 + (i % 3) * 120} className="absolute bottom-4 right-4 size-14 opacity-90" />
+                  <span className="absolute bottom-4 right-4 flex size-14 items-center justify-center rounded-2xl bg-ink/45 text-paper ring-1 ring-white/15 backdrop-blur-md">
+                    <AnimIcon name={SERVICE_ICON[s.slug]} className="size-9" />
+                  </span>
                 </div>
                 <h3 className="t-h4 mt-5 transition-colors group-hover:text-brand">{s.name}</h3>
                 <p className="mt-2 max-w-[38ch] text-sm leading-relaxed text-slate">{s.cardText}</p>
@@ -75,7 +77,7 @@ export function ApproachBand({
             <li key={p.name} className="flex flex-col rounded-card bg-paper/95 p-6 shadow-[0_24px_60px_-34px_rgba(15,15,31,.4)] ring-1 ring-ink/5">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold tracking-[0.14em] text-brand">0{i + 1}</span>
-                <LineIcon src={p.icon} delay={200 + i * 150} className="h-16 w-[72px]" />
+                <AnimIcon name={p.name.toLowerCase() as "discover"} className="size-14 text-brand" />
               </div>
               <h3 className="t-h4 mt-4">{p.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate">{p.text}</p>

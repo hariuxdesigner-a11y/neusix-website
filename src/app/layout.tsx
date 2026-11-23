@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Lora, Google_Sans_Flex } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { LineIcon } from "@/components/motion/LineIcon";
+import { AnimIcon, SERVICE_ICON } from "@/components/icons/AnimIcon";
 import { SERVICES } from "@/content/services";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { RevealObserver } from "@/components/ui/RevealObserver";
@@ -83,7 +83,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader icons={Object.fromEntries([...SERVICES.map((s) => [s.href, <LineIcon key={s.slug} src={s.cardGfx} stroke={1.5} mono className="size-full" />]), ["/our-work/industries", <LineIcon key="ind" src="/assets/cs-i3.svg" stroke={1.4} mono className="size-full" />], ["/our-work/case-studies", <LineIcon key="cs" src="/assets/outcome-banner.svg" stroke={1.4} mono className="size-full" />], ["/blog", <LineIcon key="blog" src="/assets/res-blog.svg" stroke={1.4} mono className="size-full" />], ["/white-papers", <LineIcon key="wp" src="/assets/res-white-paper.svg" stroke={1.4} mono className="size-full" />]])} />
+        <SiteHeader
+          icons={Object.fromEntries([
+            ...SERVICES.map((sv) => [sv.href, <AnimIcon key={sv.slug} name={SERVICE_ICON[sv.slug]} className="size-full" />]),
+            ["/our-work/industries", <AnimIcon key="ind" name="industries" className="size-full" />],
+            ["/our-work/case-studies", <AnimIcon key="cs" name="cases" className="size-full" />],
+            ["/blog", <AnimIcon key="blog" name="blog" className="size-full" />],
+            ["/white-papers", <AnimIcon key="wp" name="white-papers" className="size-full" />],
+          ])}
+        />
         <main id="main" className="flex-1">
           {children}
         </main>

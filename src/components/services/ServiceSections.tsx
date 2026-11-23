@@ -1,7 +1,7 @@
 import { ACCENT_HEX, ACCENT_INK } from "@/content/services";
 import type { Service } from "@/content/services";
-import { LineIcon } from "@/components/motion/LineIcon";
 import { StatementFill } from "@/components/motion/StatementFill";
+import { AnimIcon, SERVICE_ICON } from "@/components/icons/AnimIcon";
 export { ACCENT_HEX };
 
 
@@ -29,7 +29,7 @@ export function StageFit({ s }: { s: Service }) {
               className="border-dotted md:px-[clamp(16px,2.4vw,40px)] md:first:pl-0 md:[&:not(:first-child)]:border-l-2"
               style={{ borderColor: c }}
             >
-              <LineIcon src={col.gfx} delay={250 + i * 180} knock="#fcfcfd" mono stroke={1.6} color={ACCENT_INK[s.accent]} className="h-[clamp(80px,7vw,104px)] w-[clamp(94px,8.2vw,122px)]" />
+              <AnimIcon name={(["advisory", "development", "managed"] as const)[i]} className="size-[clamp(64px,5.6vw,84px)]" style={{ color: ACCENT_INK[s.accent] }} />
               <h3 className="t-h4 mt-5">{col.title}</h3>
               <ul className="mt-4 space-y-4">
                 {col.items.map((t) => (

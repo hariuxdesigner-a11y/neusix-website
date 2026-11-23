@@ -216,3 +216,152 @@ html.lenis, html.lenis body { height: auto; }
 .prose-article th, .prose-article td { padding: .8em 1em; border-bottom: 1px solid rgb(15 15 31 / .08); vertical-align: top; }
 .prose-article tr:last-child td { border-bottom: 0; }
 .prose-article td:first-child { color: var(--color-ink); font-weight: 500; }
+
+/* ── Home hero: six-node tracking overlay ───────────────────────────────── */
+.hero-six-frame { left: 9%; right: 9%; top: calc(var(--header-h) + 40px); height: clamp(150px, 24svh, 230px); }
+@media (min-width: 1024px) { .hero-six-frame { left: 57%; right: 7%; top: calc(var(--header-h) + 56px); height: 46%; } }
+@media (max-width: 1023px) { .hero-six { opacity: .75; } }
+@media (max-width: 1023px) and (max-height: 700px) { .hero-six { display: none; } }
+@media (min-width: 640px) and (max-width: 1023px) { .hero-six-frame { left: 40%; right: 7%; height: clamp(180px, 30svh, 300px); } }
+.hero-six-scan { top: 0; animation: hero-six-scan 5.5s cubic-bezier(.45,0,.55,1) infinite; }
+@keyframes hero-six-scan { 0% { top: 0; opacity: 0 } 10% { opacity: 1 } 90% { opacity: 1 } 100% { top: 100%; opacity: 0 } }
+.hero-six-flow { animation: hero-six-flow .9s linear infinite; }
+@keyframes hero-six-flow { to { stroke-dashoffset: -16 } }
+.hero-six-ping { animation: hero-six-ping 1.6s cubic-bezier(.2,.6,.3,1) infinite; }
+@keyframes hero-six-ping { from { transform: scale(1); opacity: .9 } to { transform: scale(3.2); opacity: 0 } }
+.hero-six-tag { animation: hero-six-tag .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes hero-six-tag { from { opacity: 0; clip-path: inset(0 100% 0 0) } to { opacity: 1; clip-path: inset(0 0 0 0) } }
+.hero-six-rec { animation: hero-six-rec 1.4s steps(2) infinite; }
+@keyframes hero-six-rec { 50% { opacity: .2 } }
+@media (prefers-reduced-motion: reduce) { .hero-six-scan, .hero-six-flow, .hero-six-ping, .hero-six-tag, .hero-six-rec { animation: none } .hero-six-scan { display: none } }
+
+/* ── Agent primitives: small animated technical drawings ─────────────────── */
+.ap-svg { overflow: visible; }
+.ap-svg .ap-ln { fill: none; stroke: var(--color-ink); stroke-opacity: .72; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.ap-svg .ap-thin { stroke-opacity: .28; stroke-width: 1; }
+.ap-svg .ap-ac { fill: none; stroke: var(--color-brand); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.ap-svg .ap-paper { fill: var(--color-paper); }
+.ap-svg .ap-fillac { fill: rgb(64 62 142 / .1); }
+.ap-svg .ap-hl { fill: rgb(239 112 61 / .22); stroke: var(--color-orange); stroke-width: 1; }
+.ap-svg .ap-band { fill: rgb(109 110 181 / .16); }
+.ap-svg .ap-thr { stroke: var(--color-orange); stroke-width: 1; stroke-dasharray: 3 3; }
+.ap-svg .ap-dot { fill: var(--color-orange); }
+.ap-svg .ap-bar { fill: var(--color-brand); transform-box: fill-box; transform-origin: center; animation: ap-bar 1.3s ease-in-out infinite; }
+.ap-svg .ap-tagbg { fill: var(--color-orange); }
+.ap-svg .ap-scanbar { fill: rgb(239 112 61 / .55); animation: ap-scanbar 3.2s cubic-bezier(.45,0,.55,1) infinite; }
+.ap-svg .ap-lbl { font: 500 7.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--color-slate); letter-spacing: .04em; }
+.ap-svg .ap-lbl-ac { fill: var(--color-brand); }
+.ap-svg .ap-lbl-w { fill: #fff; }
+.ap-svg .ap-dash { stroke-dasharray: 3 3; }
+.ap-svg .ap-flow { stroke-dasharray: 4 4; animation: ap-flow 1s linear infinite; }
+.ap-svg .ap-pulse { transform-box: fill-box; transform-origin: center; animation: ap-pulse 1.8s ease-in-out infinite; }
+.ap-svg .ap-alert { transform-box: fill-box; transform-origin: center; animation: ap-pulse 1s ease-in-out infinite; }
+.ap-svg .ap-chunk { animation: ap-chunk 3s steps(1) infinite; }
+.ap-svg .ap-field { animation: ap-field 3.2s ease-in-out infinite both; }
+.ap-svg .ap-brackets { transform-box: fill-box; transform-origin: center; animation: ap-brackets 2.4s cubic-bezier(.6,0,.3,1) infinite; }
+.ap-svg .ap-twin { animation: ap-twin 2.4s ease-in-out infinite; }
+.ap-svg .ap-token { animation: ap-token 2.4s ease-in-out infinite both; }
+.ap-svg .ap-draw { stroke-dasharray: 120; stroke-dashoffset: 120; animation: ap-draw 3.2s cubic-bezier(.6,0,.3,1) infinite; }
+.ap-svg .ap-tick { stroke-dasharray: 14; stroke-dashoffset: 14; animation: ap-tick 3s ease-out infinite; }
+.ap-svg .ap-check { stroke-dasharray: 22; stroke-dashoffset: 22; animation: ap-check 4s ease-out infinite; }
+.ap-svg .ap-scroll { animation: ap-scroll 6s linear infinite; }
+@keyframes ap-bar { 0%,100% { transform: scaleY(.25) } 50% { transform: scaleY(1) } }
+@keyframes ap-scanbar { 0% { transform: translateY(0) } 50% { transform: translateY(83px) } 100% { transform: translateY(0) } }
+@keyframes ap-flow { to { stroke-dashoffset: -16 } }
+@keyframes ap-pulse { 0%,100% { transform: scale(1); opacity: 1 } 50% { transform: scale(1.7); opacity: .55 } }
+@keyframes ap-chunk { 0% { transform: translateY(-16px) } 33% { transform: translateY(0) } 66% { transform: translateY(16px) } }
+@keyframes ap-field { 0%,15% { opacity: 0; transform: translateX(-6px) } 30%,85% { opacity: 1; transform: none } 100% { opacity: 0 } }
+@keyframes ap-brackets { 0%,100% { transform: scale(1.12); opacity: .5 } 45%,70% { transform: scale(1); opacity: 1 } }
+@keyframes ap-twin { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+@keyframes ap-token { 0%,20% { opacity: 0 } 40%,85% { opacity: 1 } 100% { opacity: 0 } }
+@keyframes ap-draw { 0% { stroke-dashoffset: 120 } 45%,85% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: 120; opacity: 0 } }
+@keyframes ap-tick { 0%,20% { stroke-dashoffset: 14 } 45%,85% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: 14 } }
+@keyframes ap-check { 0%,55% { stroke-dashoffset: 22 } 70%,90% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: 22 } }
+@keyframes ap-scroll { to { transform: translateX(-192px) } }
+.ap-svg { clip-path: inset(-4px); }
+@media (prefers-reduced-motion: reduce) {
+  .ap-svg * { animation: none !important; }
+  .ap-svg .ap-draw, .ap-svg .ap-tick, .ap-svg .ap-check { stroke-dashoffset: 0; }
+  .ap-svg .ap-bar { transform: scaleY(.7); }
+}
+
+/* ── Animated icons (components/icons/AnimIcon.tsx) ──────────────────────── */
+.ai { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.ai .t { stroke-opacity: .42; }
+.ai .f { fill: currentColor; stroke: none; }
+.ai .o { fill: var(--color-orange); stroke: none; }
+.ai g, .ai circle, .ai rect, .ai path { transform-box: fill-box; transform-origin: center; }
+.ai .ai-node { fill: var(--color-paper); animation: ai-node 1.8s ease-in-out infinite; }
+.ai .ai-spark { animation: ai-spark 1.8s ease-in-out infinite; }
+.ai .ai-lift { animation: ai-lift 2.8s cubic-bezier(.6,0,.3,1) infinite; }
+.ai .ai-blink { animation: ai-blink 1s steps(2) infinite; }
+.ai .ai-blinkdot { animation: ai-blinkdot 1.6s ease-in-out infinite; }
+.ai .ai-spoke { stroke-dasharray: 3 3; animation: ai-flow 1.2s linear infinite; }
+.ai .ai-globe { animation: ai-globe 3.6s ease-in-out infinite; }
+.ai .ai-orbit { transform-box: view-box; transform-origin: 24px 24px; animation: ai-rot 6s linear infinite; }
+.ai .ai-needle { transform-box: view-box; transform-origin: 24px 24px; animation: ai-needle 3.2s cubic-bezier(.5,0,.2,1) infinite; }
+.ai .ai-plug-l { animation: ai-plug-l 2.6s cubic-bezier(.6,0,.3,1) infinite; }
+.ai .ai-plug-r { animation: ai-plug-r 2.6s cubic-bezier(.6,0,.3,1) infinite; }
+.ai .ai-joint { animation: ai-joint 2.6s ease-in-out infinite; }
+.ai .ai-spin { transform-box: view-box; transform-origin: 24px 24px; animation: ai-rot 5s linear infinite; }
+.ai .ai-spin-slow { transform-box: view-box; transform-origin: 21px 22px; animation: ai-rot 7s linear infinite; }
+.ai .ai-tickloop { stroke-dasharray: 20; animation: ai-tick 2.8s ease-in-out infinite; }
+.ai .ai-sweep { transform-box: view-box; transform-origin: 24px 26px; animation: ai-sweep 3.4s ease-in-out infinite; }
+.ai .ai-drawloop { stroke-dasharray: 1; animation: ai-drawloop 3.2s cubic-bezier(.6,0,.3,1) infinite; }
+.ai .ai-drop { animation: ai-drop 2.6s cubic-bezier(.5,0,.3,1.3) infinite; }
+.ai .ai-grow { transform-origin: bottom; animation: ai-grow 2.6s cubic-bezier(.5,0,.3,1) infinite; }
+.ai .ai-handover { animation: ai-handover 2.8s cubic-bezier(.6,0,.3,1) infinite; }
+.ai .ai-nudge { animation: ai-nudge 1.4s ease-in-out infinite; }
+.ai .ai-scanx { stroke: var(--color-orange); stroke-opacity: .8; animation: ai-scanx 2.4s ease-in-out infinite; }
+.ai .ai-gear { transform-box: view-box; transform-origin: 18px 20px; animation: ai-rot 6s linear infinite; }
+.ai .ai-gear-r { transform-box: view-box; transform-origin: 33px 33px; animation: ai-rot 4.5s linear infinite reverse; }
+.ai .ai-arm { transform-box: view-box; transform-origin: 17px 34px; animation: ai-arm 3.2s cubic-bezier(.5,0,.3,1) infinite; }
+.ai .ai-forearm { transform-box: view-box; transform-origin: 26px 18px; animation: ai-forearm 3.2s cubic-bezier(.5,0,.3,1) infinite; }
+.ai .ai-orbit-a, .ai .ai-orbit-b, .ai .ai-orbit-c { transform-box: view-box; transform-origin: 24px 24px; }
+.ai .ai-orbit-a { animation: ai-rot 9s linear infinite; }
+.ai .ai-orbit-b { animation: ai-rot 12s linear infinite reverse; }
+.ai .ai-orbit-c { animation: ai-rot 15s linear infinite; }
+.ai .ai-link { stroke: var(--color-orange); stroke-width: 2; stroke-dasharray: 3; stroke-dashoffset: 3; animation: ai-link 2s ease-in-out infinite; }
+.ai .ai-wave { animation: ai-wave 1.8s ease-out infinite; }
+.ai .ai-window { animation: ai-window 1.8s steps(1) infinite; }
+.ai .ai-type { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ai-type 2.6s ease-out infinite; }
+.ai .ai-page { animation: ai-page 3s cubic-bezier(.6,0,.3,1) infinite; }
+@keyframes ai-node { 0%,100% { fill: var(--color-paper) } 30% { fill: currentColor } }
+@keyframes ai-spark { 0%,100% { transform: scale(.6) rotate(0); opacity: .5 } 50% { transform: scale(1.1) rotate(45deg); opacity: 1 } }
+@keyframes ai-lift { 0%,20%,100% { transform: none } 50%,70% { transform: translateY(-5px) } }
+@keyframes ai-blink { 50% { opacity: 0 } }
+@keyframes ai-blinkdot { 0%,100% { opacity: 1; transform: scale(1) } 50% { opacity: .35; transform: scale(.7) } }
+@keyframes ai-flow { to { stroke-dashoffset: -12 } }
+@keyframes ai-globe { 0%,100% { transform: scaleX(.35) } 50% { transform: scaleX(1) } }
+@keyframes ai-rot { to { transform: rotate(360deg) } }
+@keyframes ai-needle { 0% { transform: rotate(-50deg) } 30% { transform: rotate(28deg) } 45% { transform: rotate(-10deg) } 58%,100% { transform: rotate(0) } }
+@keyframes ai-plug-l { 0%,100% { transform: translateX(-5px) } 40%,75% { transform: translateX(0) } }
+@keyframes ai-plug-r { 0%,100% { transform: translateX(5px) } 40%,75% { transform: translateX(0) } }
+@keyframes ai-joint { 0%,35%,85%,100% { opacity: 0; transform: scale(.4) } 45%,75% { opacity: 1; transform: scale(1) } }
+@keyframes ai-tick { 0%,30% { stroke-dashoffset: 20 } 55%,90% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: -20 } }
+@keyframes ai-sweep { 0%,100% { transform: translate(-3px,0) rotate(-6deg) } 50% { transform: translate(6px,-3px) rotate(6deg) } }
+@keyframes ai-drawloop { 0% { stroke-dashoffset: 1 } 50%,80% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: -1 } }
+@keyframes ai-drop { 0% { transform: translateY(-10px); opacity: 0 } 25% { opacity: 1 } 45%,85% { transform: none; opacity: 1 } 100% { transform: none; opacity: 0 } }
+@keyframes ai-grow { 0% { transform: scaleY(.15) } 45%,85% { transform: scaleY(1) } 100% { transform: scaleY(.15) } }
+@keyframes ai-handover { 0%,15% { transform: translateX(0) } 50%,75% { transform: translateX(20px) } 100% { transform: translateX(0) } }
+@keyframes ai-nudge { 0%,100% { transform: translateX(-2px) } 50% { transform: translateX(2px) } }
+@keyframes ai-scanx { 0%,100% { transform: translateY(0); opacity: 0 } 15% { opacity: 1 } 50% { transform: translateY(9px); opacity: 1 } 85% { opacity: 0 } }
+@keyframes ai-arm { 0%,100% { transform: rotate(0) } 50% { transform: rotate(-18deg) } }
+@keyframes ai-forearm { 0%,100% { transform: rotate(0) } 50% { transform: rotate(30deg) } }
+@keyframes ai-link { 0%,20% { stroke-dashoffset: 3 } 45%,85% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: -3 } }
+@keyframes ai-wave { 0% { opacity: 0 } 30% { opacity: 1 } 100% { opacity: 0 } }
+@keyframes ai-window { 0% { opacity: 1 } 50% { opacity: .2 } }
+@keyframes ai-type { 0%,10% { stroke-dashoffset: 1 } 45%,85% { stroke-dashoffset: 0 } 100% { stroke-dashoffset: 0; opacity: 0 } }
+@keyframes ai-page { 0%,20%,100% { transform: none } 45%,70% { transform: translate(-3px,3px) rotate(-4deg) } }
+@media (prefers-reduced-motion: reduce) {
+  .ai *, .ai { animation: none !important; }
+  .ai .ai-type, .ai .ai-drawloop, .ai .ai-tickloop { stroke-dashoffset: 0; }
+  .ai .ai-link { stroke-dashoffset: 0; }
+}
+
+/* home industries */
+.ind-progress { animation: ind-progress 3.2s linear both; }
+@keyframes ind-progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+.ind-fade { animation: ind-fade .5s ease both; }
+@keyframes ind-fade { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+@media (prefers-reduced-motion: reduce) { .ind-progress { animation: none; transform: scaleX(0) } .ind-fade { animation: none } }

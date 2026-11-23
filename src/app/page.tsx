@@ -9,19 +9,22 @@ import { getCaseStudy } from "@/content/case-studies";
 import { SITE } from "@/content/site";
 import { FAQS } from "@/content/extras";
 import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
-import { LineIcon } from "@/components/motion/LineIcon";
+import { AnimIcon, type AnimIconName } from "@/components/icons/AnimIcon";
+import { HeroSix } from "@/components/cinematic/HeroSix";
+import { AgentPrimitives } from "@/components/cinematic/AgentPrimitives";
+import { SERVICES } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/");
 
 const COMPETENCIES = [
-  { label: "Extended Reality", media: "comp-xr", icon: "/assets/comp-extended-reality.svg" },
-  { label: "Enterprise Automation", media: "comp-automation", icon: "/assets/comp-enterprise-automation.svg" },
-  { label: "Robotics", media: "comp-robotics", icon: "/assets/comp-robotics.svg" },
-  { label: "Quantum Computing", media: "comp-quantum", icon: "/assets/comp-quantum-computing.svg" },
-  { label: "Block Chain", media: "comp-blockchain", icon: "/assets/comp-block-chain.svg" },
-  { label: "IoT", media: "comp-iot", icon: "/assets/comp-iot.svg" },
-] as const;
+  { label: "Extended Reality", media: "comp-xr", icon: "xr" },
+  { label: "Enterprise Automation", media: "comp-automation", icon: "automation" },
+  { label: "Robotics", media: "comp-robotics", icon: "robotics" },
+  { label: "Quantum Computing", media: "comp-quantum", icon: "quantum" },
+  { label: "Block Chain", media: "comp-blockchain", icon: "blockchain" },
+  { label: "IoT", media: "comp-iot", icon: "iot" },
+] as const satisfies readonly { label: string; media: string; icon: AnimIconName }[];
 
 export default function HomePage() {
   const featured = getCaseStudy("logistics-ports")!;
@@ -29,6 +32,8 @@ export default function HomePage() {
     <>
       <VideoHero
         media="home-hero"
+        grade="duotone"
+        overlayArt={<HeroSix labels={SERVICES.map((s) => s.name)} />}
         eyebrow="Shipping Impact"
         title="Harnessing AI to create relevance, not just competence"
         primary={{ label: "Book a Free Consultation", href: "/contact-us" }}
@@ -60,11 +65,13 @@ export default function HomePage() {
         business impact.
       </StatementBand>
 
+      <AgentPrimitives />
+
       <section aria-labelledby="competencies-title" className="section-y">
         <div className="container-x">
           <SectionHead id="competencies-title" title="Our competencies" />
           <div className="mt-[clamp(32px,4vw,56px)]">
-            <VideoTabs tabs={COMPETENCIES.map((c) => ({ ...c, icon: <LineIcon src={c.icon} className="size-full" /> }))} />
+            <VideoTabs tabs={COMPETENCIES.map((c) => ({ ...c, icon: <AnimIcon name={c.icon} className="size-full" /> }))} />
           </div>
         </div>
       </section>

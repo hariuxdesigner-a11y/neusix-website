@@ -23,6 +23,8 @@ export function VideoHero({
   size = "full",
   accent,
   compact = false,
+  grade,
+  overlayArt,
   children,
 }: {
   media: MediaId;
@@ -36,6 +38,10 @@ export function VideoHero({
   accent?: string;
   /** smaller headline for long titles (case studies) */
   compact?: boolean;
+  /** colour grade for the footage */
+  grade?: "none" | "duotone";
+  /** decorative layer drawn over the footage, under the copy */
+  overlayArt?: ReactNode;
   children?: ReactNode;
 }) {
   return (
@@ -45,7 +51,8 @@ export function VideoHero({
         size === "full" ? "min-h-[clamp(560px,100svh,1080px)]" : "min-h-[clamp(520px,82svh,860px)]"
       }`}
     >
-      <VideoBackground id={media} overlay="hero" priority parallax={90} />
+      <VideoBackground id={media} overlay="hero" priority parallax={90} grade={grade} />
+      {overlayArt}
       <div className="container-x relative grid gap-10 pb-[clamp(40px,7vw,96px)] pt-[calc(var(--header-h)+48px)] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="max-w-[880px]">
           {eyebrow && (

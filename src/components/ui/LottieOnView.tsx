@@ -8,7 +8,7 @@ setWasmUrl("/lottie/dotlottie-player.wasm");
 
 /** Loads and plays a Lottie (.lottie or .json) animation once it scrolls into view.
  *  Nothing is downloaded until the element is near the viewport. */
-export function LottieOnView({ src, label, className = "", loop = false }: { src: string; label?: string; className?: string; loop?: boolean }) {
+export function LottieOnView({ src, label, className = "", loop = false, speed = 1 }: { src: string; label?: string; className?: string; loop?: boolean; speed?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -28,7 +28,7 @@ export function LottieOnView({ src, label, className = "", loop = false }: { src
   }, []);
   return (
     <div ref={ref} className={className} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
-      {show && <DotLottieReact src={src} autoplay loop={loop} className="h-full w-full" />}
+      {show && <DotLottieReact src={src} autoplay loop={loop} speed={speed} className="h-full w-full" />}
     </div>
   );
 }

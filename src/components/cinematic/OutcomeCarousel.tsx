@@ -16,7 +16,7 @@ export function OutcomeCarousel({
   head,
   cta,
   source,
-  interval = 6500,
+  interval = 3500,
 }: {
   items: Outcome[];
   head: ReactNode;
@@ -63,7 +63,7 @@ export function OutcomeCarousel({
           style={{ backgroundImage: "repeating-linear-gradient(90deg, rgba(109,110,181,.22) 0 1px, transparent 1px 7px)" }}
         />
         <div key={i} className="relative mx-auto mt-2 size-[clamp(180px,22vw,260px)] animate-[megaIn_.5s_ease-out]">
-          <LottieOnView src={o.lottie} className="size-full" />
+          <LottieOnView src={o.lottie} speed={1.8} className="size-full" />
           {o.value && (
             <span className="absolute inset-0 flex items-center justify-center">
               <span className="bg-mist/90 px-2 font-serif text-2xl text-navy">{o.value}</span>

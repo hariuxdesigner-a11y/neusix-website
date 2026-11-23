@@ -5,6 +5,7 @@ import { CASE_STUDIES } from "@/content/case-studies";
 import { MediaPoster } from "@/components/media/MediaPoster";
 import { CaseCard } from "@/components/case-studies/CaseCard";
 import { SectionHead } from "./Bands";
+import { IndustriesHome } from "./IndustriesHome";
 import { Marquee } from "@/components/motion/Marquee";
 import { StaggerParallax } from "@/components/motion/StaggerParallax";
 import { Counter } from "@/components/motion/Counter";
@@ -44,7 +45,7 @@ export function ClientMarquee() {
 /** Home: the nine industries as image tiles linking to their section on the Industries page. */
 export function IndustriesStrip() {
   return (
-    <section aria-labelledby="industries-title" className="section-y bg-mist/60">
+    <section aria-labelledby="industries-title" className="section-y">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead id="industries-title" eyebrow="Industries" title="AI transformation across industries" sub="built to survive the real world." />
@@ -52,20 +53,12 @@ export function IndustriesStrip() {
             All Industries <Arrow />
           </Link>
         </div>
-        <ul className="stagger -mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
-          {INDUSTRIES.map((ind) => (
-            <li key={ind.media} className="w-[78vw] max-w-[340px] shrink-0 snap-start sm:w-auto sm:max-w-none">
-              <Link href={`/our-work/industries#${ind.slug}`} className="group relative isolate block overflow-hidden rounded-[clamp(14px,1.6vw,20px)]">
-                <MediaPoster id={ind.media} className="aspect-[4/3]" />
-                <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
-                <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 text-paper">
-                  <span className="text-[17px] font-medium leading-snug">{ind.name}</span>
-                  <ArrowChip tone="image" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <IndustriesHome
+          items={INDUSTRIES.map((ind) => {
+            const w = ind.where.replace(/^Where we help:\s*/i, "").replace(/\.$/, "");
+            return { name: ind.name, slug: ind.slug!, media: ind.media, where: w.charAt(0).toUpperCase() + w.slice(1) + "." };
+          })}
+        />
       </div>
     </section>
   );
