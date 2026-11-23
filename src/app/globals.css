@@ -349,7 +349,7 @@ html.lenis, html.lenis body { height: auto; }
 @media (prefers-reduced-motion: reduce) { .ind-progress { animation: none; transform: scaleX(0) } .ind-fade { animation: none } }
 
 /* ── Home hero (light single-hue banner + instruments) ───────────────────── */
-.home-hero-scan { background: repeating-linear-gradient(0deg, rgba(252,252,253,.09) 0 1px, transparent 1px 3px); mix-blend-mode: screen; }
+.home-hero-scan, .media-scan { background: repeating-linear-gradient(0deg, rgba(252,252,253,.09) 0 1px, transparent 1px 3px); mix-blend-mode: screen; }
 .hi-track { left: 64%; top: calc(var(--header-h) + 34px); width: 24%; height: clamp(90px, 14svh, 150px); animation: hi-drift 9s ease-in-out infinite; }
 .hi-dial { left: 2.5%; bottom: 3%; width: clamp(140px, 14vw, 210px); height: auto; aspect-ratio: 1; }
 .hi-chart { right: 2.5%; bottom: 3.5%; width: clamp(200px, 17vw, 260px); height: clamp(110px, 9vw, 140px); }
@@ -375,3 +375,10 @@ html.lenis, html.lenis body { height: auto; }
   .hi-line { stroke-dashoffset: 0; }
   .hi-ping { display: none; }
 }
+
+/* ── Site-wide media tone: photos match the light lilac footage grade ────── */
+.tone { isolation: isolate; }
+.tone img { filter: grayscale(1) contrast(1.18) brightness(1.06); }
+.tone::before, .tone::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.tone::before { background: #8b8dcf; mix-blend-mode: screen; }
+.tone::after { background: #e9e9f8; mix-blend-mode: multiply; }

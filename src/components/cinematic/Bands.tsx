@@ -80,24 +80,24 @@ export function VideoCtaCard({
 }) {
   return (
     <section aria-labelledby="cta-title" className="container-x py-[clamp(48px,6vw,96px)]">
-      <div className="reveal relative isolate flex min-h-[clamp(440px,60vw,640px)] flex-col justify-end overflow-hidden rounded-[clamp(18px,2.4vw,32px)] p-[clamp(24px,5vw,72px)] text-paper">
+      <div className="reveal relative isolate flex min-h-[clamp(440px,60vw,640px)] flex-col justify-end overflow-hidden rounded-[clamp(18px,2.4vw,32px)] p-[clamp(24px,5vw,72px)] text-ink">
         <VideoBackground id={media} overlay="hero" parallax={70} />
-        <NArch strokeWidth={34} delay={300} className="absolute -bottom-[14%] right-[5%] -z-[1] h-[62%] text-lilac-soft/40 sm:h-[88%]" />
+        <NArch strokeWidth={34} delay={300} className="absolute -bottom-[14%] right-[5%] -z-[1] h-[62%] text-navy/25 sm:h-[88%]" />
         <h2 id="cta-title" className="t-display max-w-[16ch]">
           {title}
         </h2>
-        <p className="mt-5 max-w-[56ch] text-sm leading-relaxed text-paper/85 sm:text-base">{body}</p>
+        <p className="mt-5 max-w-[56ch] text-sm font-medium leading-relaxed text-ink/85 sm:text-base">{body}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button href={primary.href} className="!bg-paper !text-ink hover:!bg-lilac-soft">
+          <Button href={primary.href} variant="dark">
             {primary.label}
           </Button>
           {secondary && (
-            <Button href={secondary.href} variant="ghost-light">
+            <Button href={secondary.href} variant="light" className="!bg-paper/80 backdrop-blur hover:!bg-navy">
               {secondary.label}
             </Button>
           )}
         </div>
-        {note && <p className="mt-6 text-sm text-paper/85">{note}</p>}
+        {note && <p className="mt-6 text-sm text-ink/80">{note}</p>}
       </div>
     </section>
   );

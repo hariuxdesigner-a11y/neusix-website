@@ -7,9 +7,10 @@ import { MEDIA, mediaSrc, type MediaId } from "@/content/media";
 type Overlay = "hero" | "dark" | "soft" | "light" | "none";
 
 const OVERLAYS: Record<Overlay, string> = {
-  // bottom-weighted for left/bottom-aligned hero copy
-  hero: "linear-gradient(90deg, rgba(15,15,31,.55) 0%, rgba(15,15,31,.2) 45%, rgba(15,15,31,0) 70%), linear-gradient(180deg, rgba(15,15,31,.4) 0%, rgba(15,15,31,.18) 32%, rgba(15,15,31,.8) 72%, rgba(15,15,31,.95) 100%)",
-  dark: "linear-gradient(180deg, rgba(15,15,31,.76), rgba(15,15,31,.86))",
+  // Site-wide light tone (Nov 2026): all overlays are light veils for dark text.
+  // hero: bottom/left-weighted veil for bottom-left copy
+  hero: "linear-gradient(90deg, rgba(252,252,253,.6) 0%, rgba(252,252,253,.26) 45%, rgba(252,252,253,0) 72%), linear-gradient(180deg, rgba(252,252,253,.4) 0%, rgba(252,252,253,0) 28%, rgba(252,252,253,.22) 60%, rgba(252,252,253,.78) 100%)",
+  dark: "linear-gradient(180deg, rgba(252,252,253,.62), rgba(252,252,253,.78))",
   soft: "linear-gradient(180deg, rgba(252,252,253,.55), rgba(252,252,253,.92))",
   light: "linear-gradient(180deg, rgba(252,252,253,.2), rgba(252,252,253,.6))",
   none: "none",
@@ -47,7 +48,7 @@ export function VideoBackground({
   active = true,
   className = "",
   parallax = 0,
-  grade = "none",
+  grade = "light",
 }: {
   id: MediaId;
   overlay?: Overlay;
@@ -181,6 +182,7 @@ export function VideoBackground({
           {/* light single-hue grade: shadows lift to NeuSix lilac, highlights stay near-white */}
           <div className="absolute inset-0 mix-blend-screen" style={{ background: "#8b8dcf" }} />
           <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#e9e9f8" }} />
+          <div className="media-scan absolute inset-0" />
         </>
       )}
       {overlay !== "none" && <div className="absolute inset-0" style={{ background: OVERLAYS[overlay] }} />}

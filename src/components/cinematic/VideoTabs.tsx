@@ -62,16 +62,16 @@ export function VideoTabs({ tabs, autoAdvance = 7000, dark = false }: { tabs: Vi
         role="tabpanel"
         id={`${id}-p`}
         aria-labelledby={`${id}-t${i}`}
-        className="relative order-1 isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[clamp(16px,2vw,28px)] p-[clamp(20px,3vw,40px)] text-paper sm:aspect-[16/10] lg:order-2"
+        className="relative order-1 isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[clamp(16px,2vw,28px)] p-[clamp(20px,3vw,40px)] text-ink sm:aspect-[16/10] lg:order-2"
       >
         {tabs.map((tab, k) => (
           <div key={tab.media + k} className={`absolute inset-0 -z-10 transition-opacity duration-700 ${k === i ? "opacity-100" : "opacity-0"}`}>
             <VideoBackground id={tab.media} overlay="hero" active={k === i} playOnMobile={k === i} />
           </div>
         ))}
-        <p className="eyebrow text-paper/85">{String(i + 1).padStart(2, "0")} / {String(tabs.length).padStart(2, "0")}</p>
+        <p className="eyebrow text-navy">{String(i + 1).padStart(2, "0")} / {String(tabs.length).padStart(2, "0")}</p>
         <h3 className="t-h3 mt-2">{t.title ?? t.label}</h3>
-        {t.body && <div className="mt-3 max-w-[52ch] text-sm leading-relaxed text-paper/85 sm:text-base">{t.body}</div>}
+        {t.body && <div className="mt-3 max-w-[52ch] text-sm font-medium leading-relaxed text-ink/85 sm:text-base">{t.body}</div>}
       </div>
     </div>
   );

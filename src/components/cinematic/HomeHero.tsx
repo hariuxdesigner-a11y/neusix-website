@@ -35,7 +35,6 @@ export function HomeHero({
       <div className="home-hero relative isolate flex min-h-[600px] flex-col overflow-hidden rounded-[clamp(18px,2vw,30px)] bg-lilac-soft [height:calc(100svh-clamp(8px,.9vw,14px))]">
         <VideoBackground id={media} overlay="none" grade="light" priority />
         {/* scan lines + soft light behind the copy */}
-        <div aria-hidden className="home-hero-scan pointer-events-none absolute inset-0 -z-[6]" />
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-[6] bg-[radial-gradient(58%_52%_at_50%_52%,rgba(252,252,253,.82),rgba(252,252,253,.45)_55%,rgba(252,252,253,.12)_85%)]" />
         {/* light veil under the floating header and over the bottom prompt */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-[4] h-[150px] bg-gradient-to-b from-paper/85 via-paper/45 to-transparent" />

@@ -76,10 +76,10 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
               </div>
             ))}
             <div className="absolute inset-x-0 bottom-0 z-10 p-8">
-              <p className="eyebrow text-paper/85">
+              <p className="eyebrow text-navy">
                 {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </p>
-              <p className="t-h3 mt-2 text-paper">{items[active].name}</p>
+              <p className="t-h3 mt-2 text-ink">{items[active].name}</p>
             </div>
           </div>
         </div>

@@ -37,7 +37,7 @@ export function ServiceShowcase({ title = "Our Services", eyebrow = "Services" }
                 <div className="relative">
                   <MediaPoster id={`svc-${s.slug}` as MediaId} className="aspect-[4/3] rounded-[clamp(14px,1.6vw,22px)]" />
                   <span aria-hidden className="absolute left-4 top-4 h-1 w-10 rounded-full" style={{ background: ACCENT_HEX[s.accent] }} />
-                  <span className="absolute bottom-4 right-4 flex size-14 items-center justify-center rounded-2xl bg-ink/45 text-paper ring-1 ring-white/15 backdrop-blur-md">
+                  <span className="absolute bottom-4 right-4 flex size-14 items-center justify-center z-[3] rounded-2xl bg-paper/80 text-brand ring-1 ring-ink/10 backdrop-blur-md">
                     <AnimIcon name={SERVICE_ICON[s.slug]} className="size-9" />
                   </span>
                 </div>

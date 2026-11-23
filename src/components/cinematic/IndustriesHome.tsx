@@ -50,21 +50,21 @@ export function IndustriesHome({ items }: { items: Item[] }) {
               <MediaPoster id={it.media} className="size-full" sizes="(min-width: 1024px) 50vw, 94vw" />
             </div>
           ))}
-          <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
-          <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-[clamp(16px,2vw,28px)] text-paper">
+          <span className="absolute inset-0 z-[2] bg-gradient-to-t from-paper/95 via-paper/35 to-transparent" />
+          <span className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-4 p-[clamp(16px,2vw,28px)] text-ink">
             <span>
-              <span className="block font-mono text-[11px] tracking-[0.16em] text-lilac-soft">
+              <span className="block font-mono text-[11px] tracking-[0.16em] text-navy">
                 {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </span>
               <span key={cur.slug} className="ind-fade mt-1 block text-[clamp(1.1rem,1rem+.5vw,1.5rem)] font-medium leading-snug">
                 {cur.name}
               </span>
             </span>
-            <ArrowChip tone="image" />
+            <ArrowChip />
           </span>
           {/* progress */}
-          <span className="absolute inset-x-0 top-0 h-[3px] bg-white/15">
-            <span key={active} className="ind-progress block h-full origin-left bg-paper/80" />
+          <span className="absolute inset-x-0 top-0 z-[3] h-[3px] bg-ink/10">
+            <span key={active} className="ind-progress block h-full origin-left bg-navy" />
           </span>
         </div>
       </Link>

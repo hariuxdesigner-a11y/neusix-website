@@ -30,11 +30,11 @@ export function BlurStage({ media, children, labelledBy }: { media: MediaId; chi
         </div>
         {MEDIA[media].ready && (
           <div ref={blur} className="absolute inset-0 opacity-0">
-            <picture>
+            <div className="tone absolute inset-0"><picture>
               <source media="(max-width: 767px)" srcSet={s.posterMobile} />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={s.thumb} alt="" loading="lazy" className="absolute inset-0 size-full scale-110 object-cover blur-[28px]" />
-            </picture>
+            </picture></div>
           </div>
         )}
         <div ref={veil} className="absolute inset-0 bg-paper opacity-0" />

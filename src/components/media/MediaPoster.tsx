@@ -4,7 +4,7 @@ import { MEDIA, mediaSrc, type MediaId } from "@/content/media";
 export function MediaPoster({ id, className = "", sizes = "(min-width: 1024px) 34vw, (min-width: 640px) 50vw, 90vw", priority = false }: { id: MediaId; className?: string; sizes?: string; priority?: boolean }) {
   const m = MEDIA[id];
   return (
-    <div aria-hidden className={`relative overflow-hidden bg-ink ${className}`}>
+    <div aria-hidden className={`tone relative overflow-hidden bg-lilac-soft ${className}`}>
       {m.ready ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={mediaSrc(id).thumb} srcSet={`${mediaSrc(id).thumb} 640w, ${mediaSrc(id).poster} 1280w`} sizes={sizes} alt="" loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : undefined} className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" style={{ objectPosition: m.focal }} />

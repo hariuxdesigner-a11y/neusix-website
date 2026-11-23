@@ -172,7 +172,7 @@ export default function AboutPage() {
           <ul className="stagger grid gap-4 sm:grid-cols-2">
             {AWARDS.map((a) => (
               <li key={a.text} className="group overflow-hidden rounded-card bg-mist ring-1 ring-ink/[.04]">
-                <div className="overflow-hidden">
+                <div className="tone relative overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={a.img.replace(/\.svg$/, ".webp")}

@@ -112,12 +112,12 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
       >
         <ul className="mt-6 flex flex-wrap gap-2" aria-label="Capabilities">
           {c.tags.map((t) => (
-            <li key={t} className="rounded-full bg-white/10 px-3.5 py-1.5 text-xs text-paper ring-1 ring-white/20 backdrop-blur">
+            <li key={t} className="rounded-full bg-paper/75 px-3.5 py-1.5 text-xs font-medium text-ink ring-1 ring-ink/10 backdrop-blur">
               {t}
             </li>
           ))}
         </ul>
-        <Link href="/our-work/case-studies" className="mt-6 inline-block text-sm text-paper/85 hover:text-paper">
+        <Link href="/our-work/case-studies" className="mt-6 inline-block text-sm font-medium text-navy hover:text-brand">
           <span className="inline-flex items-center gap-2"><Icon name="arrow-left" size={16} /> All case studies</span>
         </Link>
       </VideoHero>
