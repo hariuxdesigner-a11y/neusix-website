@@ -179,8 +179,8 @@ export function VideoBackground({
       {grade === "light" && (
         <>
           {/* light single-hue grade: shadows lift to NeuSix lilac, highlights stay near-white */}
-          <div className="absolute inset-0 mix-blend-screen" style={{ background: "#6466b4" }} />
-          <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#dcdcf2" }} />
+          <div className="absolute inset-0 mix-blend-screen" style={{ background: "#8b8dcf" }} />
+          <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#e9e9f8" }} />
         </>
       )}
       {overlay !== "none" && <div className="absolute inset-0" style={{ background: OVERLAYS[overlay] }} />}

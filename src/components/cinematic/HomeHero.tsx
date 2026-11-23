@@ -36,7 +36,10 @@ export function HomeHero({
         <VideoBackground id={media} overlay="none" grade="light" priority />
         {/* scan lines + soft light behind the copy */}
         <div aria-hidden className="home-hero-scan pointer-events-none absolute inset-0 -z-[6]" />
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-[6] bg-[radial-gradient(60%_55%_at_50%_52%,rgba(252,252,253,.62),rgba(252,252,253,.18)_60%,transparent_80%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-[6] bg-[radial-gradient(58%_52%_at_50%_52%,rgba(252,252,253,.82),rgba(252,252,253,.45)_55%,rgba(252,252,253,.12)_85%)]" />
+        {/* light veil under the floating header and over the bottom prompt */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-[4] h-[150px] bg-gradient-to-b from-paper/85 via-paper/45 to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-[4] h-[120px] bg-gradient-to-t from-paper/70 to-transparent" />
         <HeroInstruments labels={labels} />
 
         <div className="container-x relative flex flex-1 flex-col items-center justify-center pb-[clamp(72px,9vh,110px)] pt-[calc(var(--header-h)+24px)] text-center">
@@ -48,7 +51,7 @@ export function HomeHero({
           <h1 id="page-title" className="t-display mt-5 max-w-[17ch] text-balance text-ink">
             <WordRise>{title}</WordRise>
           </h1>
-          <p className="rise mt-6 max-w-[52ch] text-[clamp(1rem,.95rem+.35vw,1.25rem)] leading-relaxed text-ink/80" style={{ ["--d" as string]: "450ms" }}>
+          <p className="rise mt-6 max-w-[52ch] text-[clamp(1rem,.95rem+.35vw,1.25rem)] font-medium leading-relaxed text-ink" style={{ ["--d" as string]: "450ms" }}>
             {lede}
           </p>
           <div className="rise mt-9 flex flex-wrap justify-center gap-3" style={{ ["--d" as string]: "600ms" }}>

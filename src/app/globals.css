@@ -350,12 +350,12 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ── Home hero (light single-hue banner + instruments) ───────────────────── */
 .home-hero-scan { background: repeating-linear-gradient(0deg, rgba(252,252,253,.09) 0 1px, transparent 1px 3px); mix-blend-mode: screen; }
-.hi-track { left: 60%; top: calc(var(--header-h) + 36px); width: 26%; height: 24%; animation: hi-drift 9s ease-in-out infinite; }
+.hi-track { left: 64%; top: calc(var(--header-h) + 34px); width: 24%; height: clamp(90px, 14svh, 150px); animation: hi-drift 9s ease-in-out infinite; }
 .hi-dial { left: 2.5%; bottom: 3%; width: clamp(140px, 14vw, 210px); height: auto; aspect-ratio: 1; }
 .hi-chart { right: 2.5%; bottom: 3.5%; width: clamp(200px, 17vw, 260px); height: clamp(110px, 9vw, 140px); }
 @media (max-width: 1023px) {
   .hi-dial, .hi-chart { display: none; }
-  .hi-track { left: 54%; width: 38%; height: 16%; top: calc(var(--header-h) + 34px); }
+  .hi-track { left: 56%; width: 36%; height: clamp(56px, 9svh, 90px); top: calc(var(--header-h) + 30px); }
 }
 @media (max-height: 640px) and (max-width: 1023px) { .hi-track { display: none; } }
 .hi-tag { animation: hi-tag .5s cubic-bezier(.2,.7,.2,1) both; }

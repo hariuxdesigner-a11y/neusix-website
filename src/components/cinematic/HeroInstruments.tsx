@@ -33,19 +33,19 @@ export function HeroInstruments({ labels }: { labels: string[] }) {
 
   const angle = -90 + i * 60 + 30; // needle points at the middle of segment i
   return (
-    <div ref={root} aria-hidden className="hi pointer-events-none absolute inset-0 -z-[5] text-paper">
+    <div ref={root} aria-hidden className="hi pointer-events-none absolute inset-0 -z-[5] text-navy">
       {/* tracking box */}
       <div className="hi-track absolute">
         {["left-0 top-0 border-l-2 border-t-2", "right-0 top-0 border-r-2 border-t-2", "bottom-0 left-0 border-b-2 border-l-2", "bottom-0 right-0 border-b-2 border-r-2"].map((c) => (
-          <span key={c} className={`absolute size-5 border-paper ${c}`} />
+          <span key={c} className={`absolute size-5 border-navy ${c}`} />
         ))}
-        <span className="absolute inset-0 border border-paper/45" />
-        <span key={i} className="hi-tag absolute -top-px left-0 -translate-y-full whitespace-nowrap border border-paper/80 bg-navy/35 px-2.5 py-1 text-[13px] font-medium text-paper backdrop-blur-[2px]">
+        <span className="absolute inset-0 border border-navy/35" />
+        <span key={i} className="hi-tag absolute -top-px left-0 -translate-y-full whitespace-nowrap bg-navy px-2.5 py-1 text-[13px] font-medium text-paper">
           <span className="mr-2 font-mono text-[10px] tracking-[0.14em] text-paper">0{i + 1}/06</span>
           {labels[i]}
         </span>
-        <span className="absolute left-[38%] top-[44%] size-2 rounded-full bg-paper shadow-[0_0_0_6px_rgba(252,252,253,.25)]" />
-        <span className="hi-ping absolute left-[38%] top-[44%] size-2 rounded-full border border-paper" />
+        <span className="absolute left-[38%] top-[44%] size-2 rounded-full bg-navy shadow-[0_0_0_6px_rgba(49,49,104,.18)]" />
+        <span className="hi-ping absolute left-[38%] top-[44%] size-2 rounded-full border border-navy" />
       </div>
 
       {/* dial */}
@@ -74,8 +74,8 @@ export function HeroInstruments({ labels }: { labels: string[] }) {
       </svg>
 
       {/* signal chart */}
-      <div className="hi-chart absolute rounded-[3px] border border-paper/80 bg-navy/25 backdrop-blur-[2px]">
-        <span className="absolute left-2 top-1.5 font-mono text-[10px] tracking-[0.08em] text-paper/90">NX · delivery signal</span>
+      <div className="hi-chart absolute rounded-[3px] border border-navy/40 bg-paper/55 backdrop-blur-[3px]">
+        <span className="absolute left-2 top-1.5 font-mono text-[10px] tracking-[0.08em] text-navy">NX · delivery signal</span>
         <svg viewBox="0 0 240 130" preserveAspectRatio="none" className="absolute inset-0 size-full">
           {[60, 120, 180].map((x) => (
             <line key={x} x1={x} y1="24" x2={x} y2="118" stroke="currentColor" strokeOpacity=".5" strokeDasharray="2 4" vectorEffect="non-scaling-stroke" />
@@ -84,7 +84,7 @@ export function HeroInstruments({ labels }: { labels: string[] }) {
           <path className="hi-line hi-line-b" pathLength={1} d="M6 110 C 30 104, 50 112, 70 100 S 110 96, 130 88 S 170 84, 190 70 S 220 62, 234 58" fill="none" stroke="currentColor" strokeOpacity=".6" strokeWidth="1.2" vectorEffect="non-scaling-stroke" />
         </svg>
         {["discover", "plan", "build", "scale"].map((t, k) => (
-          <span key={t} className="absolute bottom-1 font-mono text-[9px] text-paper/85" style={{ left: `${k * 25 + 3}%` }}>
+          <span key={t} className="absolute bottom-1 font-mono text-[9px] text-navy/80" style={{ left: `${k * 25 + 3}%` }}>
             {t}
           </span>
         ))}
