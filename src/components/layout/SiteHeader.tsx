@@ -161,9 +161,12 @@ function MobileMenu({ open, pathname, onClose }: { open: boolean; pathname: stri
 export function SiteHeader({ icons = {} }: { icons?: Record<string, ReactNode> }) {
   const pathname = usePathname() || "/";
   const [markedLight, setMarkedLight] = useState(false);
+  const [glassTop, setGlassTop] = useState(false); // light hero that the header floats over (home)
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- read the page marker after each navigation
-    setMarkedLight(!!document.querySelector("[data-light-top]"));
+    const m = document.querySelector("[data-light-top]");
+    setMarkedLight(!!m);
+    setGlassTop(m?.getAttribute("data-light-top") === "glass");
   }, [pathname]);
   const lightTop = markedLight || LIGHT_TOP.some((p) => pathname.startsWith(p));
   const [scrolled, setScrolled] = useState(false);
@@ -245,7 +248,7 @@ export function SiteHeader({ icons = {} }: { icons?: Record<string, ReactNode> }
     <header
       ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow,color] duration-300 ${hidden && !menu && !panel ? "-translate-y-full" : ""} ${
-        menu ? "bg-ink text-paper" : solid ? "border-b border-ink/[.07] bg-paper/95 text-ink backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-gradient-to-b from-ink/55 to-transparent text-paper"
+        menu ? "bg-ink text-paper" : glassTop && !scrolled ? "border-b border-transparent bg-transparent text-ink" : solid ? "border-b border-ink/[.07] bg-paper/95 text-ink backdrop-blur-xl backdrop-saturate-150" : "border-b border-transparent bg-gradient-to-b from-ink/55 to-transparent text-paper"
       }`}
       style={{ height: "var(--header-h)" }}
       onMouseLeave={scheduleClose}

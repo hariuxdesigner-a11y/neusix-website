@@ -59,7 +59,7 @@ export function VideoBackground({
   /** px the media drifts inside its frame while the section scrolls by (0 = off) */
   parallax?: number;
   /** "duotone": grade the footage to one settled NeuSix indigo (home hero) */
-  grade?: "none" | "duotone";
+  grade?: "none" | "duotone" | "light";
 }) {
   const m = MEDIA[id];
   const s = mediaSrc(id);
@@ -140,7 +140,7 @@ export function VideoBackground({
       <div
         ref={layer}
         className="absolute inset-x-0 will-change-transform"
-        style={{ ...(parallax ? { top: -parallax, bottom: -parallax } : { top: 0, bottom: 0 }), ...(grade === "duotone" ? { filter: "grayscale(1) contrast(1.12) brightness(.92)" } : {}) }}
+        style={{ ...(parallax ? { top: -parallax, bottom: -parallax } : { top: 0, bottom: 0 }), ...(grade === "duotone" ? { filter: "grayscale(1) contrast(1.12) brightness(.92)" } : grade === "light" ? { filter: "grayscale(1) contrast(1.18) brightness(1.06)" } : {}) }}
       >
       {m.ready ? (
         <>
@@ -174,6 +174,13 @@ export function VideoBackground({
           {/* one settled hue: greyscale footage recoloured to NeuSix indigo, then deepened */}
           <div className="absolute inset-0 mix-blend-color" style={{ background: "#6d6eb5" }} />
           <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#9fa0cf" }} />
+        </>
+      )}
+      {grade === "light" && (
+        <>
+          {/* light single-hue grade: shadows lift to NeuSix lilac, highlights stay near-white */}
+          <div className="absolute inset-0 mix-blend-screen" style={{ background: "#6466b4" }} />
+          <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#dcdcf2" }} />
         </>
       )}
       {overlay !== "none" && <div className="absolute inset-0" style={{ background: OVERLAYS[overlay] }} />}

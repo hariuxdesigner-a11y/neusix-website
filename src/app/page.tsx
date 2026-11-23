@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { VideoHero } from "@/components/cinematic/VideoHero";
 import { ProofStrip } from "@/components/cinematic/ProofStrip";
 import { StatementBand, VideoCtaCard, SectionHead } from "@/components/cinematic/Bands";
 import { VideoTabs } from "@/components/cinematic/VideoTabs";
 import { ApproachBand, OutcomeShowcase, ResourcesTeaser, ServiceShowcase, WhyBand } from "@/components/cinematic/HomeBlocks";
 import { HOME_OUTCOMES } from "@/content/services";
-import { getCaseStudy } from "@/content/case-studies";
 import { SITE } from "@/content/site";
 import { FAQS } from "@/content/extras";
 import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
 import { AnimIcon, type AnimIconName } from "@/components/icons/AnimIcon";
-import { HeroSix } from "@/components/cinematic/HeroSix";
+import { HomeHero } from "@/components/cinematic/HomeHero";
 import { AgentPrimitives } from "@/components/cinematic/AgentPrimitives";
 import { SERVICES } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
@@ -27,19 +25,19 @@ const COMPETENCIES = [
 ] as const satisfies readonly { label: string; media: string; icon: AnimIconName }[];
 
 export default function HomePage() {
-  const featured = getCaseStudy("logistics-ports")!;
   return (
     <>
-      <VideoHero
-        media="home-hero"
-        grade="duotone"
-        overlayArt={<HeroSix labels={SERVICES.map((s) => s.name)} />}
+      <HomeHero
+        media="ind-manufacturing"
         eyebrow="Shipping Impact"
         title="Harnessing AI to create relevance, not just competence"
+        lede="We modernize systems, redesign how work gets done, and deploy production-grade AI that delivers measurable business impact."
         primary={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondary={{ label: "Explore Services", href: "/services/services-neusix" }}
-        pill={{ label: `Case Study | ${featured.industry}`, title: featured.title, href: `/case-studies/${featured.slug}` }}
+        labels={SERVICES.map((s) => s.name)}
+        next={{ label: "See how we deliver", href: "#after-hero" }}
       />
+      <div id="after-hero" className="scroll-mt-[var(--header-h)]" />
 
       <ClientMarquee />
 
@@ -80,7 +78,7 @@ export default function HomePage() {
       <IndustriesStrip />
       <ApproachBand />
       <OutcomeShowcase items={HOME_OUTCOMES} />
-      <ImpactCases exclude={featured.slug} />
+      <ImpactCases />
       <WhyBand />
       <FaqSection items={FAQS} />
       <VideoCtaCard />
