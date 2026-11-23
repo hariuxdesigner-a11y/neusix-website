@@ -83,7 +83,6 @@ function MegaPanel({ panel, id, onNavigate, icons }: { panel: Panel; id: string;
                   {icons[it.href] ? (
                     <span aria-hidden className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-mist transition-colors duration-200 group-hover:bg-paper group-hover:ring-1 group-hover:ring-ink/10">
                       <span className="size-9 text-brand">{icons[it.href]}</span>
-                      {it.accent && <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full ring-2 ring-paper" style={{ background: it.accent }} />}
                     </span>
                   ) : (
                     <span aria-hidden className="mt-1.5 size-2 shrink-0 rounded-full bg-lilac" />

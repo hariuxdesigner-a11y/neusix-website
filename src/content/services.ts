@@ -344,22 +344,12 @@ export const COMMERCIAL_NOTE = "The right model depends on your internal capabil
 
 export const HOME_OUTCOMES = SERVICES[0].outcomes;
 
-/** Darker versions of the accents for icons and small graphics on white (≥ 3:1 contrast). */
-export const ACCENT_INK: Record<Accent, string> = {
-  purple: "#5a5ba6",
-  violet: "#8a4e96",
-  orange: "#c8541f",
-  yellow: "#b56a0e",
-  red: "#c23434",
-  green: "#4a7f38",
-};
-
-/** Brand accent colours used per service (page theme, cards, menu). */
-export const ACCENT_HEX: Record<Accent, string> = {
-  purple: "#6d6eb5",
-  violet: "#995ba5",
-  orange: "#ef703d",
-  yellow: "#f6a042",
-  red: "#d43c3c",
-  green: "#649e4f",
-};
+/**
+ * One NeuSix colour system for every service page (Nov 2026: per-service colours removed for
+ * consistency). The Accent keys stay on each service so a future theme could bring them back,
+ * but every key now resolves to the brand palette.
+ */
+const BRAND_ACCENT = "#6d6eb5"; // lilac: lines, bars, soft washes
+const BRAND_ACCENT_INK = "#403e8e"; // brand indigo: icons and small graphics on white (AA)
+export const ACCENT_INK: Record<Accent, string> = { purple: BRAND_ACCENT_INK, violet: BRAND_ACCENT_INK, orange: BRAND_ACCENT_INK, yellow: BRAND_ACCENT_INK, red: BRAND_ACCENT_INK, green: BRAND_ACCENT_INK };
+export const ACCENT_HEX: Record<Accent, string> = { purple: BRAND_ACCENT, violet: BRAND_ACCENT, orange: BRAND_ACCENT, yellow: BRAND_ACCENT, red: BRAND_ACCENT, green: BRAND_ACCENT };

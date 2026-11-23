@@ -111,9 +111,8 @@ export function UseCaseThemes({ s }: { s: Service }) {
         </h2>
         <ul className="stagger mx-auto mt-10 flex max-w-[1000px] flex-wrap justify-center gap-3">
           {s.useCaseThemes.map((t) => (
-            <li key={t} className="flex items-center gap-2.5 rounded-full border border-lilac-soft bg-paper px-5 py-3 text-sm sm:text-base">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/radial-button-bullet.svg" alt="" width={20} height={20} className="size-5" />
+            <li key={t} className="flex items-center gap-3 rounded-full border border-ink/10 bg-paper px-5 py-3 text-sm text-ink transition-colors hover:border-navy/40 sm:text-base">
+              <span aria-hidden className="size-2 shrink-0 rounded-full bg-orange ring-4 ring-orange/15" />
               {t}
             </li>
           ))}
