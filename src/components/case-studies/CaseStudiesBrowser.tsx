@@ -27,15 +27,34 @@ export function CaseStudiesBrowser() {
 
   return (
     <>
-      <section aria-label="Filter case studies" className="relative isolate overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/line-02-new.svg" alt="" aria-hidden className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-[70%] w-full -translate-y-1/2 object-fill opacity-35" />
-        <div className="container-x py-[clamp(48px,6vw,96px)]">
-          <div className="mx-auto grid max-w-[1100px] gap-10">
+      <section aria-labelledby="cs-filter-title" className="container-x pb-[clamp(32px,4vw,56px)] pt-[clamp(40px,5vw,80px)]">
+        <div className="reveal rounded-card bg-mist/70 p-[clamp(20px,3vw,40px)] ring-1 ring-ink/5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h2 id="cs-filter-title" className="t-h4">
+              Filter case studies
+            </h2>
+            <p className="text-sm text-slate" aria-live="polite">
+              {active ? `${list.length} of ${CASE_STUDIES.length} match` : `${CASE_STUDIES.length} case studies`}
+              {active ? (
+                <>
+                  {" · "}
+                  <button type="button" className="font-medium text-navy underline underline-offset-4 hover:text-brand" onClick={() => setSel({ industry: [], services: [], themes: [] })}>
+                    Clear all
+                  </button>
+                </>
+              ) : null}
+            </p>
+          </div>
+          <div className="mt-6 divide-y divide-ink/10 border-t border-ink/10">
             {(Object.keys(FILTER_GROUPS) as Key[]).map((k) => (
-              <fieldset key={k} className="reveal text-center">
-                <legend className="t-h3 mx-auto">{LABELS[k]}</legend>
-                <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+              <fieldset key={k} className="grid gap-3 py-5 md:grid-cols-[140px_minmax(0,1fr)] md:items-start md:gap-6">
+                <legend className="contents">
+                  <span className="flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+                    {LABELS[k]}
+                    {sel[k].length > 0 && <span className="rounded-full bg-navy px-1.5 text-[10px] leading-4 text-paper">{sel[k].length}</span>}
+                  </span>
+                </legend>
+                <div className="flex flex-wrap gap-2">
                   {FILTER_GROUPS[k].map((v) => {
                     const on = sel[k].includes(v);
                     return (
@@ -44,8 +63,17 @@ export function CaseStudiesBrowser() {
                         type="button"
                         aria-pressed={on}
                         onClick={() => toggle(k, v)}
-                        className={`min-h-10 rounded-full px-4 py-2 text-sm transition-colors ${on ? "bg-navy text-white" : "bg-mist-2 text-ink hover:bg-lilac-soft"}`}
+                        className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-sm transition-colors ${
+                          on ? "border-ink bg-ink text-paper" : "border-ink/10 bg-paper text-ink hover:border-navy/50"
+                        }`}
                       >
+                        {on ? (
+                          <svg aria-hidden viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3.5 8.5l3 3 6-7" />
+                          </svg>
+                        ) : (
+                          <span aria-hidden className="size-1.5 rounded-full bg-lilac" />
+                        )}
                         {v}
                       </button>
                     );
@@ -62,16 +90,6 @@ export function CaseStudiesBrowser() {
           <h2 id="cs-list-title" className="t-h2">
             Case studies
           </h2>
-          <p className="text-sm text-slate" aria-live="polite">
-            {active ? (
-              <>
-                {list.length} of {CASE_STUDIES.length} shown ·{" "}
-                <button type="button" className="underline underline-offset-4 hover:text-brand" onClick={() => setSel({ industry: [], services: [], themes: [] })}>
-                  Clear filters
-                </button>
-              </>
-            ) : null}
-          </p>
         </div>
         {list.length ? (
           <ul className="stagger mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
