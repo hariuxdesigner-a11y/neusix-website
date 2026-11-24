@@ -391,7 +391,28 @@ html.lenis, html.lenis body { height: auto; }
   padding-block: 4px;
 }
 .lib-track::-webkit-scrollbar { display: none; }
-.lib-item { animation: lib-in .45s cubic-bezier(.2,.7,.2,1) both; }
-@keyframes lib-in { from { opacity: 0; transform: translateY(8px); } }
-@media (prefers-reduced-motion: reduce) { .lib-item { animation: none; } }
-.lib-chips { scrollbar-width: none; } .lib-chips::-webkit-scrollbar { display: none; }
+
+/* Microservices library: animated name cloud on a navy panel */
+.lib-cloud {
+  background:
+    radial-gradient(60% 70% at 38% 50%, rgb(64 62 142 / .55), transparent 70%),
+    radial-gradient(40% 50% at 95% 10%, rgb(109 110 181 / .25), transparent 70%),
+    linear-gradient(160deg, #24244f 0%, var(--color-navy) 55%, #1c1c40 100%);
+}
+.lib-pill {
+  position: absolute; display: inline-flex; align-items: center; gap: 8px;
+  height: 34px; padding: 0 14px; border-radius: 999px; white-space: nowrap;
+  font-size: 14px; font-weight: 500; color: var(--color-paper);
+  background: rgb(49 49 104 / .72); border: 1px solid rgb(217 218 242 / .22);
+  box-shadow: 0 6px 20px -8px rgb(10 10 30 / .5);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: opacity .52s ease, filter .52s ease, translate .52s ease;
+}
+.lib-pill > i { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--color-lilac-soft); }
+.lib-pill.is-out { opacity: 0; filter: blur(4px); translate: 0 6px; }
+@media (max-width: 639px) { .lib-pill { height: 30px; font-size: 12.5px; padding: 0 11px; } }
+.lib-count {
+  background: linear-gradient(100deg, #fff 10%, var(--color-lilac-soft) 55%, #8b8dcf 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+@media (prefers-reduced-motion: reduce) { .lib-pill { transition: none; } }
