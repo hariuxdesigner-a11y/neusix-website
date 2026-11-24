@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { WordRise } from "@/components/motion/WordRise";
-import { VideoBackground } from "@/components/media/VideoBackground";
 import type { MediaId } from "@/content/media";
-import { HeroInstruments } from "./HeroInstruments";
+import { HeroStage } from "./HeroStage";
 
 type Cta = { label: string; href: string };
 
@@ -21,7 +20,7 @@ export function HomeHero({
   labels,
   next,
 }: {
-  media: MediaId;
+  media: MediaId[];
   eyebrow: string;
   title: string;
   lede: string;
@@ -33,13 +32,12 @@ export function HomeHero({
   return (
     <section aria-labelledby="page-title" data-light-top="glass" className="px-[clamp(8px,.9vw,14px)] pt-[clamp(8px,.9vw,14px)]">
       <div className="home-hero relative isolate flex min-h-[600px] flex-col overflow-hidden rounded-[clamp(18px,2vw,30px)] bg-lilac-soft [height:calc(100svh-clamp(8px,.9vw,14px))]">
-        <VideoBackground id={media} overlay="none" grade="light" priority />
         {/* scan lines + soft light behind the copy */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-[6] bg-[radial-gradient(58%_52%_at_50%_52%,rgba(252,252,253,.82),rgba(252,252,253,.45)_55%,rgba(252,252,253,.12)_85%)]" />
         {/* light veil under the floating header and over the bottom prompt */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-[4] h-[150px] bg-gradient-to-b from-paper/85 via-paper/45 to-transparent" />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-[4] h-[120px] bg-gradient-to-t from-paper/70 to-transparent" />
-        <HeroInstruments labels={labels} />
+        <HeroStage media={media} labels={labels} />
 
         <div className="container-x relative flex flex-1 flex-col items-center justify-center pb-[clamp(72px,9vh,110px)] pt-[calc(var(--header-h)+24px)] text-center">
           <p className="eyebrow rise flex items-center gap-3 text-navy">

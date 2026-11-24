@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 
 /**
  * Thin white "instrument" overlays for the home banner, in the spirit of a computer-vision
@@ -9,31 +8,12 @@ import { useEffect, useRef, useState } from "react";
  *    NeuSix service line (01–06),
  *  - a dial with six segments whose needle steps to the active service,
  *  - a small signal chart for Discover → Plan → Build → Scale that redraws on a loop.
- * Decorative (aria-hidden). Pauses off-screen; static for prefers-reduced-motion.
+ * Decorative (aria-hidden). Driven by HeroStage, which also dissolves the footage on each step.
  */
-const STEP = 2600;
-
-export function HeroInstruments({ labels }: { labels: string[] }) {
-  const [i, setI] = useState(0);
-  const root = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let visible = true;
-    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
-    if (root.current) io.observe(root.current);
-    const id = setInterval(() => {
-      if (visible && !document.hidden) setI((n) => (n + 1) % 6);
-    }, STEP);
-    return () => {
-      clearInterval(id);
-      io.disconnect();
-    };
-  }, []);
-
+export function HeroInstruments({ labels, index: i }: { labels: string[]; index: number }) {
   const angle = -90 + i * 60 + 30; // needle points at the middle of segment i
   return (
-    <div ref={root} aria-hidden className="hi pointer-events-none absolute inset-0 -z-[5] text-navy">
+    <div aria-hidden className="hi pointer-events-none absolute inset-0 -z-[5] text-navy">
       {/* tracking box */}
       <div className="hi-track absolute">
         {["left-0 top-0 border-l-2 border-t-2", "right-0 top-0 border-r-2 border-t-2", "bottom-0 left-0 border-b-2 border-l-2", "bottom-0 right-0 border-b-2 border-r-2"].map((c) => (

@@ -11,6 +11,7 @@ import { AnimIcon, type AnimIconName } from "@/components/icons/AnimIcon";
 import { HomeHero } from "@/components/cinematic/HomeHero";
 import { AgentPrimitives } from "@/components/cinematic/AgentPrimitives";
 import { SERVICES } from "@/content/services";
+import type { MediaId } from "@/content/media";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/");
@@ -28,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero
-        media="ind-manufacturing"
+        media={SERVICES.map((s) => `svc-${s.slug}` as MediaId)}
         eyebrow="Shipping Impact"
         title="Harnessing AI to create relevance, not just competence"
         lede="We modernize systems, redesign how work gets done, and deploy production-grade AI that delivers measurable business impact."
