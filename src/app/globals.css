@@ -416,3 +416,26 @@ html.lenis, html.lenis body { height: auto; }
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 @media (prefers-reduced-motion: reduce) { .lib-pill { transition: none; } }
+
+/* Our competencies: feature card (lilac wash over the clip, frosted selector) */
+.comp-veil {
+  background:
+    radial-gradient(70% 90% at 0% 100%, rgb(217 218 242 / .9), transparent 70%),
+    linear-gradient(180deg, rgb(225 226 246 / .9) 0%, rgb(225 226 246 / .82) 55%, rgb(225 226 246 / .94) 100%);
+}
+@media (min-width: 1024px) {
+  .comp-veil {
+    background:
+      linear-gradient(90deg, rgb(225 226 246 / .97) 0%, rgb(225 226 246 / .9) 38%, rgb(225 226 246 / .55) 68%, rgb(225 226 246 / .3) 100%),
+      linear-gradient(0deg, rgb(225 226 246 / .85) 0%, transparent 30%);
+  }
+}
+.comp-glass {
+  background: rgb(252 252 253 / .38);
+  border: 1px solid rgb(252 252 253 / .7);
+  box-shadow: 0 20px 50px -24px rgb(15 15 31 / .35);
+  backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+.comp-swap { animation: comp-swap .6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes comp-swap { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) { .comp-swap { animation: none; } }

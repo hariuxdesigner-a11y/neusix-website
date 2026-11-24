@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { ProofStrip } from "@/components/cinematic/ProofStrip";
 import { StatementBand, VideoCtaCard, SectionHead } from "@/components/cinematic/Bands";
-import { VideoTabs } from "@/components/cinematic/VideoTabs";
+import { CompetencyShowcase, type Competency } from "@/components/cinematic/CompetencyShowcase";
 import { ApproachBand, OutcomeShowcase, ResourcesTeaser, ServiceShowcase, WhyBand } from "@/components/cinematic/HomeBlocks";
 import { HOME_OUTCOMES } from "@/content/services";
 import { SITE } from "@/content/site";
 import { FAQS } from "@/content/extras";
 import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
-import { AnimIcon, type AnimIconName } from "@/components/icons/AnimIcon";
 import { HomeHero } from "@/components/cinematic/HomeHero";
 import { ServiceLibrary } from "@/components/cinematic/ServiceLibrary";
 import { SERVICES, serviceClip } from "@/content/services";
@@ -15,15 +14,67 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/");
 
-const COMPETENCIES = [
-  { label: "Extended Reality", media: "comp-xr", icon: "xr" },
-  { label: "Enterprise Automation", media: "comp-automation", icon: "automation" },
-  { label: "Robotics", media: "comp-robotics", icon: "robotics" },
-  { label: "Quantum Computing", media: "comp-quantum", icon: "quantum" },
-  { label: "Block Chain", media: "comp-blockchain", icon: "blockchain" },
-  { label: "IoT", media: "comp-iot", icon: "iot" },
-] as const satisfies readonly { label: string; media: string; icon: AnimIconName }[];
-
+const COMPETENCIES: Competency[] = [
+  {
+    label: "Extended Reality",
+    code: "XR",
+    media: "comp-xr",
+    icon: "xr",
+    title: "See the work before it exists.",
+    body: "We build AR, VR and mixed-reality tools for training, remote assistance and design review, so teams can rehearse, inspect and decide inside a faithful model of the real thing.",
+    uses: ["Immersive training", "Remote expert assistance", "Spatial design review"],
+    area: "AR / VR / XR / MR",
+  },
+  {
+    label: "Enterprise Automation",
+    code: "AUT",
+    media: "comp-automation",
+    icon: "automation",
+    title: "Work that runs itself, with people in charge.",
+    body: "We combine document AI, agents and workflow orchestration to take repetitive steps out of finance, operations and service, with approvals and audit trails built in.",
+    uses: ["Document processing", "Agentic workflows", "Exception handling"],
+    area: "Enterprise AI",
+  },
+  {
+    label: "Robotics",
+    code: "ROB",
+    media: "comp-robotics",
+    icon: "robotics",
+    title: "Machines that see, plan and act safely.",
+    body: "From perception to motion planning, we build the software that lets robots, drones and autonomous equipment work alongside people on the floor and in the field.",
+    uses: ["Pick and inspect", "Autonomous navigation", "Teleoperation"],
+    area: "Physical AI",
+  },
+  {
+    label: "Quantum Computing",
+    code: "QC",
+    media: "comp-quantum",
+    icon: "quantum",
+    title: "Ready for the next class of compute.",
+    body: "We help teams find the optimization and simulation problems where quantum and quantum-inspired methods could pay off, and run focused pilots that test them honestly.",
+    uses: ["Readiness assessment", "Optimization pilots", "Quantum-inspired solvers"],
+  },
+  {
+    label: "Blockchain",
+    code: "BCH",
+    media: "comp-blockchain",
+    icon: "blockchain",
+    title: "Records every party can trust.",
+    body: "We design shared-ledger workflows for provenance, verifiable credentials and settlement, so partners can exchange data without reconciling it all over again.",
+    uses: ["Supply-chain provenance", "Verifiable credentials", "Tokenized assets"],
+    area: "Blockchain",
+  },
+  {
+    label: "IoT",
+    code: "IOT",
+    media: "comp-iot",
+    icon: "iot",
+    title: "Every asset, connected and understood.",
+    body: "We connect sensors and machines from plant floor to field, stream their data reliably, and turn it into alerts, dashboards and digital twins.",
+    uses: ["Condition monitoring", "Fleet telemetry", "Remote control"],
+    area: "IoT",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -70,7 +121,7 @@ export default function HomePage() {
         <div className="container-x">
           <SectionHead id="competencies-title" title="Our competencies" />
           <div className="mt-[clamp(32px,4vw,56px)]">
-            <VideoTabs tabs={COMPETENCIES.map((c) => ({ ...c, icon: <AnimIcon name={c.icon} className="size-full" /> }))} />
+            <CompetencyShowcase items={COMPETENCIES} />
           </div>
         </div>
       </section>

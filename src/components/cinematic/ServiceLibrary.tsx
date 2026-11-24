@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LIBRARY_AREAS, LIBRARY_TOTAL } from "@/content/microservices";
 import { LibraryCloud } from "./LibraryCloud";
+import { LIBRARY_FOCUS_EVENT } from "./CompetencyShowcase";
 import { LIBRARY_DRAWINGS } from "./LibraryDrawings";
 import { SectionHead } from "./Bands";
 
@@ -38,6 +39,17 @@ export function ServiceLibrary() {
       clearInterval(id);
       io.disconnect();
     };
+  }, []);
+
+  // other sections (e.g. Our competencies) can focus the cloud on an area
+  useEffect(() => {
+    const on = (e: Event) => {
+      const a = (e as CustomEvent<string>).detail;
+      setArea(a);
+      catalogue.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+    window.addEventListener(LIBRARY_FOCUS_EVENT, on);
+    return () => window.removeEventListener(LIBRARY_FOCUS_EVENT, on);
   }, []);
 
   const scrollBy = (dir: 1 | -1) => {
