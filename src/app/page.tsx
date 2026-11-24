@@ -97,7 +97,7 @@ export default function HomePage() {
         stats={[
           { value: "10+", label: "engagements delivered" },
           { value: "98%", label: "client satisfaction" },
-          { value: "15+", label: "years applied experience" },
+          { value: "160+", label: "years of combined applied research experience" },
         ]}
       />
 
