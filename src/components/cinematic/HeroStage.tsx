@@ -16,9 +16,15 @@ export const HERO_STEP = 2600; // ms per service line
 
 export function HeroStage({ media, labels }: { media: MediaId[]; labels: string[] }) {
   const [i, setI] = useState(0);
-  const [mounted, setMounted] = useState<Set<number>>(() => new Set([0, 1]));
+  const [mounted, setMounted] = useState<Set<number>>(() => new Set([0]));
   const root = useRef<HTMLDivElement>(null);
   const n = media.length;
+
+  // preload the second clip only once the page has settled (keeps the first paint light)
+  useEffect(() => {
+    const t = setTimeout(() => setMounted((m) => new Set([...m, 1])), 1800);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
