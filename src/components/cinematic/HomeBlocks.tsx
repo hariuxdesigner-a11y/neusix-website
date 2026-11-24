@@ -71,7 +71,7 @@ export function ApproachBand({
   return (
     <BlurStage media={media} labelledBy="approach-title">
       <div className="container-x pb-[clamp(88px,12vw,180px)] pt-[32svh]">
-        <SectionHead id="approach-title" eyebrow={title} title={sub} align="center" />
+        <SectionHead id="approach-title" eyebrow={title} title={sub} align="center" onMedia />
         <ol className="stagger mt-[clamp(48px,8vw,120px)] grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p, i) => (
             <li key={p.name} className="flex flex-col rounded-card bg-paper/95 p-6 shadow-[0_24px_60px_-34px_rgba(15,15,31,.4)] ring-1 ring-ink/5">

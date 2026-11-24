@@ -17,7 +17,7 @@ export default function ContactPage() {
       <Breadcrumbs items={[{ name: "Contact", path: "/contact-us" }]} />
       <JsonLd data={{ "@type": "ContactPage", name: "Contact NeuSix", url: `${SITE_URL}/contact-us`, isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` } }} />
     <section data-light-top className="relative isolate overflow-hidden text-ink">
-      <VideoBackground id="contact" overlay="dark" priority />
+      <VideoBackground id="contact" overlay="dark" grade="light" priority />
       <div className="container-x grid min-h-[100svh] gap-12 pb-[clamp(48px,7vw,112px)] pt-[calc(var(--header-h)+clamp(40px,6vw,96px))] md:grid-cols-[1fr_1.1fr] md:items-center md:gap-16 lg:gap-24">
         <div className="flex flex-col gap-12">
           <div>

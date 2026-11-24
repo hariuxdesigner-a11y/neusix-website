@@ -72,7 +72,7 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
           <div className="sticky top-[calc(var(--header-h)+24px)] isolate h-[calc(100svh-var(--header-h)-48px)] overflow-hidden rounded-[28px]">
             {items.map((ind, i) => (
               <div key={ind.media} className={`absolute inset-0 transition-opacity duration-700 ${i === active ? "opacity-100" : "opacity-0"}`}>
-                <VideoBackground id={ind.media} overlay="hero" active={i === active} className="!z-0" />
+                <VideoBackground id={ind.media} overlay="card" active={i === active} className="!z-0" />
               </div>
             ))}
             <div className="absolute inset-x-0 bottom-0 z-10 p-8">

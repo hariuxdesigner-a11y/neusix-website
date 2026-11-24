@@ -66,7 +66,7 @@ export function VideoTabs({ tabs, autoAdvance = 7000, dark = false }: { tabs: Vi
       >
         {tabs.map((tab, k) => (
           <div key={tab.media + k} className={`absolute inset-0 -z-10 transition-opacity duration-700 ${k === i ? "opacity-100" : "opacity-0"}`}>
-            <VideoBackground id={tab.media} overlay="hero" active={k === i} playOnMobile={k === i} />
+            <VideoBackground id={tab.media} overlay="card" active={k === i} playOnMobile={k === i} />
           </div>
         ))}
         <p className="eyebrow text-navy">{String(i + 1).padStart(2, "0")} / {String(tabs.length).padStart(2, "0")}</p>

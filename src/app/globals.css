@@ -378,7 +378,7 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ── Site-wide media tone: photos match the light lilac footage grade ────── */
 .tone { isolation: isolate; }
-.tone img { filter: grayscale(1) contrast(1.18) brightness(1.06); }
+.tone img { filter: grayscale(1) contrast(1.38) brightness(.98); }
 .tone::before, .tone::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.tone::before { background: #8b8dcf; mix-blend-mode: screen; }
-.tone::after { background: #e9e9f8; mix-blend-mode: multiply; }
+.tone::before { background: #5a5cab; mix-blend-mode: screen; }
+.tone::after { background: #dedef4; mix-blend-mode: multiply; }

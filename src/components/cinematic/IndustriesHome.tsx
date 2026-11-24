@@ -50,7 +50,7 @@ export function IndustriesHome({ items }: { items: Item[] }) {
               <MediaPoster id={it.media} className="size-full" sizes="(min-width: 1024px) 50vw, 94vw" />
             </div>
           ))}
-          <span className="absolute inset-0 z-[2] bg-gradient-to-t from-paper/95 via-paper/35 to-transparent" />
+          <span className="absolute inset-0 z-[2] bg-gradient-to-t from-paper/92 via-paper/0 via-45% to-transparent" />
           <span className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-4 p-[clamp(16px,2vw,28px)] text-ink">
             <span>
               <span className="block font-mono text-[11px] tracking-[0.16em] text-navy">

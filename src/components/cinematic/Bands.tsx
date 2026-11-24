@@ -81,7 +81,9 @@ export function VideoCtaCard({
   return (
     <section aria-labelledby="cta-title" className="container-x py-[clamp(48px,6vw,96px)]">
       <div className="reveal relative isolate flex min-h-[clamp(440px,60vw,640px)] flex-col justify-end overflow-hidden rounded-[clamp(18px,2.4vw,32px)] p-[clamp(24px,5vw,72px)] text-ink">
-        <VideoBackground id={media} overlay="hero" parallax={70} />
+        <VideoBackground id={media} overlay="none" parallax={70} />
+        {/* veil only behind the copy: from the left on wide screens, from the bottom on phones */}
+        <div aria-hidden className="absolute inset-0 -z-[2] bg-[linear-gradient(180deg,rgba(252,252,253,.3)_0%,rgba(252,252,253,.82)_42%,rgba(252,252,253,.92)_100%)] sm:bg-[linear-gradient(90deg,rgba(252,252,253,.9)_0%,rgba(252,252,253,.7)_38%,rgba(252,252,253,0)_68%)]" />
         <NArch strokeWidth={34} delay={300} className="absolute -bottom-[14%] right-[5%] -z-[1] h-[62%] text-navy/25 sm:h-[88%]" />
         <h2 id="cta-title" className="t-display max-w-[16ch]">
           {title}
@@ -112,6 +114,7 @@ export function SectionHead({
   text,
   align = "left",
   dark = false,
+  onMedia,
 }: {
   id: string;
   eyebrow?: string;
@@ -119,11 +122,13 @@ export function SectionHead({
   sub?: ReactNode;
   text?: ReactNode;
   align?: "left" | "center";
+  /** set when the heading sits over footage: darker eyebrow for contrast */
+  onMedia?: boolean;
   dark?: boolean;
 }) {
   return (
     <div className={`stagger ${align === "center" ? "mx-auto max-w-[820px] text-center" : "max-w-[820px]"}`}>
-      {eyebrow && <p className={`eyebrow ${dark ? "text-lilac-soft" : "text-brand"}`}>{eyebrow}</p>}
+      {eyebrow && <p className={`eyebrow ${dark ? "text-lilac-soft" : onMedia ? "font-semibold text-ink" : "text-brand"}`}>{eyebrow}</p>}
       <h2 id={id} className="t-h2 mt-3 text-balance !text-[clamp(1.9rem,1.3rem+2.4vw,3.25rem)] !leading-[1.08]">
         {title}
         {sub && <span className={`block ${dark ? "text-paper/75" : "text-ink/60"}`}>{sub}</span>}

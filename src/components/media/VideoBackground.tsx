@@ -4,15 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { useScrollProgress } from "@/components/motion/scroll";
 import { MEDIA, mediaSrc, type MediaId } from "@/content/media";
 
-type Overlay = "hero" | "dark" | "soft" | "light" | "none";
+type Overlay = "card" | "hero" | "dark" | "soft" | "light" | "none";
 
 const OVERLAYS: Record<Overlay, string> = {
   // Site-wide light tone (Nov 2026): all overlays are light veils for dark text.
   // hero: bottom/left-weighted veil for bottom-left copy
   hero: "linear-gradient(90deg, rgba(252,252,253,.6) 0%, rgba(252,252,253,.26) 45%, rgba(252,252,253,0) 72%), linear-gradient(180deg, rgba(252,252,253,.4) 0%, rgba(252,252,253,0) 28%, rgba(252,252,253,.22) 60%, rgba(252,252,253,.78) 100%)",
   dark: "linear-gradient(180deg, rgba(252,252,253,.62), rgba(252,252,253,.78))",
-  soft: "linear-gradient(180deg, rgba(252,252,253,.55), rgba(252,252,253,.92))",
+  soft: "linear-gradient(180deg, rgba(252,252,253,.34), rgba(252,252,253,.62) 55%, rgba(252,252,253,.86))",
   light: "linear-gradient(180deg, rgba(252,252,253,.2), rgba(252,252,253,.6))",
+  // in-page panels: clear footage, veil only where the copy sits (bottom)
+  card: "linear-gradient(180deg, rgba(252,252,253,0) 40%, rgba(252,252,253,.45) 68%, rgba(252,252,253,.9) 100%)",
   none: "none",
 };
 
@@ -48,7 +50,7 @@ export function VideoBackground({
   active = true,
   className = "",
   parallax = 0,
-  grade = "light",
+  grade = "rich",
 }: {
   id: MediaId;
   overlay?: Overlay;
@@ -60,7 +62,8 @@ export function VideoBackground({
   /** px the media drifts inside its frame while the section scrolls by (0 = off) */
   parallax?: number;
   /** "duotone": grade the footage to one settled NeuSix indigo (home hero) */
-  grade?: "none" | "duotone" | "light";
+  /** light = banners (airy, for copy on top); rich = everywhere else (same hue, more contrast) */
+  grade?: "none" | "duotone" | "light" | "rich";
 }) {
   const m = MEDIA[id];
   const s = mediaSrc(id);
@@ -141,7 +144,7 @@ export function VideoBackground({
       <div
         ref={layer}
         className="absolute inset-x-0 will-change-transform"
-        style={{ ...(parallax ? { top: -parallax, bottom: -parallax } : { top: 0, bottom: 0 }), ...(grade === "duotone" ? { filter: "grayscale(1) contrast(1.12) brightness(.92)" } : grade === "light" ? { filter: "grayscale(1) contrast(1.18) brightness(1.06)" } : {}) }}
+        style={{ ...(parallax ? { top: -parallax, bottom: -parallax } : { top: 0, bottom: 0 }), ...(grade === "duotone" ? { filter: "grayscale(1) contrast(1.12) brightness(.92)" } : grade === "light" ? { filter: "grayscale(1) contrast(1.18) brightness(1.06)" } : grade === "rich" ? { filter: "grayscale(1) contrast(1.38) brightness(.98)" } : {}) }}
       >
       {m.ready ? (
         <>
@@ -175,6 +178,14 @@ export function VideoBackground({
           {/* one settled hue: greyscale footage recoloured to NeuSix indigo, then deepened */}
           <div className="absolute inset-0 mix-blend-color" style={{ background: "#6d6eb5" }} />
           <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#9fa0cf" }} />
+        </>
+      )}
+      {grade === "rich" && (
+        <>
+          {/* same lilac hue as the banners, deeper shadows and crisper detail */}
+          <div className="absolute inset-0 mix-blend-screen" style={{ background: "#5a5cab" }} />
+          <div className="absolute inset-0 mix-blend-multiply" style={{ background: "#dedef4" }} />
+          <div className="media-scan absolute inset-0" />
         </>
       )}
       {grade === "light" && (
