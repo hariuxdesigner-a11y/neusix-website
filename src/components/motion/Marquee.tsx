@@ -52,12 +52,14 @@ export function Marquee({ children, speed = 40, className = "", gap = "clamp(40p
       className={`relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)] ${className}`}
       onMouseEnter={() => (hover.current = true)}
       onMouseLeave={() => (hover.current = false)}
+      onFocusCapture={() => (hover.current = true)}
+      onBlurCapture={() => (hover.current = false)}
     >
       <div ref={track} className="flex w-max will-change-transform motion-reduce:w-full motion-reduce:flex-wrap motion-reduce:justify-center">
         <div ref={first} className="flex shrink-0 items-center motion-reduce:shrink motion-reduce:flex-wrap motion-reduce:justify-center" style={{ gap, paddingRight: gap }}>
           {children}
         </div>
-        <div aria-hidden className="flex shrink-0 items-center motion-reduce:hidden" style={{ gap, paddingRight: gap }}>
+        <div aria-hidden inert className="flex shrink-0 items-center motion-reduce:hidden" style={{ gap, paddingRight: gap }}>
           {children}
         </div>
       </div>

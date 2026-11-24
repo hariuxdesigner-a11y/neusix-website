@@ -382,3 +382,16 @@ html.lenis, html.lenis body { height: auto; }
 .tone::before, .tone::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; }
 .tone::before { background: #5a5cab; mix-blend-mode: screen; }
 .tone::after { background: #dedef4; mix-blend-mode: multiply; }
+
+/* Microservices library carousel: native scroll-snap row aligned to the container gutter */
+.lib-track {
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding-inline: max(var(--gutter), calc((100vw - 1440px) / 2 + var(--gutter)));
+  scroll-padding-inline: max(var(--gutter), calc((100vw - 1440px) / 2 + var(--gutter)));
+  padding-block: 4px;
+}
+.lib-track::-webkit-scrollbar { display: none; }
+.lib-item { animation: lib-in .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes lib-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .lib-item { animation: none; } }
+.lib-chips { scrollbar-width: none; } .lib-chips::-webkit-scrollbar { display: none; }

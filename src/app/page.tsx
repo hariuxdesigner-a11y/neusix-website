@@ -9,7 +9,7 @@ import { FAQS } from "@/content/extras";
 import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
 import { AnimIcon, type AnimIconName } from "@/components/icons/AnimIcon";
 import { HomeHero } from "@/components/cinematic/HomeHero";
-import { AgentPrimitives } from "@/components/cinematic/AgentPrimitives";
+import { ServiceLibrary } from "@/components/cinematic/ServiceLibrary";
 import { SERVICES, serviceClip } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
 
@@ -64,7 +64,7 @@ export default function HomePage() {
         business impact.
       </StatementBand>
 
-      <AgentPrimitives />
+      <ServiceLibrary />
 
       <section aria-labelledby="competencies-title" className="section-y">
         <div className="container-x">
