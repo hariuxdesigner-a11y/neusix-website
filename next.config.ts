@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 
+// Review previews (Netlify sets NETLIFY=true, Vercel sets VERCEL=1) stay out of search engines.
+// Production (Hostinger) builds set neither, so the real site stays indexable.
+const isPreview = process.env.NETLIFY === "true" || process.env.VERCEL === "1";
+
 const nextConfig: NextConfig = {
   // Self-contained server bundle (.next/standalone): what Hostinger's Node.js hosting runs for Next.js.
-  output: "standalone",
+  // Vercel builds its own output, so the standalone bundle is skipped there.
+  ...(process.env.VERCEL ? {} : { output: "standalone" as const }),
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
@@ -39,9 +44,7 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-          // Review preview on Netlify (NETLIFY=true at build): keep it out of search engines.
-          // Production (Hostinger) builds don't set NETLIFY, so the real site stays indexable.
-          ...(process.env.NETLIFY === "true" ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : []),
+          ...(isPreview ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : []),
         ],
       },
       {
