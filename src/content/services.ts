@@ -1,3 +1,4 @@
+import type { MediaId } from "@/content/media";
 /* Service content: copied verbatim from the live service pages (17 Nov 2026).
    Each page shares one template; `accent` drives the page colour theme. */
 
@@ -353,3 +354,17 @@ const BRAND_ACCENT = "#6d6eb5"; // lilac: lines, bars, soft washes
 const BRAND_ACCENT_INK = "#403e8e"; // brand indigo: icons and small graphics on white (AA)
 export const ACCENT_INK: Record<Accent, string> = { purple: BRAND_ACCENT_INK, violet: BRAND_ACCENT_INK, orange: BRAND_ACCENT_INK, yellow: BRAND_ACCENT_INK, red: BRAND_ACCENT_INK, green: BRAND_ACCENT_INK };
 export const ACCENT_HEX: Record<Accent, string> = { purple: BRAND_ACCENT, violet: BRAND_ACCENT, orange: BRAND_ACCENT, yellow: BRAND_ACCENT, red: BRAND_ACCENT, green: BRAND_ACCENT };
+
+/**
+ * The footage that represents each service everywhere: home banner reel, the service page
+ * banner and the home service cards. Swap a line here to change a service's video site-wide.
+ */
+export const SERVICE_CLIP: Record<string, MediaId> = {
+  "ai-transformation-page": "svc-ai-transformation-page", // neural network
+  modernization: "svc-modernization", // data centre
+  "digital-transformation": "svc-digital-transformation", // digital payments interface
+  "offshore-development-center": "about-global", // earth at night: global delivery
+  "ai-center-of-excellence": "svc-ai-center-of-excellence", // team reviewing analytics
+  "software-engineering-services": "services-hero", // developers at work
+};
+export const serviceClip = (slug: string) => SERVICE_CLIP[slug] ?? (`svc-${slug}` as MediaId);

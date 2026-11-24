@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { MediaId } from "@/content/media";
-import { SERVICES, SERVICE_CARD_ORDER, APPROACH_DEFAULT, WHY_NEUSIX, type Outcome } from "@/content/services";
+import { SERVICES, SERVICE_CARD_ORDER, APPROACH_DEFAULT, WHY_NEUSIX, type Outcome, serviceClip } from "@/content/services";
 import { getCaseStudy } from "@/content/case-studies";
 import { SORTED_POSTS, WHITE_PAPERS } from "@/content/resources";
 import { PostCard } from "@/components/blog/PostCard";
@@ -35,7 +35,7 @@ export function ServiceShowcase({ title = "Our Services", eyebrow = "Services" }
             <li key={s.slug}>
               <Link href={s.href} className="group block">
                 <div className="relative">
-                  <MediaPoster id={`svc-${s.slug}` as MediaId} className="aspect-[4/3] rounded-[clamp(14px,1.6vw,22px)]" />
+                  <MediaPoster id={serviceClip(s.slug)} className="aspect-[4/3] rounded-[clamp(14px,1.6vw,22px)]" />
                   <span aria-hidden className="absolute left-4 top-4 h-1 w-10 rounded-full" style={{ background: ACCENT_HEX[s.accent] }} />
                   <span className="absolute bottom-4 right-4 flex size-14 items-center justify-center z-[3] rounded-2xl bg-paper/80 text-brand ring-1 ring-ink/10 backdrop-blur-md">
                     <AnimIcon name={SERVICE_ICON[s.slug]} className="size-9" />

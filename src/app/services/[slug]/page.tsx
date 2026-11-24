@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SERVICES, getService } from "@/content/services";
-import type { MediaId } from "@/content/media";
+import { SERVICES, getService, serviceClip } from "@/content/services";
 import { ACCENT_HEX, ServiceIntro, StageFit, UseCaseThemes, WhatWeDo } from "@/components/services/ServiceSections";
 import { WhatYouGet } from "@/components/services/WhatYouGet";
 import { LineIcon } from "@/components/motion/LineIcon";
@@ -57,7 +56,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         }}
       />
       <VideoHero
-        media={`svc-${s.slug}` as MediaId}
+        media={serviceClip(s.slug)}
         size="tall"
         eyebrow="Shipping Impact"
         accent={accent}

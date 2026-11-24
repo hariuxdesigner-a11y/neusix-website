@@ -4,6 +4,10 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 const base = process.argv[2] || "http://localhost:3000";
 const seo = fs.readFileSync(new URL("../src/content/seo.ts", import.meta.url), "utf8");
+// same service → footage map as src/content/services.ts (SERVICE_CLIP)
+const svcSrc = fs.readFileSync(new URL("../src/content/services.ts", import.meta.url), "utf8");
+const clipBlock = svcSrc.slice(svcSrc.indexOf("export const SERVICE_CLIP"));
+const CLIP = Object.fromEntries([...clipBlock.slice(0, clipBlock.indexOf("};")).matchAll(/"?([a-z-]+)"?: "([a-z0-9-]+)"/g)].map((m) => [m[1], m[2]]));
 const res = fs.readFileSync(new URL("../src/content/resources.ts", import.meta.url), "utf8");
 const only = process.env.ONLY ? new RegExp(process.env.ONLY) : null;
 const titleOf = (path) => {
@@ -15,7 +19,7 @@ const cards = [
   { key: "home", media: "home-hero", eyebrow: "Shipping Impact", title: "Harnessing AI to create relevance, not just competence" },
   { key: "services", media: "services-hero", eyebrow: "Services", title: "Services designed to ship measurable outcomes" },
   ...["ai-transformation-page", "modernization", "digital-transformation", "software-engineering-services", "ai-center-of-excellence", "offshore-development-center"].map((s) => ({
-    key: `svc-${s}`, media: `svc-${s}`, eyebrow: "Services", title: titleOf(`/services/${s}`),
+    key: `svc-${s}`, media: CLIP[s] ?? `svc-${s}`, eyebrow: "Services", title: titleOf(`/services/${s}`),
   })),
   { key: "industries", media: "industries-hero", eyebrow: "Industries", title: "AI transformation across industries built to survive the real world." },
   { key: "case-studies", media: "cases-hero", eyebrow: "Case Studies", title: "AI Transformation that moves from pilots to production" },

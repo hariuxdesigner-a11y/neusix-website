@@ -10,8 +10,7 @@ import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/compo
 import { AnimIcon, type AnimIconName } from "@/components/icons/AnimIcon";
 import { HomeHero } from "@/components/cinematic/HomeHero";
 import { AgentPrimitives } from "@/components/cinematic/AgentPrimitives";
-import { SERVICES } from "@/content/services";
-import type { MediaId } from "@/content/media";
+import { SERVICES, serviceClip } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/");
@@ -25,21 +24,12 @@ const COMPETENCIES = [
   { label: "IoT", media: "comp-iot", icon: "iot" },
 ] as const satisfies readonly { label: string; media: string; icon: AnimIconName }[];
 
-/** Home banner: the clip shown while each service line is "detected" (same order as SERVICES). */
-const HERO_CLIPS: Record<string, MediaId> = {
-  "ai-transformation-page": "svc-ai-transformation-page", // neural network
-  modernization: "svc-modernization", // data centre
-  "digital-transformation": "svc-digital-transformation", // digital payments interface
-  "offshore-development-center": "about-global", // earth at night: global delivery
-  "ai-center-of-excellence": "svc-ai-center-of-excellence", // team reviewing analytics
-  "software-engineering-services": "services-hero", // developers at work (the code-screen clip washes out in the light grade)
-};
 
 export default function HomePage() {
   return (
     <>
       <HomeHero
-        media={SERVICES.map((s) => HERO_CLIPS[s.slug] ?? (`svc-${s.slug}` as MediaId))}
+        media={SERVICES.map((s) => serviceClip(s.slug))}
         eyebrow="Shipping Impact"
         title="Harnessing AI to create relevance, not just competence"
         lede="We modernize systems, redesign how work gets done, and deploy production-grade AI that delivers measurable business impact."
