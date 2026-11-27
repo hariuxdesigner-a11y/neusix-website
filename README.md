@@ -88,7 +88,7 @@ docs/                          AUDIT.md, PLAN-V2-CINEMATIC.md, MEDIA-CREDITS.md,
 
 ## Environment variables
 
-See `.env.example`. The contact form needs **SMTP** (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_TO`)
+See `.env.example`. The contact form needs **SMTP** (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`; enquiries go to contact@neusix.com unless `CONTACT_TO` overrides it)
 and/or a **webhook** (`CONTACT_WEBHOOK_URL`). If neither is set, submissions show the original Webflow error message
 and nothing is reported as sent.
 

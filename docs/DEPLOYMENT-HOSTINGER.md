@@ -46,7 +46,7 @@ If the domain already has a website on the plan, remove that website first. The 
 | `SMTP_PORT` | `465` | SSL. If you get encryption errors, use `587` (STARTTLS) |
 | `SMTP_USER` | `website@neusix.com` | Full mailbox address |
 | `SMTP_PASS` | (mailbox password) | Keep secret; set only in hPanel |
-| `CONTACT_TO` | `hello@neusix.com` | Where enquiries arrive (comma-separate several) |
+| `CONTACT_TO` | `contact@neusix.com` | Where enquiries arrive (comma-separate several) |
 | `CONTACT_FROM` | `NeuSix Website <website@neusix.com>` | Optional; must be allowed by the SMTP account |
 | `CONTACT_WEBHOOK_URL` | `https://…` | Optional: also send each enquiry as JSON to a CRM/automation |
 

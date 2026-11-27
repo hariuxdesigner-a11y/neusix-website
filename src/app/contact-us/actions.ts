@@ -5,6 +5,9 @@ import { z } from "zod";
 import nodemailer from "nodemailer";
 import { INDUSTRIES, type ContactState } from "./shared";
 
+/** Where enquiries arrive. CONTACT_TO in the environment can override it (comma-separate several). */
+const DEFAULT_CONTACT_TO = "contact@neusix.com";
+
 
 
 const Schema = z.object({
@@ -69,9 +72,10 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   try {
     let delivered = false;
 
-    // Option A: SMTP (e.g. Hostinger business email). Configure SMTP_* and CONTACT_TO in the environment.
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO, CONTACT_FROM } = process.env;
-    if (SMTP_HOST && SMTP_USER && SMTP_PASS && CONTACT_TO) {
+    // Option A: SMTP (e.g. Hostinger business email). Configure SMTP_* in the environment.
+    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_FROM } = process.env;
+    const CONTACT_TO = process.env.CONTACT_TO || DEFAULT_CONTACT_TO;
+    if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
       const port = Number(SMTP_PORT || 465);
       const transport = nodemailer.createTransport({ host: SMTP_HOST, port, secure: port === 465, auth: { user: SMTP_USER, pass: SMTP_PASS } });
       await transport.sendMail({ from: CONTACT_FROM || SMTP_USER, to: CONTACT_TO, replyTo: d.email, subject, text, html });
@@ -90,7 +94,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     }
 
     if (!delivered) {
-      console.error("[contact] No delivery channel configured: set SMTP_* + CONTACT_TO and/or CONTACT_WEBHOOK_URL.");
+      console.error("[contact] No delivery channel configured: set SMTP_* and/or CONTACT_WEBHOOK_URL.");
       return { status: "error", message: FAIL, values };
     }
     return { status: "success", message: "Thank you! Your submission has been received!" };
