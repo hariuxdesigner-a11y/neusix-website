@@ -45,10 +45,10 @@ export function VideoHero({
   children?: ReactNode;
 }) {
   return (
-    <section aria-labelledby="page-title" data-light-top="glass" className="px-[clamp(8px,.9vw,14px)] pt-[clamp(8px,.9vw,14px)]">
+    <section aria-labelledby="page-title" data-light-top="glass">
       <div
-        className={`relative isolate flex flex-col justify-end overflow-hidden rounded-[clamp(18px,2vw,30px)] bg-lilac-soft text-ink ${
-          size === "full" ? "min-h-[clamp(560px,calc(100svh-14px),1080px)]" : "min-h-[clamp(520px,82svh,860px)]"
+        className={`relative isolate flex flex-col justify-end overflow-hidden bg-lilac-soft text-ink ${
+          size === "full" ? "min-h-[clamp(560px,100svh,1080px)]" : "min-h-[clamp(520px,82svh,860px)]"
         }`}
       >
         <VideoBackground id={media} overlay="hero" priority parallax={60} grade={grade === "duotone" ? "light" : (grade ?? "light")} />
