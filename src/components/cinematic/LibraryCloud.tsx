@@ -338,7 +338,7 @@ export function LibraryCloud({
   const info = area ? LIBRARY_AREAS.find((a) => a.area === area) : null;
 
   return (
-    <div className="grid items-center gap-[clamp(24px,3vw,48px)] lg:grid-cols-[minmax(0,1fr)_280px]">
+    <div className="grid items-center gap-[clamp(24px,3vw,48px)] lg:grid-cols-[280px_minmax(0,1fr)]">
       <div className="lib-cloud relative overflow-hidden rounded-[clamp(18px,2vw,28px)] text-paper">
         <div
           ref={stage}
@@ -380,7 +380,7 @@ export function LibraryCloud({
       </div>
 
       {/* count and context, on the page (outside the card) */}
-      <div className="flex flex-col gap-3">
+      <div className="order-first flex flex-col gap-3">
         <p className="eyebrow text-brand">{info ? info.label : "Services"}</p>
         <p
           className="lib-count font-sans text-[clamp(3.4rem,2.4rem+4vw,6rem)] font-semibold leading-none tracking-tight tabular-nums"
