@@ -360,11 +360,11 @@ export const ACCENT_HEX: Record<Accent, string> = { purple: BRAND_ACCENT, violet
  * banner and the home service cards. Swap a line here to change a service's video site-wide.
  */
 export const SERVICE_CLIP: Record<string, MediaId> = {
-  "ai-transformation-page": "svc-ai-transformation-page", // neural network
-  modernization: "svc-modernization", // data centre
-  "digital-transformation": "svc-digital-transformation", // digital payments interface
-  "offshore-development-center": "about-global", // earth at night: global delivery
-  "ai-center-of-excellence": "svc-ai-center-of-excellence", // team reviewing analytics
-  "software-engineering-services": "services-hero", // developers at work
+  "ai-transformation-page": "svc-ai-transformation-page", // team working with holographic AI data screens
+  modernization: "svc-modernization", // engineers upgrading a data centre
+  "digital-transformation": "svc-digital-transformation", // team running the business from tablet dashboards
+  "offshore-development-center": "svc-offshore-development-center", // diverse dedicated team at work
+  "ai-center-of-excellence": "svc-ai-center-of-excellence", // leadership team reviewing data on a whiteboard
+  "software-engineering-services": "svc-software-engineering-services", // developer at screens full of code
 };
 export const serviceClip = (slug: string) => SERVICE_CLIP[slug] ?? (`svc-${slug}` as MediaId);
