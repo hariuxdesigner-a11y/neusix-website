@@ -29,7 +29,7 @@ export const LIBRARY_FOCUS_EVENT = "neusix:library-focus";
  * clip behind a lilac wash, and three typical uses along the bottom. Auto-advances; pauses on
  * hover/focus. Library links carry real counts from the microservices library.
  */
-export function CompetencyShowcase({ items, autoAdvance = 7000 }: { items: Competency[]; autoAdvance?: number }) {
+export function CompetencyShowcase({ items, autoAdvance = 4500 }: { items: Competency[]; autoAdvance?: number }) {
   const [i, setI] = useState(0);
   const root = useRef<HTMLDivElement>(null);
   const auto = useAutoAdvance(root, autoAdvance > 0);
