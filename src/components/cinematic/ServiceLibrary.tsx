@@ -12,7 +12,7 @@ import { SectionHead } from "./Bands";
  * all 600 service names. Picking a card focuses the cloud on that area.
  */
 
-const AUTO_MS = 3800;
+const AUTO_MS = 2400;
 
 export function ServiceLibrary() {
   const track = useRef<HTMLDivElement>(null);
