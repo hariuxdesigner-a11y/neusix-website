@@ -4,6 +4,10 @@ import type { MediaId } from "./media";
 
 export const MEDIA_CREDITS: Partial<Record<MediaId, { source: string; url: string; license: string }>> = {
   "home-hero": { source: "Mixkit: 3d models of many connected floating points", url: "https://mixkit.co/free-stock-video/3d-models-of-many-connected-floating-points-31774/", license: "Mixkit Stock Video Free License" },
+  "hero-edge-ai": { source: "Mixkit: Chipset closeup", url: "https://mixkit.co/free-stock-video/chipset-closeup-101095/", license: "Mixkit Stock Video Free License" },
+  "hero-physical-ai": { source: "Mixkit: Robot working in a production line", url: "https://mixkit.co/free-stock-video/robot-working-in-a-production-line-47257/", license: "Mixkit Stock Video Free License" },
+  "hero-digital-twins": { source: "Mixkit: Virtual metropolis 3d loop video", url: "https://mixkit.co/free-stock-video/virtual-metropolis-3d-loop-video-30874/", license: "Mixkit Stock Video Free License" },
+  "hero-xr": { source: "Mixkit: Animation of futuristic devices", url: "https://mixkit.co/free-stock-video/animation-of-futuristic-devices-99786/", license: "Mixkit Stock Video Free License" },
   "home-purpose": { source: "Mixkit: Surveillance team looking at monitors", url: "https://mixkit.co/free-stock-video/surveillance-team-looking-at-monitors-23016/", license: "Mixkit Stock Video Free License" },
   "comp-xr": { source: "Mixkit: Man browsing holographic vr screens with gestures", url: "https://mixkit.co/free-stock-video/man-browsing-holographic-vr-screens-with-gestures-5427/", license: "Mixkit Stock Video Free License" },
   "comp-automation": { source: "Mixkit: Parcels on a conveyor belt", url: "https://mixkit.co/free-stock-video/parcels-on-a-conveyor-belt-20770/", license: "Mixkit Stock Video Free License" },

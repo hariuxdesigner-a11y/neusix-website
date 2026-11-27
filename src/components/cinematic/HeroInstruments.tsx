@@ -5,13 +5,16 @@
  * Thin white "instrument" overlays for the home banner, in the spirit of a computer-vision
  * annotation layer:
  *  - a tracking box with corner brackets drifting over the subject, tagged with the current
- *    NeuSix service line (01–06),
- *  - a dial with six segments whose needle steps to the active service,
+ *    current line (01, 02…),
+ *  - a dial with one segment per line whose needle steps to the active one,
  *  - a small signal chart for Discover → Plan → Build → Scale that redraws on a loop.
  * Decorative (aria-hidden). Driven by HeroStage, which also dissolves the footage on each step.
  */
 export function HeroInstruments({ labels, index: i }: { labels: string[]; index: number }) {
-  const angle = -90 + i * 60 + 30; // needle points at the middle of segment i
+  const n = labels.length;
+  const seg = 360 / n;
+  const pad = (v: number) => String(v).padStart(2, "0");
+  const angle = -90 + i * seg + seg / 2; // needle points at the middle of segment i
   return (
     <div aria-hidden className="hi pointer-events-none absolute inset-0 -z-[5] text-navy">
       {/* tracking box */}
@@ -21,7 +24,7 @@ export function HeroInstruments({ labels, index: i }: { labels: string[]; index:
         ))}
         <span className="absolute inset-0 border border-navy/35" />
         <span key={i} className="hi-tag absolute -top-px left-0 -translate-y-full whitespace-nowrap bg-navy px-2.5 py-1 text-[13px] font-medium text-paper">
-          <span className="mr-2 font-mono text-[10px] tracking-[0.14em] text-paper">0{i + 1}/06</span>
+          <span className="mr-2 font-mono text-[10px] tracking-[0.14em] text-paper">{pad(i + 1)}/{pad(n)}</span>
           {labels[i]}
         </span>
         <span className="absolute left-[38%] top-[44%] size-2 rounded-full bg-navy shadow-[0_0_0_6px_rgba(49,49,104,.18)]" />
@@ -37,15 +40,15 @@ export function HeroInstruments({ labels, index: i }: { labels: string[]; index:
           const r1 = major ? 78 : 85;
           return <line key={k} x1={Math.cos(a) * r1} y1={Math.sin(a) * r1} x2={Math.cos(a) * 92} y2={Math.sin(a) * 92} stroke="currentColor" strokeOpacity={major ? 0.95 : 0.45} strokeWidth={major ? 1.6 : 1} />;
         })}
-        {Array.from({ length: 6 }, (_, k) => {
-          const a = (k * 60 + 30 - 90) * (Math.PI / 180);
+        {Array.from({ length: n }, (_, k) => {
+          const a = (k * seg + seg / 2 - 90) * (Math.PI / 180);
           return (
             <text key={k} x={Math.cos(a) * 64} y={Math.sin(a) * 64 + 3.5} textAnchor="middle" className={`hi-num ${k === i ? "on" : ""}`}>
-              0{k + 1}
+              {pad(k + 1)}
             </text>
           );
         })}
-        <circle r="92" fill="none" stroke="currentColor" strokeWidth="3.2" strokeDasharray={`${(Math.PI * 2 * 92) / 6 - 4} ${Math.PI * 2 * 92}`} transform={`rotate(${-90 + i * 60 + 0.6})`} className="hi-arc" />
+        <circle r="92" fill="none" stroke="currentColor" strokeWidth="3.2" strokeDasharray={`${(Math.PI * 2 * 92) / n - 4} ${Math.PI * 2 * 92}`} transform={`rotate(${-90 + i * seg + 0.6})`} className="hi-arc" />
         <g className="hi-needle" style={{ transform: `rotate(${angle}deg)` }}>
           <line x1="0" y1="0" x2="50" y2="0" stroke="currentColor" strokeWidth="1.4" strokeDasharray="5 4" />
           <circle cx="50" cy="0" r="3" fill="currentColor" />

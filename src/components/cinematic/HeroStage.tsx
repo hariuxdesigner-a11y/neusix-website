@@ -12,7 +12,7 @@ import { HeroInstruments } from "./HeroInstruments";
  * Only the current and next clip are mounted (light on data); only the current one plays.
  * Reduced motion: first clip only, no cycling.
  */
-export const HERO_STEP = 2600; // ms per service line
+export const HERO_STEP = 2600; // ms per banner line
 
 export function HeroStage({ media, labels }: { media: MediaId[]; labels: string[] }) {
   const [i, setI] = useState(0);

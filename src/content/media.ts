@@ -11,7 +11,7 @@
  */
 
 export type MediaId =
-  | "home-hero" | "home-purpose" | "comp-xr" | "comp-automation" | "comp-robotics" | "comp-quantum" | "comp-blockchain" | "comp-iot"
+  | "home-hero" | "hero-edge-ai" | "hero-physical-ai" | "hero-digital-twins" | "hero-xr" | "home-purpose" | "comp-xr" | "comp-automation" | "comp-robotics" | "comp-quantum" | "comp-blockchain" | "comp-iot"
   | "home-approach" | "consult" | "services-hero" | "services-stages"
   | "svc-ai-transformation-page" | "svc-modernization" | "svc-digital-transformation" | "svc-software-engineering-services" | "svc-ai-center-of-excellence" | "svc-offshore-development-center"
   | "industries-hero" | "ind-healthcare" | "ind-retail" | "ind-bfsi" | "ind-manufacturing" | "ind-aviation" | "ind-realestate" | "ind-professional" | "ind-energy" | "ind-public"
@@ -34,7 +34,11 @@ const INK = "#313168";
 const LILAC = "#6d6eb5";
 
 export const MEDIA: Record<MediaId, Media> = {
-  "home-hero": { concept: "Macro push through a glowing data/neural network resolving into a modern enterprise space", tint: LILAC },
+  "home-hero": { concept: "Home banner, Enterprise AI: dense neural network of light strands", tint: LILAC },
+  "hero-edge-ai": { concept: "Home banner, Edge AI: chipset close-up on a circuit board", tint: LILAC },
+  "hero-physical-ai": { concept: "Home banner, Physical AI: industrial robot arm on a production line", tint: LILAC },
+  "hero-digital-twins": { concept: "Home banner, Digital Twins: 3D virtual city", tint: LILAC },
+  "hero-xr": { concept: "Home banner, AR / VR / MR / XR: floating holographic interface panels", tint: LILAC },
   "home-purpose": { concept: "Operations control room, team at large data walls", tint: INK },
   "comp-xr": { concept: "Person using an AR/VR headset; holographic interface", tint: "#995ba5" },
   "comp-automation": { concept: "Connected workflow lines / automated sorting conveyor", tint: "#ef703d" },

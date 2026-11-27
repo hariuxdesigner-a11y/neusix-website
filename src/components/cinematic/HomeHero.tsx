@@ -8,7 +8,7 @@ type Cta = { label: string; href: string };
 /**
  * Home banner: a rounded, inset frame of footage graded to one light NeuSix lilac, fine scan
  * lines, a centred dark headline and thin "instrument" overlays (dial, tracking box, signal chart)
- * that follow NeuSix's six service lines. Light page top, so the header uses its dark style here.
+ * that follow the capability lines the home page passes in. Light page top, so the header uses its dark style here.
  */
 export function HomeHero({
   media,

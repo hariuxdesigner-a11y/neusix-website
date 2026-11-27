@@ -9,10 +9,19 @@ import { FAQS } from "@/content/extras";
 import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/components/cinematic/Extras";
 import { HomeHero } from "@/components/cinematic/HomeHero";
 import { ServiceLibrary } from "@/components/cinematic/ServiceLibrary";
-import { SERVICES, serviceClip } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
+import type { MediaId } from "@/content/media";
 
 export const metadata: Metadata = pageMetadata("/");
+
+/** Home banner only: the capability lines the banner cycles through, each with its own footage. */
+const HERO_LINES: { label: string; media: MediaId }[] = [
+  { label: "Enterprise AI", media: "home-hero" },
+  { label: "Edge AI", media: "hero-edge-ai" },
+  { label: "Physical AI", media: "hero-physical-ai" },
+  { label: "Digital Twins", media: "hero-digital-twins" },
+  { label: "AR / VR / MR / XR", media: "hero-xr" },
+];
 
 const COMPETENCIES: Competency[] = [
   {
@@ -80,13 +89,13 @@ export default function HomePage() {
   return (
     <>
       <HomeHero
-        media={SERVICES.map((s) => serviceClip(s.slug))}
+        media={HERO_LINES.map((l) => l.media)}
         eyebrow="Shipping Impact"
         title="Harnessing AI to create relevance, not just competence"
         lede="We modernize systems, redesign how work gets done, and deploy production-grade AI that delivers measurable business impact."
         primary={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondary={{ label: "Explore Services", href: "/services/services-neusix" }}
-        labels={SERVICES.map((s) => s.name)}
+        labels={HERO_LINES.map((l) => l.label)}
         next={{ label: "See how we deliver", href: "#after-hero" }}
       />
       <div id="after-hero" className="scroll-mt-[var(--header-h)]" />
