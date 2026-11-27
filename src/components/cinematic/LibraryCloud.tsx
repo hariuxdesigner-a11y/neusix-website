@@ -17,7 +17,13 @@ type Slot = { x: number; y: number; c: number; maxW: number };
 const SWAP_MS = 240; // one pill changes this often
 const FADE_MS = 520;
 
-export function LibraryCloud({ area, onClear }: { area: string | null; onClear: () => void }) {
+export function LibraryCloud({
+  area,
+  onClear,
+}: {
+  area: string | null;
+  onClear: () => void;
+}) {
   const stage = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const pills = useRef<(HTMLSpanElement | null)[]>([]);
@@ -39,7 +45,9 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
         if (!r.ok) throw new Error(String(r.status));
         return r.json() as Promise<{ rows: string[][] }>;
       })
-      .then((d) => setRows(d.rows.map(([, name, a], i) => ({ i, name, area: a }))))
+      .then((d) =>
+        setRows(d.rows.map(([, name, a], i) => ({ i, name, area: a }))),
+      )
       .catch(() => setFailed(true));
   }, []);
 
@@ -81,17 +89,22 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
           out.push({ x, y, c: 0, maxW: w * 0.7 });
         }
       } else {
-        r = Math.min(w * 0.19, h * 0.3);
+        r = Math.min(w * 0.175, h * 0.3);
         const n = w < 900 ? 12 : 16;
         for (let k = 0; k < n; k++) {
           // even ring, nudged off the exact top/bottom so wide pills don't stack
           const a = (k / n) * Math.PI * 2 - Math.PI / 2 + Math.PI / n;
-          const rx = r + 40 + (k % 2) * 46;
+          const rx = r + 34 + (k % 2) * 30;
           const ry = r + 36;
           const x = w / 2 + Math.cos(a) * rx;
           const y = h / 2 + Math.sin(a) * ry;
           const c = Math.cos(a);
-          const maxW = c > 0.15 ? w - x - 12 : c < -0.15 ? x - 12 : Math.min(x, w - x) * 2 - 24;
+          const maxW =
+            c > 0.15
+              ? w - x - 12
+              : c < -0.15
+                ? x - 12
+                : Math.min(x, w - x) * 2 - 24;
           out.push({ x, y, c, maxW: Math.max(120, Math.min(320, maxW)) });
         }
       }
@@ -115,7 +128,9 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
   useEffect(() => {
     const cv = canvas.current!;
     const ctx = cv.getContext("2d")!;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     // Fibonacci sphere, 600 points; service i sits on a shuffled point so areas scatter
     const N = LIBRARY_TOTAL;
     const pts = Array.from({ length: N }, (_, k) => {
@@ -153,7 +168,10 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
         ctx.arc(cx, cy, r * 0.42, 0, Math.PI * 2);
         ctx.fill();
         const tilt = 0.32;
-        const cr = Math.cos(rot), sr = Math.sin(rot), ct = Math.cos(tilt), st = Math.sin(tilt);
+        const cr = Math.cos(rot),
+          sr = Math.sin(rot),
+          ct = Math.cos(tilt),
+          st = Math.sin(tilt);
         const f = focus.current;
         for (let s = 0; s < N; s++) {
           const [px, py, pz] = pts[map[s]];
@@ -177,9 +195,18 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
             ctx.fill();
           } else {
             const a = inFocus ? 0.22 + depth * 0.7 : 0.06 + depth * 0.1;
-            ctx.fillStyle = inFocus && f ? `rgba(255,255,255,${a})` : `rgba(217,218,242,${a})`;
+            ctx.fillStyle =
+              inFocus && f
+                ? `rgba(255,255,255,${a})`
+                : `rgba(217,218,242,${a})`;
             ctx.beginPath();
-            ctx.arc(X, Y, (inFocus && f ? 1.3 : 0.9) + depth * 0.9, 0, Math.PI * 2);
+            ctx.arc(
+              X,
+              Y,
+              (inFocus && f ? 1.3 : 0.9) + depth * 0.9,
+              0,
+              Math.PI * 2,
+            );
             ctx.fill();
           }
         }
@@ -239,34 +266,48 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
       if (!el) return;
       el.classList.add("is-out");
       timers.push(
-        window.setTimeout(() => {
-          set(k, take());
-          el.classList.remove("is-out");
-        }, 120 + k * 70),
+        window.setTimeout(
+          () => {
+            set(k, take());
+            el.classList.remove("is-out");
+          },
+          120 + k * 70,
+        ),
       );
     });
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (reduce) return () => timers.forEach(clearTimeout);
     let visible = true;
     const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
     io.observe(stage.current!);
     let k = 0;
-    const iv = window.setInterval(() => {
-      if (!visible || document.hidden) return;
-      k = (k + 5) % slots.length; // hop around the ring
-      const el = pills.current[k];
-      if (!el) return;
-      const slot = slots[k];
-      el.classList.add("is-out");
-      timers.push(
-        window.setTimeout(() => {
-          set(k, take());
-          el.classList.remove("is-out");
-          const now = performance.now();
-          for (let d = 0; d < 5; d++) sparks.current.push({ x: slot.x, y: slot.y, t0: now, d: d * 110 });
-        }, FADE_MS),
-      );
-    }, SWAP_MS * (slots.length < 12 ? 2.4 : 1.4));
+    const iv = window.setInterval(
+      () => {
+        if (!visible || document.hidden) return;
+        k = (k + 5) % slots.length; // hop around the ring
+        const el = pills.current[k];
+        if (!el) return;
+        const slot = slots[k];
+        el.classList.add("is-out");
+        timers.push(
+          window.setTimeout(() => {
+            set(k, take());
+            el.classList.remove("is-out");
+            const now = performance.now();
+            for (let d = 0; d < 5; d++)
+              sparks.current.push({
+                x: slot.x,
+                y: slot.y,
+                t0: now,
+                d: d * 110,
+              });
+          }, FADE_MS),
+        );
+      },
+      SWAP_MS * (slots.length < 12 ? 2.4 : 1.4),
+    );
     return () => {
       clearInterval(iv);
       timers.forEach(clearTimeout);
@@ -275,9 +316,12 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
   }, [rows, slots, area]);
 
   // count-up to the current total
-  const target = area ? (LIBRARY_AREAS.find((a) => a.area === area)?.count ?? 0) : LIBRARY_TOTAL;
+  const target = area
+    ? (LIBRARY_AREAS.find((a) => a.area === area)?.count ?? 0)
+    : LIBRARY_TOTAL;
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setCount(target);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      return setCount(target);
     let id = 0;
     const from = count;
     const t0 = performance.now();
@@ -294,9 +338,13 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
   const info = area ? LIBRARY_AREAS.find((a) => a.area === area) : null;
 
   return (
-    <div className="lib-cloud relative overflow-hidden rounded-[clamp(18px,2vw,28px)] text-paper">
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_300px]">
-        <div ref={stage} className="relative h-[560px] sm:h-[clamp(460px,46vw,600px)]" aria-hidden>
+    <div className="grid items-center gap-[clamp(24px,3vw,48px)] lg:grid-cols-[minmax(0,1fr)_280px]">
+      <div className="lib-cloud relative overflow-hidden rounded-[clamp(18px,2vw,28px)] text-paper">
+        <div
+          ref={stage}
+          className="relative h-[560px] sm:h-[clamp(460px,46vw,600px)]"
+          aria-hidden
+        >
           <canvas ref={canvas} className="absolute inset-0" />
           {slots.map((s, k) => (
             <span
@@ -319,30 +367,53 @@ export function LibraryCloud({ area, onClear }: { area: string | null; onClear: 
           {failed && (
             <p className="absolute inset-x-6 bottom-6 text-center text-[14px] text-paper">
               The service names could not be loaded just now.{" "}
-              <button type="button" onClick={load} className="font-medium underline underline-offset-4">
+              <button
+                type="button"
+                onClick={load}
+                className="font-medium underline underline-offset-4"
+              >
                 Try again
               </button>
             </p>
           )}
         </div>
+      </div>
 
-        <div className="relative flex flex-col justify-center gap-3 px-[clamp(20px,3vw,40px)] pb-[clamp(24px,3vw,40px)] lg:py-10 lg:pl-0">
-          <p className="eyebrow text-lilac-soft">{info ? info.label : "Services"}</p>
-          <p className="lib-count font-sans text-[clamp(3.4rem,2.4rem+4vw,6rem)] font-semibold leading-none tracking-tight tabular-nums" aria-live="polite">
-            {count.toLocaleString("en-IN")}
+      {/* count and context, on the page (outside the card) */}
+      <div className="flex flex-col gap-3">
+        <p className="eyebrow text-brand">{info ? info.label : "Services"}</p>
+        <p
+          className="lib-count font-sans text-[clamp(3.4rem,2.4rem+4vw,6rem)] font-semibold leading-none tracking-tight tabular-nums"
+          aria-live="polite"
+        >
+          {count.toLocaleString("en-IN")}
+        </p>
+        <p className="max-w-[300px] text-[17px] leading-snug text-body">
+          {info
+            ? info.blurb
+            : "reusable services across 12 capability areas, from document AI to digital twins and edge devices."}
+        </p>
+        {info ? (
+          <button
+            type="button"
+            onClick={onClear}
+            className="mt-2 inline-flex h-10 w-fit items-center gap-2 rounded-full border border-ink/15 px-4 text-[13px] font-medium text-ink transition-colors hover:bg-ink hover:text-paper"
+          >
+            <svg viewBox="0 0 12 12" className="size-3" aria-hidden>
+              <path
+                d="m3 3 6 6M9 3 3 9"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+            Show all {LIBRARY_TOTAL}
+          </button>
+        ) : (
+          <p className="mt-2 font-mono text-[12px] text-slate">
+            Pick an area above to focus the cloud.
           </p>
-          <p className="max-w-[300px] text-[17px] leading-snug text-paper/85">
-            {info ? info.blurb : "reusable services across 12 capability areas, from document AI to digital twins and edge devices."}
-          </p>
-          {info ? (
-            <button type="button" onClick={onClear} className="mt-2 inline-flex h-10 w-fit items-center gap-2 rounded-full border border-paper/25 px-4 text-[13px] font-medium text-paper transition-colors hover:bg-paper hover:text-ink">
-              <svg viewBox="0 0 12 12" className="size-3" aria-hidden><path d="m3 3 6 6M9 3 3 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-              Show all {LIBRARY_TOTAL}
-            </button>
-          ) : (
-            <p className="mt-2 font-mono text-[12px] text-paper/70">Pick an area above to focus the cloud.</p>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

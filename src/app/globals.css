@@ -412,7 +412,7 @@ html.lenis, html.lenis body { height: auto; }
 .lib-pill.is-out { opacity: 0; filter: blur(4px); translate: 0 6px; }
 @media (max-width: 639px) { .lib-pill { height: 30px; font-size: 12.5px; padding: 0 11px; } }
 .lib-count {
-  background: linear-gradient(100deg, #fff 10%, var(--color-lilac-soft) 55%, #8b8dcf 100%);
+  background: linear-gradient(100deg, var(--color-ink) 15%, var(--color-brand) 60%, var(--color-lilac) 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 @media (prefers-reduced-motion: reduce) { .lib-pill { transition: none; } }
