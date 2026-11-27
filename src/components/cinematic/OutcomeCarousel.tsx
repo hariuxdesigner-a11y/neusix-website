@@ -16,7 +16,7 @@ export function OutcomeCarousel({
   head,
   cta,
   source,
-  interval = 3500,
+  interval = 2500,
 }: {
   items: Outcome[];
   head: ReactNode;
@@ -33,7 +33,7 @@ export function OutcomeCarousel({
       <div className="flex flex-col">
         {head}
         {cta && <div className="reveal mt-8">{cta}</div>}
-        <div role="tablist" aria-label="Typical outcomes" className="stagger mt-10 flex flex-col gap-1 lg:mt-auto lg:pt-16">
+        <div role="tablist" aria-label="Typical outcomes" className="stagger mt-10 flex flex-col gap-1">
           {items.map((it, k) => {
             const on = k === i;
             return (
