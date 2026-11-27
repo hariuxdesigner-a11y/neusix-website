@@ -161,8 +161,8 @@ export function LibraryCloud({
         ctx.clearRect(0, 0, w, h);
         // soft core
         const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 0.48);
-        g.addColorStop(0, "rgba(141,143,214,.34)");
-        g.addColorStop(1, "rgba(141,143,214,.16)");
+        g.addColorStop(0, "rgba(109,110,181,.22)");
+        g.addColorStop(1, "rgba(109,110,181,.10)");
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(cx, cy, r * 0.42, 0, Math.PI * 2);
@@ -197,8 +197,8 @@ export function LibraryCloud({
             const a = inFocus ? 0.22 + depth * 0.7 : 0.06 + depth * 0.1;
             ctx.fillStyle =
               inFocus && f
-                ? `rgba(255,255,255,${a})`
-                : `rgba(217,218,242,${a})`;
+                ? `rgba(49,49,104,${a})`
+                : `rgba(64,62,142,${a * 0.8})`;
             ctx.beginPath();
             ctx.arc(
               X,
@@ -219,7 +219,7 @@ export function LibraryCloud({
           const e = 1 - Math.pow(1 - k, 2);
           const X = p.x + (cx - p.x) * e * 0.72;
           const Y = p.y + (cy - p.y) * e * 0.72;
-          ctx.fillStyle = `rgba(217,218,242,${0.85 * (1 - k)})`;
+          ctx.fillStyle = `rgba(64,62,142,${0.7 * (1 - k)})`;
           ctx.beginPath();
           ctx.arc(X, Y, 2.2, 0, Math.PI * 2);
           ctx.fill();
@@ -315,31 +315,53 @@ export function LibraryCloud({
     };
   }, [rows, slots, area]);
 
-  // count-up to the current total
-  const target = area
-    ? (LIBRARY_AREAS.find((a) => a.area === area)?.count ?? 0)
-    : LIBRARY_TOTAL;
+  // count-up: from 0 when the number first scrolls into view, then between totals as areas change
+  const countEl = useRef<HTMLParagraphElement>(null);
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setSeen(true);
+    setCount(0); // the server-rendered 600 stays for no-JS; the section sits well below the fold
+    const el = countEl.current!;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setSeen(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.6 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const target = !seen
+    ? 0
+    : area
+      ? (LIBRARY_AREAS.find((a) => a.area === area)?.count ?? 0)
+      : LIBRARY_TOTAL;
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-      return setCount(target);
+      return setCount(target || LIBRARY_TOTAL);
+    if (!seen) return;
     let id = 0;
     const from = count;
+    const dur = from === 0 ? 1800 : 700;
     const t0 = performance.now();
     const step = (t: number) => {
-      const k = Math.min(1, (t - t0) / 700);
+      const k = Math.min(1, (t - t0) / dur);
       setCount(Math.round(from + (target - from) * (1 - Math.pow(1 - k, 3))));
       if (k < 1) id = requestAnimationFrame(step);
     };
     id = requestAnimationFrame(step);
     return () => cancelAnimationFrame(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target]);
+  }, [target, seen]);
 
   const info = area ? LIBRARY_AREAS.find((a) => a.area === area) : null;
 
   return (
     <div className="grid items-center gap-[clamp(24px,3vw,48px)] lg:grid-cols-[280px_minmax(0,1fr)]">
-      <div className="lib-cloud relative overflow-hidden rounded-[clamp(18px,2vw,28px)] text-paper">
+      <div className="lib-cloud relative overflow-hidden rounded-[clamp(18px,2vw,28px)] text-ink">
         <div
           ref={stage}
           className="relative h-[560px] sm:h-[clamp(460px,46vw,600px)]"
@@ -365,7 +387,7 @@ export function LibraryCloud({
             </span>
           ))}
           {failed && (
-            <p className="absolute inset-x-6 bottom-6 text-center text-[14px] text-paper">
+            <p className="absolute inset-x-6 bottom-6 text-center text-[14px] text-ink">
               The service names could not be loaded just now.{" "}
               <button
                 type="button"
@@ -383,12 +405,13 @@ export function LibraryCloud({
       <div className="order-first flex flex-col gap-3">
         <p className="eyebrow text-brand">{info ? info.label : "Services"}</p>
         <p
+          ref={countEl}
           className="lib-count font-sans text-[clamp(3.4rem,2.4rem+4vw,6rem)] font-semibold leading-none tracking-tight tabular-nums"
           aria-live="polite"
         >
           {count.toLocaleString("en-IN")}
         </p>
-        <p className="max-w-[300px] text-[17px] leading-snug text-body">
+        <p className="max-w-[320px] text-[18px] font-semibold leading-snug text-ink">
           {info
             ? info.blurb
             : "reusable services across 12 capability areas, from document AI to digital twins and edge devices."}
