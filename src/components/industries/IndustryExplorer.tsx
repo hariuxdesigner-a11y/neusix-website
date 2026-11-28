@@ -26,7 +26,7 @@ export function IndustryExplorer({ items }: { items: Industry[] }) {
   }, []);
 
   return (
-    <section aria-label="Industries we serve" className="container-x py-[clamp(48px,6vw,96px)]">
+    <section aria-label="Industries we serve" className="container-x section-y">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
         <div>
           {items.map((ind, i) => (

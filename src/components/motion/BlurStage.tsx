@@ -23,7 +23,7 @@ export function BlurStage({ media, children, labelledBy }: { media: MediaId; chi
   });
   const s = mediaSrc(media);
   return (
-    <section ref={ref} aria-labelledby={labelledBy} className="relative isolate">
+    <section ref={ref} aria-labelledby={labelledBy} className="section-box relative isolate">
       <div className="sticky top-0 -z-10 h-[100svh] overflow-hidden" aria-hidden>
         <div ref={base} className="absolute inset-0 will-change-transform">
           <VideoBackground id={media} overlay="soft" className="!z-0" />
@@ -40,7 +40,7 @@ export function BlurStage({ media, children, labelledBy }: { media: MediaId; chi
         <div ref={veil} className="absolute inset-0 bg-paper opacity-0" />
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-paper to-transparent" />
       </div>
-      <div className="relative -mt-[100svh]">{children}</div>
+      <div className="relative -mt-[100svh] flex min-h-[100svh] flex-col justify-end">{children}</div>
     </section>
   );
 }

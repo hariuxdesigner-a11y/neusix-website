@@ -42,7 +42,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   if (!s) notFound();
   const accent = ACCENT_HEX[s.accent];
   return (
-    <div style={{ ["--accent" as string]: accent }}>
+    <div className="contents" style={{ ["--accent" as string]: accent }}>
       <Breadcrumbs items={[{ name: "Services", path: "/services/services-neusix" }, { name: s.name, path: s.href }]} />
       <JsonLd
         data={{

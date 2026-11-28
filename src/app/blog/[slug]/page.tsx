@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
       )}
       <ReadingProgress targetId="article-body" />
 
-      <article>
+      <article className="flex flex-col">
         <header className="below-header relative isolate overflow-hidden">
           <NArch strokeWidth={26} className="pointer-events-none absolute right-[-6%] top-[14%] -z-10 hidden h-[110%] text-brand/[.06] lg:block" />
           <div className="container-x pt-[clamp(40px,6vw,88px)]">
@@ -252,7 +252,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         </div>
       </article>
 
-      <section aria-labelledby="related" className="section-y border-t border-ink/5 bg-mist/50">
+      <section aria-labelledby="related" className="section-band border-t border-ink/5 bg-mist/50">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <h2 id="related" className="t-h2 reveal">

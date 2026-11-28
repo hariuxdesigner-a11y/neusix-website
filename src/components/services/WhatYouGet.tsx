@@ -27,7 +27,7 @@ export function WhatYouGet({ items, icons, panelIcons, accent }: { items: string
 
   return (
     <section ref={ref} aria-labelledby="wyg-title" className="relative isolate overflow-hidden">
-      <div className="container-x relative py-[clamp(64px,8vw,128px)]">
+      <div className="container-x section-y relative">
         <div className="stagger">
           <p className="eyebrow text-brand">Deliverables</p>
           <h2 id="wyg-title" className="t-h2 mt-3">
@@ -35,7 +35,7 @@ export function WhatYouGet({ items, icons, panelIcons, accent }: { items: string
           </h2>
         </div>
         <ul
-          className="relative mt-[clamp(32px,4vw,56px)] grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-3 lg:block lg:min-h-[420px] lg:w-1/2"
+          className="relative mt-[clamp(32px,4vw,56px)] grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-3 lg:block lg:min-h-[312px] lg:w-1/2"
           onMouseLeave={() => setPaused(false)}
         >
           {items.map((label, i) => {

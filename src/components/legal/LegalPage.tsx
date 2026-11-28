@@ -23,7 +23,7 @@ export function LegalPage({
   return (
     <>
       <Breadcrumbs items={[{ name: title, path }]} />
-      <div data-light-top className="below-header container-x pb-[var(--section-y)]">
+      <div data-light-top className="below-header container-x pb-[calc(var(--section-y)/2)]">
         <header className="max-w-[860px] border-b border-ink/10 pb-[clamp(32px,4vw,56px)] pt-[clamp(48px,7vw,104px)]">
           <p className="eyebrow rise text-brand">Legal</p>
           <h1 className="t-display mt-3">

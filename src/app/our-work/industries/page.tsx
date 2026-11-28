@@ -13,7 +13,7 @@ export default function IndustriesPage() {
   return (
     <>
       <Breadcrumbs items={[{ name: "Industries", path: "/our-work/industries" }]} />
-      <div>
+      <div className="contents">
         <VideoHero
           media="industries-hero"
           eyebrow="Our Work"
@@ -22,7 +22,7 @@ export default function IndustriesPage() {
           secondary={{ label: "Case Studies", href: "/our-work/case-studies" }}
         />
         <IndustryExplorer items={INDUSTRIES} />
-        <section aria-labelledby="problems-title" className="section-y bg-mist/70">
+        <section aria-labelledby="problems-title" className="section-band bg-mist/70">
           <div className="container-x">
             <SectionHead id="problems-title" eyebrow="Challenges" title="The Problems We Solve" sub="What most industries actually need from AI" />
             <ul className="stagger mt-[clamp(32px,4vw,56px)] grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

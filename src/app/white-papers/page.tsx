@@ -36,7 +36,7 @@ export default function WhitePapersPage() {
           </p>
         </div>
       </header>
-      <section aria-label="White papers" className="container-x pb-[var(--section-y)]">
+      <section aria-label="White papers" className="container-x pb-[calc(var(--section-y)/2)]">
         <ul className="stagger grid gap-[clamp(16px,2vw,24px)] md:grid-cols-3">
           {WHITE_PAPERS.map((w, i) => (
             <li key={w.title}>

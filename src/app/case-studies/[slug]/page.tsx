@@ -63,8 +63,8 @@ function Bullets({ items, dark = false, labelled = false }: { items: string[]; d
 
 function Block({ id, title, children, className = "", as: As = "h2" }: { id: string; title: string; children: ReactNode; className?: string; as?: "h2" | "h3" }) {
   return (
-    <section aria-labelledby={id} className={className}>
-      <div className="container-x py-[clamp(48px,6vw,96px)]">
+    <section aria-labelledby={id} className={`${className} ${/\bbg-/.test(className) ? "section-box" : ""}`}>
+      <div className={`container-x ${/\bbg-/.test(className) ? "section-pad" : "section-y"}`}>
         <As id={id} className="t-h2 reveal">
           {title}
         </As>
@@ -96,7 +96,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
   };
 
   return (
-    <article>
+    <article className="flex flex-col">
       <Breadcrumbs items={[{ name: "Case Studies", path: "/our-work/case-studies" }, { name: c.title, path: `/case-studies/${c.slug}` }]} />
       <VideoHero
         media={`cs-${c.slug}` as MediaId}
@@ -145,8 +145,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </div>
       </Block>
 
-      <section aria-labelledby="oh" className="bg-mist/70">
-        <div className="container-x grid gap-10 py-[clamp(56px,7vw,112px)] lg:grid-cols-[1fr_1fr] lg:items-center">
+      <section aria-labelledby="oh" className="section-box bg-mist/70">
+        <div className="container-x section-pad grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
             <p className="eyebrow reveal text-brand">Results</p>
             <h2 id="oh" className="t-h2 reveal mt-3">
@@ -170,8 +170,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </div>
       </Block>
 
-      <section aria-labelledby="chal" className="bg-mist/60">
-        <div className="container-x grid gap-10 py-[clamp(48px,6vw,96px)] lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <section aria-labelledby="chal" className="section-box bg-mist/60">
+        <div className="container-x section-pad grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
           <div>
             <h2 id="chal" className="t-h2 reveal">
               The Challenge
@@ -200,7 +200,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </ul>
       </Block>
 
-      <section aria-labelledby="harness" className="container-x py-[clamp(24px,3vw,40px)]">
+      <section aria-labelledby="harness" className="container-x section-y">
         <div className="reveal relative isolate flex flex-col items-center gap-8 overflow-hidden rounded-[clamp(20px,2.4vw,32px)] bg-ink px-6 py-[clamp(48px,6vw,88px)] text-center text-paper">
           <Orbs preset="dark" dim />
           <h2 id="harness" className="t-h2 max-w-[22ch]">
@@ -229,7 +229,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </ul>
       </Block>
 
-      <section aria-labelledby="measured" className="container-x grid gap-10 py-[clamp(48px,6vw,96px)] lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <section aria-labelledby="measured" className="container-x section-y grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
         <div>
           <h2 id="measured" className="t-h2 reveal">
             What We Measured
@@ -253,7 +253,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         </div>
       </Block>
 
-      <nav aria-label="More case studies" className="border-y border-ink/5">
+      <nav aria-label="More case studies" className="section-box border-y border-ink/5">
         <div className="container-x grid divide-y divide-ink/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
           {[
             { c: prev, dir: "Previous case study", align: "sm:pr-8" },

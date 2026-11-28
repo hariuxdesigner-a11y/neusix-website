@@ -58,7 +58,7 @@ export function BlogIndex({ tag }: { tag: string }) {
         </div>
       </header>
 
-      <section aria-label={all ? "All articles" : `${tagLabel(tag)} articles`} className="container-x pb-[var(--section-y)]">
+      <section aria-label={all ? "All articles" : `${tagLabel(tag)} articles`} className="container-x pb-[calc(var(--section-y)/2)]">
         {featured && (
           <div className="reveal mb-[clamp(28px,3.5vw,48px)]">
             <FeaturedPostCard post={featured} />

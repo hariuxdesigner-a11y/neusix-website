@@ -14,7 +14,7 @@ export function StageFit({ s }: { s: Service }) {
     { title: "Managed Services", items: s.stage.managed, gfx: s.stage.gfx[2] },
   ];
   return (
-    <section aria-labelledby="stage-title" className="border-b border-ink/[.07]">
+    <section aria-labelledby="stage-title" className="section-box section-attach border-b border-ink/[.07]">
       <div className="container-x py-[clamp(56px,7vw,112px)]">
         <div className="stagger">
           <p className="eyebrow text-brand">Stage Fit</p>
@@ -52,7 +52,7 @@ export function ServiceIntro({ s }: { s: Service }) {
   const parts = s.intro.bullets ? s.intro.text.split(" • ") : null;
   return (
     <section aria-labelledby="intro-title" className="relative isolate overflow-hidden">
-      <div className="container-x py-[clamp(72px,9vw,140px)] text-center">
+      <div className="container-x section-y text-center">
         <h2 id="intro-title" className="t-h2 reveal">
           {s.intro.title}
         </h2>
@@ -104,8 +104,8 @@ export function WhatWeDo({ s }: { s: Service }) {
 export function UseCaseThemes({ s }: { s: Service }) {
   if (!s.useCaseThemes) return null;
   return (
-    <section aria-labelledby="ucs-title" className="bg-mist/60">
-      <div className="container-x py-[clamp(56px,7vw,104px)]">
+    <section aria-labelledby="ucs-title" className="section-box bg-mist/60">
+      <div className="container-x section-pad">
         <h2 id="ucs-title" className="t-h2 reveal text-center">
           Use-case themes
         </h2>

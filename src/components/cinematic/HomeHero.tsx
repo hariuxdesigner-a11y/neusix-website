@@ -30,7 +30,7 @@ export function HomeHero({
   next: Cta;
 }) {
   return (
-    <section aria-labelledby="page-title" data-light-top="glass">
+    <section aria-labelledby="page-title" data-light-top="glass" className="section-hero">
       <div className="home-hero relative isolate flex min-h-[600px] flex-col overflow-hidden bg-lilac-soft [height:100svh]">
         {/* scan lines + soft light behind the copy */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-[6] bg-[radial-gradient(58%_52%_at_50%_52%,rgba(252,252,253,.82),rgba(252,252,253,.45)_55%,rgba(252,252,253,.12)_85%)]" />

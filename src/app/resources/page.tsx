@@ -48,7 +48,7 @@ export default function ResourcesPage() {
         </div>
       </header>
 
-      <section aria-labelledby="latest" className="container-x pb-[var(--section-y)]">
+      <section aria-labelledby="latest" className="container-x pb-[calc(var(--section-y)/2)]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <h2 id="latest" className="t-h2 reveal">
             From the blog

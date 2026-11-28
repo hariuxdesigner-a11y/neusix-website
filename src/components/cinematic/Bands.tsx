@@ -79,7 +79,7 @@ export function VideoCtaCard({
   note?: string;
 }) {
   return (
-    <section aria-labelledby="cta-title" className="container-x py-[clamp(48px,6vw,96px)]">
+    <section aria-labelledby="cta-title" className="container-x section-box">
       <div className="reveal relative isolate flex min-h-[clamp(440px,60vw,640px)] flex-col justify-end overflow-hidden rounded-[clamp(18px,2.4vw,32px)] p-[clamp(24px,5vw,72px)] text-ink">
         <VideoBackground id={media} overlay="none" parallax={70} />
         {/* veil only behind the copy: from the left on wide screens, from the bottom on phones */}

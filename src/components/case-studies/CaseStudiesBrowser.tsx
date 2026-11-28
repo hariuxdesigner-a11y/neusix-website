@@ -85,7 +85,7 @@ export function CaseStudiesBrowser() {
         </div>
       </section>
 
-      <section aria-labelledby="cs-list-title" className="container-x pb-[var(--section-y)]">
+      <section aria-labelledby="cs-list-title" className="container-x pb-[calc(var(--section-y)/2)]">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 id="cs-list-title" className="t-h2">
             Case studies

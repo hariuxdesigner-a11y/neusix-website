@@ -14,7 +14,8 @@ export function StaggerParallax({ children, step = 64, className = "" }: { child
     const desktop = window.innerWidth >= 1024;
     const n = items.length;
     for (let i = 0; i < n; i++) {
-      const y = desktop ? (n - 1 - i) * step * (0.35 + p * 1.1) : 0;
+      // cards start staggered and settle into one row as the list scrolls up through the view
+      const y = desktop ? (n - 1 - i) * step * Math.max(0, 1 - p * 1.25) : 0;
       (items[i] as HTMLElement).style.transform = desktop ? `translate3d(0,${y.toFixed(1)}px,0)` : "";
     }
   });

@@ -17,7 +17,7 @@ const TALENT = [
 export function ProofStrip({ stats }: { stats: { value: string; label: string }[] }) {
   return (
     <section aria-label="NeuSix at a glance" className="border-b border-ink/5">
-      <div className="container-x py-[clamp(48px,6vw,88px)]">
+      <div className="container-x section-y">
         <dl className="stagger grid grid-cols-1 gap-8 xs:grid-cols-3">
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col-reverse border-l border-ink/10 pl-5">

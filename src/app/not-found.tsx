@@ -16,7 +16,7 @@ const LINKS = [
 
 export default function NotFound() {
   return (
-    <section data-light-top className="container-x relative isolate pb-[var(--section-y)] pt-[calc(var(--header-h)+clamp(48px,8vw,120px))]">
+    <section data-light-top className="container-x relative isolate pb-[calc(var(--section-y)/2)] pt-[calc(var(--header-h)+clamp(48px,8vw,120px))]">
       <NArch strokeWidth={26} delay={250} className="absolute right-[var(--gutter)] top-[calc(var(--header-h)+24px)] -z-10 hidden h-[clamp(220px,26vw,380px)] text-brand/20 md:block" />
       <p className="eyebrow text-brand">Error 404</p>
       <h1 className="t-display mt-4 max-w-[16ch]">

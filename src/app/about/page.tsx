@@ -50,8 +50,8 @@ export default function AboutPage() {
       />
 
       {/* ── Conviction ─────────────────────────────────────────────────── */}
-      <section aria-labelledby="conviction" className="container-x relative isolate pt-[var(--section-y)]">
-        <NArch strokeWidth={20} delay={200} className="absolute right-[var(--gutter)] top-[calc(var(--section-y)-8px)] -z-10 hidden h-[clamp(240px,24vw,360px)] text-brand/[.14] lg:block" />
+      <section aria-labelledby="conviction" className="container-x section-y relative isolate">
+        <NArch strokeWidth={20} delay={200} className="absolute right-[var(--gutter)] top-[calc(var(--section-y)/2-8px)] -z-10 hidden h-[clamp(240px,24vw,360px)] text-brand/[.14] lg:block" />
         <p id="conviction" className="eyebrow reveal text-brand">
           Our Conviction
         </p>
@@ -98,8 +98,8 @@ export default function AboutPage() {
       </section>
 
       {/* ── Our DNA (values) ────────────────────────────────────────────── */}
-      <section aria-labelledby="dna" className="bg-mist/70">
-        <div className="container-x section-y">
+      <section aria-labelledby="dna" className="section-box bg-mist/70">
+        <div className="container-x section-pad">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHead id="dna" eyebrow="Our Values" title="Our DNA" text="Everything we do is guided by four principles:" />
           </div>
@@ -194,8 +194,8 @@ export default function AboutPage() {
       </section>
 
       {/* ── Global presence ─────────────────────────────────────────────── */}
-      <section aria-labelledby="presence" className="bg-mist/70">
-        <div className="container-x section-y grid items-center gap-10 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.3fr)] lg:gap-16">
+      <section aria-labelledby="presence" className="section-box bg-mist/70">
+        <div className="container-x section-pad grid items-center gap-10 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.3fr)] lg:gap-16">
           <div>
             <SectionHead id="presence" eyebrow="Where we work" title="Global Presence & Delivery Reach" />
             <ul className="stagger mt-10 divide-y divide-ink/10 border-y border-ink/10">

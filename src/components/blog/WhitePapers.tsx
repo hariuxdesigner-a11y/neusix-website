@@ -33,7 +33,7 @@ export function WhitePaperCard({ paper, index, headingLevel = 3 }: { paper: (typ
 /** White papers teaser band (blog index, post pages, resources hub). */
 export function WhitePapersBand({ title = "White papers" }: { title?: string }) {
   return (
-    <section aria-labelledby="wp-band" className="section-y border-t border-ink/5 bg-mist/50">
+    <section aria-labelledby="wp-band" className="section-band border-t border-ink/5 bg-mist/50">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>

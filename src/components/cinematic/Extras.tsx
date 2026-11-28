@@ -17,7 +17,7 @@ export const Arrow = LinkArrow;
 export function ClientMarquee() {
   if (!CLIENTS.length) return null;
   return (
-    <section aria-labelledby="clients-title" className="border-b border-ink/[.07] bg-paper">
+    <section aria-labelledby="clients-title" className="section-box section-attach border-b border-ink/[.07] bg-paper">
       <div className="container-x grid items-center gap-5 py-[clamp(24px,3vw,40px)] lg:grid-cols-[minmax(0,240px)_1fr] lg:gap-12">
         <h2 id="clients-title" className="reveal text-sm leading-snug text-slate">
           <span className="eyebrow block text-brand">{CLIENTS_SECTION.eyebrow}</span>
@@ -167,7 +167,7 @@ export function ImpactCases({ exclude }: { exclude?: string }) {
         </div>
         <StaggerParallax
           step={56}
-          className="-mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-[200px]"
+          className="-mx-[var(--gutter)] mt-[clamp(32px,4vw,56px)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-0"
         >
           {list.map((c) => {
             const hl = c.card.find((h) => h.value) ?? c.card[0];

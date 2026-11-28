@@ -45,7 +45,7 @@ export function VideoHero({
   children?: ReactNode;
 }) {
   return (
-    <section aria-labelledby="page-title" data-light-top="glass">
+    <section aria-labelledby="page-title" data-light-top="glass" className="section-hero">
       <div
         className={`relative isolate flex flex-col justify-end overflow-hidden bg-lilac-soft text-ink ${
           size === "full" ? "min-h-[clamp(560px,100svh,1080px)]" : "min-h-[clamp(520px,82svh,860px)]"
