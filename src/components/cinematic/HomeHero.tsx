@@ -1,15 +1,17 @@
 import { Button } from "@/components/ui/Button";
 import { WordRise } from "@/components/motion/WordRise";
+import type { MediaId } from "@/content/media";
 import { HeroStage } from "./HeroStage";
 
 type Cta = { label: string; href: string };
 
 /**
- * Home banner: animated infographic scenes on one light NeuSix lilac, fine scan lines, a centred dark headline and thin "instrument" overlays (dial, tracking box, signal chart)
+ * Home banner: a rounded, inset frame of footage graded to one light NeuSix lilac, fine scan
+ * lines, a centred dark headline and thin "instrument" overlays (dial, tracking box, signal chart)
  * that follow the capability lines the home page passes in. Light page top, so the header uses its dark style here.
  */
 export function HomeHero({
-  scenes,
+  media,
   eyebrow,
   title,
   lede,
@@ -18,7 +20,7 @@ export function HomeHero({
   labels,
   next,
 }: {
-  scenes: string[];
+  media: MediaId[];
   eyebrow: string;
   title: string;
   lede: string;
@@ -35,7 +37,7 @@ export function HomeHero({
         {/* light veil under the floating header and over the bottom prompt */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-[4] h-[150px] bg-gradient-to-b from-paper/85 via-paper/45 to-transparent" />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-[4] h-[120px] bg-gradient-to-t from-paper/70 to-transparent" />
-        <HeroStage scenes={scenes} labels={labels} />
+        <HeroStage media={media} labels={labels} />
 
         <div className="container-x relative flex flex-1 flex-col items-center justify-center pb-[clamp(72px,9vh,110px)] pt-[calc(var(--header-h)+24px)] text-center">
           <p className="eyebrow rise flex items-center gap-3 text-navy">

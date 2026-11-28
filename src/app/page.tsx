@@ -10,16 +10,17 @@ import { ClientMarquee, FaqSection, ImpactCases, IndustriesStrip } from "@/compo
 import { HomeHero } from "@/components/cinematic/HomeHero";
 import { ServiceLibrary } from "@/components/cinematic/ServiceLibrary";
 import { pageMetadata } from "@/lib/seo";
+import type { MediaId } from "@/content/media";
 
 export const metadata: Metadata = pageMetadata("/");
 
 /** Home banner only: the capability lines the banner cycles through, each with its own footage. */
-const HERO_LINES: { label: string; scene: string }[] = [
-  { label: "Enterprise AI", scene: "enterprise-ai" },
-  { label: "Edge AI", scene: "edge-ai" },
-  { label: "Physical AI", scene: "physical-ai" },
-  { label: "Digital Twins", scene: "digital-twins" },
-  { label: "AR / VR / MR / XR", scene: "xr" },
+const HERO_LINES: { label: string; media: MediaId }[] = [
+  { label: "Enterprise AI", media: "home-hero" },
+  { label: "Edge AI", media: "hero-edge-ai" },
+  { label: "Physical AI", media: "hero-physical-ai" },
+  { label: "Digital Twins", media: "hero-digital-twins" },
+  { label: "AR / VR / MR / XR", media: "hero-xr" },
 ];
 
 const COMPETENCIES: Competency[] = [
@@ -88,7 +89,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero
-        scenes={HERO_LINES.map((l) => l.scene)}
+        media={HERO_LINES.map((l) => l.media)}
         eyebrow="Shipping Impact"
         title="Harnessing AI to create relevance, not just competence"
         lede="We modernize systems, redesign how work gets done, and deploy production-grade AI that delivers measurable business impact."
