@@ -66,7 +66,7 @@ export function ServiceLibrary() {
   };
 
   return (
-    <section aria-labelledby="library-title" className="section-y overflow-hidden">
+    <section aria-labelledby="library-title" className="overflow-hidden pb-[clamp(8px,1vw,16px)] pt-[var(--section-y)]">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead

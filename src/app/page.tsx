@@ -126,7 +126,7 @@ export default function HomePage() {
 
       <ServiceLibrary />
 
-      <section aria-labelledby="competencies-title" className="section-y">
+      <section aria-labelledby="competencies-title" className="pb-[var(--section-y)] pt-[clamp(24px,3vw,48px)]">
         <div className="container-x">
           <SectionHead id="competencies-title" title="Our competencies" />
           <div className="mt-[clamp(32px,4vw,56px)]">

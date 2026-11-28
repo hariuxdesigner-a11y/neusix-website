@@ -364,7 +364,7 @@ export function LibraryCloud({
       <div className="lib-cloud relative overflow-hidden rounded-[clamp(18px,2vw,28px)] text-ink">
         <div
           ref={stage}
-          className="relative h-[560px] sm:h-[clamp(460px,46vw,600px)]"
+          className="relative h-[560px] sm:h-[clamp(440px,40vw,540px)]"
           aria-hidden
         >
           <canvas ref={canvas} className="absolute inset-0" />
