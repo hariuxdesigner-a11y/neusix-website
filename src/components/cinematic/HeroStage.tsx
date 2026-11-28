@@ -1,30 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { VideoBackground } from "@/components/media/VideoBackground";
-import type { MediaId } from "@/content/media";
 import { HeroInstruments } from "./HeroInstruments";
+import { HERO_SCENES } from "./HeroScenes";
 
 /**
- * Home banner background: one clip per NeuSix service line, dissolving from one to the next in
- * step with the six-service instruments (tag, dial, tracking box). One timer drives both, so the
- * footage changes exactly when the tag moves to the next service.
- * Only the current and next clip are mounted (light on data); only the current one plays.
- * Reduced motion: first clip only, no cycling.
+ * Home banner background: one animated infographic scene per capability line (HeroScenes),
+ * dissolving from one to the next in step with the instruments (tag, dial, tracking box). One timer
+ * drives both, so the scene changes exactly when the tag moves to the next line.
+ * Only the current and outgoing scenes are rendered. Reduced motion: first scene only, no cycling.
  */
 export const HERO_STEP = 2600; // ms per banner line
 
-export function HeroStage({ media, labels }: { media: MediaId[]; labels: string[] }) {
+export function HeroStage({ scenes, labels }: { scenes: string[]; labels: string[] }) {
   const [i, setI] = useState(0);
-  const [mounted, setMounted] = useState<Set<number>>(() => new Set([0]));
+  const [prev, setPrev] = useState(-1);
   const root = useRef<HTMLDivElement>(null);
-  const n = media.length;
-
-  // preload the second clip only once the page has settled (keeps the first paint light)
-  useEffect(() => {
-    const t = setTimeout(() => setMounted((m) => new Set([...m, 1])), 1800);
-    return () => clearTimeout(t);
-  }, []);
+  const n = scenes.length;
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -34,9 +26,8 @@ export function HeroStage({ media, labels }: { media: MediaId[]; labels: string[
     const id = setInterval(() => {
       if (!visible || document.hidden) return;
       setI((cur) => {
-        const next = (cur + 1) % n;
-        setMounted((m) => (m.has(next) && m.has((next + 1) % n) ? m : new Set([...m, next, (next + 1) % n])));
-        return next;
+        setPrev(cur);
+        return (cur + 1) % n;
       });
     }, HERO_STEP);
     return () => {
@@ -48,13 +39,14 @@ export function HeroStage({ media, labels }: { media: MediaId[]; labels: string[
   return (
     <>
       <div ref={root} aria-hidden className="absolute inset-0 -z-10">
-        {media.map((id, k) =>
-          mounted.has(k) ? (
-            <div key={id} className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out ${k === i ? "opacity-100" : "opacity-0"}`}>
-              <VideoBackground id={id} overlay="none" grade="light" priority={k === 0} playOnMobile active={k === i || k === (i + n - 1) % n} />
+        {scenes.map((id, k) =>
+          k === i || k === prev ? (
+            <div key={id} className={`hs-scene transition-opacity duration-[1200ms] ease-in-out ${k === i ? "hs-on opacity-100" : "opacity-0"}`}>
+              {HERO_SCENES[id]}
             </div>
           ) : null,
         )}
+        <div className="media-scan absolute inset-0" />
       </div>
       <HeroInstruments labels={labels} index={i} />
     </>
