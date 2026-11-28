@@ -450,3 +450,6 @@ html.lenis, html.lenis body { height: auto; }
 .comp-swap { animation: comp-swap .6s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes comp-swap { from { opacity: 0; transform: translateY(10px); } }
 @media (prefers-reduced-motion: reduce) { .comp-swap { animation: none; } }
+
+/* Comfortable tap targets for small text links (arrow links, footer links) without moving the layout */
+main a.group, footer a { padding-block: 4px; margin-block: -4px; }

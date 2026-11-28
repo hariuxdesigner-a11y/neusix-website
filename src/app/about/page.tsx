@@ -215,6 +215,8 @@ export default function AboutPage() {
             <img
               src="/assets/world-1.svg"
               alt="World map showing the delivery hub in India and client locations in the USA, UK, UAE and Australia/New Zealand"
+              width={390}
+              height={167}
               loading="lazy"
               className="h-auto w-full"
             />

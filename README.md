@@ -69,7 +69,7 @@ src/
     media-credits.ts           Licence/credit for each placeholder clip
 public/assets/                 Original NeuSix assets downloaded from the Webflow CDN
 public/media/                  Section videos: <id>.mp4 (desktop), <id>-m.mp4 (mobile), <id>.jpg (poster)
-scripts/                       qa.mjs, form-test.mjs, nav-test.mjs, sheet.py, postbuild/postinstall helpers
+scripts/                       QA (see Testing), media encoding, share images, postbuild/postinstall helpers
 docs/                          AUDIT.md, PLAN-V2-CINEMATIC.md, MEDIA-CREDITS.md, DEPLOYMENT-HOSTINGER.md, TESTING.md, CONTENT-NOTES.md
 ```
 
@@ -105,3 +105,18 @@ npm run qa          # screenshots + overflow/console checks at 8 widths → qa-s
 npm run test:nav    # keyboard + mobile navigation, filters
 npm run test:form   # contact form E2E (needs a delivery channel configured)
 ```
+
+### Pre-launch audit (run against a built site: `npm run build && npm start`)
+
+```bash
+python3 scripts/seo-audit.py http://localhost:3000                     # titles, descriptions, H1s, canonicals, OG/Twitter, JSON-LD, alt text
+node scripts/qa.mjs http://localhost:3000 /tmp/qa 320,390,768,1024,1440,1920 /   # horizontal overflow per width
+node scripts/contrast.mjs http://localhost:3000 390,1440 / /about     # WCAG AA text contrast (axe)
+node scripts/ux-audit.mjs http://localhost:3000 / /contact-us         # console errors, tap targets, form labels, focus rings
+node scripts/spacing-audit.mjs http://localhost:3000 1440,390 /       # section-to-section spacing
+python3 scripts/link-check.py                                          # every internal link and asset resolves
+```
+
+Previews on Netlify or Vercel are automatically `noindex` (robots.txt blocks crawling and every response carries
+`X-Robots-Tag: noindex`). A normal production build (Hostinger) is indexable.
+

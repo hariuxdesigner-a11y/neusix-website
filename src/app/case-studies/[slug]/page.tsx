@@ -117,7 +117,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
             </li>
           ))}
         </ul>
-        <Link href="/our-work/case-studies" className="mt-6 inline-block text-sm font-medium text-navy hover:text-brand">
+        <Link href="/our-work/case-studies" className="mt-6 inline-flex min-h-6 items-center text-sm font-medium text-navy hover:text-brand">
           <span className="inline-flex items-center gap-2"><Icon name="arrow-left" size={16} /> All case studies</span>
         </Link>
       </VideoHero>

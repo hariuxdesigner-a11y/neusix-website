@@ -30,6 +30,8 @@ export function ClientMarquee() {
               key={c.name}
               src={c.logo}
               alt={c.name}
+              width={Math.round(100 * c.ratio)}
+              height={100}
               loading="lazy"
               className="w-auto max-w-none shrink-0 select-none object-contain opacity-60 transition duration-300 [filter:grayscale(1)_brightness(0)] hover:opacity-100 hover:[filter:none]"
               // optical sizing: wide wordmarks get shorter, square marks taller, so all read at the same weight

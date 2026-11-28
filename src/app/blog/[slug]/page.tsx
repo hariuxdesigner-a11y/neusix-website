@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         </header>
 
         <div className="container-x mt-[clamp(28px,4vw,56px)]">
-          <MediaPoster id={post.image} priority className="reveal aspect-[16/9] rounded-[clamp(16px,2vw,28px)] sm:aspect-[21/9]" sizes="(min-width: 1280px) 1200px, 94vw" />
+          <MediaPoster id={post.image} priority className="aspect-[16/9] rounded-[clamp(16px,2vw,28px)] sm:aspect-[21/9]" sizes="(min-width: 1280px) 1200px, 94vw" />
         </div>
 
         <div className="container-x grid gap-[clamp(32px,5vw,80px)] pb-[clamp(56px,7vw,112px)] pt-[clamp(36px,5vw,72px)] lg:grid-cols-[250px_minmax(0,1fr)] xl:grid-cols-[270px_minmax(0,1fr)]">
